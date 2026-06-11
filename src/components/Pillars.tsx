@@ -151,6 +151,8 @@ export default function Pillars() {
                   <motion.img
                     src={pillar.gif}
                     alt={pillar.alt}
+                    width={1080}
+                    height={1080}
                     loading="lazy"
                     draggable={false}
                     animate={

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useInView, useReducedMotion } from 'framer-motion';
 
 type Props = {
   /** Final value the counter should land on. */
@@ -26,9 +25,33 @@ export default function AnimatedCounter({
   monospaceDigits = false
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-15%' });
-  const reducedMotion = useReducedMotion();
+  const [inView, setInView] = useState(false);
+  const reducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const [value, setValue] = useState(reducedMotion ? to : 0);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    if (!('IntersectionObserver' in window)) {
+      setInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        setInView(true);
+        observer.disconnect();
+      },
+      { rootMargin: '0px 0px -15% 0px' }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!inView || reducedMotion) {

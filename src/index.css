@@ -12,6 +12,26 @@
   #features-root {
     font-family: 'Arboria', system-ui, -apple-system, sans-serif;
   }
+
+  #stats-root {
+    min-height: 520px;
+  }
+
+  #pillars-root,
+  #features-root {
+    min-height: 1700px;
+  }
+
+  #carousel-root {
+    min-height: 640px;
+  }
+
+  @media (min-width: 1024px) {
+    #pillars-root,
+    #features-root {
+      min-height: 1900px;
+    }
+  }
 }
 
 @keyframes panelEnter {
@@ -22,5 +42,57 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes heroWord {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroMascot {
+  0% {
+    opacity: 0;
+    transform: translateZ(0) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+  }
+}
+
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes scrollCue {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
   }
 }

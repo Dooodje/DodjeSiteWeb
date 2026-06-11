@@ -118,6 +118,8 @@ export default function Features() {
                   <motion.img
                     src={f.gif}
                     alt={f.alt}
+                    width={1080}
+                    height={1080}
                     loading="lazy"
                     draggable={false}
                     animate={reducedMotion ? undefined : { y: [0, -8, 0] }}

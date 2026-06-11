@@ -21,11 +21,41 @@ const islands: Island[] = [
   { id: 'features-root', render: () => <Features /> }
 ];
 
-for (const { id, render, eager } of islands) {
-  const el = document.getElementById(id);
-  if (!el) continue;
+function mountIsland(el: HTMLElement, render: () => JSX.Element, eager?: boolean) {
   const node = eager
     ? render()
     : <Suspense fallback={null}>{render()}</Suspense>;
+
   createRoot(el).render(<StrictMode>{node}</StrictMode>);
+}
+
+function mountWhenNearViewport(el: HTMLElement, render: () => JSX.Element) {
+  if (!('IntersectionObserver' in window)) {
+    mountIsland(el, render);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      mountIsland(el, render);
+    },
+    {
+      rootMargin: '100px 0px'
+    }
+  );
+
+  observer.observe(el);
+}
+
+for (const { id, render, eager } of islands) {
+  const el = document.getElementById(id);
+  if (!el) continue;
+
+  if (eager) {
+    mountIsland(el, render, true);
+  } else {
+    mountWhenNearViewport(el, render);
+  }
 }

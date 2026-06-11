@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import AnimatedCounter from './AnimatedCounter';
 
 type Stat = {
@@ -24,19 +23,6 @@ const STATS: Stat[] = [
     caption: 'Une session courte suffit pour ancrer une habitude durable.'
   }
 ];
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.08 * i,
-      duration: 0.7,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number]
-    }
-  })
-};
 
 export default function Stats() {
   return (
@@ -67,29 +53,21 @@ export default function Stats() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-15%' }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mb-14 sm:mb-20"
+        <div
+          className="max-w-3xl mb-14 sm:mb-20 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
         >
           <h2 className="font-arboria font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl">
             Tout pour <span className="text-dodje-green">commencer</span>.
           </h2>
-        </motion.div>
+        </div>
 
         {/* Stat grid — minimal, no card chrome */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-16">
           {STATS.map((stat, i) => (
-            <motion.div
+            <div
               key={stat.label}
-              custom={i}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-10%' }}
-              className="flex flex-col"
+              className="flex flex-col motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
+              style={{ animationDelay: `${80 * i}ms` }}
             >
               <div className="font-arboria font-black leading-none text-6xl sm:text-7xl lg:text-8xl text-white">
                 <AnimatedCounter
@@ -105,7 +83,7 @@ export default function Stats() {
               <p className="font-arboria mt-2 text-sm sm:text-base text-white/60 leading-relaxed max-w-md">
                 {stat.caption}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
