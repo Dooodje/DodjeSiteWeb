@@ -1,8 +1,7 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { ArrowDown, Sparkles } from 'lucide-react';
-// Waving mascot — animated GIF: alpha-transparent natively, not interactive,
-// no platform play-button overlay. Plays at its baked-in frame rate.
-import salutGif from '../../assets/anime/Salut.gif';
+import salutMp4 from '../../assets/anime/Salut.mp4';
+import salutWebm from '../../assets/anime/Salut.webm';
 
 const HEADLINE_LINE_1 = ['Comprends', 'ton', 'argent'];
 const HEADLINE_LINE_2 = ['simplement', 'et', 'gratuitement.'];
@@ -37,6 +36,36 @@ const fadeUpVariants: Variants = {
 
 const TRUST_NOTE =
   'Contenus éducatifs uniquement, sans conseil financier personnalisé.';
+
+function AppleIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="currentColor"
+      aria-hidden
+      className="text-2xl"
+    >
+      <path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z" />
+    </svg>
+  );
+}
+
+function GooglePlayIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      fill="currentColor"
+      aria-hidden
+      className="text-xl"
+    >
+      <path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z" />
+    </svg>
+  );
+}
 
 export default function Hero() {
   const reducedMotion = useReducedMotion();
@@ -145,7 +174,7 @@ export default function Hero() {
                 background: 'linear-gradient(to bottom, #9BEC00 0%, #06D001 100%)'
               }}
             >
-              <i className="fab fa-apple text-2xl" aria-hidden />
+              <AppleIcon />
               <span className="flex flex-col leading-tight text-left">
                 <span className="text-[0.65rem] uppercase tracking-wide opacity-70">
                   Télécharger sur
@@ -162,7 +191,7 @@ export default function Hero() {
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-white text-dodje-ink font-arboria font-bold shadow-[0_12px_30px_-8px_rgba(255,255,255,0.25)]"
             >
-              <i className="fab fa-google-play text-xl" aria-hidden />
+              <GooglePlayIcon />
               <span className="flex flex-col leading-tight text-left">
                 <span className="text-[0.65rem] uppercase tracking-wide opacity-70">
                   Disponible sur
@@ -182,15 +211,18 @@ export default function Hero() {
           </motion.p>
         </motion.div>
 
-        {/* RIGHT: Mascotte with floating bob (arm wave baked in the GIF).
+        {/* RIGHT: Mascotte with floating bob.
             Green halo behind mascot removed for a calmer, less neon look. */}
         <div className="relative flex items-center justify-center min-h-[420px] lg:min-h-[1040px]">
-          <motion.img
-            src={salutGif}
-            alt="Mascotte Dodje qui salue"
-            draggable={false}
-            decoding="async"
-            fetchPriority="high"
+          <motion.video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-label="Mascotte Dodje qui salue"
+            width={1200}
+            height={1200}
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -203,7 +235,10 @@ export default function Hero() {
               pointerEvents: 'none'
             }}
             className="relative z-10 w-[560px] sm:w-[820px] lg:w-[1080px] xl:w-[1200px] max-w-full select-none drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)]"
-          />
+          >
+            <source src={salutWebm} type="video/webm" />
+            <source src={salutMp4} type="video/mp4" />
+          </motion.video>
         </div>
        </div>
 

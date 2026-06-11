@@ -121,16 +121,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gestion de la vidéo d'arrière-plan
     const backgroundVideo = document.getElementById('background-video');
     if (backgroundVideo) {
-        // S'assurer que la vidéo démarre bien
-        backgroundVideo.play().catch(e => {
-            console.log('Autoplay bloqué:', e);
-        });
-        
-        // Redémarrer la vidéo quand elle se termine (double sécurité pour la boucle)
-        backgroundVideo.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
-        });
+        const shouldDisableBackgroundVideo = window.matchMedia('(max-width: 767px)').matches;
+
+        if (shouldDisableBackgroundVideo) {
+            backgroundVideo.querySelectorAll('source').forEach(source => source.remove());
+            backgroundVideo.removeAttribute('src');
+            backgroundVideo.load();
+        } else {
+            // S'assurer que la vidéo démarre bien
+            backgroundVideo.play().catch(e => {
+                console.log('Autoplay bloqué:', e);
+            });
+
+            // Redémarrer la vidéo quand elle se termine (double sécurité pour la boucle)
+            backgroundVideo.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            });
+        }
     }
 
     // Navbar scroll effect
