@@ -47,13 +47,13 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
   switch (role) {
     case 'center':
       return {
-        transform: `translateX(-50%) scale(${isMobile ? 1.15 : 1.2})`,
+        transform: `translateX(-50%) scale(${isMobile ? 1.25 : 1.35})`,
         filter: 'none',
         opacity: 1,
         zIndex: 20,
         left: '50%',
-        height: isMobile ? '52%' : '58%',
-        bottom: isMobile ? '42%' : '44%'
+        height: isMobile ? '62%' : '70%',
+        bottom: isMobile ? '28%' : '30%'
       };
     case 'left':
       return {
@@ -61,9 +61,9 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
         filter: 'blur(2px)',
         opacity: 0.85,
         zIndex: 10,
-        left: isMobile ? '20%' : '30%',
-        height: isMobile ? '16%' : '24%',
-        bottom: isMobile ? '52%' : '56%'
+        left: isMobile ? '18%' : '28%',
+        height: isMobile ? '20%' : '30%',
+        bottom: isMobile ? '37%' : '41%'
       };
     case 'right':
       return {
@@ -71,9 +71,9 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
         filter: 'blur(2px)',
         opacity: 0.85,
         zIndex: 10,
-        left: isMobile ? '80%' : '70%',
-        height: isMobile ? '16%' : '24%',
-        bottom: isMobile ? '52%' : '56%'
+        left: isMobile ? '82%' : '72%',
+        height: isMobile ? '20%' : '30%',
+        bottom: isMobile ? '37%' : '41%'
       };
     case 'back':
       return {
@@ -82,8 +82,8 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
         opacity: 1,
         zIndex: 5,
         left: '50%',
-        height: isMobile ? '13%' : '20%',
-        bottom: isMobile ? '52%' : '56%'
+        height: isMobile ? '17%' : '26%',
+        bottom: isMobile ? '37%' : '41%'
       };
     case 'hidden':
     default:
@@ -93,8 +93,8 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
         opacity: 0,
         zIndex: 1,
         left: '50%',
-        height: isMobile ? '13%' : '20%',
-        bottom: isMobile ? '52%' : '56%',
+        height: isMobile ? '17%' : '26%',
+        bottom: isMobile ? '37%' : '41%',
         pointerEvents: 'none'
       };
   }
@@ -172,7 +172,7 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
           Sizes to content, rounded corners always visible. */}
       <div
         className="absolute pointer-events-auto z-[50]
-                   left-1/2 -translate-x-1/2 bottom-10 sm:bottom-14
+                   left-1/2 -translate-x-1/2 bottom-6 sm:bottom-14
                    w-[min(540px,calc(100%-48px))]
                    rounded-[28px]
                    backdrop-blur-2xl
@@ -200,22 +200,39 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
           <p className="font-arboria text-[0.7rem] uppercase tracking-widest text-white/50 mt-3">
             {activeIndex + 1} / {n}
           </p>
+          <div className="flex sm:hidden items-center justify-center gap-3 mt-4">
+            <button
+              type="button"
+              onClick={() => navigate('prev')}
+              aria-label="Précédent"
+              className="w-12 h-12 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+              style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
+            >
+              <ArrowLeft size={26} strokeWidth={2.25} />
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('next')}
+              aria-label="Suivant"
+              className="w-12 h-12 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+              style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
+            >
+              <ArrowRight size={26} strokeWidth={2.25} />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Navigation buttons — centered on phones, anchored bottom-left
-          from sm: up. */}
+      {/* Navigation buttons — desktop only, anchored bottom-left. */}
       <div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2
-                   sm:left-10 sm:translate-x-0 sm:bottom-10
-                   flex items-center gap-3"
+        className="absolute hidden sm:flex bottom-10 left-10 items-center gap-3"
         style={{ zIndex: 60 }}
       >
         <button
           type="button"
           onClick={() => navigate('prev')}
           aria-label="Précédent"
-          className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
           style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
         >
           <ArrowLeft size={26} strokeWidth={2.25} />
@@ -224,7 +241,7 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
           type="button"
           onClick={() => navigate('next')}
           aria-label="Suivant"
-          className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
           style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
         >
           <ArrowRight size={26} strokeWidth={2.25} />
