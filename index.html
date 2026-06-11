@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodje - Application d'éducation financière gratuite</title>
+    
+    <!-- Favicon pour l'onglet du navigateur -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/IconeApp.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/IconeApp.png">
+    <link rel="apple-touch-icon" href="assets/IconeApp.png">
+    
+    <!-- SEO Meta Tags Optimises -->
+    <meta name="description" content="Dodje est l'application mobile gratuite d'éducation financière lancée en 2024. Apprends budget, épargne, bourse et crypto en français, sans jargon, sur iOS et Android.">
+    <meta name="keywords" content="dodje, application éducation financière, apprendre la finance, finance personnelle, budget, épargne, bourse débutant, crypto débutant, application finance gratuite, culture financière">
+    <meta name="author" content="Dodje">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="fr-FR">
+    
+    <meta name="theme-color" content="#06D001">
+
+    <!-- URLs Canoniques -->
+    <link rel="canonical" href="https://dodje.fr/">
+
+    <!-- Hreflang : signale à Google que ce site est en français pour la France -->
+    <link rel="alternate" hreflang="fr-FR" href="https://dodje.fr/">
+    <link rel="alternate" hreflang="fr" href="https://dodje.fr/">
+    <link rel="alternate" hreflang="x-default" href="https://dodje.fr/">
+    
+    <!-- DNS Prefetch + preconnect pour optimiser les performances -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Preload hero LCP asset (mascot GIF) for fast first paint -->
+    <link rel="preload" as="image" href="assets/anime/Salut.gif" fetchpriority="high">
+
+    <!-- Open Graph pour Facebook, LinkedIn, etc. -->
+    <meta property="og:title" content="Dodje - Application d'éducation financière gratuite">
+    <meta property="og:description" content="Apprends le budget, l'épargne, la bourse et la crypto simplement avec Dodje, l'app d'éducation financière ludique.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Dodje - Application d'éducation financière">
+    <meta property="og:url" content="https://dodje.fr/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dodje">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DodjeApp">
+    <meta name="twitter:creator" content="@DodjeApp">
+    <meta name="twitter:title" content="Dodje - Application d'éducation financière gratuite">
+    <meta name="twitter:description" content="Apprends le budget, l'épargne, la bourse et la crypto simplement avec Dodje, l'app d'éducation financière ludique.">
+    <meta name="twitter:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta name="twitter:image:alt" content="Dodje - Application d'éducation financière">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Donnees structurees JSON-LD pour le SEO et les moteurs IA -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://dodje.fr/#organization",
+        "name": "Dodje",
+        "alternateName": [
+          "Dodje",
+          "DodjeApp"
+        ],
+        "url": "https://dodje.fr/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dodje.fr/assets/Logo_degrade_PNG.png",
+          "width": 400,
+          "height": 120
+        },
+        "description": "Dodje est une application gratuite d'éducation financière pour apprendre le budget, l'épargne, la bourse et la crypto, sans jargon ni promesse de gain.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contact@dodje.fr",
+          "contactType": "customer support",
+          "availableLanguage": "French"
+        },
+        "sameAs": [
+          "https://www.instagram.com/dodjeapp/",
+          "https://x.com/DodjeApp",
+          "https://www.tiktok.com/@dodjeapp",
+          "https://discord.gg/qn7cp4nVFh",
+          "https://play.google.com/store/apps/details?id=xyz.dodje.app",
+          "https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215"
+        ],
+        "slogan": "L'éducation financière qui pousse en toi",
+        "legalName": "Dodje Solutions",
+        "foundingLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Orléans",
+            "postalCode": "45000",
+            "addressCountry": "FR"
+          }
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "France"
+        },
+        "knowsAbout": [
+          "Éducation financière",
+          "Budget personnel",
+          "Épargne",
+          "Investissement en bourse",
+          "ETF",
+          "Cryptomonnaies",
+          "Immobilier locatif",
+          "Fiscalité française"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "@id": "https://dodje.fr/#app",
+        "name": "Dodje",
+        "applicationCategory": "FinanceApplication",
+        "applicationSubCategory": "EducationalApplication",
+        "description": "Application gratuite d'éducation financière pour apprendre le budget, l'épargne, la bourse et la crypto avec des contenus courts, des quiz et un parcours progressif pensé pour les débutants.",
+        "url": "https://dodje.fr/",
+        "image": "https://dodje.fr/assets/IconeApp.png",
+        "screenshot": [
+          "https://dodje.fr/assets/imageapp/08B85A0C-122F-456C-BD9C-99BA9C7E7FFD_1_102_o.jpeg",
+          "https://dodje.fr/assets/imageapp/8593ECD7-3E13-4753-9761-4CD0B7FCDF1E_1_102_o.jpeg",
+          "https://dodje.fr/assets/imageapp/B1B03881-6C26-4381-8854-9D3F16BCC970_1_102_o.jpeg",
+          "https://dodje.fr/assets/imageapp/BE6D9D32-BAB5-4776-9566-2477A5052007_1_102_o.jpeg"
+        ],
+        "author": {
+          "@id": "https://dodje.fr/#organization"
+        },
+        "publisher": {
+          "@id": "https://dodje.fr/#organization"
+        },
+        "operatingSystem": [
+          "iOS",
+          "Android"
+        ],
+        "downloadUrl": [
+          "https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215",
+          "https://play.google.com/store/apps/details?id=xyz.dodje.app"
+        ],
+        "inLanguage": "fr-FR",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        },
+        "featureList": [
+          "Parcours d'apprentissage progressif",
+          "Quiz et mini-jeux éducatifs",
+          "Défis quotidiens",
+          "Contenu sur le budget, l'épargne, la bourse et la crypto",
+          "Gamification et système de récompenses",
+          "Gratuit sur iOS et Android"
+        ],
+        "keywords": [
+          "education financiere",
+          "finance personnelle",
+          "budget",
+          "epargne",
+          "bourse debutant",
+          "crypto debutant",
+          "dodje"
+        ],
+        "datePublished": "2024"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://dodje.fr/#website",
+        "name": "Dodje",
+        "url": "https://dodje.fr/",
+        "publisher": {
+          "@id": "https://dodje.fr/#organization"
+        },
+        "inLanguage": "fr-FR",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://dodje.fr/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://dodje.fr/#faq-home",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Qu'est-ce que Dodje ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dodje est une application mobile gratuite d'éducation financière, lancée en 2024 et disponible sur iOS et Android. Elle aide les débutants à comprendre le budget, l'épargne, la bourse, la crypto, l'immobilier et la fiscalité grâce à des parcours d'apprentissage ludiques, des quiz interactifs et un système de gamification (Dodjis, niveaux, classement)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "À qui s'adresse l'application Dodje ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dodje s'adresse aux débutants en finance personnelle, en particulier les 18-45 ans qui veulent comprendre leur argent sans jargon. L'application part du niveau zéro et progresse étape par étape — aucune connaissance préalable n'est requise. Âge minimum : 16 ans."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Dodje est-il vraiment gratuit ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, Dodje est 100% gratuit sur iOS et Android. Aucune carte bancaire n'est demandée à l'inscription et les parcours d'éducation financière (budget, épargne, bourse, crypto) sont accessibles sans abonnement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels sujets de finance sont couverts par Dodje ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dodje couvre 6 thématiques principales : budget personnel, épargne de précaution, bourse (actions, ETF), cryptomonnaies (blockchain, wallets, risques), immobilier locatif, et fiscalité française. Chaque sujet est découpé en parcours progressifs avec exemples concrets et sans promesse de rendement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Dodje donne-t-il des conseils en investissement personnalisés ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non. Dodje est exclusivement un service d'éducation et d'information financière. L'application n'est pas un conseiller financier réglementé et ne fournit aucune recommandation personnalisée, aucune promesse de rendement, ni d'incitation à investir dans un produit financier spécifique."
+            }
+          }
+        ]
+      }
+    ]
+    </script>
+</head>
+<body>
+    <!-- Vidéo d'arrière-plan avec lazy loading -->
+    <video id="background-video" autoplay muted loop playsinline loading="lazy" preload="metadata">
+        <source src="assets/anime/FondAnime.mp4" type="video/mp4">
+        <!-- Fallback pour les navigateurs qui ne supportent pas la vidéo -->
+        Votre navigateur ne supporte pas la vidéo HTML5.
+    </video>
+
+    <!-- Fluid background overlay above the video, beneath all section content -->
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <!-- Navigation minimale en haut de page -->
+    <nav class="navbar-minimal" id="navbar-minimal">
+        <div class="nav-minimal-container">
+            <div class="nav-logo-centered">
+                <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Application éducation financière gratuite" class="logo-img">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navigation complète lors du scroll -->
+    <nav class="navbar navbar-scroll" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Application finance ludique pour apprendre investissement" class="logo-img">
+            </div>
+            <div class="nav-menu">
+                <a href="#pillars" class="nav-link">À propos</a>
+                <a href="#features" class="nav-link">Fonctionnalités</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/faq" class="nav-link">FAQ</a>
+                <a href="#community" class="nav-link">Communauté</a>
+                <a href="#hero" class="cta-button nav-cta">Télécharger</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Menu">
+                <span class="burger" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Menu Mobile -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <img src="assets/Logo_degrade_PNG.png" alt="Dodje - App gratuite formation finance" class="logo-img">
+            <button class="mobile-menu-close" id="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="#pillars" class="nav-link">À propos</a>
+            <a href="#features" class="nav-link">Fonctionnalités</a>
+            <a href="/blog" class="nav-link">Blog</a>
+            <a href="/faq" class="nav-link">FAQ</a>
+            <a href="#community" class="nav-link">Communauté</a>
+        </nav>
+        <div class="mobile-cta">
+            <a href="#hero" class="cta-button">Télécharger</a>
+        </div>
+    </div>
+
+    <!-- Hero Section (React).
+         Static H1 + intro lives inside #hero-root as a no-JS / crawler
+         fallback. React mounts on top of it and replaces the children when
+         the bundle loads, so end users only see the React UI. -->
+    <div id="hero-root">
+        <h1 style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">
+            Dodje, l'application mobile gratuite d'éducation financière pour comprendre ton argent simplement et sans jargon.
+        </h1>
+        <p style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">
+            Dodje est l'application mobile française d'éducation financière lancée en 2024. Elle aide les débutants à comprendre le budget, l'épargne, la bourse et la crypto grâce à des parcours d'apprentissage ludiques, des quiz et un système de gamification. Disponible gratuitement sur iOS et Android, sans conseil personnalisé ni promesse de rendement.
+        </p>
+    </div>
+
+    <!-- Stats Section (React) -->
+    <div id="stats-root"></div>
+
+    <!-- Three Pillars Section (React) -->
+    <div id="pillars-root"></div>
+
+    <!-- Biome Carousel Section (React) -->
+    <div id="carousel-root"></div>
+
+    <!-- Features Section (React) -->
+    <div id="features-root"></div>
+
+    <!-- Community Section -->
+    <section class="community" id="community">
+        <div class="container">
+            <div class="community-content">
+                <div class="community-visual">
+                    <img src="assets/anime/Re_volution.gif" alt="Communauté Dodje autour de l'éducation financière" class="revolution-video" loading="lazy">
+                </div>
+                <div class="community-text">
+                    <h2 class="community-title">
+                        <span class="animate-revolution">Rejoins la communauté Dodje</span>
+                    </h2>
+                    <p class="community-description">
+                        Une communauté de personnes qui veulent enfin comprendre leur argent au lieu de faire semblant, sans jargon, sans pression et sans bullshit.
+                    </p>
+                    <a href="https://discord.gg/qn7cp4nVFh" target="_blank" rel="noopener noreferrer" class="community-cta">
+                        <span class="svg-wrapper" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
+                                <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+                            </svg>
+                        </span>
+                        <span>Rejoindre la communauté</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Logo application finance éducative gratuite" class="footer-logo">
+                    <p>Dodje - la finance enfin expliquée simplement</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rejoins le mouvement</h4>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@dodjeapp" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/dodjeapp/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://discord.gg/qn7cp4nVFh" class="social-link" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="https://x.com/DodjeApp" class="social-link" target="_blank"><i class="fas fa-x"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens utiles</h4>
+                    <ul>
+                        <li><a href="blog">Blog</a></li>
+                        <li><a href="faq">FAQ</a></li>
+                        <li><a href="conditions-utilisation">Conditions d'utilisation</a></li>
+                        <li><a href="politique-confidentialite">Confidentialité</a></li>
+                        <li><a href="mailto:contact@dodje.fr">contact@dodje.fr</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- React hero entry -->
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Arboria font already loaded via styles.css @font-face — referenced by font-arboria utility */
+
+@layer base {
+  #hero-root,
+  #stats-root,
+  #pillars-root,
+  #carousel-root,
+  #features-root {
+    font-family: 'Arboria', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@keyframes panelEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

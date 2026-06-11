@@ -1,0 +1,235 @@
+import { useEffect, useState, type CSSProperties } from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Lottie from 'lottie-react';
+
+export type CarouselItem = {
+  id: string;
+  /** Lottie animation data (parsed JSON) for the building. */
+  building: object;
+  /** Small kicker shown above the title in the info panel (e.g. "Ton job"). */
+  tagline: string;
+  /** Building name (e.g. "L'atelier"). */
+  title: string;
+  /** Long-form description. */
+  description: string;
+};
+
+type Role = 'center' | 'left' | 'right' | 'back' | 'hidden';
+
+const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
+const DURATION_MS = 650;
+
+const TRANSITION = [
+  `transform ${DURATION_MS}ms ${EASE}`,
+  `filter ${DURATION_MS}ms ${EASE}`,
+  `opacity ${DURATION_MS}ms ${EASE}`,
+  `left ${DURATION_MS}ms ${EASE}`
+].join(', ');
+
+function useIsMobile(): boolean {
+  const [isMobile, setIsMobile] = useState<boolean>(
+    typeof window === 'undefined' ? false : window.innerWidth < 640
+  );
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener('resize', onResize, { passive: true });
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  return isMobile;
+}
+
+function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
+  // Desktop values give the buildings a higher anchor + smaller scale so
+  // their visual bottom edge stays clear of the info panel that sits at
+  // bottom-28 of the section.
+  switch (role) {
+    case 'center':
+      return {
+        transform: `translateX(-50%) scale(${isMobile ? 1.15 : 1.2})`,
+        filter: 'none',
+        opacity: 1,
+        zIndex: 20,
+        left: '50%',
+        height: isMobile ? '52%' : '58%',
+        bottom: isMobile ? '42%' : '44%'
+      };
+    case 'left':
+      return {
+        transform: 'translateX(-50%) scale(1)',
+        filter: 'blur(2px)',
+        opacity: 0.85,
+        zIndex: 10,
+        left: isMobile ? '20%' : '30%',
+        height: isMobile ? '16%' : '24%',
+        bottom: isMobile ? '52%' : '56%'
+      };
+    case 'right':
+      return {
+        transform: 'translateX(-50%) scale(1)',
+        filter: 'blur(2px)',
+        opacity: 0.85,
+        zIndex: 10,
+        left: isMobile ? '80%' : '70%',
+        height: isMobile ? '16%' : '24%',
+        bottom: isMobile ? '52%' : '56%'
+      };
+    case 'back':
+      return {
+        transform: 'translateX(-50%) scale(1)',
+        filter: 'blur(4px)',
+        opacity: 1,
+        zIndex: 5,
+        left: '50%',
+        height: isMobile ? '13%' : '20%',
+        bottom: isMobile ? '52%' : '56%'
+      };
+    case 'hidden':
+    default:
+      return {
+        transform: 'translateX(-50%) scale(1)',
+        filter: 'blur(6px)',
+        opacity: 0,
+        zIndex: 1,
+        left: '50%',
+        height: isMobile ? '13%' : '20%',
+        bottom: isMobile ? '52%' : '56%',
+        pointerEvents: 'none'
+      };
+  }
+}
+
+function resolveRole(index: number, active: number, n: number): Role {
+  if (index === active) return 'center';
+  if (index === (active + n - 1) % n) return 'left';
+  if (index === (active + 1) % n) return 'right';
+  if (index === (active + 2) % n) return 'back';
+  return 'hidden';
+}
+
+export type CharacterCarouselProps = {
+  items: CarouselItem[];
+  className?: string;
+};
+
+const LOTTIE_RENDERER_OPTS = { preserveAspectRatio: 'xMidYMid meet' };
+
+export default function CharacterCarousel({ items, className }: CharacterCarouselProps) {
+  const n = items.length;
+  const isMobile = useIsMobile();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const navigate = (dir: 'next' | 'prev') => {
+    if (isAnimating || n <= 1) return;
+    setIsAnimating(true);
+    setActiveIndex((prev) => (dir === 'next' ? (prev + 1) % n : (prev + n - 1) % n));
+    window.setTimeout(() => setIsAnimating(false), DURATION_MS);
+  };
+
+  const active = items[activeIndex];
+
+  return (
+    <div className={`relative w-full h-full ${className ?? ''}`}>
+      {/* Carousel items layer (Lottie buildings) */}
+      <div className="absolute inset-0" style={{ zIndex: 3 }}>
+        {items.map((item, index) => {
+          const role = resolveRole(index, activeIndex, n);
+          const roleStyles = getRoleStyles(role, isMobile);
+          const style: CSSProperties = {
+            position: 'absolute',
+            aspectRatio: '0.6 / 1',
+            transition: TRANSITION,
+            willChange: 'transform, filter, opacity',
+            ...roleStyles
+          };
+          const isCenter = role === 'center';
+          return (
+            <div
+              key={item.id}
+              style={style}
+              aria-hidden={!isCenter}
+              data-role={role}
+            >
+              <Lottie
+                animationData={item.building}
+                loop
+                autoplay
+                rendererSettings={LOTTIE_RENDERER_OPTS}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  filter: 'drop-shadow(0 16px 32px rgba(0,0,0,0.45))'
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Liquid-glass info panel — centered below the active building.
+          Sizes to content, rounded corners always visible. */}
+      <div
+        className="absolute pointer-events-auto z-[50]
+                   left-1/2 -translate-x-1/2 bottom-10 sm:bottom-14
+                   w-[min(540px,calc(100%-48px))]
+                   rounded-[28px]
+                   backdrop-blur-2xl
+                   shadow-[0_24px_60px_-12px_rgba(0,0,0,0.55)]
+                   px-5 py-4 sm:px-6 sm:py-5
+                   text-center"
+        style={{
+          border: '1px solid #121212',
+          backgroundColor: 'rgba(18, 18, 18, 0.7)'
+        }}
+      >
+        <div
+          key={active.id}
+          className="flex flex-col gap-2 animate-[panelEnter_500ms_cubic-bezier(0.4,0,0.2,1)]"
+        >
+          <p className="font-arboria text-xs sm:text-sm font-medium uppercase tracking-[0.18em] text-dodje-green">
+            {active.tagline}
+          </p>
+          <h3 className="font-arboria font-black text-3xl sm:text-4xl leading-[1.05] text-white">
+            {active.title}
+          </h3>
+          <p className="font-arboria text-sm sm:text-base text-white/85 leading-relaxed mt-2">
+            {active.description}
+          </p>
+          <p className="font-arboria text-[0.7rem] uppercase tracking-widest text-white/50 mt-3">
+            {activeIndex + 1} / {n}
+          </p>
+        </div>
+      </div>
+
+      {/* Navigation buttons — centered on phones, anchored bottom-left
+          from sm: up. */}
+      <div
+        className="absolute bottom-6 left-1/2 -translate-x-1/2
+                   sm:left-10 sm:translate-x-0 sm:bottom-10
+                   flex items-center gap-3"
+        style={{ zIndex: 60 }}
+      >
+        <button
+          type="button"
+          onClick={() => navigate('prev')}
+          aria-label="Précédent"
+          className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
+        >
+          <ArrowLeft size={26} strokeWidth={2.25} />
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('next')}
+          aria-label="Suivant"
+          className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
+        >
+          <ArrowRight size={26} strokeWidth={2.25} />
+        </button>
+      </div>
+    </div>
+  );
+}
