@@ -335,5 +335,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
 
-    console.log('🌱 Dodje Landing Page with Firebase loaded successfully');
+    console.log('🌱 Dodje Landing Page loaded successfully');
 });
