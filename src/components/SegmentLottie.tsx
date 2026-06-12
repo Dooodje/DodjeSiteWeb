@@ -1,0 +1,101 @@
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
+
+const RENDERER_SETTINGS = { preserveAspectRatio: 'xMidYMid meet' };
+
+type SegmentLottieProps = {
+  loadAnimation: () => Promise<object>;
+  alt: string;
+  loop?: boolean;
+  reducedMotion?: boolean | null;
+  className?: string;
+  style?: CSSProperties;
+};
+
+export default function SegmentLottie({
+  loadAnimation,
+  alt,
+  loop = true,
+  reducedMotion = false,
+  className,
+  style
+}: SegmentLottieProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const lottieRef = useRef<LottieRefCurrentProps>(null);
+  const [animationData, setAnimationData] = useState<object | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  const syncPlayback = useCallback(() => {
+    const instance = lottieRef.current;
+    if (!instance || !isReady) return;
+
+    if (isVisible && !reducedMotion) {
+      instance.play();
+    } else {
+      instance.pause();
+    }
+  }, [isVisible, isReady, reducedMotion]);
+
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsVisible(entries.some((entry) => entry.isIntersecting));
+      },
+      { rootMargin: '120px 0px', threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || animationData) return;
+
+    let cancelled = false;
+    loadAnimation().then((data) => {
+      if (!cancelled) setAnimationData(data);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isVisible, animationData, loadAnimation]);
+
+  useEffect(() => {
+    setIsReady(false);
+  }, [animationData]);
+
+  useEffect(() => {
+    syncPlayback();
+  }, [syncPlayback]);
+
+  return (
+    <div
+      ref={rootRef}
+      role="img"
+      aria-label={alt}
+      className={className}
+      style={style}
+    >
+      {animationData ? (
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={animationData}
+          loop={loop && !reducedMotion}
+          autoplay={!reducedMotion}
+          onDOMLoaded={() => setIsReady(true)}
+          rendererSettings={RENDERER_SETTINGS}
+          style={{
+            width: '100%',
+            height: '100%',
+            filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.45))'
+          }}
+        />
+      ) : null}
+    </div>
+  );
+}

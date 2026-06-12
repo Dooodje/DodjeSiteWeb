@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import salutGif from '../../assets/anime/Salut.gif';
 import salutMp4 from '../../assets/anime/Salut.mp4';
 import salutWebm from '../../assets/anime/Salut.webm';
@@ -64,7 +64,6 @@ export default function Hero() {
     <section
       id="hero"
       className="relative w-full overflow-hidden text-white"
-      style={{ minHeight: '100svh' }}
     >
       {/* Background: subtle dot pattern only. No green blobs / halos so the
           hero reads as quietly dark instead of neon-flashy. Masked to fade
@@ -89,7 +88,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1500px] px-6 sm:px-10 lg:px-16 pt-12 pb-4 lg:pt-12 lg:pb-6 flex flex-col gap-2 lg:gap-3">
+      <div className="relative z-10 mx-auto max-w-[1500px] px-6 sm:px-10 lg:px-16 pt-32 pb-14 sm:pt-24 lg:pt-12 lg:pb-20 flex flex-col gap-2 lg:gap-3">
        <div className="grid lg:grid-cols-[0.8fr_1.4fr] gap-3 lg:gap-10 items-center">
         {/* LEFT: Text + CTAs */}
         <div className="flex flex-col gap-2 lg:gap-3">
@@ -141,15 +140,6 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p
-            className="font-arboria text-lg sm:text-xl lg:text-[1.35rem] text-white/75 max-w-xl leading-relaxed motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
-            style={{ animationDelay: '700ms' }}
-          >
-            Dodje est l’app de finance pour débutants qui t’aide à comprendre
-            ton argent facilement, même si tu pars de zéro.
-          </p>
-
           {/* CTAs */}
           <div
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
@@ -199,7 +189,7 @@ export default function Hero() {
 
         {/* RIGHT: Mascotte with floating bob.
             Green halo behind mascot removed for a calmer, less neon look. */}
-        <div className="relative flex items-center justify-center min-h-[420px] lg:min-h-[1040px]">
+        <div className="relative flex items-center justify-center min-h-[320px] lg:min-h-0">
           {canUseVideoMascot ? (
             <video
               autoPlay
@@ -236,25 +226,6 @@ export default function Hero() {
           )}
         </div>
        </div>
-
-        {/* Scroll cue — placed under the trust note, horizontally centered
-            across the viewport (in flow so it follows the trust note vertically
-            on every breakpoint instead of being anchored to the viewport). */}
-        <a
-          href="/"
-          data-scroll-to="stats"
-          aria-label="Découvre la suite"
-          className="mx-auto mt-2 z-20 flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors motion-safe:animate-[heroFadeIn_800ms_ease_1400ms_both]"
-        >
-          <span className="text-[0.7rem] uppercase tracking-[0.25em] font-arboria">
-            Découvre
-          </span>
-          <span
-            className="inline-flex motion-safe:animate-[scrollCue_1.8s_ease-in-out_infinite]"
-          >
-            <ArrowDown size={20} strokeWidth={2.25} />
-          </span>
-        </a>
       </div>
     </section>
   );

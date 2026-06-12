@@ -71,6 +71,9 @@ export default function App() {
         <h2 className="font-arboria font-black uppercase tracking-tight leading-[0.95] text-3xl sm:text-5xl md:text-6xl max-w-3xl">
           De la théorie à la <span className="text-dodje-green">pratique</span>
         </h2>
+        <p className="font-arboria text-base sm:text-lg text-white/75 max-w-2xl mt-5 leading-relaxed">
+          Récupère des Dodji, débloque des bâtiments et prends des décisions financières. Apprendre à gérer son argent n’a jamais été aussi fun.
+        </p>
       </div>
 
       {/* Mobile: full section. Desktop: buildings start below title with

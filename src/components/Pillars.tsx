@@ -1,17 +1,23 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-
-// Reuse the existing brand gifs that already live under /assets/anime
+import { segmentLottie } from '../assets/lottie/segments';
 import parcoursGif from '../../assets/anime/Parcours.gif';
-import methodeGif from '../../assets/anime/MethodeRevolutionnaire.gif';
-import funGif from '../../assets/anime/fun.gif';
+import SegmentLottie from './SegmentLottie';
+
+type PillarMedia =
+  | { kind: 'gif'; src: string }
+  | {
+      kind: 'lottie';
+      loadAnimation: () => Promise<object>;
+      aspectClass: string;
+      scaleClass: string;
+    };
 
 type Pillar = {
   number: string;
   titleLine1: string;
   titleAccent: string;
   body: string;
-  quote: string;
-  gif: string;
+  media: PillarMedia;
   alt: string;
 };
 
@@ -21,30 +27,37 @@ const PILLARS: Pillar[] = [
     titleLine1: 'Un parcours',
     titleAccent: 'progressif',
     body:
-      'Tu commences par les bases, tu avances étape par étape, et tu construis des repères solides avant d’aller plus loin.',
-    quote: 'On ne naît pas à l’aise avec la finance. On le devient.',
-    gif: parcoursGif,
+      'Avec Dodje, tu avances à ton rythme. Tu commences par les bases, tu débloques de nouvelles notions petit à petit, et tu comprends enfin la finance sans te sentir perdu.',
+    media: { kind: 'gif', src: parcoursGif },
     alt: 'Parcours d’apprentissage progressif'
   },
   {
     number: '02',
-    titleLine1: 'Un mouvement',
-    titleAccent: 'nécessaire',
+    titleLine1: 'Ton argent',
+    titleAccent: 'en clair',
     body:
-      'On te dit qu’il faut t’intéresser à ton argent, mais rarement de façon claire. Dodje existe pour changer ça.',
-    quote: 'Comprendre son argent ne devrait jamais être un privilège.',
-    gif: methodeGif,
-    alt: 'Méthode révolutionnaire Dodje'
+      'On parle souvent d’argent, mais rarement de façon simple. Dodje t’aide à prendre de bonnes habitudes et à mieux comprendre les décisions qui comptent dans ta vie.',
+    media: {
+      kind: 'lottie',
+      loadAnimation: segmentLottie.mouvementNecessaire,
+      aspectClass: 'aspect-square',
+      scaleClass: 'scale-[1.1] sm:scale-[1.2] lg:scale-[1.3]'
+    },
+    alt: 'Notification Dodje — ton argent en clair'
   },
   {
     number: '03',
     titleLine1: 'Gratuit. Simple.',
     titleAccent: 'Ludique.',
     body:
-      'Des contenus courts, des formats interactifs et une progression claire pour enfin t’y mettre sans te sentir largué.',
-    quote: 'On peut parler d’argent sérieusement sans rendre ça chiant.',
-    gif: funGif,
-    alt: 'Apprentissage finance ludique'
+      'Apprendre avec Dodje, c’est gratuit, clair et motivant. Les leçons sont courtes, les quiz te font pratiquer, et chaque progrès te donne envie de continuer.',
+    media: {
+      kind: 'lottie',
+      loadAnimation: segmentLottie.gratuitSimpleLudique,
+      aspectClass: 'aspect-square',
+      scaleClass: 'scale-[1.1] sm:scale-[1.2] lg:scale-[1.3]'
+    },
+    alt: 'Daily reward Dodje — gratuit, simple et ludique'
   }
 ];
 
@@ -76,13 +89,20 @@ const visualVariants: Variants = {
   }
 };
 
+const floatTransition = (delay: number) => ({
+  duration: 5,
+  repeat: Infinity,
+  ease: 'easeInOut' as const,
+  delay
+});
+
 export default function Pillars() {
   const reducedMotion = useReducedMotion();
 
   return (
     <section
       id="pillars"
-      className="relative w-full overflow-hidden text-white py-24 sm:py-36"
+      className="relative w-full overflow-x-hidden text-white py-24 sm:py-36"
     >
       <div
         aria-hidden
@@ -91,9 +111,6 @@ export default function Pillars() {
           backgroundImage:
             'radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)',
           backgroundSize: '28px 28px',
-          // Fade the dot grid in/out at section edges so the pattern blends
-          // continuously with adjacent sections instead of starting / ending
-          // on a hard line.
           WebkitMaskImage:
             'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
           maskImage:
@@ -102,7 +119,6 @@ export default function Pillars() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        {/* Pillars */}
         <div className="flex flex-col gap-28 sm:gap-40">
           {PILLARS.map((pillar, i) => {
             const reverse = i % 2 === 1;
@@ -111,7 +127,7 @@ export default function Pillars() {
                 key={pillar.number}
                 className={`grid lg:grid-cols-2 gap-10 lg:gap-20 items-center ${
                   reverse ? 'lg:[direction:rtl]' : ''
-                }`}
+                } ${pillar.media.kind === 'lottie' ? 'overflow-visible' : ''}`}
               >
                 <motion.div
                   variants={reverse ? textVariantsReverse : textVariants}
@@ -130,15 +146,6 @@ export default function Pillars() {
                   <p className="font-arboria text-base sm:text-lg text-white/75 max-w-xl mt-2 leading-relaxed">
                     {pillar.body}
                   </p>
-                  <div className="relative mt-5 pl-5 max-w-xl">
-                    <span
-                      aria-hidden
-                      className="absolute left-0 top-1 bottom-1 w-[3px] rounded-full bg-dodje-green"
-                    />
-                    <p className="font-arboria text-base sm:text-lg italic text-white/90">
-                      « {pillar.quote} »
-                    </p>
-                  </div>
                 </motion.div>
 
                 <motion.div
@@ -146,29 +153,35 @@ export default function Pillars() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-10%' }}
-                  className="relative flex items-center justify-center [direction:ltr]"
+                  className={`relative flex items-center justify-center [direction:ltr] ${
+                    pillar.media.kind === 'lottie' ? 'overflow-visible' : ''
+                  }`}
+                  animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
+                  transition={floatTransition(i * 0.4)}
                 >
-                  <motion.img
-                    src={pillar.gif}
-                    alt={pillar.alt}
-                    width={1080}
-                    height={1080}
-                    loading="lazy"
-                    draggable={false}
-                    style={{ backgroundColor: 'transparent' }}
-                    animate={
-                      reducedMotion
-                        ? undefined
-                        : { y: [0, -8, 0] }
-                    }
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      delay: i * 0.4
-                    }}
-                    className="relative z-10 w-full max-w-[460px] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)]"
-                  />
+                  {pillar.media.kind === 'lottie' ? (
+                    <div
+                      className={`w-full max-w-[460px] origin-center ${pillar.media.scaleClass}`}
+                    >
+                      <SegmentLottie
+                        loadAnimation={pillar.media.loadAnimation}
+                        alt={pillar.alt}
+                        reducedMotion={reducedMotion}
+                        className={`relative z-10 w-full ${pillar.media.aspectClass}`}
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      src={pillar.media.src}
+                      alt={pillar.alt}
+                      width={1080}
+                      height={1080}
+                      loading="lazy"
+                      draggable={false}
+                      style={{ backgroundColor: 'transparent' }}
+                      className="relative z-10 w-full max-w-[460px] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)]"
+                    />
+                  )}
                 </motion.div>
               </div>
             );

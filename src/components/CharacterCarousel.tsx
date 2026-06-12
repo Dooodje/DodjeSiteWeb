@@ -60,7 +60,7 @@ function getRoleStyles(role: Role, isMobile: boolean, isShort: boolean): CSSProp
         zIndex: 20,
         left: '50%',
         height: isMobile ? (isShort ? '68%' : '72%') : '78%',
-        bottom: isMobile ? '8%' : '6%'
+        bottom: isMobile ? '-6%' : '-8%'
       };
     case 'left':
       return {
@@ -70,7 +70,7 @@ function getRoleStyles(role: Role, isMobile: boolean, isShort: boolean): CSSProp
         zIndex: 10,
         left: isMobile ? '18%' : '28%',
         height: isMobile ? '22%' : '30%',
-        bottom: isMobile ? '18%' : '22%'
+        bottom: isMobile ? '8%' : '10%'
       };
     case 'right':
       return {
@@ -80,7 +80,7 @@ function getRoleStyles(role: Role, isMobile: boolean, isShort: boolean): CSSProp
         zIndex: 10,
         left: isMobile ? '82%' : '72%',
         height: isMobile ? '22%' : '30%',
-        bottom: isMobile ? '18%' : '22%'
+        bottom: isMobile ? '8%' : '10%'
       };
     case 'back':
       return {
@@ -90,7 +90,7 @@ function getRoleStyles(role: Role, isMobile: boolean, isShort: boolean): CSSProp
         zIndex: 5,
         left: '50%',
         height: isMobile ? '18%' : '26%',
-        bottom: isMobile ? '18%' : '22%'
+        bottom: isMobile ? '8%' : '10%'
       };
     case 'hidden':
     default:
@@ -101,7 +101,7 @@ function getRoleStyles(role: Role, isMobile: boolean, isShort: boolean): CSSProp
         zIndex: 1,
         left: '50%',
         height: isMobile ? '18%' : '26%',
-        bottom: isMobile ? '18%' : '22%',
+        bottom: isMobile ? '8%' : '10%',
         pointerEvents: 'none'
       };
   }
@@ -202,20 +202,13 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
         </div>
       </div>
 
-      {/* Liquid-glass info panel — in document flow below buildings. */}
+      {/* Info content — in document flow below buildings. */}
       <div
         className="relative pointer-events-auto z-[50] shrink-0 mx-auto
                    w-[min(540px,calc(100%-48px))]
                    mb-[max(1.5rem,env(safe-area-inset-bottom))] sm:mb-14
-                   rounded-[28px]
-                   backdrop-blur-2xl
-                   shadow-[0_24px_60px_-12px_rgba(0,0,0,0.55)]
                    px-5 py-4 sm:px-6 sm:py-5
                    text-center"
-        style={{
-          border: '1px solid #121212',
-          backgroundColor: 'rgba(18, 18, 18, 0.7)'
-        }}
       >
         <div
           key={active.id}
@@ -227,9 +220,6 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
           <h3 className="font-arboria font-black text-3xl sm:text-4xl leading-[1.05] text-white">
             {active.title}
           </h3>
-          <p className="font-arboria text-sm sm:text-base text-white/85 leading-relaxed mt-2">
-            {active.description}
-          </p>
           <p className="font-arboria text-[0.7rem] uppercase tracking-widest text-white/50 mt-3">
             {activeIndex + 1} / {n}
           </p>
