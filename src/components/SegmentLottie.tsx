@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
-import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
+import { useCallback, useEffect, useRef, useState, type ComponentType, type CSSProperties } from 'react';
+import type { LottieComponentProps, LottieRefCurrentProps } from 'lottie-react';
 
 type SegmentLottieProps = {
   loadAnimation: () => Promise<object>;
@@ -10,6 +10,8 @@ type SegmentLottieProps = {
   className?: string;
   style?: CSSProperties;
 };
+
+type LottieComponent = ComponentType<LottieComponentProps>;
 
 export default function SegmentLottie({
   loadAnimation,
@@ -22,6 +24,7 @@ export default function SegmentLottie({
 }: SegmentLottieProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+  const [Lottie, setLottie] = useState<LottieComponent | null>(null);
   const [animationData, setAnimationData] = useState<object | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isReady, setIsReady] = useState(false);
@@ -53,6 +56,19 @@ export default function SegmentLottie({
   }, []);
 
   useEffect(() => {
+    if (!isVisible || Lottie) return;
+
+    let cancelled = false;
+    import('lottie-react').then((mod) => {
+      if (!cancelled) setLottie(() => mod.default);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isVisible, Lottie]);
+
+  useEffect(() => {
     if (!isVisible || animationData) return;
 
     let cancelled = false;
@@ -81,7 +97,7 @@ export default function SegmentLottie({
       className={className}
       style={style}
     >
-      {animationData ? (
+      {Lottie && animationData ? (
         <Lottie
           lottieRef={lottieRef}
           animationData={animationData}

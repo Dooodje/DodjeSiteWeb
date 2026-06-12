@@ -1,4 +1,6 @@
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import type { ReactNode } from 'react';
+import { useInView } from '../hooks/useInView';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import { segmentLottie } from '../assets/lottie/segments';
 import SegmentLottie from './SegmentLottie';
 
@@ -63,37 +65,56 @@ const FEATURES: Feature[] = [
   }
 ];
 
-const textVariants: Variants = {
-  hidden: { opacity: 0, x: -32 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
-const textVariantsReverse: Variants = {
-  hidden: { opacity: 0, x: 32 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
-const visualVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.92, y: 24 },
-  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const floatTransition = (delay: number) => ({
-  duration: 5,
-  repeat: Infinity,
-  ease: 'easeInOut' as const,
-  delay
-});
-
-/** Uniform vertical rhythm between feature rows. */
 const FEATURE_STACK_GAP = 'gap-32 lg:gap-36';
-/** Same row height on desktop so block spacing reads evenly. */
 const FEATURE_ROW =
   'grid lg:grid-cols-2 gap-10 lg:gap-x-20 items-center lg:min-h-[540px]';
-/** Fixed visual slot — animations centered regardless of aspect ratio. */
 const VISUAL_SLOT =
   'relative flex h-[380px] sm:h-[440px] lg:h-[500px] w-full items-center justify-center overflow-visible [direction:ltr]';
 
+type RevealBlockProps = {
+  reverse?: boolean;
+  visual?: boolean;
+  float?: number;
+  className?: string;
+  children: ReactNode;
+};
+
+function RevealBlock({
+  reverse = false,
+  visual = false,
+  float = 0,
+  className = '',
+  children
+}: RevealBlockProps) {
+  const reducedMotion = usePrefersReducedMotion();
+  const { ref, inView } = useInView({
+    rootMargin: '-10% 0px',
+    threshold: 0.15,
+    once: true
+  });
+
+  const visible = reducedMotion || inView;
+  const baseClass = visual ? 'reveal-visual' : 'reveal-text';
+  const directionClass = !visual && reverse ? 'reveal-text--reverse' : '';
+  const floatClass = visual && float && visible && !reducedMotion ? 'segment-float' : '';
+
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`${baseClass} ${directionClass} ${floatClass} ${
+        visible ? 'is-visible' : ''
+      } ${className}`.trim()}
+      style={
+        floatClass ? { animationDelay: `${float}s` } : undefined
+      }
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function Features() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = usePrefersReducedMotion();
 
   return (
     <section
@@ -125,11 +146,8 @@ export default function Features() {
                   reverse ? 'lg:[direction:rtl]' : ''
                 } overflow-visible`}
               >
-                <motion.div
-                  variants={reverse ? textVariantsReverse : textVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-10%' }}
+                <RevealBlock
+                  reverse={reverse}
                   className="flex flex-col gap-4 [direction:ltr]"
                 >
                   <h3 className="font-arboria font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl">
@@ -140,17 +158,9 @@ export default function Features() {
                   <p className="font-arboria text-base sm:text-lg text-white/75 max-w-xl mt-2 leading-relaxed">
                     {f.body}
                   </p>
-                </motion.div>
+                </RevealBlock>
 
-                <motion.div
-                  variants={visualVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-10%' }}
-                  className={VISUAL_SLOT}
-                  animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
-                  transition={floatTransition(i * 0.35)}
-                >
+                <RevealBlock visual float={i * 0.35} className={VISUAL_SLOT}>
                   <div
                     className={`w-full max-w-[460px] origin-center ${f.media.scaleClass}`}
                   >
@@ -161,7 +171,7 @@ export default function Features() {
                       className={`relative z-10 w-full ${f.media.aspectClass}`}
                     />
                   </div>
-                </motion.div>
+                </RevealBlock>
               </div>
             );
           })}

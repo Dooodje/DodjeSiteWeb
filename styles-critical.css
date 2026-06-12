@@ -1,0 +1,753 @@
+/* Arboria Font Faces */
+@font-face {
+    font-family: 'Arboria';
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url('./fonts/Arboria-Thin.woff2') format('woff2'),
+         url('./fonts/Arboria-Thin.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Arboria';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('./fonts/Arboria-Light.woff2') format('woff2'),
+         url('./fonts/Arboria-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Arboria';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./fonts/Arboria-Book.woff2') format('woff2'),
+         url('./fonts/Arboria-Book.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Arboria';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('./fonts/Arboria-Medium.woff2') format('woff2'),
+         url('./fonts/Arboria-Medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Arboria';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('./fonts/Arboria-Black.woff2') format('woff2'),
+         url('./fonts/Arboria-Black.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Arboria Fallback';
+    src: local('Arial');
+    size-adjust: 94%;
+    ascent-override: 95%;
+    descent-override: 25%;
+    line-gap-override: 0%;
+}
+
+/* CSS Variables */
+:root {
+    /* Colors - Hackathon.dev inspired */
+    --black: #000000;
+    --white: #ffffff;
+    --gray-50: #fafafa;
+    --gray-100: #f5f5f5;
+    --gray-200: #e5e5e5;
+    --gray-300: #d4d4d4;
+    --gray-400: #a3a3a3;
+    --gray-500: #737373;
+    --gray-600: #525252;
+    --gray-700: #404040;
+    --gray-800: #262626;
+    --gray-900: #171717;
+    
+    /* Dodje Brand Colors */
+    --primary-text: #0A0400;
+    --secondary-green: #06D001;
+    --accent-light-green: #9BEC00;
+    --accent-brown: #7C6354;
+    --accent-yellow: #F3FF90;
+    
+    /* Modern palette */
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-card: #111111;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-muted: rgba(255, 255, 255, 0.2);
+    
+    /* Typography - Ultra modern */
+    --font-family: 'Arboria', 'Arboria Fallback', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
+    --font-size-7xl: 4.5rem;
+    --font-size-8xl: 6rem;
+    --font-size-9xl: 8rem;
+    
+    --line-height-none: 1;
+    --line-height-tight: 1.15;
+    --line-height-snug: 1.25;
+    --line-height-normal: 1.35;
+    --line-height-relaxed: 1.45;
+    --line-height-loose: 1.75;
+    
+    --letter-spacing-tighter: -0.05em;
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0em;
+    --letter-spacing-wide: 0.025em;
+    --letter-spacing-wider: 0.05em;
+    --letter-spacing-widest: 0.1em;
+    
+    /* Spacing - Consistent system */
+    --space-px: 1px;
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+    --space-40: 10rem;
+    --space-48: 12rem;
+    --space-56: 14rem;
+    --space-64: 16rem;
+    
+    /* Borders & Radius */
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Shadows - Subtle and modern */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    --shadow-green: 0 0 0 1px var(--secondary-green);
+    --shadow-green-glow: 0 0 20px rgba(6, 208, 1, 0.3);
+    
+    /* Transitions */
+    --transition-none: none;
+    --transition-all: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), text-decoration-color 150ms cubic-bezier(0.4, 0, 0.2, 1), fill 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-colors: color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-opacity: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-shadow: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-transform: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--border-subtle);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    line-height: 1.35;
+    -webkit-text-size-adjust: 100%;
+    font-family: var(--font-family);
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+html {
+    /* Fallback color shown before the background video loads / on browsers
+       that block autoplay. Keeps the visual identity stable. */
+    background-color: var(--bg-primary);
+}
+
+body {
+    font-family: inherit;
+    line-height: inherit;
+    /* Transparent so the fixed #background-video and #bg-overlay can show
+       through every section. */
+    background-color: transparent;
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Vidéo d'arrière-plan - Suit le scroll en arrière-plan */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 1;
+    /* Less aggressive brightening so the video reads as atmospheric backdrop
+       under the dark overlay rather than competing with foreground text.
+       No saturate boost so the bg stays neutral (no warm/red cast). */
+    filter: brightness(1.05);
+    pointer-events: none;
+    /* Empêcher l'interaction sur mobile */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Forcer le mode inline sur iOS */
+    -webkit-playsinline: true;
+    /* Empêcher le zoom sur mobile */
+    touch-action: none;
+    /* S'assurer que la vidéo reste en arrière-plan */
+    background-attachment: fixed;
+}
+
+/* Hide the iOS Safari / WebKit "play" overlay on every decorative video
+   (page background + hero mascot). They should read as silent loops,
+   never as playable media elements. */
+#background-video::-webkit-media-controls,
+#background-video::-webkit-media-controls-panel,
+#background-video::-webkit-media-controls-start-playback-button,
+#background-video::-webkit-media-controls-overlay-play-button,
+#hero-root video::-webkit-media-controls,
+#hero-root video::-webkit-media-controls-panel,
+#hero-root video::-webkit-media-controls-start-playback-button,
+#hero-root video::-webkit-media-controls-overlay-play-button {
+    display: none !important;
+    -webkit-appearance: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Firefox / generic hide of native controls */
+#background-video,
+#hero-root video {
+    pointer-events: none;
+}
+
+/* On phones we do NOT render the background video:
+   - iOS Safari blocks autoplay of fixed-position videos in many cases
+     and shows a "tap to play" overlay that we can't reliably hide.
+   - Downloading the 14MB mp4 on cellular is wasteful for what is purely
+     a decorative backdrop.
+   The fixed #bg-overlay already provides a brand-coherent dark gradient,
+   and we layer a slow CSS gradient pulse on top so the bg still feels
+   alive on mobile without any video element. */
+@media (max-width: 767px) {
+    #background-video {
+        display: none !important;
+    }
+
+    /* Animated mobile fallback: a slow color-shifting deep-black gradient
+       with a faint green halo that drifts. No JS, no media, no play icon. */
+    #bg-overlay {
+        background:
+            radial-gradient(ellipse at 50% 0%, rgba(6, 208, 1, 0.08), transparent 55%),
+            linear-gradient(180deg, #050505 0%, #000 60%, #050505 100%);
+        animation: mobileBgDrift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes mobileBgDrift {
+        0%   { background-position: 0% 0%, 0% 0%; }
+        100% { background-position: 0% 30%, 0% 0%; }
+    }
+}
+
+/* Global fixed overlay above the background video.
+   Pure neutral black gradient. No green tint anywhere — the page stays
+   quietly dark instead of casting a neon halo over the content. */
+#bg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.88) 100%);
+}
+
+/* Sections avec fond noir - Laissent voir la vidéo en arrière-plan */
+.hero,
+.pillars,
+.about,
+.features,
+.guides,
+.faq,
+.community,
+.footer {
+    position: relative;
+    z-index: 0;
+}
+
+/* Section overlays disabled — the global #bg-overlay already provides a
+   consistent dim across all sections. Doubling the dim here was causing a
+   visible brightness step between React sections (no class overlay) and
+   legacy HTML sections (with this overlay). Kept as no-op for safety. */
+/* Layout */
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+}
+
+/* Reserve space for React islands before JS hydrates to prevent CLS. */
+#hero-root {
+    min-height: 640px;
+}
+
+#stats-root {
+    min-height: 520px;
+}
+
+#pillars-root,
+#features-root {
+    min-height: 1700px;
+}
+
+#carousel-root {
+    min-height: 640px;
+}
+
+@media (min-width: 1024px) {
+    #hero-root {
+        min-height: 720px;
+    }
+
+    #pillars-root,
+    #features-root {
+        min-height: 1900px;
+    }
+}
+
+/* Navigation minimale en haut de page */
+.navbar-minimal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background-color: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-minimal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+}
+
+.nav-minimal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.nav-logo-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo-centered .logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Navigation complète lors du scroll */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+    width: 100%;
+}
+
+.navbar.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    top: 0;
+}
+
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.95);
+    border-bottom: none;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    width: 100%;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nav-logo h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+}
+
+.nav-link {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--gray-300);
+    text-decoration: none;
+    transition: color 180ms ease, transform 180ms ease;
+    position: relative;
+    outline: none;
+    /* Kill the iOS gray tap rectangle so click feedback is purely the green
+       text color. */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover / focus / active / current — all collapse to the same green text
+   color so there's no underline, no surrounding rectangle, and no browser
+   focus ring. Subtle scale on press for tactile feedback.
+   `outline: none !important` overrides the global `a:focus` rule which
+   otherwise draws a 2px green outline around the link. */
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:focus-visible,
+.nav-link:active,
+.nav-link.is-active {
+    color: var(--secondary-green);
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
+}
+
+.nav-link:active {
+    transform: scale(0.96);
+}
+
+/* CTA Button - Pill style comme l'image */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    line-height: var(--line-height-none);
+    color: var(--white) !important;
+    background: linear-gradient(135deg, #9BEC00, #06D001);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: var(--space-4) var(--space-8);
+    text-decoration: none;
+    transition: var(--transition-all);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    background: linear-gradient(135deg, #B8FF20, #08E003);
+    color: var(--white) !important;
+}
+
+/* App Download Buttons */
+.app-download-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--space-8);
+    flex-wrap: wrap;
+}
+
+.store-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    background: var(--black);
+    border: 2px solid var(--white);
+    border-radius: var(--space-3);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 180px;
+}
+
+.store-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    border-color: var(--secondary-green);
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: var(--space-2);
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* Keep the toggle above the open menu panel so the same button can
+       morph from bars to X to close the menu. */
+    z-index: 110;
+    transition: color 180ms ease, transform 180ms ease;
+    -webkit-tap-highlight-color: transparent;
+}
+.mobile-menu-toggle:hover,
+.mobile-menu-toggle:focus {
+    color: var(--secondary-green);
+    outline: none;
+}
+.mobile-menu-toggle:active {
+    transform: scale(0.92);
+}
+
+/* Animated 3-bar burger that morphs into an X when `.is-active`. */
+.burger {
+    position: relative;
+    width: 24px;
+    height: 18px;
+    display: inline-block;
+}
+.burger span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition:
+        transform 360ms cubic-bezier(0.65, 0, 0.35, 1),
+        top 240ms cubic-bezier(0.65, 0, 0.35, 1) 120ms,
+        opacity 200ms ease;
+    transform-origin: 50% 50%;
+    will-change: transform, top, opacity;
+}
+.burger span:nth-child(1) { top: 0; }
+.burger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.burger span:nth-child(3) { top: 100%; transform: translateY(-100%); }
+
+/* Active state: top + bottom bars converge to middle, then cross into X.
+   Middle bar fades out. */
+.mobile-menu-toggle.is-active .burger span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    transition:
+        top 240ms cubic-bezier(0.65, 0, 0.35, 1),
+        transform 360ms cubic-bezier(0.65, 0, 0.35, 1) 240ms;
+}
+.mobile-menu-toggle.is-active .burger span:nth-child(2) {
+    opacity: 0;
+    transform: translateY(-50%) scaleX(0.4);
+}
+.mobile-menu-toggle.is-active .burger span:nth-child(3) {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+    transition:
+        top 240ms cubic-bezier(0.65, 0, 0.35, 1),
+        transform 360ms cubic-bezier(0.65, 0, 0.35, 1) 240ms;
+}
+
+.mobile-menu-toggle:hover {
+    color: var(--secondary-green);
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(340px, 92vw);
+    height: 100svh;
+    background: rgba(8, 8, 8, 0.85);
+    backdrop-filter: blur(24px) saturate(1.1);
+    -webkit-backdrop-filter: blur(24px) saturate(1.1);
+    z-index: 100;
+    /* Slide via transform (GPU-accelerated) instead of `right` for a
+       silkier opening. Custom out-cubic easing for a premium feel. */
+    transform: translateX(105%);
+    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: -32px 0 60px -20px rgba(0, 0, 0, 0.55);
+    padding: var(--space-8) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    will-change: transform;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* Stagger nav items + cta on open. Each link slides in slightly from the
+   right with a small delay so the panel feels alive, not static. */
+.mobile-menu.active .mobile-nav-links .nav-link,
+.mobile-menu.active .mobile-cta {
+    animation: mobileMenuItemIn 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.mobile-menu .mobile-nav-links .nav-link,
+.mobile-menu .mobile-cta {
+    opacity: 0;
+    transform: translateX(18px);
+}
+.mobile-menu.active .mobile-nav-links .nav-link:nth-child(1) { animation-delay: 90ms; }
+.mobile-menu.active .mobile-nav-links .nav-link:nth-child(2) { animation-delay: 150ms; }
+.mobile-menu.active .mobile-nav-links .nav-link:nth-child(3) { animation-delay: 210ms; }
+.mobile-menu.active .mobile-nav-links .nav-link:nth-child(4) { animation-delay: 270ms; }
+.mobile-menu.active .mobile-nav-links .nav-link:nth-child(5) { animation-delay: 330ms; }
+.mobile-menu.active .mobile-cta { animation-delay: 410ms; }
+
+@keyframes mobileMenuItemIn {
+    from { opacity: 0; transform: translateX(18px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    transition: color 180ms ease, transform 220ms ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-close:hover {
+    color: var(--secondary-green);
+    transform: rotate(90deg);
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.mobile-nav-links .nav-link {
+    display: block;
+    padding: var(--space-4);
+    font-size: var(--font-size-lg);
+    color: var(--gray-300);
+    text-decoration: none;
+    background: transparent;
+    border-radius: 0;
+    transition: color 180ms ease, transform 180ms ease;
+}
+
+/* Mobile: same behavior as desktop — green text on hover/tap, no card bg,
+   no surrounding rectangle. */
+.mobile-nav-links .nav-link:hover,
+.mobile-nav-links .nav-link:focus,
+.mobile-nav-links .nav-link:focus-visible,
+.mobile-nav-links .nav-link:active,
+.mobile-nav-links .nav-link.is-active {
+    color: var(--secondary-green);
+    background: transparent;
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
+}
+
+.mobile-nav-links .nav-link:active {
+    transform: scale(0.96);
+}
+
+/* Mobile User Info Section - Style identique à la popup desktop */
+.mobile-user-info {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: var(--radius-2xl);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-subtle);
+    margin: var(--space-6) 0;
+    overflow: hidden;
+}

@@ -1,4 +1,6 @@
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import type { ReactNode } from 'react';
+import { useInView } from '../hooks/useInView';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import { segmentLottie } from '../assets/lottie/segments';
 import SegmentLottie from './SegmentLottie';
 
@@ -63,41 +65,6 @@ const PILLARS: Pillar[] = [
   }
 ];
 
-const textVariants: Variants = {
-  hidden: { opacity: 0, x: -32 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-  }
-};
-
-const textVariantsReverse: Variants = {
-  hidden: { opacity: 0, x: 32 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-  }
-};
-
-const visualVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.92, y: 24 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] }
-  }
-};
-
-const floatTransition = (delay: number) => ({
-  duration: 5,
-  repeat: Infinity,
-  ease: 'easeInOut' as const,
-  delay
-});
-
 /** Same vertical rhythm as Features. */
 const PILLAR_STACK_GAP = 'gap-32 lg:gap-36';
 const PILLAR_ROW =
@@ -105,8 +72,48 @@ const PILLAR_ROW =
 const VISUAL_SLOT =
   'relative flex h-[380px] sm:h-[440px] lg:h-[500px] w-full items-center justify-center overflow-visible [direction:ltr]';
 
+type RevealBlockProps = {
+  reverse?: boolean;
+  visual?: boolean;
+  float?: number;
+  className?: string;
+  children: ReactNode;
+};
+
+function RevealBlock({
+  reverse = false,
+  visual = false,
+  float = 0,
+  className = '',
+  children
+}: RevealBlockProps) {
+  const reducedMotion = usePrefersReducedMotion();
+  const { ref, inView } = useInView({
+    rootMargin: '-10% 0px',
+    threshold: 0.15,
+    once: true
+  });
+
+  const visible = reducedMotion || inView;
+  const baseClass = visual ? 'reveal-visual' : 'reveal-text';
+  const directionClass = !visual && reverse ? 'reveal-text--reverse' : '';
+  const floatClass = visual && float > 0 && visible && !reducedMotion ? 'segment-float' : '';
+
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`${baseClass} ${directionClass} ${floatClass} ${
+        visible ? 'is-visible' : ''
+      } ${className}`.trim()}
+      style={floatClass ? { animationDelay: `${float}s` } : undefined}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function Pillars() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = usePrefersReducedMotion();
 
   return (
     <section
@@ -138,11 +145,8 @@ export default function Pillars() {
                   reverse ? 'lg:[direction:rtl]' : ''
                 } overflow-visible`}
               >
-                <motion.div
-                  variants={reverse ? textVariantsReverse : textVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-10%' }}
+                <RevealBlock
+                  reverse={reverse}
                   className="flex flex-col gap-4 [direction:ltr]"
                 >
                   <h3 className="font-arboria font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl">
@@ -155,17 +159,9 @@ export default function Pillars() {
                   <p className="font-arboria text-base sm:text-lg text-white/75 max-w-xl mt-2 leading-relaxed">
                     {pillar.body}
                   </p>
-                </motion.div>
+                </RevealBlock>
 
-                <motion.div
-                  variants={visualVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-10%' }}
-                  className={VISUAL_SLOT}
-                  animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
-                  transition={floatTransition(i * 0.4)}
-                >
+                <RevealBlock visual float={i * 0.4} className={VISUAL_SLOT}>
                   <div
                     className={`w-full max-w-[460px] origin-center ${pillar.media.scaleClass}`}
                   >
@@ -176,7 +172,7 @@ export default function Pillars() {
                       className={`relative z-10 w-full ${pillar.media.aspectClass}`}
                     />
                   </div>
-                </motion.div>
+                </RevealBlock>
               </div>
             );
           })}

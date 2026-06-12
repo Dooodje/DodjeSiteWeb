@@ -39,11 +39,9 @@
 </head>
 <body>
     <!-- Vidéo d'arrière-plan -->
-    <video id="background-video" autoplay muted loop playsinline preload="none">
-        <source src="assets/anime/FondAnime-optimized.webm" type="video/webm">
-        <source src="assets/anime/FondAnime-optimized.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo HTML5.
-    </video>
+    <video id="background-video" autoplay muted loop playsinline preload="none" aria-hidden="true"
+        data-webm="assets/anime/FondAnime-optimized.webm"
+        data-mp4="assets/anime/FondAnime-optimized.mp4"></video>
     <div id="bg-overlay" aria-hidden="true"></div>
 
     <!-- Navigation minimale en haut de page -->

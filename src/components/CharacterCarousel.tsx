@@ -1,6 +1,6 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { useEffect, useState, type CSSProperties, type ComponentType } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import Lottie from 'lottie-react';
+import type { LottieComponentProps } from 'lottie-react';
 
 export type CarouselItem = {
   id: string;
@@ -135,11 +135,24 @@ export type CharacterCarouselProps = {
 
 const LOTTIE_RENDERER_OPTS = { preserveAspectRatio: 'xMidYMid meet' };
 
+type LottieComponent = ComponentType<LottieComponentProps>;
+
 export default function CharacterCarousel({ items, className }: CharacterCarouselProps) {
   const n = items.length;
   const { isMobile, isShort, isDesktop } = useViewportFlags();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [Lottie, setLottie] = useState<LottieComponent | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    import('lottie-react').then((mod) => {
+      if (!cancelled) setLottie(() => mod.default);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const navigate = (dir: 'next' | 'prev') => {
     if (isAnimating || n <= 1) return;
@@ -173,17 +186,19 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
               aria-hidden={!isCenter}
               data-role={role}
             >
-              <Lottie
-                animationData={item.building}
-                loop
-                autoplay
-                rendererSettings={LOTTIE_RENDERER_OPTS}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  filter: 'drop-shadow(0 16px 32px rgba(0,0,0,0.45))'
-                }}
-              />
+              {Lottie ? (
+                <Lottie
+                  animationData={item.building}
+                  loop
+                  autoplay
+                  rendererSettings={LOTTIE_RENDERER_OPTS}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    filter: 'drop-shadow(0 16px 32px rgba(0,0,0,0.45))'
+                  }}
+                />
+              ) : null}
             </div>
           );
         })}

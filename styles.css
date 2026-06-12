@@ -44,6 +44,15 @@
          url('./fonts/Arboria-Black.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Arboria Fallback';
+    src: local('Arial');
+    size-adjust: 94%;
+    ascent-override: 95%;
+    descent-override: 25%;
+    line-gap-override: 0%;
+}
+
 /* CSS Variables */
 :root {
     /* Colors - Hackathon.dev inspired */
@@ -75,7 +84,7 @@
     --border-muted: rgba(255, 255, 255, 0.2);
     
     /* Typography - Ultra modern */
-    --font-family: 'Arboria', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-family: 'Arboria', 'Arboria Fallback', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
@@ -177,6 +186,7 @@ html {
     font-feature-settings: normal;
     font-variation-settings: normal;
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
 }
 
 html {
@@ -327,6 +337,41 @@ body {
     margin-right: auto;
     padding-left: var(--space-6);
     padding-right: var(--space-6);
+}
+
+/* Reserve space for React islands before JS hydrates to prevent CLS. */
+#hero-root {
+    min-height: 640px;
+}
+
+#stats-root {
+    min-height: 520px;
+}
+
+#pillars-root,
+#features-root {
+    min-height: 1700px;
+}
+
+#carousel-root {
+    min-height: 640px;
+}
+
+@media (min-width: 1024px) {
+    #hero-root {
+        min-height: 720px;
+    }
+
+    #pillars-root,
+    #features-root {
+        min-height: 1900px;
+    }
+}
+
+@media (min-width: 768px) {
+    .community-visual {
+        min-height: 490px;
+    }
 }
 
 /* Navigation minimale en haut de page */
@@ -1519,12 +1564,12 @@ body {
     gap: var(--space-16);
 }
 
-.community-visual {
-    display: flex;
+.community-content--solo {
     justify-content: center;
-    align-items: center;
-    flex: 1;
-    max-width: 50%;
+}
+
+.community-content--solo .community-text {
+    max-width: min(720px, 100%);
 }
 
 .community-text {
@@ -1535,30 +1580,6 @@ body {
     flex: 1;
     max-width: 50%;
     gap: var(--space-8);
-}
-
-.revolution-video {
-    width: 700px;
-    height: 490px;
-    border-radius: var(--radius-2xl);
-    object-fit: contain;
-    box-shadow: var(--shadow-xl);
-    transition: var(--transition-transform);
-}
-
-.revolution-video-mobile {
-    display: none;
-    width: 700px;
-    height: 490px;
-    border-radius: var(--radius-2xl);
-    object-fit: contain;
-    background-color: transparent;
-    box-shadow: var(--shadow-xl);
-}
-
-.revolution-video:hover {
-    transform: scale(1.05);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .community-benefits {
@@ -1646,6 +1667,7 @@ body {
     color: var(--white);
     margin: 0;
     text-align: center;
+    min-height: 2.2em;
 }
 
 .community-description {
@@ -4322,7 +4344,6 @@ a:focus-visible {
         gap: var(--space-16);
     }
     
-    .community-visual,
     .community-text {
         max-width: 50%;
         flex: 1;
@@ -4515,7 +4536,6 @@ a:focus-visible {
         text-align: center;
     }
     
-    .community-visual,
     .community-text {
         max-width: 100%;
         flex: none;
@@ -4526,11 +4546,6 @@ a:focus-visible {
         font-size: var(--font-size-4xl);
         line-height: var(--line-height-tight);
         max-width: 100%;
-    }
-    
-    .revolution-video {
-        width: 700px;
-        height: 490px;
     }
     
     .about-video {
@@ -4922,7 +4937,6 @@ a:focus-visible {
         text-align: center;
     }
     
-    .community-visual,
     .community-text {
         max-width: 100%;
         flex: none;
@@ -4936,17 +4950,6 @@ a:focus-visible {
         max-width: 90%;
         margin-left: auto;
         margin-right: auto;
-    }
-    
-    .revolution-video-desktop {
-        display: none;
-    }
-
-    .revolution-video-mobile {
-        display: block;
-        width: 100%;
-        max-width: 500px;
-        height: 350px;
     }
     
     .phone-mockup {
@@ -5066,12 +5069,6 @@ a:focus-visible {
         max-width: 85%;
         margin-left: auto;
         margin-right: auto;
-    }
-    
-    .revolution-video-mobile {
-        width: 100%;
-        max-width: 400px;
-        height: 280px;
     }
     
     .about-video {

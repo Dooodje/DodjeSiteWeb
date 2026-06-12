@@ -29,36 +29,70 @@ const cleanUrlsDev = () => ({
   }
 })
 
-const rewriteHtmlStylesheets = (html) =>
-  html.replace(
-    /<link rel="stylesheet"([^>]*?) href="([^"]+\.css)"([^>]*)>/g,
-    (tag, beforeHref, href, afterHref) =>
-      `<link rel="preload" as="style"${beforeHref} href="${href}"${afterHref} onload="this.onload=null;this.rel='stylesheet'"><noscript>${tag}</noscript>`
-  )
+const CRITICAL_ASSETS_MARKER = '<!-- vite:critical-assets -->'
 
-const asyncStylesheets = () => ({
-  name: 'async-stylesheets',
-  enforce: 'post',
-  writeBundle(options, bundle) {
-    const outDir = options.dir || resolve(__dirname, 'dist')
+const extractTag = (html, pattern) => {
+  const tags = []
+  const cleaned = html.replace(pattern, (match) => {
+    tags.push(match.trim())
+    return ''
+  })
+  return { cleaned, tags }
+}
 
-    for (const asset of Object.values(bundle)) {
-      if (asset.type !== 'asset' || !asset.fileName.endsWith('.html')) {
-        continue
+// Hoist Vite-injected CSS/JS to the top of <head> so the browser discovers
+// the entry module before parsing non-critical markup (JSON-LD, etc.).
+const earlyCriticalAssets = () => ({
+  name: 'early-critical-assets',
+  transformIndexHtml: {
+    order: 'post',
+    handler(html) {
+      if (!html.includes(CRITICAL_ASSETS_MARKER)) return html
+
+      const stylesheetPattern = /\n\s*<link rel="stylesheet" crossorigin href="\/assets\/[^"]+\.css">/g
+      const modulepreloadPattern = /\n\s*<link rel="modulepreload" crossorigin href="\/assets\/[^"]+">/g
+      const moduleScriptPattern = /\n\s*<script type="module" crossorigin src="\/assets\/[^"]+"><\/script>/g
+
+      let result = html
+      const stylesheets = extractTag(result, stylesheetPattern)
+      result = stylesheets.cleaned
+      const modulepreloads = extractTag(result, modulepreloadPattern)
+      result = modulepreloads.cleaned
+      const moduleScripts = extractTag(result, moduleScriptPattern)
+      result = moduleScripts.cleaned
+
+      const toAsyncStylesheet = (tag) => {
+        const href = tag.match(/href="([^"]+)"/)?.[1]
+        if (!href) return tag
+        return `<link rel="preload" as="style" crossorigin href="${href}" onload="this.onload=null;this.rel='stylesheet'"><noscript>${tag}</noscript>`
       }
 
-      const filePath = resolve(outDir, asset.fileName)
-      const source = fs.readFileSync(filePath, 'utf8')
-      const nextSource = rewriteHtmlStylesheets(source)
-      if (nextSource !== source) {
-        fs.writeFileSync(filePath, nextSource)
+      const syncStylesheets = stylesheets.tags.filter((tag) => tag.includes('main-'))
+      const deferredStylesheets = stylesheets.tags
+        .filter((tag) => !tag.includes('main-'))
+        .map(toAsyncStylesheet)
+
+      const bundle = [
+        ...syncStylesheets,
+        ...deferredStylesheets,
+        ...modulepreloads.tags,
+        ...moduleScripts.tags
+      ].join('\n    ')
+
+      if (!bundle) {
+        return result.replace(CRITICAL_ASSETS_MARKER, '')
       }
+
+      return result.replace(
+        CRITICAL_ASSETS_MARKER,
+        bundle
+      )
     }
   }
 })
 
 export default defineConfig({
-  plugins: [react(), cleanUrlsDev(), asyncStylesheets()],
+  plugins: [react(), cleanUrlsDev(), earlyCriticalAssets()],
   server: {
     port: 3000,
     open: true,
@@ -69,8 +103,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    // Bump warning so legitimate vendor chunks (framer-motion, lottie) don't
-    // spam the build log.
+    // Bump warning so legitimate vendor chunks (lottie) don't spam the build log.
     chunkSizeWarningLimit: 800,
     rollupOptions: {
       input: {
@@ -90,9 +123,6 @@ export default defineConfig({
           if (id.includes('node_modules')) {
             if (id.includes('react-dom') || id.includes('/react/') || id.includes('scheduler')) {
               return 'vendor-react'
-            }
-            if (id.includes('framer-motion') || id.includes('motion-utils') || id.includes('motion-dom')) {
-              return 'vendor-motion'
             }
             if (id.includes('lottie-react') || id.includes('lottie-web')) {
               return 'vendor-lottie'

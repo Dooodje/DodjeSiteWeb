@@ -2,6 +2,70 @@
 
 const SCROLL_TO_KEY = 'dodje-scroll-to';
 
+function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function shouldSaveData() {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    return Boolean(connection && connection.saveData);
+}
+
+function canPlayWebM() {
+    const probe = document.createElement('video');
+    return (
+        probe.canPlayType('video/webm; codecs="vp9"') !== '' ||
+        probe.canPlayType('video/webm; codecs="vp8"') !== '' ||
+        probe.canPlayType('video/webm') !== ''
+    );
+}
+
+function pickVideoUrl(video) {
+    const webm = video.dataset.webm;
+    const mp4 = video.dataset.mp4;
+    if (webm && canPlayWebM()) return webm;
+    return mp4 || webm || '';
+}
+
+function scheduleIdle(task, timeoutMs = 1200) {
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(task, { timeout: timeoutMs });
+        return;
+    }
+    window.setTimeout(task, Math.min(timeoutMs, 400));
+}
+
+function attachSingleSourceVideo(video, { autoplay = true, loop = true } = {}) {
+    const src = pickVideoUrl(video);
+    if (!src || video.dataset.loaded === 'true') return;
+
+    video.dataset.loaded = 'true';
+    video.src = src;
+    video.loop = loop;
+
+    if (autoplay) {
+        video.play().catch(() => {});
+    }
+}
+
+function initBackgroundVideo() {
+    const video = document.getElementById('background-video');
+    if (!video) return;
+
+    if (
+        window.matchMedia('(max-width: 767px)').matches ||
+        prefersReducedMotion() ||
+        shouldSaveData()
+    ) {
+        video.removeAttribute('src');
+        return;
+    }
+
+    scheduleIdle(() => {
+        attachSingleSourceVideo(video, { autoplay: true, loop: true });
+    }, 1500);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // ==================== GESTION DU CACHE ====================
     function getUserFromCache() {
@@ -120,28 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ==================== EXISTING FUNCTIONALITY ====================
-    // Gestion de la vidéo d'arrière-plan
-    const backgroundVideo = document.getElementById('background-video');
-    if (backgroundVideo) {
-        const shouldDisableBackgroundVideo = window.matchMedia('(max-width: 767px)').matches;
-
-        if (shouldDisableBackgroundVideo) {
-            backgroundVideo.querySelectorAll('source').forEach(source => source.remove());
-            backgroundVideo.removeAttribute('src');
-            backgroundVideo.load();
-        } else {
-            // S'assurer que la vidéo démarre bien
-            backgroundVideo.play().catch(e => {
-                console.log('Autoplay bloqué:', e);
-            });
-
-            // Redémarrer la vidéo quand elle se termine (double sécurité pour la boucle)
-            backgroundVideo.addEventListener('ended', function() {
-                this.currentTime = 0;
-                this.play();
-            });
-        }
-    }
+    initBackgroundVideo();
 
     // Navbar scroll effect
     let lastScrollTop = 0;

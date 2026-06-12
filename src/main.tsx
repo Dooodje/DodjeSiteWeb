@@ -2,10 +2,22 @@ import { StrictMode, Suspense, lazy, type JSX } from 'react';
 import { createRoot } from 'react-dom/client';
 import Hero from './components/Hero';
 import './index.css';
+import '../script.js';
+
+function loadDeferredStyles() {
+  void import('../styles.css');
+}
+
+if (typeof window !== 'undefined') {
+  const schedule =
+    window.requestIdleCallback ??
+    ((cb: () => void) => window.setTimeout(cb, 200));
+  schedule(loadDeferredStyles);
+}
 
 // Below-fold islands lazy-load so the initial bundle only ships Hero +
-// React + framer-motion. Lottie / Stats / Pillars / Features only fetch
-// their chunk when the user scrolls past Hero.
+// React. Lottie / Stats / Pillars / Features only fetch their chunk when
+// their section enters the viewport.
 const Stats = lazy(() => import('./components/Stats'));
 const Pillars = lazy(() => import('./components/Pillars'));
 const App = lazy(() => import('./App'));
@@ -42,7 +54,8 @@ function mountWhenNearViewport(el: HTMLElement, render: () => JSX.Element) {
       mountIsland(el, render);
     },
     {
-      rootMargin: '100px 0px'
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.12
     }
   );
 
