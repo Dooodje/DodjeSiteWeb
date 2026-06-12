@@ -30,31 +30,6 @@ const cleanUrlsDev = () => ({
 })
 
 const CRITICAL_ASSETS_MARKER = '<!-- vite:critical-assets -->'
-const CRITICAL_SHELL_PATH = resolve(__dirname, 'critical-shell.css')
-
-const minifyCss = (css) =>
-  css
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-
-const inlineCriticalShell = () => ({
-  name: 'inline-critical-shell',
-  transformIndexHtml: {
-    order: 'pre',
-    handler(html) {
-      if (!html.includes(CRITICAL_ASSETS_MARKER) || !fs.existsSync(CRITICAL_SHELL_PATH)) {
-        return html
-      }
-
-      const shell = minifyCss(fs.readFileSync(CRITICAL_SHELL_PATH, 'utf8'))
-      return html.replace(
-        CRITICAL_ASSETS_MARKER,
-        `<style>${shell}</style>\n    ${CRITICAL_ASSETS_MARKER}`
-      )
-    }
-  }
-})
 
 const extractTag = (html, pattern) => {
   const tags = []
@@ -106,14 +81,16 @@ const earlyCriticalAssets = () => ({
       const toAsyncStylesheet = (tag) => {
         const href = tag.match(/href="([^"]+)"/)?.[1]
         if (!href) return tag
-        const isMainBundle = href.includes('main-')
-        const priority = isMainBundle ? ' fetchpriority="high"' : ' fetchpriority="low"'
-        return `<link rel="preload" as="style"${priority} crossorigin href="${href}" onload="this.onload=null;this.rel='stylesheet'"><noscript>${tag}</noscript>`
+        return `<link rel="preload" as="style" crossorigin href="${href}" onload="this.onload=null;this.rel='stylesheet'"><noscript>${tag}</noscript>`
       }
 
-      const deferredStylesheets = stylesheets.tags.map(toAsyncStylesheet)
+      const syncStylesheets = stylesheets.tags.filter((tag) => tag.includes('main-'))
+      const deferredStylesheets = stylesheets.tags
+        .filter((tag) => !tag.includes('main-'))
+        .map(toAsyncStylesheet)
 
       const bundle = [
+        ...syncStylesheets,
         ...deferredStylesheets,
         ...modulepreloads.tags,
         ...moduleScripts.tags
@@ -132,7 +109,7 @@ const earlyCriticalAssets = () => ({
 })
 
 export default defineConfig({
-  plugins: [react(), cleanUrlsDev(), inlineCriticalShell(), earlyCriticalAssets(), copyBackgroundVideos()],
+  plugins: [react(), cleanUrlsDev(), earlyCriticalAssets(), copyBackgroundVideos()],
   server: {
     port: 3000,
     open: true,

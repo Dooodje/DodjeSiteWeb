@@ -4,6 +4,17 @@ import Hero from './components/Hero';
 import './index.css';
 import '../script.js';
 
+function loadDeferredStyles() {
+  void import('../styles.css');
+}
+
+if (typeof window !== 'undefined') {
+  const schedule =
+    window.requestIdleCallback ??
+    ((cb: () => void) => window.setTimeout(cb, 200));
+  schedule(loadDeferredStyles);
+}
+
 // Below-fold islands lazy-load so the initial bundle only ships Hero +
 // React. Lottie / Stats / Pillars / Features only fetch their chunk when
 // their section enters the viewport.
