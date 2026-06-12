@@ -5,7 +5,7 @@ import salutMp4 from '../../assets/anime/Salut.mp4';
 import salutWebm from '../../assets/anime/Salut.webm';
 
 const HEADLINE_LINE_1 = ['Comprends', 'ton', 'argent'];
-const HEADLINE_LINE_2 = ['simplement', 'et', 'gratuitement.'];
+const HEADLINE_LINE_2 = ['simplement et', 'gratuitement.'];
 
 const TRUST_NOTE =
   'Contenus éducatifs uniquement, sans conseil financier personnalisé.';
@@ -102,7 +102,7 @@ export default function Hero() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-arboria font-black uppercase tracking-tight leading-[0.92] text-5xl sm:text-6xl md:text-7xl lg:text-[5.25rem]">
+          <h1 className="font-arboria font-black uppercase tracking-tight leading-[0.92] text-[clamp(2.35rem,10.6vw,3rem)] sm:text-6xl md:text-7xl lg:text-[clamp(4.25rem,5.8vw,5.25rem)]">
             <span className="block">
               {HEADLINE_LINE_1.map((word, i) => (
                 <span
