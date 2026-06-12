@@ -30,6 +30,31 @@ const cleanUrlsDev = () => ({
 })
 
 const CRITICAL_ASSETS_MARKER = '<!-- vite:critical-assets -->'
+const CRITICAL_SHELL_PATH = resolve(__dirname, 'critical-shell.css')
+
+const minifyCss = (css) =>
+  css
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+const inlineCriticalShell = () => ({
+  name: 'inline-critical-shell',
+  transformIndexHtml: {
+    order: 'pre',
+    handler(html) {
+      if (!html.includes(CRITICAL_ASSETS_MARKER) || !fs.existsSync(CRITICAL_SHELL_PATH)) {
+        return html
+      }
+
+      const shell = minifyCss(fs.readFileSync(CRITICAL_SHELL_PATH, 'utf8'))
+      return html.replace(
+        CRITICAL_ASSETS_MARKER,
+        `<style>${shell}</style>\n    ${CRITICAL_ASSETS_MARKER}`
+      )
+    }
+  }
+})
 
 const extractTag = (html, pattern) => {
   const tags = []
@@ -42,6 +67,23 @@ const extractTag = (html, pattern) => {
 
 // Hoist Vite-injected CSS/JS to the top of <head> so the browser discovers
 // the entry module before parsing non-critical markup (JSON-LD, etc.).
+// Background videos are loaded via data-* attributes in script.js, so Vite's
+// HTML asset pipeline never copies them. Mirror assets/anime into dist on build.
+const copyBackgroundVideos = () => ({
+  name: 'copy-background-videos',
+  closeBundle() {
+    const srcDir = resolve(__dirname, 'assets/anime')
+    const destDir = resolve(__dirname, 'dist/assets/anime')
+    if (!fs.existsSync(srcDir)) return
+
+    fs.mkdirSync(destDir, { recursive: true })
+    for (const entry of fs.readdirSync(srcDir)) {
+      if (!entry.startsWith('FondAnime-optimized.')) continue
+      fs.copyFileSync(resolve(srcDir, entry), resolve(destDir, entry))
+    }
+  }
+})
+
 const earlyCriticalAssets = () => ({
   name: 'early-critical-assets',
   transformIndexHtml: {
@@ -64,16 +106,14 @@ const earlyCriticalAssets = () => ({
       const toAsyncStylesheet = (tag) => {
         const href = tag.match(/href="([^"]+)"/)?.[1]
         if (!href) return tag
-        return `<link rel="preload" as="style" crossorigin href="${href}" onload="this.onload=null;this.rel='stylesheet'"><noscript>${tag}</noscript>`
+        const isMainBundle = href.includes('main-')
+        const priority = isMainBundle ? ' fetchpriority="high"' : ' fetchpriority="low"'
+        return `<link rel="preload" as="style"${priority} crossorigin href="${href}" onload="this.onload=null;this.rel='stylesheet'"><noscript>${tag}</noscript>`
       }
 
-      const syncStylesheets = stylesheets.tags.filter((tag) => tag.includes('main-'))
-      const deferredStylesheets = stylesheets.tags
-        .filter((tag) => !tag.includes('main-'))
-        .map(toAsyncStylesheet)
+      const deferredStylesheets = stylesheets.tags.map(toAsyncStylesheet)
 
       const bundle = [
-        ...syncStylesheets,
         ...deferredStylesheets,
         ...modulepreloads.tags,
         ...moduleScripts.tags
@@ -92,7 +132,7 @@ const earlyCriticalAssets = () => ({
 })
 
 export default defineConfig({
-  plugins: [react(), cleanUrlsDev(), earlyCriticalAssets()],
+  plugins: [react(), cleanUrlsDev(), inlineCriticalShell(), earlyCriticalAssets(), copyBackgroundVideos()],
   server: {
     port: 3000,
     open: true,

@@ -28,15 +28,15 @@
     <link rel="alternate" hreflang="fr" href="https://dodje.fr/">
     <link rel="alternate" hreflang="x-default" href="https://dodje.fr/">
     
-    <!-- DNS Prefetch + preconnect pour optimiser les performances -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-
     <!-- Preload the likely LCP assets used above the fold. -->
     <link rel="preload" as="image" href="assets/Logo_degrade_260.webp" fetchpriority="high" type="image/webp">
 
-    <!-- Preload critical Arboria weights used above the fold (headings + UI). -->
+    <!-- Preload Arboria weights used above the fold (headings + UI). -->
     <link rel="preload" href="fonts/Arboria-Black.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/Arboria-Medium.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Site styles discovered from HTML (not via JS) to avoid critical request chains. -->
+    <link rel="stylesheet" href="styles.css">
 
     <!-- vite:critical-assets -->
 

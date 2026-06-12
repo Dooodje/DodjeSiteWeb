@@ -40,8 +40,21 @@ function attachSingleSourceVideo(video, { autoplay = true, loop = true } = {}) {
     if (!src || video.dataset.loaded === 'true') return;
 
     video.dataset.loaded = 'true';
-    video.src = src;
     video.loop = loop;
+
+    const fallback = video.dataset.mp4;
+    video.addEventListener('error', function onVideoError() {
+        if (fallback && video.src !== fallback) {
+            video.src = fallback;
+            if (autoplay) {
+                video.play().catch(() => {});
+            }
+            return;
+        }
+        video.removeEventListener('error', onVideoError);
+    }, { once: true });
+
+    video.src = src;
 
     if (autoplay) {
         video.play().catch(() => {});
