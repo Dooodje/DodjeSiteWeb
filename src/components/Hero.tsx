@@ -241,7 +241,8 @@ export default function Hero() {
             across the viewport (in flow so it follows the trust note vertically
             on every breakpoint instead of being anchored to the viewport). */}
         <a
-          href="#stats"
+          href="/"
+          data-scroll-to="stats"
           aria-label="Découvre la suite"
           className="mx-auto mt-2 z-20 flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors motion-safe:animate-[heroFadeIn_800ms_ease_1400ms_both]"
         >

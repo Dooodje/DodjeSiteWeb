@@ -49,13 +49,63 @@ function mountWhenNearViewport(el: HTMLElement, render: () => JSX.Element) {
   observer.observe(el);
 }
 
+const SCROLL_TO_KEY = 'dodje-scroll-to';
+
+function getScrollTarget(): string | null {
+  const fromStorage = sessionStorage.getItem(SCROLL_TO_KEY);
+  if (fromStorage) {
+    sessionStorage.removeItem(SCROLL_TO_KEY);
+    return fromStorage;
+  }
+
+  const hash = window.location.hash.slice(1);
+  if (hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    return hash;
+  }
+
+  return null;
+}
+
+const scrollTarget = getScrollTarget();
+const sectionIslandMap: Record<string, string> = {
+  stats: 'stats-root',
+  pillars: 'pillars-root',
+  batiments: 'carousel-root',
+  features: 'features-root'
+};
+
+function shouldEagerMount(islandId: string): boolean {
+  if (!scrollTarget) return false;
+  return sectionIslandMap[scrollTarget] === islandId;
+}
+
+function scrollToSection(retries = 30) {
+  if (!scrollTarget) return;
+
+  const target = document.getElementById(scrollTarget);
+  if (target) {
+    const offsetTop = target.offsetTop - 80;
+    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    return;
+  }
+
+  if (retries > 0) {
+    window.setTimeout(() => scrollToSection(retries - 1), 100);
+  }
+}
+
 for (const { id, render, eager } of islands) {
   const el = document.getElementById(id);
   if (!el) continue;
 
-  if (eager) {
+  if (eager || shouldEagerMount(id)) {
     mountIsland(el, render, true);
   } else {
     mountWhenNearViewport(el, render);
   }
+}
+
+if (scrollTarget) {
+  scrollToSection();
 }

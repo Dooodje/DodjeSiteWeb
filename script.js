@@ -1,5 +1,7 @@
 // Simple and clean interactions inspired by Hackathon.dev
 
+const SCROLL_TO_KEY = 'dodje-scroll-to';
+
 document.addEventListener('DOMContentLoaded', function() {
     // ==================== GESTION DU CACHE ====================
     function getUserFromCache() {
@@ -159,24 +161,70 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: true });
     }
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
-                
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+    function isHomePage() {
+        return Boolean(document.getElementById('hero-root'));
+    }
+
+    function stripHashFromUrl() {
+        if (!window.location.hash) return;
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
+    function scrollToSectionId(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (!targetSection) return false;
+
+        const offsetTop = targetSection.offsetTop - 80;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
         });
+        stripHashFromUrl();
+        return true;
+    }
+
+    function navigateToSection(sectionId) {
+        if (isHomePage()) {
+            scrollToSectionId(sectionId);
+            return;
+        }
+
+        sessionStorage.setItem(SCROLL_TO_KEY, sectionId);
+        window.location.href = '/';
+    }
+
+    function getSectionIdFromLink(link) {
+        const dataTarget = link.getAttribute('data-scroll-to');
+        if (dataTarget) return dataTarget;
+
+        const href = link.getAttribute('href') || '';
+        if (href.startsWith('/#')) return href.slice(2);
+        if (href.startsWith('#')) return href.slice(1);
+        return null;
+    }
+
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[data-scroll-to], a[href^="#"], a[href^="/#"]');
+        if (!link) return;
+
+        const sectionId = getSectionIdFromLink(link);
+        if (!sectionId) return;
+
+        e.preventDefault();
+        navigateToSection(sectionId);
     });
+
+    if (isHomePage()) {
+        const pendingSection = sessionStorage.getItem(SCROLL_TO_KEY);
+        if (pendingSection) {
+            sessionStorage.removeItem(SCROLL_TO_KEY);
+            window.setTimeout(() => scrollToSectionId(pendingSection), 100);
+        } else if (window.location.hash) {
+            const legacySection = window.location.hash.slice(1);
+            stripHashFromUrl();
+            window.setTimeout(() => scrollToSectionId(legacySection), 100);
+        }
+    }
 
     const allCtaButtons = document.querySelectorAll('.cta-button');
 
@@ -245,4 +293,4 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
 
     console.log('🌱 Dodje Landing Page with Firebase loaded successfully');
-}); 
+});
