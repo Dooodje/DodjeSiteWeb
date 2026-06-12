@@ -31,8 +31,8 @@
     <!-- DNS Prefetch + preconnect pour optimiser les performances -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
 
-    <!-- Preload hero LCP asset (mascot GIF) for fast first paint -->
-    <link rel="preload" as="video" href="assets/anime/Salut.webm" fetchpriority="high" type="video/webm">
+    <!-- Preload the likely LCP assets used above the fold. -->
+    <link rel="preload" as="image" href="assets/Logo_degrade_260.webp" fetchpriority="high" type="image/webp">
 
     <!-- Open Graph pour Facebook, LinkedIn, etc. -->
     <meta property="og:title" content="Dodje - Comprends ton argent en t'amusant">
@@ -55,7 +55,7 @@
     <meta name="twitter:image" content="https://dodje.fr/assets/IconeApp.png">
     <meta name="twitter:image:alt" content="Dodje - Application d'éducation financière">
     
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
     
     <!-- Donnees structurees JSON-LD pour le SEO et les moteurs IA -->
@@ -254,8 +254,8 @@
         <div class="nav-minimal-container">
             <div class="nav-logo-centered">
                 <picture>
-                        <source srcset="assets/Logo_degrade.webp" type="image/webp">
-                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Application éducation financière gratuite" class="logo-img" width="130" height="50">
+                        <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
+                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Application éducation financière gratuite" class="logo-img" width="130" height="50" fetchpriority="high" decoding="sync">
                     </picture>
             </div>
         </div>
@@ -266,8 +266,8 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <picture>
-                        <source srcset="assets/Logo_degrade.webp" type="image/webp">
-                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Application finance ludique pour apprendre investissement" class="logo-img" width="130" height="50">
+                        <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
+                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Application finance ludique pour apprendre investissement" class="logo-img" width="130" height="50" loading="lazy" decoding="async">
                     </picture>
             </div>
             <div class="nav-menu">
@@ -293,8 +293,8 @@
     <div class="mobile-menu" id="mobile-menu">
         <div class="mobile-menu-header">
             <picture>
-                        <source srcset="assets/Logo_degrade.webp" type="image/webp">
-                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - App gratuite formation finance" class="logo-img" width="130" height="50">
+                        <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
+                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - App gratuite formation finance" class="logo-img" width="130" height="50" loading="lazy" decoding="async">
                     </picture>
             <button class="mobile-menu-close" id="mobile-menu-close" type="button" aria-label="Fermer le menu">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -344,10 +344,13 @@
             <div class="community-content">
                 <div class="community-visual">
                     <video class="revolution-video revolution-video-desktop" autoplay muted loop playsinline preload="none" width="900" height="900" aria-label="Communauté Dodje autour de l'éducation financière">
-                        <source src="assets/anime/Revolution.webm" type="video/webm">
                         <source src="assets/anime/Revolution.mp4" type="video/mp4">
+                        <source src="assets/anime/Revolution.webm" type="video/webm">
                     </video>
-                    <img class="revolution-gif-mobile" src="assets/anime/Re_volution.gif" alt="Communauté Dodje autour de l'éducation financière" loading="lazy" draggable="false" width="900" height="900">
+                    <video class="revolution-video revolution-video-mobile" autoplay muted loop playsinline preload="none" width="900" height="900" aria-label="Communauté Dodje autour de l'éducation financière">
+                        <source src="assets/anime/Revolution.mp4" type="video/mp4">
+                        <source src="assets/anime/Revolution.webm" type="video/webm">
+                    </video>
                 </div>
                 <div class="community-text">
                     <h2 class="community-title">
@@ -376,8 +379,8 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <picture>
-                        <source srcset="assets/Logo_degrade.webp" type="image/webp">
-                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Logo application finance éducative gratuite" class="footer-logo" width="130" height="50">
+                        <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
+                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Logo application finance éducative gratuite" class="footer-logo" width="130" height="50" loading="lazy" decoding="async">
                     </picture>
                     <p>Dodje - la finance enfin expliquée simplement</p>
                 </div>

@@ -1546,7 +1546,7 @@ body {
     transition: var(--transition-transform);
 }
 
-.revolution-gif-mobile {
+.revolution-video-mobile {
     display: none;
     width: 700px;
     height: 490px;
@@ -4942,7 +4942,7 @@ a:focus-visible {
         display: none;
     }
 
-    .revolution-gif-mobile {
+    .revolution-video-mobile {
         display: block;
         width: 100%;
         max-width: 500px;
@@ -5068,7 +5068,7 @@ a:focus-visible {
         margin-right: auto;
     }
     
-    .revolution-gif-mobile {
+    .revolution-video-mobile {
         width: 100%;
         max-width: 400px;
         height: 280px;

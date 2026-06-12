@@ -1,16 +1,13 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { segmentLottie } from '../assets/lottie/segments';
-import recompensesGif from '../../assets/anime/re_compenses.gif';
 import SegmentLottie from './SegmentLottie';
 
-type FeatureMedia =
-  | { kind: 'gif'; src: string }
-  | {
-      kind: 'lottie';
-      loadAnimation: () => Promise<object>;
-      aspectClass: string;
-      scaleClass: string;
-    };
+type FeatureMedia = {
+  kind: 'lottie';
+  loadAnimation: () => Promise<object>;
+  aspectClass: string;
+  scaleClass: string;
+};
 
 type Feature = {
   index: string;
@@ -56,8 +53,13 @@ const FEATURES: Feature[] = [
     titleAccent: 'ludique',
     body:
       'Avec des quiz, des défis et des récompenses à collectionner, apprendre devient plus motivant. Tu pratiques souvent, tu retiens mieux, et tu prends plaisir à continuer.',
-    media: { kind: 'gif', src: recompensesGif },
-    alt: 'Système de récompenses Dodje'
+    media: {
+      kind: 'lottie',
+      loadAnimation: segmentLottie.apprentissageLudique,
+      aspectClass: 'aspect-square',
+      scaleClass: 'scale-[1.1] sm:scale-[1.2] lg:scale-[1.3]'
+    },
+    alt: 'Apprentissage ludique Dodje'
   }
 ];
 
@@ -80,6 +82,15 @@ const floatTransition = (delay: number) => ({
   ease: 'easeInOut' as const,
   delay
 });
+
+/** Uniform vertical rhythm between feature rows. */
+const FEATURE_STACK_GAP = 'gap-32 lg:gap-36';
+/** Same row height on desktop so block spacing reads evenly. */
+const FEATURE_ROW =
+  'grid lg:grid-cols-2 gap-10 lg:gap-x-20 items-center lg:min-h-[540px]';
+/** Fixed visual slot — animations centered regardless of aspect ratio. */
+const VISUAL_SLOT =
+  'relative flex h-[380px] sm:h-[440px] lg:h-[500px] w-full items-center justify-center overflow-visible [direction:ltr]';
 
 export default function Features() {
   const reducedMotion = useReducedMotion();
@@ -104,15 +115,15 @@ export default function Features() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        <div className="flex flex-col gap-28 sm:gap-40">
+        <div className={`flex flex-col ${FEATURE_STACK_GAP}`}>
           {FEATURES.map((f, i) => {
             const reverse = i % 2 === 1;
             return (
               <div
                 key={f.index}
-                className={`grid lg:grid-cols-2 gap-10 lg:gap-20 items-center ${
+                className={`${FEATURE_ROW} ${
                   reverse ? 'lg:[direction:rtl]' : ''
-                } ${f.media.kind === 'lottie' ? 'overflow-visible' : ''}`}
+                } overflow-visible`}
               >
                 <motion.div
                   variants={reverse ? textVariantsReverse : textVariants}
@@ -136,35 +147,20 @@ export default function Features() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-10%' }}
-                  className={`relative flex items-center justify-center [direction:ltr] ${
-                    f.media.kind === 'lottie' ? 'overflow-visible' : ''
-                  }`}
+                  className={VISUAL_SLOT}
                   animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
                   transition={floatTransition(i * 0.35)}
                 >
-                  {f.media.kind === 'lottie' ? (
-                    <div
-                      className={`w-full max-w-[460px] origin-center ${f.media.scaleClass}`}
-                    >
-                      <SegmentLottie
-                        loadAnimation={f.media.loadAnimation}
-                        alt={f.alt}
-                        reducedMotion={reducedMotion}
-                        className={`relative z-10 w-full ${f.media.aspectClass}`}
-                      />
-                    </div>
-                  ) : (
-                    <img
-                      src={f.media.src}
+                  <div
+                    className={`w-full max-w-[460px] origin-center ${f.media.scaleClass}`}
+                  >
+                    <SegmentLottie
+                      loadAnimation={f.media.loadAnimation}
                       alt={f.alt}
-                      width={1080}
-                      height={1080}
-                      loading="lazy"
-                      draggable={false}
-                      style={{ backgroundColor: 'transparent' }}
-                      className="relative z-10 w-full max-w-[460px] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)]"
+                      reducedMotion={reducedMotion}
+                      className={`relative z-10 w-full ${f.media.aspectClass}`}
                     />
-                  )}
+                  </div>
                 </motion.div>
               </div>
             );

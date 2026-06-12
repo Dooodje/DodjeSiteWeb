@@ -29,8 +29,36 @@ const cleanUrlsDev = () => ({
   }
 })
 
+const rewriteHtmlStylesheets = (html) =>
+  html.replace(
+    /<link rel="stylesheet"([^>]*?) href="([^"]+\.css)"([^>]*)>/g,
+    (tag, beforeHref, href, afterHref) =>
+      `<link rel="preload" as="style"${beforeHref} href="${href}"${afterHref} onload="this.onload=null;this.rel='stylesheet'"><noscript>${tag}</noscript>`
+  )
+
+const asyncStylesheets = () => ({
+  name: 'async-stylesheets',
+  enforce: 'post',
+  writeBundle(options, bundle) {
+    const outDir = options.dir || resolve(__dirname, 'dist')
+
+    for (const asset of Object.values(bundle)) {
+      if (asset.type !== 'asset' || !asset.fileName.endsWith('.html')) {
+        continue
+      }
+
+      const filePath = resolve(outDir, asset.fileName)
+      const source = fs.readFileSync(filePath, 'utf8')
+      const nextSource = rewriteHtmlStylesheets(source)
+      if (nextSource !== source) {
+        fs.writeFileSync(filePath, nextSource)
+      }
+    }
+  }
+})
+
 export default defineConfig({
-  plugins: [react(), cleanUrlsDev()],
+  plugins: [react(), cleanUrlsDev(), asyncStylesheets()],
   server: {
     port: 3000,
     open: true,

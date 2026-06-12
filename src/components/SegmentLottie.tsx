@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 
-const RENDERER_SETTINGS = { preserveAspectRatio: 'xMidYMid meet' };
-
 type SegmentLottieProps = {
   loadAnimation: () => Promise<object>;
   alt: string;
   loop?: boolean;
   reducedMotion?: boolean | null;
+  alignBottom?: boolean;
   className?: string;
   style?: CSSProperties;
 };
@@ -17,6 +16,7 @@ export default function SegmentLottie({
   alt,
   loop = true,
   reducedMotion = false,
+  alignBottom = false,
   className,
   style
 }: SegmentLottieProps) {
@@ -88,7 +88,9 @@ export default function SegmentLottie({
           loop={loop && !reducedMotion}
           autoplay={!reducedMotion}
           onDOMLoaded={() => setIsReady(true)}
-          rendererSettings={RENDERER_SETTINGS}
+          rendererSettings={{
+            preserveAspectRatio: alignBottom ? 'xMidYMax meet' : 'xMidYMid meet'
+          }}
           style={{
             width: '100%',
             height: '100%',

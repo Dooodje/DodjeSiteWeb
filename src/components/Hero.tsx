@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react';
 import { Sparkles } from 'lucide-react';
-import salutGif from '../../assets/anime/Salut.gif';
-import salutMp4 from '../../assets/anime/Salut.mp4';
-import salutWebm from '../../assets/anime/Salut.webm';
 
 const HEADLINE_LINE_1 = ['Comprends', 'ton', 'argent'];
 const HEADLINE_LINE_2 = [
@@ -12,20 +8,6 @@ const HEADLINE_LINE_2 = [
 
 const TRUST_NOTE =
   'Contenus éducatifs uniquement, sans conseil financier personnalisé.';
-
-function useCanUseVideoMascot() {
-  const [canUseVideo, setCanUseVideo] = useState(
-    typeof window !== 'undefined' ? window.innerWidth >= 640 : true
-  );
-
-  useEffect(() => {
-    const onResize = () => setCanUseVideo(window.innerWidth >= 640);
-    window.addEventListener('resize', onResize, { passive: true });
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  return canUseVideo;
-}
 
 function AppleIcon() {
   return (
@@ -58,8 +40,6 @@ function GooglePlayIcon() {
 }
 
 export default function Hero() {
-  const canUseVideoMascot = useCanUseVideoMascot();
-
   return (
     <section
       id="hero"
@@ -88,10 +68,8 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1500px] px-6 sm:px-10 lg:px-16 pt-32 pb-14 sm:pt-24 lg:pt-12 lg:pb-20 flex flex-col gap-2 lg:gap-3">
-       <div className="grid lg:grid-cols-[0.8fr_1.4fr] gap-3 lg:gap-10 items-center">
-        {/* LEFT: Text + CTAs */}
-        <div className="flex flex-col gap-2 lg:gap-3">
+      <div className="relative z-10 mx-auto max-w-[1500px] px-6 sm:px-10 lg:px-16 pt-32 pb-14 sm:pt-24 lg:pt-12 lg:pb-20">
+        <div className="flex flex-col gap-2 lg:gap-3 max-w-2xl">
           {/* Eyebrow chip */}
           <div
             className="inline-flex items-center gap-2 self-start rounded-full
@@ -186,46 +164,6 @@ export default function Hero() {
             {TRUST_NOTE}
           </p>
         </div>
-
-        {/* RIGHT: Mascotte with floating bob.
-            Green halo behind mascot removed for a calmer, less neon look. */}
-        <div className="relative flex items-center justify-center min-h-[320px] lg:min-h-0">
-          {canUseVideoMascot ? (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              aria-label="Mascotte Dodje qui salue"
-              width={1200}
-              height={1200}
-              style={{
-                transform: 'translateZ(0)',
-                pointerEvents: 'none'
-              }}
-              className="relative z-10 w-[560px] sm:w-[820px] lg:w-[1080px] xl:w-[1200px] max-w-full select-none drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)] motion-safe:animate-[heroMascot_900ms_cubic-bezier(0.4,0,0.2,1)_300ms_both]"
-            >
-              <source src={salutWebm} type="video/webm" />
-              <source src={salutMp4} type="video/mp4" />
-            </video>
-          ) : (
-            <img
-              src={salutGif}
-              alt="Mascotte Dodje qui salue"
-              width={1200}
-              height={1200}
-              draggable={false}
-              style={{
-                transform: 'translateZ(0)',
-                pointerEvents: 'none',
-                backgroundColor: 'transparent'
-              }}
-              className="relative z-10 w-[560px] max-w-full select-none drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)] motion-safe:animate-[heroMascot_900ms_cubic-bezier(0.4,0,0.2,1)_300ms_both]"
-            />
-          )}
-        </div>
-       </div>
       </div>
     </section>
   );
