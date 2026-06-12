@@ -26,34 +26,41 @@ const TRANSITION = [
   `left ${DURATION_MS}ms ${EASE}`
 ].join(', ');
 
-function useIsMobile(): boolean {
-  const [isMobile, setIsMobile] = useState<boolean>(
-    typeof window === 'undefined' ? false : window.innerWidth < 640
-  );
+function useViewportFlags(): { isMobile: boolean; isShort: boolean } {
+  const [flags, setFlags] = useState(() => ({
+    isMobile: typeof window === 'undefined' ? false : window.innerWidth < 640,
+    isShort: typeof window === 'undefined' ? false : window.innerHeight < 740
+  }));
 
   useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 640);
+    const onResize = () => {
+      setFlags({
+        isMobile: window.innerWidth < 640,
+        isShort: window.innerHeight < 740
+      });
+    };
     window.addEventListener('resize', onResize, { passive: true });
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  return isMobile;
+  return flags;
 }
 
-function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
-  // Desktop values give the buildings a higher anchor + smaller scale so
-  // their visual bottom edge stays clear of the info panel that sits at
-  // bottom-28 of the section.
+function getRoleStyles(role: Role, isMobile: boolean, isShort: boolean): CSSProperties {
+  // Buildings live in a dedicated flex stage above the info panel, so
+  // percentages are relative to that stage — not the full section.
+  const centerScale = isMobile ? (isShort ? 1.05 : 1.12) : 1.35;
+
   switch (role) {
     case 'center':
       return {
-        transform: `translateX(-50%) scale(${isMobile ? 1.25 : 1.35})`,
+        transform: `translateX(-50%) scale(${centerScale})`,
         filter: 'none',
         opacity: 1,
         zIndex: 20,
         left: '50%',
-        height: isMobile ? '62%' : '70%',
-        bottom: isMobile ? '28%' : '30%'
+        height: isMobile ? (isShort ? '68%' : '72%') : '78%',
+        bottom: isMobile ? '8%' : '6%'
       };
     case 'left':
       return {
@@ -62,8 +69,8 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
         opacity: 0.85,
         zIndex: 10,
         left: isMobile ? '18%' : '28%',
-        height: isMobile ? '20%' : '30%',
-        bottom: isMobile ? '37%' : '41%'
+        height: isMobile ? '22%' : '30%',
+        bottom: isMobile ? '18%' : '22%'
       };
     case 'right':
       return {
@@ -72,8 +79,8 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
         opacity: 0.85,
         zIndex: 10,
         left: isMobile ? '82%' : '72%',
-        height: isMobile ? '20%' : '30%',
-        bottom: isMobile ? '37%' : '41%'
+        height: isMobile ? '22%' : '30%',
+        bottom: isMobile ? '18%' : '22%'
       };
     case 'back':
       return {
@@ -82,8 +89,8 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
         opacity: 1,
         zIndex: 5,
         left: '50%',
-        height: isMobile ? '17%' : '26%',
-        bottom: isMobile ? '37%' : '41%'
+        height: isMobile ? '18%' : '26%',
+        bottom: isMobile ? '18%' : '22%'
       };
     case 'hidden':
     default:
@@ -93,8 +100,8 @@ function getRoleStyles(role: Role, isMobile: boolean): CSSProperties {
         opacity: 0,
         zIndex: 1,
         left: '50%',
-        height: isMobile ? '17%' : '26%',
-        bottom: isMobile ? '37%' : '41%',
+        height: isMobile ? '18%' : '26%',
+        bottom: isMobile ? '18%' : '22%',
         pointerEvents: 'none'
       };
   }
@@ -117,7 +124,7 @@ const LOTTIE_RENDERER_OPTS = { preserveAspectRatio: 'xMidYMid meet' };
 
 export default function CharacterCarousel({ items, className }: CharacterCarouselProps) {
   const n = items.length;
-  const isMobile = useIsMobile();
+  const { isMobile, isShort } = useViewportFlags();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -131,12 +138,13 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
   const active = items[activeIndex];
 
   return (
-    <div className={`relative w-full h-full ${className ?? ''}`}>
-      {/* Carousel items layer (Lottie buildings) */}
-      <div className="absolute inset-0" style={{ zIndex: 3 }}>
+    <div className={`relative w-full h-full flex flex-col ${className ?? ''}`}>
+      {/* Buildings stage — flex child above the card, never overlaps it. */}
+      <div className="relative flex-1 min-h-[140px] w-full overflow-hidden">
+        <div className="absolute inset-0" style={{ zIndex: 3 }}>
         {items.map((item, index) => {
           const role = resolveRole(index, activeIndex, n);
-          const roleStyles = getRoleStyles(role, isMobile);
+          const roleStyles = getRoleStyles(role, isMobile, isShort);
           const style: CSSProperties = {
             position: 'absolute',
             aspectRatio: '0.6 / 1',
@@ -166,14 +174,39 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
             </div>
           );
         })}
+        </div>
+
+        {/* Navigation buttons — desktop only, anchored bottom-left of stage. */}
+        <div
+          className="absolute hidden sm:flex bottom-6 left-6 lg:bottom-10 lg:left-10 items-center gap-3"
+          style={{ zIndex: 60 }}
+        >
+          <button
+            type="button"
+            onClick={() => navigate('prev')}
+            aria-label="Précédent"
+            className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+            style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
+          >
+            <ArrowLeft size={26} strokeWidth={2.25} />
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate('next')}
+            aria-label="Suivant"
+            className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+            style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
+          >
+            <ArrowRight size={26} strokeWidth={2.25} />
+          </button>
+        </div>
       </div>
 
-      {/* Liquid-glass info panel — centered below the active building.
-          Sizes to content, rounded corners always visible. */}
+      {/* Liquid-glass info panel — in document flow below buildings. */}
       <div
-        className="absolute pointer-events-auto z-[50]
-                   left-1/2 -translate-x-1/2 bottom-6 sm:bottom-14
+        className="relative pointer-events-auto z-[50] shrink-0 mx-auto
                    w-[min(540px,calc(100%-48px))]
+                   mb-[max(1.5rem,env(safe-area-inset-bottom))] sm:mb-14
                    rounded-[28px]
                    backdrop-blur-2xl
                    shadow-[0_24px_60px_-12px_rgba(0,0,0,0.55)]
@@ -221,31 +254,6 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Navigation buttons — desktop only, anchored bottom-left. */}
-      <div
-        className="absolute hidden sm:flex bottom-10 left-10 items-center gap-3"
-        style={{ zIndex: 60 }}
-      >
-        <button
-          type="button"
-          onClick={() => navigate('prev')}
-          aria-label="Précédent"
-          className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-          style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
-        >
-          <ArrowLeft size={26} strokeWidth={2.25} />
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('next')}
-          aria-label="Suivant"
-          className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-          style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
-        >
-          <ArrowRight size={26} strokeWidth={2.25} />
-        </button>
       </div>
     </div>
   );

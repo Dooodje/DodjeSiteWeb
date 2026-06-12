@@ -5,7 +5,10 @@ import salutMp4 from '../../assets/anime/Salut.mp4';
 import salutWebm from '../../assets/anime/Salut.webm';
 
 const HEADLINE_LINE_1 = ['Comprends', 'ton', 'argent'];
-const HEADLINE_LINE_2 = ['simplement et', 'gratuitement.'];
+const HEADLINE_LINE_2 = [
+  { words: ['simplement', 'et'], nowrap: true },
+  { words: ['gratuitement.'] }
+];
 
 const TRUST_NOTE =
   'Contenus éducatifs uniquement, sans conseil financier personnalisé.';
@@ -102,7 +105,7 @@ export default function Hero() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-arboria font-black uppercase tracking-tight leading-[0.92] text-[clamp(2.35rem,10.6vw,3rem)] sm:text-6xl md:text-7xl lg:text-[clamp(4.25rem,5.8vw,5.25rem)]">
+          <h1 className="font-arboria font-black uppercase tracking-tight leading-[0.92] text-[clamp(2.35rem,10.6vw,3rem)] sm:text-6xl md:text-7xl lg:text-[clamp(3.35rem,4.1vw,4.5rem)] xl:text-[5rem]">
             <span className="block">
               {HEADLINE_LINE_1.map((word, i) => (
                 <span
@@ -115,13 +118,24 @@ export default function Hero() {
               ))}
             </span>
             <span className="block text-dodje-green">
-              {HEADLINE_LINE_2.map((word, i) => (
+              {HEADLINE_LINE_2.map((segment, i) => (
                 <span
                   key={`l2-${i}`}
-                  className="inline-block mr-[0.18em] last:mr-0 motion-safe:animate-[heroWord_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
+                  className={`inline-block mr-[0.18em] last:mr-0 motion-safe:animate-[heroWord_700ms_cubic-bezier(0.4,0,0.2,1)_both]${
+                    segment.nowrap ? ' whitespace-nowrap' : ''
+                  }`}
                   style={{ animationDelay: `${390 + i * 70}ms` }}
                 >
-                  {word}
+                  {segment.words.map((word, j) => (
+                    <span
+                      key={`l2-${i}-${j}`}
+                      className={`inline-block last:mr-0 ${
+                        j < segment.words.length - 1 ? 'mr-[0.18em]' : ''
+                      }`}
+                    >
+                      {word}
+                    </span>
+                  ))}
                 </span>
               ))}
             </span>
