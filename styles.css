@@ -1546,6 +1546,16 @@ body {
     transition: var(--transition-transform);
 }
 
+.revolution-gif-mobile {
+    display: none;
+    width: 700px;
+    height: 490px;
+    border-radius: var(--radius-2xl);
+    object-fit: contain;
+    background-color: transparent;
+    box-shadow: var(--shadow-xl);
+}
+
 .revolution-video:hover {
     transform: scale(1.05);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -4928,7 +4938,12 @@ a:focus-visible {
         margin-right: auto;
     }
     
-    .revolution-video {
+    .revolution-video-desktop {
+        display: none;
+    }
+
+    .revolution-gif-mobile {
+        display: block;
         width: 100%;
         max-width: 500px;
         height: 350px;
@@ -5053,7 +5068,7 @@ a:focus-visible {
         margin-right: auto;
     }
     
-    .revolution-video {
+    .revolution-gif-mobile {
         width: 100%;
         max-width: 400px;
         height: 280px;

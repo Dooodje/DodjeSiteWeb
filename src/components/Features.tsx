@@ -122,6 +122,7 @@ export default function Features() {
                     height={1080}
                     loading="lazy"
                     draggable={false}
+                    style={{ backgroundColor: 'transparent' }}
                     animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
                     transition={{
                       duration: 5,

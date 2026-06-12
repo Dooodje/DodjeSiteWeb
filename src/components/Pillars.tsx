@@ -155,6 +155,7 @@ export default function Pillars() {
                     height={1080}
                     loading="lazy"
                     draggable={false}
+                    style={{ backgroundColor: 'transparent' }}
                     animate={
                       reducedMotion
                         ? undefined
