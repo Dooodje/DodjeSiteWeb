@@ -1,4 +1,7 @@
 import { Sparkles } from 'lucide-react';
+import { segmentLottie } from '../assets/lottie/segments';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
+import SegmentLottie from './SegmentLottie';
 
 const HEADLINE_LINE_1 = ['Comprends', 'ton', 'argent'];
 const HEADLINE_LINE_2 = [
@@ -40,6 +43,8 @@ function GooglePlayIcon() {
 }
 
 export default function Hero() {
+  const reducedMotion = usePrefersReducedMotion();
+
   return (
     <section
       id="hero"
@@ -69,7 +74,9 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 sm:px-10 lg:px-16 pt-32 pb-14 sm:pt-24 lg:pt-12 lg:pb-20">
-        <div className="flex flex-col gap-2 lg:gap-3 max-w-2xl">
+        <div className="grid lg:grid-cols-[0.8fr_1.4fr] gap-6 lg:gap-10 items-center">
+          {/* LEFT: Text + CTAs */}
+          <div className="flex flex-col gap-2 lg:gap-3 max-w-2xl">
           {/* Eyebrow chip */}
           <div
             className="inline-flex items-center gap-2 self-start rounded-full
@@ -163,6 +170,18 @@ export default function Hero() {
           >
             {TRUST_NOTE}
           </p>
+          </div>
+
+          {/* RIGHT: Mascotte Salut (Lottie) */}
+          <div className="relative flex items-center justify-center min-h-[320px] sm:min-h-[420px] lg:min-h-[640px]">
+            <SegmentLottie
+              loadAnimation={segmentLottie.salut}
+              alt="Mascotte Dodje qui salue"
+              reducedMotion={reducedMotion}
+              className="relative z-10 w-[min(100%,560px)] sm:w-[min(100%,820px)] lg:w-[min(100%,1080px)] xl:w-[min(100%,1200px)] aspect-square select-none motion-safe:animate-[heroMascot_900ms_cubic-bezier(0.4,0,0.2,1)_300ms_both]"
+              style={{ pointerEvents: 'none' }}
+            />
+          </div>
         </div>
       </div>
     </section>

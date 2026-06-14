@@ -4967,6 +4967,15 @@ a:focus-visible {
     .footer-section {
         text-align: center;
     }
+
+    .footer-section picture {
+        display: block;
+    }
+
+    .footer-logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
     
     .social-links {
         justify-content: center;

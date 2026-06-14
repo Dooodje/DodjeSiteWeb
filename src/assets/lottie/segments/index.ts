@@ -1,5 +1,6 @@
 /** Landing-page segment Lottie animations — lazy-loaded per segment. */
 export const segmentLottie = {
+  salut: () => import('../salut-2.json').then((m) => m.default),
   parcours: () => import('../parcours.json').then((m) => m.default),
   recompenses: () => import('../re-compenses.json').then((m) => m.default),
   experiencePersonnalisee: () =>
