@@ -63,22 +63,19 @@ export default function App() {
   return (
     <section
       id="batiments"
-      className="relative w-full overflow-hidden text-white"
-      style={{ height: '90svh', minHeight: '640px' }}
+      className="relative flex h-[100svh] min-h-[100svh] w-full flex-col overflow-hidden text-white"
     >
-      {/* Section title overlay — generous space above title, clear gap below. */}
-      <div className="relative pointer-events-none z-[40] flex flex-col items-center text-center px-6 pt-14 sm:pt-20 lg:pt-24 lg:pb-8">
+      {/* Header — in document flow so carousel never overlaps the subtitle. */}
+      <div className="relative shrink-0 flex flex-col items-center text-center px-6 pt-8 sm:pt-14 lg:pt-16 pb-2 sm:pb-3">
         <h2 className="font-arboria font-black uppercase tracking-tight leading-[0.95] text-3xl sm:text-5xl md:text-6xl max-w-3xl">
           De la théorie à la <span className="text-dodje-green">pratique</span>
         </h2>
-        <p className="font-arboria text-base sm:text-lg text-white/75 max-w-2xl mt-5 leading-relaxed">
+        <p className="font-arboria text-sm sm:text-lg text-white/75 max-w-2xl mt-2 sm:mt-3 leading-relaxed">
           Récupère des Dodji, débloque des bâtiments et prends des décisions financières. Apprendre à gérer son argent n’a jamais été aussi fun.
         </p>
       </div>
 
-      {/* Mobile: full section. Desktop: buildings start below title with
-          clean separation; bottom margin from panel kept tight. */}
-      <div className="absolute inset-0 lg:top-44">
+      <div className="relative min-h-0 flex-1 w-full h-full">
         <CharacterCarousel items={items} />
       </div>
     </section>

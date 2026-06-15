@@ -1,131 +1,43 @@
-import { useEffect, useState, type CSSProperties, type ComponentType } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ComponentType } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import type { LottieComponentProps } from 'lottie-react';
 
 export type CarouselItem = {
   id: string;
-  /** Lottie animation data (parsed JSON) for the building. */
   building: object;
-  /** Small kicker shown above the title in the info panel (e.g. "Ton job"). */
   tagline: string;
-  /** Building name (e.g. "L'atelier"). */
   title: string;
-  /** Long-form description. */
   description: string;
 };
 
-type Role = 'center' | 'left' | 'right' | 'back' | 'hidden';
+type StageDims = { width: number; height: number };
 
 const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
 const DURATION_MS = 650;
 
 const TRANSITION = [
   `transform ${DURATION_MS}ms ${EASE}`,
-  `filter ${DURATION_MS}ms ${EASE}`,
   `opacity ${DURATION_MS}ms ${EASE}`,
-  `left ${DURATION_MS}ms ${EASE}`
+  `height ${DURATION_MS}ms ${EASE}`,
+  `width ${DURATION_MS}ms ${EASE}`
 ].join(', ');
 
-function useViewportFlags(): { isMobile: boolean; isShort: boolean; isDesktop: boolean } {
-  const [flags, setFlags] = useState(() => ({
-    isMobile: typeof window === 'undefined' ? false : window.innerWidth < 640,
-    isShort: typeof window === 'undefined' ? false : window.innerHeight < 740,
-    isDesktop: typeof window === 'undefined' ? false : window.innerWidth >= 1024
-  }));
+const LOTTIE_RENDERER_OPTS = { preserveAspectRatio: 'xMidYMid meet' };
 
-  useEffect(() => {
-    const onResize = () => {
-      setFlags({
-        isMobile: window.innerWidth < 640,
-        isShort: window.innerHeight < 740,
-        isDesktop: window.innerWidth >= 1024
-      });
-    };
-    window.addEventListener('resize', onResize, { passive: true });
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+type LottieComponent = ComponentType<LottieComponentProps>;
 
-  return flags;
-}
-
-function getRoleStyles(
-  role: Role,
-  isMobile: boolean,
-  isShort: boolean,
-  isDesktop: boolean
-): CSSProperties {
-  // Buildings live in a dedicated flex stage above the info panel, so
-  // percentages are relative to that stage — not the full section.
-  const centerScale = isMobile
-    ? isShort
-      ? 1.05
-      : 1.12
-    : isDesktop
-      ? 1.7
-      : 1.45;
-
-  switch (role) {
-    case 'center':
-      return {
-        transform: `translateX(-50%) scale(${centerScale})`,
-        filter: 'none',
-        opacity: 1,
-        zIndex: 20,
-        left: '50%',
-        height: isMobile ? (isShort ? '68%' : '72%') : isDesktop ? '95%' : '82%',
-        bottom: isMobile ? '-6%' : isDesktop ? '-14%' : '-10%'
-      };
-    case 'left':
-      return {
-        transform: 'translateX(-50%) scale(1)',
-        filter: 'blur(2px)',
-        opacity: 0.85,
-        zIndex: 10,
-        left: isMobile ? '18%' : isDesktop ? '26%' : '28%',
-        height: isMobile ? '22%' : isDesktop ? '38%' : '32%',
-        bottom: isMobile ? '8%' : isDesktop ? '12%' : '10%'
-      };
-    case 'right':
-      return {
-        transform: 'translateX(-50%) scale(1)',
-        filter: 'blur(2px)',
-        opacity: 0.85,
-        zIndex: 10,
-        left: isMobile ? '82%' : isDesktop ? '74%' : '72%',
-        height: isMobile ? '22%' : isDesktop ? '38%' : '32%',
-        bottom: isMobile ? '8%' : isDesktop ? '12%' : '10%'
-      };
-    case 'back':
-      return {
-        transform: 'translateX(-50%) scale(1)',
-        filter: 'blur(4px)',
-        opacity: 1,
-        zIndex: 5,
-        left: '50%',
-        height: isMobile ? '18%' : isDesktop ? '34%' : '28%',
-        bottom: isMobile ? '8%' : isDesktop ? '12%' : '10%'
-      };
-    case 'hidden':
-    default:
-      return {
-        transform: 'translateX(-50%) scale(1)',
-        filter: 'blur(6px)',
-        opacity: 0,
-        zIndex: 1,
-        left: '50%',
-        height: isMobile ? '18%' : isDesktop ? '34%' : '28%',
-        bottom: isMobile ? '8%' : isDesktop ? '12%' : '10%',
-        pointerEvents: 'none'
-      };
-  }
-}
-
-function resolveRole(index: number, active: number, n: number): Role {
-  if (index === active) return 'center';
-  if (index === (active + n - 1) % n) return 'left';
-  if (index === (active + 1) % n) return 'right';
-  if (index === (active + 2) % n) return 'back';
-  return 'hidden';
+function getCenterStyles(stage: StageDims): CSSProperties {
+  return {
+    left: '50%',
+    top: 0,
+    width: stage.width || undefined,
+    height: stage.height || undefined,
+    transform: 'translateX(-50%)',
+    transformOrigin: '50% 50%',
+    filter: 'none',
+    opacity: 1,
+    zIndex: 20
+  };
 }
 
 export type CharacterCarouselProps = {
@@ -133,16 +45,30 @@ export type CharacterCarouselProps = {
   className?: string;
 };
 
-const LOTTIE_RENDERER_OPTS = { preserveAspectRatio: 'xMidYMid meet' };
-
-type LottieComponent = ComponentType<LottieComponentProps>;
-
 export default function CharacterCarousel({ items, className }: CharacterCarouselProps) {
   const n = items.length;
-  const { isMobile, isShort, isDesktop } = useViewportFlags();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [Lottie, setLottie] = useState<LottieComponent | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [stageDims, setStageDims] = useState<StageDims>({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const update = () => {
+      setStageDims({
+        width: stage.clientWidth,
+        height: stage.clientHeight
+      });
+    };
+
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -162,109 +88,76 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
   };
 
   const active = items[activeIndex];
+  const navBtnClass =
+    'rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70';
+  const navBtnStyle = { transition: 'transform 150ms ease, background-color 150ms ease' } as const;
 
   return (
-    <div className={`relative w-full h-full flex flex-col ${className ?? ''}`}>
-      {/* Buildings stage — flex child above the card, never overlaps it. */}
-      <div className="relative flex-1 min-h-[140px] w-full overflow-hidden">
-        <div className="absolute inset-0" style={{ zIndex: 3 }}>
-        {items.map((item, index) => {
-          const role = resolveRole(index, activeIndex, n);
-          const roleStyles = getRoleStyles(role, isMobile, isShort, isDesktop);
-          const style: CSSProperties = {
-            position: 'absolute',
-            aspectRatio: '0.6 / 1',
-            transition: TRANSITION,
-            willChange: 'transform, filter, opacity',
-            ...roleStyles
-          };
-          const isCenter = role === 'center';
-          return (
-            <div
-              key={item.id}
-              style={style}
-              aria-hidden={!isCenter}
-              data-role={role}
-            >
-              {Lottie ? (
-                <Lottie
-                  animationData={item.building}
-                  loop
-                  autoplay
-                  rendererSettings={LOTTIE_RENDERER_OPTS}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    filter: 'drop-shadow(0 16px 32px rgba(0,0,0,0.45))'
-                  }}
-                />
-              ) : null}
-            </div>
-          );
-        })}
+    <div className={`flex h-full min-h-0 w-full flex-col ${className ?? ''}`}>
+      <div ref={stageRef} className="relative min-h-0 flex-1 w-full">
+        <div className="absolute inset-0">
+          <div
+            key={active.id}
+            style={{
+              position: 'absolute',
+              transition: TRANSITION,
+              willChange: 'transform, opacity, width, height',
+              ...getCenterStyles(stageDims)
+            }}
+          >
+            {Lottie ? (
+              <Lottie
+                animationData={active.building}
+                loop
+                autoplay
+                rendererSettings={LOTTIE_RENDERER_OPTS}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.4))'
+                }}
+              />
+            ) : null}
+          </div>
         </div>
-
       </div>
 
-      {/* Info content — in document flow below buildings. */}
       <div
-        className="relative pointer-events-auto z-[50] shrink-0 mx-auto
-                   w-[min(540px,calc(100%-48px))]
-                   mb-[max(1.5rem,env(safe-area-inset-bottom))] sm:mb-14
-                   px-5 py-4 sm:px-6 sm:py-5
-                   text-center"
+        className="relative z-10 shrink-0 mx-auto w-[min(540px,calc(100%-24px))] px-3 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:pt-2 sm:pb-4 text-center pointer-events-auto"
       >
         <div
           key={active.id}
-          className="flex flex-col gap-2 animate-[panelEnter_500ms_cubic-bezier(0.4,0,0.2,1)]"
+          className="animate-[panelEnter_500ms_cubic-bezier(0.4,0,0.2,1)]"
         >
-          <p className="font-arboria text-xs sm:text-sm font-medium uppercase tracking-[0.18em] text-dodje-green">
+          <p className="font-arboria text-[0.6rem] sm:text-sm font-medium uppercase tracking-[0.18em] text-dodje-green">
             {active.tagline}
           </p>
-          <h3 className="font-arboria font-black text-3xl sm:text-4xl leading-[1.05] text-white">
+          <h3 className="font-arboria font-black text-xl sm:text-4xl leading-[1.05] text-white">
             {active.title}
           </h3>
-          <div className="hidden sm:flex items-center justify-center gap-3 mt-4">
+          <div className="flex items-center justify-center gap-2.5 sm:gap-4 mt-1.5 sm:mt-2">
             <button
               type="button"
               onClick={() => navigate('prev')}
               aria-label="Précédent"
-              className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-              style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
+              className={`${navBtnClass} w-10 h-10 sm:w-14 sm:h-14`}
+              style={navBtnStyle}
             >
-              <ArrowLeft size={26} strokeWidth={2.25} />
+              <ArrowLeft size={22} strokeWidth={2.25} className="sm:hidden" />
+              <ArrowLeft size={26} strokeWidth={2.25} className="hidden sm:block" />
             </button>
+            <p className="font-arboria text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 min-w-[2.5rem]">
+              {activeIndex + 1} / {n}
+            </p>
             <button
               type="button"
               onClick={() => navigate('next')}
               aria-label="Suivant"
-              className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-              style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
+              className={`${navBtnClass} w-10 h-10 sm:w-14 sm:h-14`}
+              style={navBtnStyle}
             >
-              <ArrowRight size={26} strokeWidth={2.25} />
-            </button>
-          </div>
-          <p className="font-arboria text-[0.7rem] uppercase tracking-widest text-white/50 mt-3">
-            {activeIndex + 1} / {n}
-          </p>
-          <div className="flex sm:hidden items-center justify-center gap-3 mt-4">
-            <button
-              type="button"
-              onClick={() => navigate('prev')}
-              aria-label="Précédent"
-              className="w-12 h-12 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-              style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
-            >
-              <ArrowLeft size={26} strokeWidth={2.25} />
-            </button>
-            <button
-              type="button"
-              onClick={() => navigate('next')}
-              aria-label="Suivant"
-              className="w-12 h-12 rounded-full flex items-center justify-center border-2 border-white/80 bg-transparent text-white hover:bg-white/15 hover:scale-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-              style={{ transition: 'transform 150ms ease, background-color 150ms ease' }}
-            >
-              <ArrowRight size={26} strokeWidth={2.25} />
+              <ArrowRight size={20} strokeWidth={2.25} className="sm:hidden" />
+              <ArrowRight size={26} strokeWidth={2.25} className="hidden sm:block" />
             </button>
           </div>
         </div>

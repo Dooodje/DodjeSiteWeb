@@ -354,7 +354,7 @@ body {
 }
 
 #carousel-root {
-    min-height: 640px;
+    min-height: 100svh;
 }
 
 @media (min-width: 1024px) {
