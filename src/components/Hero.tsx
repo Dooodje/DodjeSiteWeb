@@ -80,7 +80,7 @@ export default function Hero() {
           {/* Eyebrow chip */}
           <div
             className="inline-flex items-center gap-2 self-start rounded-full
-                       border border-white/15 bg-white/5 backdrop-blur
+                       bg-white/5 backdrop-blur
                        px-3.5 py-1.5 text-xs sm:text-sm font-outfit
                        motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
           >
