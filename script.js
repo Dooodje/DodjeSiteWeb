@@ -100,41 +100,78 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==================== NAVIGATION DYNAMIQUE ====================
     const navbarMinimal = document.getElementById('navbar-minimal');
     const navbarScroll = document.getElementById('navbar-scroll');
+    const mobileFloatingBar = document.getElementById('mobile-floating-bar');
+    const mobileFloatingBreakpoint = window.matchMedia('(max-width: 767px)');
     let navScrollTop = 0;
     const scrollThreshold = 100; // Pixels de scroll avant de changer le header
+
+    function isMobileFloatingBarContext() {
+        return Boolean(mobileFloatingBar && mobileFloatingBreakpoint.matches);
+    }
+
+    function setMobileFloatingBarVisible(visible) {
+        if (!mobileFloatingBar) return;
+        mobileFloatingBar.classList.toggle('visible', visible);
+        mobileFloatingBar.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        if (visible) {
+            mobileFloatingBar.removeAttribute('inert');
+        } else {
+            mobileFloatingBar.setAttribute('inert', '');
+        }
+        document.body.classList.toggle('mobile-floating-bar-active', visible);
+    }
+
+    function updateMobileFloatingBar(forceHidden = false) {
+        if (!isMobileFloatingBarContext()) {
+            setMobileFloatingBarVisible(false);
+            return;
+        }
+
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const menuEl = document.getElementById('mobile-menu');
+        const menuOpen = menuEl && menuEl.classList.contains('active');
+        const shouldShow = !forceHidden && scrollTop > scrollThreshold && !menuOpen;
+        setMobileFloatingBarVisible(shouldShow);
+    }
     
     // Fonction pour gérer l'affichage des headers selon le scroll
     function handleScrollNavigation() {
-        if (!navbarMinimal || !navbarScroll) return;
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > scrollThreshold) {
-            // Masquer le header minimal et afficher le header complet
-            if (!navbarMinimal.classList.contains('hidden')) {
-                navbarMinimal.classList.add('hidden');
-            }
-            if (!navbarScroll.classList.contains('visible')) {
-                navbarScroll.classList.add('visible');
-            }
-        } else {
-            // Afficher le header minimal et masquer le header complet
-            if (navbarMinimal.classList.contains('hidden')) {
-                navbarMinimal.classList.remove('hidden');
-            }
-            if (navbarScroll.classList.contains('visible')) {
-                navbarScroll.classList.remove('visible');
+
+        if (navbarMinimal && navbarScroll) {
+            if (scrollTop > scrollThreshold) {
+                // Masquer le header minimal et afficher le header complet
+                if (!navbarMinimal.classList.contains('hidden')) {
+                    navbarMinimal.classList.add('hidden');
+                }
+                if (!navbarScroll.classList.contains('visible')) {
+                    navbarScroll.classList.add('visible');
+                }
+            } else {
+                // Afficher le header minimal et masquer le header complet
+                if (navbarMinimal.classList.contains('hidden')) {
+                    navbarMinimal.classList.remove('hidden');
+                }
+                if (navbarScroll.classList.contains('visible')) {
+                    navbarScroll.classList.remove('visible');
+                }
             }
         }
-        
+
+        updateMobileFloatingBar();
         navScrollTop = scrollTop;
     }
     
     // Event listener pour le scroll
     window.addEventListener('scroll', handleScrollNavigation, { passive: true });
+
+    if (typeof mobileFloatingBreakpoint.addEventListener === 'function') {
+        mobileFloatingBreakpoint.addEventListener('change', handleScrollNavigation);
+    } else if (typeof mobileFloatingBreakpoint.addListener === 'function') {
+        mobileFloatingBreakpoint.addListener(handleScrollNavigation);
+    }
     
-    // Initialiser l'état au chargement
-    handleScrollNavigation();
-    
+    // Initialiser l'état au chargement (après le menu mobile)
     // ==================== MENU MOBILE ====================
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -148,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuOverlay.classList.add('active');
         if (mobileMenuToggle) mobileMenuToggle.classList.add('is-active');
         document.body.style.overflow = 'hidden';
+        updateMobileFloatingBar(true);
     }
 
     // Fonction pour fermer le menu mobile
@@ -157,6 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuOverlay.classList.remove('active');
         if (mobileMenuToggle) mobileMenuToggle.classList.remove('is-active');
         document.body.style.overflow = 'auto';
+        updateMobileFloatingBar();
     }
 
     // Toggle (open OR close depending on current state) — the burger button
@@ -195,6 +234,8 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMobileMenu();
         }
     });
+
+    handleScrollNavigation();
     
     // ==================== EXISTING FUNCTIONALITY ====================
     initBackgroundVideo();

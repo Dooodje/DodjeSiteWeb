@@ -156,7 +156,7 @@ export default function Hero() {
               <GooglePlayIcon />
               <span className="flex flex-col leading-tight text-left">
                 <span className="text-[0.65rem] uppercase tracking-wide opacity-70">
-                  Disponible sur
+                  Télécharger sur
                 </span>
                 <span className="text-base">Google Play</span>
               </span>

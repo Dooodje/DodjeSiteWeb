@@ -125,6 +125,9 @@
     --transition-opacity: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-shadow: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-transform: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Mobile floating download bar */
+    --mobile-floating-bar-height: 4.75rem;
 }
 
 /* Reset & Base */
@@ -559,6 +562,126 @@ body {
     font-size: var(--font-size-xl);
     color: var(--white);
     font-weight: 700;
+}
+
+/* Barre flottante mobile — App Store / Google Play au scroll (inspirée armlab.fr) */
+.mobile-floating-bar {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .mobile-floating-bar {
+        display: block;
+        position: fixed;
+        inset: auto 0 0;
+        z-index: 85;
+        padding: 0 var(--space-3) max(0.5rem, env(safe-area-inset-bottom, 0px));
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(calc(100% + 0.75rem));
+        transition:
+            transform 480ms cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-floating-bar.visible {
+        pointer-events: auto;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    body.mobile-floating-bar-active #main-content {
+        padding-bottom: calc(var(--mobile-floating-bar-height) + env(safe-area-inset-bottom, 0px));
+    }
+
+    .mobile-floating-bar__shell {
+        max-width: 28rem;
+        margin: 0 auto;
+    }
+
+    .mobile-floating-bar__inner {
+        display: flex;
+        align-items: stretch;
+        gap: var(--space-2);
+        padding: 0;
+        border: none;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+    }
+
+    .mobile-floating-bar__store {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        min-height: 3rem;
+        padding: 0.55rem 0.65rem;
+        border-radius: 0.85rem;
+        text-decoration: none;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-floating-bar__store:active {
+        transform: scale(0.98);
+    }
+
+    .mobile-floating-bar__store--apple {
+        color: #0a0a0a;
+        background: linear-gradient(180deg, #9BEC00 0%, #06D001 100%);
+        box-shadow: 0 8px 20px -10px rgba(6, 208, 1, 0.65);
+    }
+
+    .mobile-floating-bar__store--google {
+        color: #0a0a0a;
+        background: #ffffff;
+        box-shadow: 0 8px 20px -12px rgba(255, 255, 255, 0.35);
+    }
+
+    .mobile-floating-bar__icon {
+        flex-shrink: 0;
+    }
+
+    .mobile-floating-bar__text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.05;
+        min-width: 0;
+    }
+
+    .mobile-floating-bar__label {
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.72;
+    }
+
+    .mobile-floating-bar__name {
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+}
+
+@media (max-width: 360px) {
+    .mobile-floating-bar__label {
+        display: none;
+    }
+
+    .mobile-floating-bar__name {
+        font-size: 0.76rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mobile-floating-bar {
+        transition: none;
+    }
 }
 
 /* Hero Section - Hackathon.dev inspired */
@@ -6782,7 +6905,8 @@ a:focus-visible {
     .navbar,
     .footer,
     .mobile-menu,
-    .mobile-menu-overlay {
+    .mobile-menu-overlay,
+    .mobile-floating-bar {
         display: none;
     }
     
