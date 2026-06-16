@@ -1,53 +1,16 @@
-/* Arboria Font Faces */
+/* Outfit Font Faces (SIL Open Font License — see fonts/Outfit-OFL.txt) */
 @font-face {
-    font-family: 'Arboria';
+    font-family: 'Outfit';
     font-style: normal;
-    font-weight: 100;
+    font-weight: 100 900;
     font-display: swap;
-    src: url('./fonts/Arboria-Thin.woff2') format('woff2'),
-         url('./fonts/Arboria-Thin.woff') format('woff');
+    src: url('./fonts/Outfit-VariableFont_wght.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Arboria';
-    font-style: normal;
-    font-weight: 300;
-    font-display: swap;
-    src: url('./fonts/Arboria-Light.woff2') format('woff2'),
-         url('./fonts/Arboria-Light.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'Arboria';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('./fonts/Arboria-Book.woff2') format('woff2'),
-         url('./fonts/Arboria-Book.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'Arboria';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url('./fonts/Arboria-Medium.woff2') format('woff2'),
-         url('./fonts/Arboria-Medium.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'Arboria';
-    font-style: normal;
-    font-weight: 900;
-    font-display: swap;
-    src: url('./fonts/Arboria-Black.woff2') format('woff2'),
-         url('./fonts/Arboria-Black.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'Arboria Fallback';
+    font-family: 'Outfit Fallback';
     src: local('Arial');
-    size-adjust: 94%;
+    size-adjust: 100%;
     ascent-override: 95%;
     descent-override: 25%;
     line-gap-override: 0%;
@@ -84,7 +47,7 @@
     --border-muted: rgba(255, 255, 255, 0.2);
     
     /* Typography - Ultra modern */
-    --font-family: 'Arboria', 'Arboria Fallback', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-family: 'Outfit', 'Outfit Fallback', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;

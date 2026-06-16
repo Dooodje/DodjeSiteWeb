@@ -16,7 +16,7 @@ module.exports = {
         }
       },
       fontFamily: {
-        arboria: ['Arboria', 'system-ui', '-apple-system', 'sans-serif']
+        outfit: ['Outfit', 'system-ui', '-apple-system', 'sans-serif']
       },
       transitionTimingFunction: {
         'dodje-out': 'cubic-bezier(0.4, 0, 0.2, 1)'

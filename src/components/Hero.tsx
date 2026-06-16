@@ -81,7 +81,7 @@ export default function Hero() {
           <div
             className="inline-flex items-center gap-2 self-start rounded-full
                        border border-white/15 bg-white/5 backdrop-blur
-                       px-3.5 py-1.5 text-xs sm:text-sm font-arboria
+                       px-3.5 py-1.5 text-xs sm:text-sm font-outfit
                        motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
           >
             <Sparkles size={14} className="text-dodje-green" />
@@ -89,7 +89,7 @@ export default function Hero() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-arboria font-black uppercase tracking-tight leading-[0.92] text-[clamp(2.35rem,10.6vw,3rem)] sm:text-6xl md:text-7xl lg:text-[clamp(3.35rem,4.1vw,4.5rem)] xl:text-[5rem]">
+          <h1 className="font-outfit font-black uppercase tracking-tight leading-[0.92] text-[clamp(2.35rem,10.6vw,3rem)] sm:text-6xl md:text-7xl lg:text-[clamp(3.35rem,4.1vw,4.5rem)] xl:text-[5rem]">
             <span className="block">
               {HEADLINE_LINE_1.map((word, i) => (
                 <span
@@ -134,7 +134,7 @@ export default function Hero() {
               href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl text-dodje-ink font-arboria font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]"
+              className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]"
               style={{
                 background: 'linear-gradient(to bottom, #9BEC00 0%, #06D001 100%)'
               }}
@@ -151,7 +151,7 @@ export default function Hero() {
               href="https://play.google.com/store/apps/details?id=xyz.dodje.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-white text-dodje-ink font-arboria font-bold shadow-[0_12px_30px_-8px_rgba(255,255,255,0.25)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]"
+              className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-white text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-8px_rgba(255,255,255,0.25)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]"
             >
               <GooglePlayIcon />
               <span className="flex flex-col leading-tight text-left">
@@ -165,7 +165,7 @@ export default function Hero() {
 
           {/* Trust note */}
           <p
-            className="text-xs sm:text-sm font-arboria text-white/55 max-w-xl mt-2 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
+            className="text-xs sm:text-sm font-outfit text-white/55 max-w-xl mt-2 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
             style={{ animationDelay: '1000ms' }}
           >
             {TRUST_NOTE}

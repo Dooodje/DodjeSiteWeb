@@ -67,10 +67,10 @@ export default function App() {
     >
       {/* Header — in document flow so carousel never overlaps the subtitle. */}
       <div className="relative shrink-0 flex flex-col items-center text-center px-6 pt-8 sm:pt-14 lg:pt-16 pb-2 sm:pb-3">
-        <h2 className="font-arboria font-black uppercase tracking-tight leading-[0.95] text-3xl sm:text-5xl md:text-6xl max-w-3xl">
+        <h2 className="font-outfit font-black uppercase tracking-tight leading-[0.95] text-3xl sm:text-5xl md:text-6xl max-w-3xl">
           De la théorie à la <span className="text-dodje-green">pratique</span>
         </h2>
-        <p className="font-arboria text-sm sm:text-lg text-white/75 max-w-2xl mt-2 sm:mt-3 leading-relaxed">
+        <p className="font-outfit text-sm sm:text-lg text-white/75 max-w-2xl mt-2 sm:mt-3 leading-relaxed">
           Récupère des Dodji, débloque des bâtiments et prends des décisions financières. Apprendre à gérer son argent n’a jamais été aussi fun.
         </p>
       </div>

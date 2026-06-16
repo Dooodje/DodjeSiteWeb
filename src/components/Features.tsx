@@ -150,12 +150,12 @@ export default function Features() {
                   reverse={reverse}
                   className="flex flex-col gap-4 [direction:ltr]"
                 >
-                  <h3 className="font-arboria font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl">
+                  <h3 className="font-outfit font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl">
                     {f.titleLine1}
                     <br />
                     <span className="text-dodje-green">{f.titleAccent}</span>
                   </h3>
-                  <p className="font-arboria text-base sm:text-lg text-white/75 max-w-xl mt-2 leading-relaxed">
+                  <p className="font-outfit text-base sm:text-lg text-white/75 max-w-xl mt-2 leading-relaxed">
                     {f.body}
                   </p>
                 </RevealBlock>

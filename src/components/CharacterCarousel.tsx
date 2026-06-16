@@ -129,10 +129,10 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
           key={active.id}
           className="animate-[panelEnter_500ms_cubic-bezier(0.4,0,0.2,1)]"
         >
-          <p className="font-arboria text-[0.6rem] sm:text-sm font-medium uppercase tracking-[0.18em] text-dodje-green">
+          <p className="font-outfit text-[0.6rem] sm:text-sm font-medium uppercase tracking-[0.18em] text-dodje-green">
             {active.tagline}
           </p>
-          <h3 className="font-arboria font-black text-xl sm:text-4xl leading-[1.05] text-white">
+          <h3 className="font-outfit font-black text-xl sm:text-4xl leading-[1.05] text-white">
             {active.title}
           </h3>
           <div className="flex items-center justify-center gap-2.5 sm:gap-4 mt-1.5 sm:mt-2">
@@ -146,7 +146,7 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
               <ArrowLeft size={22} strokeWidth={2.25} className="sm:hidden" />
               <ArrowLeft size={26} strokeWidth={2.25} className="hidden sm:block" />
             </button>
-            <p className="font-arboria text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 min-w-[2.5rem]">
+            <p className="font-outfit text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 min-w-[2.5rem]">
               {activeIndex + 1} / {n}
             </p>
             <button

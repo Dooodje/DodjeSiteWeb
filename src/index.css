@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Arboria font already loaded via styles.css @font-face — referenced by font-arboria utility */
+/* Outfit font already loaded via styles.css @font-face — referenced by font-outfit utility */
 
 @layer utilities {
   .reveal-text {
@@ -124,6 +124,6 @@
   #pillars-root,
   #carousel-root,
   #features-root {
-    font-family: 'Arboria', 'Arboria Fallback', system-ui, -apple-system, sans-serif;
+    font-family: 'Outfit', 'Outfit Fallback', system-ui, -apple-system, sans-serif;
   }
 }

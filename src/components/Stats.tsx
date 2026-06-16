@@ -53,7 +53,7 @@ export default function Stats() {
 
       <div className="relative z-10 flex w-full flex-col items-center px-6 sm:px-10 lg:px-16">
         <div className="flex w-full max-w-5xl flex-col items-center text-center">
-          <h2 className="font-arboria font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl md:whitespace-nowrap motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]">
+          <h2 className="font-outfit font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl md:whitespace-nowrap motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]">
             La porte d'entrée pour{' '}
             <span className="text-dodje-green whitespace-nowrap">débuter</span>
           </h2>
@@ -65,7 +65,7 @@ export default function Stats() {
                 className="flex w-full max-w-[17rem] sm:w-[17rem] sm:shrink-0 flex-col items-center text-center motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
                 style={{ animationDelay: `${80 * i}ms` }}
               >
-                <div className="font-arboria font-black leading-none text-6xl sm:text-7xl lg:text-8xl text-white">
+                <div className="font-outfit font-black leading-none text-6xl sm:text-7xl lg:text-8xl text-white">
                   <AnimatedCounter
                     to={stat.value}
                     prefix={stat.prefix}
@@ -73,10 +73,10 @@ export default function Stats() {
                     monospaceDigits
                   />
                 </div>
-                <p className="font-arboria mt-4 text-sm sm:text-base uppercase tracking-[0.12em] text-dodje-green">
+                <p className="font-outfit mt-4 text-sm sm:text-base uppercase tracking-[0.12em] text-dodje-green">
                   {stat.label}
                 </p>
-                <p className="font-arboria mt-2 text-sm sm:text-base text-white/60 leading-relaxed text-balance">
+                <p className="font-outfit mt-2 text-sm sm:text-base text-white/60 leading-relaxed text-balance">
                   {stat.caption}
                 </p>
               </li>
