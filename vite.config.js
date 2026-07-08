@@ -2,15 +2,68 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import fs from 'fs'
 import react from '@vitejs/plugin-react'
+import {
+  STATIC_PAGES,
+  injectSeoHeadPlugin,
+  writeSeoArtifacts
+} from './vite-seo.mjs'
 
-// Plugin: serve clean URLs in dev (e.g. /conditions-utilisation -> conditions-utilisation.html)
-// Mirrors Firebase Hosting `cleanUrls: true` behavior so links work in dev and prod.
+function collectHtmlInputs(rootDir) {
+  const inputs = {}
+  STATIC_PAGES.forEach((file) => {
+    const key = file.replace('.html', '').replace(/-/g, '_')
+    inputs[key] = resolve(rootDir, file)
+  })
+  ;['outils', 'actualites', 'guides'].forEach((dir) => {
+    const fullDir = resolve(rootDir, dir)
+    if (!fs.existsSync(fullDir)) return
+    fs.readdirSync(fullDir).forEach((file) => {
+      if (!file.endsWith('.html')) return
+      const slug = file.replace('.html', '')
+      const key = `${dir}_${slug}`.replace(/-/g, '_')
+      inputs[key] = resolve(fullDir, file)
+    })
+  })
+  return inputs
+}
+
+const seoBuildPlugin = (rootDir) => ({
+  name: 'seo-build',
+  closeBundle() {
+    writeSeoArtifacts(rootDir)
+  }
+})
+
+function appPromoScriptPath(filename) {
+  const normalized = filename.replace(/\\/g, '/')
+  if (
+    normalized.includes('/guides/') ||
+    normalized.includes('/outils/') ||
+    normalized.includes('/actualites/')
+  ) {
+    return '../app-promo.js'
+  }
+  return 'app-promo.js'
+}
+
+const injectAppPromoPlugin = () => ({
+  name: 'inject-app-promo',
+  transformIndexHtml: {
+    order: 'post',
+    handler(html, ctx) {
+      if (!ctx.filename.endsWith('.html')) return html
+      if (html.includes('app-promo.js')) return html
+      const src = appPromoScriptPath(ctx.filename)
+      return html.replace('</body>', `    <script src="${src}"></script>\n</body>`)
+    }
+  }
+})
+
 const cleanUrlsDev = () => ({
   name: 'clean-urls-dev',
   configureServer(server) {
     server.middlewares.use((req, res, next) => {
       const [pathname, query] = (req.url || '/').split('?')
-      // Skip root, asset paths, paths with extensions, and trailing-slash paths
       if (
         pathname === '/' ||
         pathname.endsWith('/') ||
@@ -20,9 +73,13 @@ const cleanUrlsDev = () => ({
       ) {
         return next()
       }
-      const candidate = resolve(__dirname, pathname.slice(1) + '.html')
-      if (fs.existsSync(candidate)) {
+      const basePath = pathname.slice(1)
+      const htmlCandidate = resolve(__dirname, basePath + '.html')
+      const indexCandidate = resolve(__dirname, basePath, 'index.html')
+      if (fs.existsSync(htmlCandidate)) {
         req.url = pathname + '.html' + (query ? '?' + query : '')
+      } else if (fs.existsSync(indexCandidate)) {
+        req.url = pathname + '/index.html' + (query ? '?' + query : '')
       }
       next()
     })
@@ -40,10 +97,6 @@ const extractTag = (html, pattern) => {
   return { cleaned, tags }
 }
 
-// Hoist Vite-injected CSS/JS to the top of <head> so the browser discovers
-// the entry module before parsing non-critical markup (JSON-LD, etc.).
-// Background videos are loaded via data-* attributes in script.js, so Vite's
-// HTML asset pipeline never copies them. Mirror assets/anime into dist on build.
 const copyBackgroundVideos = () => ({
   name: 'copy-background-videos',
   closeBundle() {
@@ -109,33 +162,27 @@ const earlyCriticalAssets = () => ({
 })
 
 export default defineConfig({
-  plugins: [react(), cleanUrlsDev(), earlyCriticalAssets(), copyBackgroundVideos()],
+  plugins: [
+    react(),
+    cleanUrlsDev(),
+    injectSeoHeadPlugin(__dirname),
+    injectAppPromoPlugin(),
+    seoBuildPlugin(__dirname),
+    earlyCriticalAssets(),
+    copyBackgroundVideos()
+  ],
   server: {
     port: 3000,
     open: true,
-    // Expose dev server on LAN so phones on the same Wi-Fi can connect
-    // via http://<your-ip>:3000/ — printed in the terminal as "Network:".
     host: true
   },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    // Bump warning so legitimate vendor chunks (lottie) don't spam the build log.
     chunkSizeWarningLimit: 800,
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        educationFinanciere: resolve(__dirname, 'education-financiere.html'),
-        apprendreLaBourse: resolve(__dirname, 'apprendre-la-bourse.html'),
-        cryptoDebutant: resolve(__dirname, 'crypto-debutant.html'),
-        confidentialite: resolve(__dirname, 'politique-confidentialite.html'),
-        conditions: resolve(__dirname, 'conditions-utilisation.html'),
-        faq: resolve(__dirname, 'faq.html'),
-        blog: resolve(__dirname, 'blog.html')
-      },
+      input: collectHtmlInputs(__dirname),
       output: {
-        // Split vendor libs so the initial bundle stays lean and below-fold
-        // libs (lottie) only load when their islands hydrate.
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (id.includes('react-dom') || id.includes('/react/') || id.includes('scheduler')) {

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur salaire brut en net 2026 | Mensuel et annuel</title>
+    <meta name="description" content="Convertis ton salaire brut en net (ou l'inverse) en France 2026 : mensuel, annuel, cadre, non-cadre, net imposable et après impôt. Barèmes URSSAF ligne par ligne.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-salaire-brut-net">
+    <meta property="og:title" content="Calculateur salaire brut en net 2026">
+    <meta property="og:description" content="Brut → net ou net → brut, mensuel ou annuel. Cotisations Agirc-Arrco et CSG 2026.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-salaire-brut-net">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur salaire brut net Dodje","url":"https://dodje.fr/outils/calculateur-salaire-brut-net","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment convertir un salaire brut mensuel en net en 2026 ?","acceptedAnswer":{"@type":"Answer","text":"Saisis ton brut mensuel, choisis cadre ou non-cadre. Le simulateur applique les cotisations salariales 2026 (vieillesse, Agirc-Arrco, CSG/CRDS) et affiche le net avant impôt, le net imposable et le net annuel."}},{"@type":"Question","name":"Quelle est la différence entre net mensuel et net annuel ?","acceptedAnswer":{"@type":"Answer","text":"Le net mensuel est ce que tu perçois chaque mois sur ta fiche de paie (avant prélèvement à la source). Le net annuel = net mensuel × 12, utile pour comparer une offre d'embauche exprimée en brut annuel."}},{"@type":"Question","name":"Peut-on calculer le brut à partir du net ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Sélectionne Net → Brut, saisis le net mensuel ou annuel souhaité : le simulateur calcule le brut contractuel nécessaire via les barèmes officiels 2026."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar visible"><div class="nav-container"><div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div><div class="nav-menu"><a href="/outils" class="nav-link">Outils</a><a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a></div></div></nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Salaire France 2026</p>
+            <h1>Salaire brut ↔ <span class="legal-title-accent">net</span></h1>
+            <p class="content-lead"><strong>En bref :</strong> convertis brut en net (ou l'inverse), en mensuel ou annuel. Cotisations salariales 2026 appliquées ligne par ligne — PMSS 3 925 €, cadre ou non-cadre.</p>
+
+            <form id="calc-salaire" class="calc-widget" data-auto-calc="true">
+                <div class="calc-segments" role="group" aria-label="Sens du calcul">
+                    <label class="calc-segment"><input type="radio" name="sens" value="brut-net" checked><span>Brut → Net</span></label>
+                    <label class="calc-segment"><input type="radio" name="sens" value="net-brut"><span>Net → Brut</span></label>
+                </div>
+                <div class="calc-segments" role="group" aria-label="Période">
+                    <label class="calc-segment"><input type="radio" name="periode" value="mensuel" checked><span>Mensuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="periode" value="annuel"><span>Annuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="sal-montant" id="sal-montant-label">Salaire brut mensuel (€)</label>
+                        <input type="number" id="sal-montant" name="montant" value="3000" min="0" step="50">
+                    </div>
+                    <div class="calc-field">
+                        <label for="sal-statut">Statut</label>
+                        <select id="sal-statut" name="statut">
+                            <option value="non-cadre">Non-cadre (secteur privé)</option>
+                            <option value="cadre">Cadre (secteur privé)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="sal-temps">Temps de travail (%)</label>
+                        <input type="number" id="sal-temps" name="temps" value="100" min="10" max="100" step="5">
+                    </div>
+                    <div class="calc-field calc-field-check">
+                        <label class="calc-check-label">
+                            <input type="checkbox" id="sal-pas" name="pas">
+                            Inclure le prélèvement à la source
+                        </label>
+                        <input type="number" id="sal-taux-pas" name="taux_pas" value="0" min="0" max="45" step="0.1" placeholder="Taux PAS (%)">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Calculer</button>
+
+                <div id="sal-results" class="calc-results" hidden>
+                    <h3>Résultats</h3>
+                    <div class="calc-result-row calc-result-highlight"><span>Net mensuel (avant impôt)</span><span class="calc-result-value" id="sal-result-net-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Net annuel (avant impôt)</span><span class="calc-result-value" id="sal-result-net-a">0 €</span></div>
+                    <div class="calc-result-row"><span>Brut mensuel</span><span class="calc-result-value" id="sal-result-brut-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Brut annuel</span><span class="calc-result-value" id="sal-result-brut-a">0 €</span></div>
+                    <div class="calc-result-row"><span>Net imposable mensuel</span><span class="calc-result-value" id="sal-result-imposable-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Net imposable annuel</span><span class="calc-result-value" id="sal-result-imposable-a">0 €</span></div>
+                    <div class="calc-result-row"><span>Cotisations salariales</span><span class="calc-result-value" id="sal-result-cot">0 €</span></div>
+                    <div class="calc-result-row"><span>Taux de cotisation effectif</span><span class="calc-result-value" id="sal-result-taux">0 %</span></div>
+                    <div class="calc-result-row" id="sal-row-pas" hidden><span>Prélèvement à la source / mois</span><span class="calc-result-value" id="sal-result-pas">0 €</span></div>
+                    <div class="calc-result-row calc-result-highlight" id="sal-row-net-apres" hidden><span>Net après impôt / mois</span><span class="calc-result-value" id="sal-result-net-apres">0 €</span></div>
+                </div>
+
+                <div id="sal-detail" class="calc-detail" hidden>
+                    <h3>Détail des cotisations (mensuel)</h3>
+                    <div class="compare-table-wrap">
+                        <table class="compare-table" id="sal-detail-table">
+                            <thead><tr><th>Cotisation</th><th>Montant</th></tr></thead>
+                            <tbody id="sal-detail-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+
+            <h2>Raccourcis 2026</h2>
+            <p>SMIC brut ≈ 1 823 €/mois → environ <strong>1 430 € net</strong>. Pour une estimation rapide : brut × 0,78 (non-cadre) ou × 0,75 (cadre au-dessus du PMSS).</p>
+
+            <div class="content-links">
+                <a href="/guides/lire-fiche-de-paie-2026">Lire sa fiche de paie</a>
+                <a href="/outils/calculateur-impot-revenu">Impôt sur le revenu</a>
+                <a href="/outils/calculateur-budget-mensuel">Budget mensuel</a>
+                <a href="/outils/calculateur-allocation-chomage">Allocation chômage</a>
+            </div>
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net" rel="noopener noreferrer" target="_blank">Urssaf, simulateur brut/net officiel</a></li>
+                    <li><a href="https://www.urssaf.fr/accueil/outils-documentation/simulateurs/cotisations-employeur.html" rel="noopener noreferrer" target="_blank">URSSAF, cotisations 2026</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>
+    <script src="../calculators.js"></script>
+    <script>
+    (function(){
+      var form = document.getElementById('calc-salaire');
+      if (!form) return;
+      function syncLabel(){
+        var sens = form.querySelector('[name=sens]:checked');
+        var periode = form.querySelector('[name=periode]:checked');
+        var label = document.getElementById('sal-montant-label');
+        if (!label) return;
+        var base = sens && sens.value === 'net-brut' ? 'net' : 'brut';
+        var p = periode && periode.value === 'annuel' ? 'annuel' : 'mensuel';
+        label.textContent = 'Salaire ' + base + ' ' + p + ' (€)';
+      }
+      form.querySelectorAll('[name=sens],[name=periode]').forEach(function(el){
+        el.addEventListener('change', syncLabel);
+      });
+      syncLabel();
+    })();
+    </script>
+</body>
+</html>

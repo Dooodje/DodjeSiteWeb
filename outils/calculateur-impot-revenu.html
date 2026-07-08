@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur impôt sur le revenu 2026 | Barème France</title>
+    <meta name="description" content="Estime ton impôt sur le revenu 2026 en France : barème progressif, quotient familial, revenu net imposable mensuel ou annuel. Simulateur gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-impot-revenu">
+    <meta property="og:title" content="Calculateur impôt sur le revenu 2026">
+    <meta property="og:description" content="Barème IR 2026, parts fiscales et impôt net estimé.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-impot-revenu">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur impôt sur le revenu Dodje","url":"https://dodje.fr/outils/calculateur-impot-revenu","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel est le barème de l'impôt sur le revenu 2026 ?","acceptedAnswer":{"@type":"Answer","text":"Revenus 2025 déclarés en 2026 : 0 % jusqu'à 11 294 € par part, 11 % de 11 295 à 28 797 €, 30 % de 28 798 à 82 341 €, 41 % de 82 342 à 177 106 €, 45 % au-delà."}},{"@type":"Question","name":"Qu'est-ce que le quotient familial ?","acceptedAnswer":{"@type":"Answer","text":"Le revenu imposable est divisé par le nombre de parts fiscales (1 pour célibataire, 2 pour couple, +0,5 par enfant à charge en général). L'impôt calculé sur le quotient est multiplié par le nombre de parts."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar visible"><div class="nav-container"><div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div><div class="nav-menu"><a href="/outils" class="nav-link">Outils</a><a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a></div></div></nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Fiscalité 2026</p>
+            <h1>Impôt sur le <span class="legal-title-accent">revenu</span></h1>
+            <p class="content-lead">Estime ton impôt annuel selon le barème progressif 2026 et ton quotient familial. Saisis ton revenu net imposable (comme sur ta fiche de paie).</p>
+
+            <form id="calc-impot" class="calc-widget" data-auto-calc="true">
+                <div class="calc-segments" role="group" aria-label="Période">
+                    <label class="calc-segment"><input type="radio" name="periode" value="annuel" checked><span>Revenu annuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="periode" value="mensuel"><span>Revenu mensuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="ir-revenu" id="ir-revenu-label">Revenu net imposable annuel (€)</label>
+                        <input type="number" id="ir-revenu" name="revenu" value="36000" min="0" step="500">
+                    </div>
+                    <div class="calc-field">
+                        <label for="ir-parts">Nombre de parts fiscales</label>
+                        <select id="ir-parts" name="parts">
+                            <option value="1">1 part (célibataire)</option>
+                            <option value="1.5">1,5 part (parent isolé + 1 enfant)</option>
+                            <option value="2" selected>2 parts (couple)</option>
+                            <option value="2.5">2,5 parts (couple + 1 enfant)</option>
+                            <option value="3">3 parts (couple + 2 enfants)</option>
+                            <option value="4">4 parts (couple + 3 enfants)</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Calculer mon impôt</button>
+                <div id="ir-results" class="calc-results" hidden>
+                    <h3>Estimation annuelle</h3>
+                    <div class="calc-result-row calc-result-highlight"><span>Impôt sur le revenu</span><span class="calc-result-value" id="ir-result-impot">0 €</span></div>
+                    <div class="calc-result-row"><span>Revenu net après impôt</span><span class="calc-result-value" id="ir-result-net">0 €</span></div>
+                    <div class="calc-result-row"><span>Net après impôt / mois</span><span class="calc-result-value" id="ir-result-net-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Taux moyen d'imposition</span><span class="calc-result-value" id="ir-result-taux">0 %</span></div>
+                    <div class="calc-result-row"><span>Quotient familial (revenu / part)</span><span class="calc-result-value" id="ir-result-quotient">0 €</span></div>
+                </div>
+            </form>
+
+            <h2>Barème 2026 (revenus 2025)</h2>
+            <div class="compare-table-wrap">
+                <table class="compare-table">
+                    <thead><tr><th>Tranche par part</th><th>Taux</th></tr></thead>
+                    <tbody>
+                        <tr><td>Jusqu'à 11 294 €</td><td>0 %</td></tr>
+                        <tr><td>11 295 € à 28 797 €</td><td>11 %</td></tr>
+                        <tr><td>28 798 € à 82 341 €</td><td>30 %</td></tr>
+                        <tr><td>82 342 € à 177 106 €</td><td>41 %</td></tr>
+                        <tr><td>Au-delà de 177 106 €</td><td>45 %</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-salaire-brut-net">Salaire brut en net</a>
+                <a href="/guides/donnees-finance-france">Données finance France</a>
+                <a href="/guides/lire-fiche-de-paie-2026">Lire sa fiche de paie</a>
+                <a href="/outils/comparatif-statuts-entreprise-france-2026">Statuts entreprise</a>
+            </div>
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.impots.gouv.fr/particulier/le-barème-de-limpot-sur-le-revenu" rel="noopener noreferrer" target="_blank">Impots.gouv.fr, barème IR</a></li>
+                    <li><a href="https://www.service-public.fr/particuliers/vosdroits/F1419" rel="noopener noreferrer" target="_blank">Service-public, impôt sur le revenu</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>
+    <script src="../calculators.js"></script>
+    <script>
+    (function(){
+      var form = document.getElementById('calc-impot');
+      if (!form) return;
+      function syncLabel(){
+        var p = form.querySelector('[name=periode]:checked');
+        var label = document.getElementById('ir-revenu-label');
+        if (label) label.textContent = p && p.value === 'mensuel' ? 'Revenu net imposable mensuel (€)' : 'Revenu net imposable annuel (€)';
+      }
+      form.querySelectorAll('[name=periode]').forEach(function(el){ el.addEventListener('change', syncLabel); });
+    })();
+    </script>
+</body>
+</html>

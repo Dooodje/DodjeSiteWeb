@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur allocation chômage 2026 | ARE brute et nette</title>
+    <meta name="description" content="Estime ton allocation chômage (ARE) en France : salaire de référence, montant brut et net mensuel. Barème France Travail 2026 simplifié. Simulateur gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-allocation-chomage">
+    <meta property="og:title" content="Calculateur allocation chômage 2026">
+    <meta property="og:description" content="Estime ton ARE mensuelle brute et nette à partir de ton dernier salaire.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-allocation-chomage">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur allocation chômage Dodje","url":"https://dodje.fr/outils/calculateur-allocation-chomage","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment est calculée l'allocation chômage en France ?","acceptedAnswer":{"@type":"Answer","text":"L'ARE repose sur le salaire journalier de référence (SJR) des 12 derniers mois. L'allocation journalière combine une partie fixe (40,4 % du SJR) et une partie complémentaire (57 % de la fraction au-dessus de 14,52 euros), plafonnée à 75 % du SJR."}},{"@type":"Question","name":"Quelle est la différence entre ARE brute et nette ?","acceptedAnswer":{"@type":"Answer","text":"L'ARE brute est le montant avant prélèvements sociaux (CSG, CRDS). L'ARE nette est ce qui est versé sur ton compte, généralement inférieure de 6 à 8 % environ."}},{"@type":"Question","name":"Ce simulateur remplace-t-il France Travail ?","acceptedAnswer":{"@type":"Answer","text":"Non. Seul le simulateur officiel de France Travail fait foi. Ce calculateur Dodje est pédagogique et utilise une approximation à partir du salaire brut mensuel moyen."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar visible"><div class="nav-container"><div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div><div class="nav-menu"><a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a></div></div></nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">France Travail 2026</p>
+            <h1>Calculateur <span class="legal-title-accent">allocation chômage</span></h1>
+            <p class="content-lead"><strong>En bref :</strong> saisis ton salaire brut mensuel moyen pour estimer une ARE mensuelle brute et nette selon les règles françaises en vigueur.</p>
+
+            <form id="calc-chomage" class="calc-widget" data-auto-calc="true">
+                <div class="calc-segments" role="group" aria-label="Période salaire">
+                    <label class="calc-segment"><input type="radio" name="periode" value="mensuel" checked><span>Salaire mensuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="periode" value="annuel"><span>Salaire annuel</span></label>
+                </div>
+                <div class="calc-field">
+                    <label for="cho-brut" id="cho-brut-label">Salaire brut mensuel moyen de référence (€)</label>
+                    <input type="number" id="cho-brut" name="brut" value="2800" min="0" step="50">
+                </div>
+                <button type="submit" class="calc-btn">Estimer mon ARE</button>
+                <div id="cho-results" class="calc-results" hidden>
+                    <h3>Estimation</h3>
+                    <div class="calc-result-row"><span>Salaire journalier de référence (SJR)</span><span class="calc-result-value" id="cho-result-sjr">0 €</span></div>
+                    <div class="calc-result-row calc-result-highlight"><span>ARE brute / mois</span><span class="calc-result-value" id="cho-result-brute">0 €</span></div>
+                    <div class="calc-result-row calc-result-highlight"><span>ARE nette / mois</span><span class="calc-result-value" id="cho-result-nette">0 €</span></div>
+                    <div class="calc-result-row"><span>ARE brute / an</span><span class="calc-result-value" id="cho-result-brute-a">0 €</span></div>
+                    <div class="calc-result-row"><span>ARE nette / an</span><span class="calc-result-value" id="cho-result-nette-a">0 €</span></div>
+                    <div class="calc-result-row"><span>Taux de remplacement</span><span class="calc-result-value" id="cho-result-ratio">0 %</span></div>
+                </div>
+            </form>
+
+            <h2>Conditions d'indemnisation</h2>
+            <p>Pour ouvrir des droits, il faut généralement avoir travaillé au moins 6 mois (130 jours ou 910 heures) sur les 24 derniers mois, ou 36 mois si tu as 53 ans et plus. La durée d'indemnisation dépend de ton âge et de ton ancienneté.</p>
+            <p>Le montant peut diminuer avec la dégressivité après 6 mois si ton salaire de référence dépassait 2 444,40 euros brut mensuel (seuil 2026 indicatif).</p>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-salaire-brut-net">Salaire brut en net</a>
+                <a href="/outils/calculateur-budget-mensuel">Budget mensuel</a>
+                <a href="/guides/lire-fiche-de-paie-2026">Lire sa fiche de paie</a>
+            </div>
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/lessentiel-a-savoir-sur-lallocat/lallocation-daide-au-retour.html" rel="noopener noreferrer" target="_blank">France Travail, allocation d'aide au retour à l'emploi</a></li>
+                    <li><a href="https://www.service-public.fr/particuliers/vosdroits/N178" rel="noopener noreferrer" target="_blank">Service-public.fr, allocation chômage</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>
+    <script src="../calculators.js"></script>
+    <script>
+    (function(){
+      var form = document.getElementById('calc-chomage');
+      if (!form) return;
+      function syncLabel(){
+        var p = form.querySelector('[name=periode]:checked');
+        var label = document.getElementById('cho-brut-label');
+        if (label) label.textContent = p && p.value === 'annuel' ? 'Salaire brut annuel moyen de référence (€)' : 'Salaire brut mensuel moyen de référence (€)';
+      }
+      form.querySelectorAll('[name=periode]').forEach(function(el){ el.addEventListener('change', syncLabel); });
+    })();
+    </script>
+</body>
+</html>

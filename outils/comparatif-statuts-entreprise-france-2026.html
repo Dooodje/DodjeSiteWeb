@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparatif statuts entreprise 2026 | Micro, EURL, SASU</title>
+    <meta name="description" content="Compare salarié, micro, EI, EURL et SASU en France : revenu net, cotisations, impôts et droits sociaux. Gratuit 2026.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <meta name="geo.region" content="FR">
+    <link rel="canonical" href="https://dodje.fr/outils/comparatif-statuts-entreprise-france-2026">
+    <meta property="og:title" content="Comparatif statuts entreprise France 2026">
+    <meta property="og:description" content="Simule ton revenu net selon ton statut : salarié, auto-entrepreneur, EURL, SASU. Tableau droits, impôts et cotisations.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/comparatif-statuts-entreprise-france-2026">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Comparatif statuts entreprise Dodje",
+      "description": "Simulateur pédagogique pour comparer salarié, micro-entreprise, EI, EURL et SASU en France : revenu net, impôts et cotisations.",
+      "url": "https://dodje.fr/outils/comparatif-statuts-entreprise-france-2026",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" },
+      "featureList": ["Comparatif revenu net par statut", "Graphique barres", "Tableau droits sociaux", "Mode net mensuel visé"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Micro-entreprise ou SASU : lequel rapporte le plus net ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cela dépend du chiffre d'affaires, des charges réelles et du mode de rémunération. En dessous de 77 700 euros de CA en prestations, la micro-entreprise est souvent la plus simple. Au-delà, une SASU à l'IS avec dividendes ou une EURL à l'IR peuvent optimiser le net, mais avec des coûts de comptabilité et de création plus élevés."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels droits sociaux pour un auto-entrepreneur vs un salarié ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le salarié bénéficie de l'assurance chômage, des congés payés, de la protection contre le licenciement et d'une retraite de base plus structurée. L'auto-entrepreneur cotise pour la maladie et la retraite de base, mais n'a pas de droit au chômage sauf souscription volontaire. Le président de SASU assimilé salarié se rapproche du régime salarié pour la protection sociale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel est le plafond de chiffre d'affaires en micro-entreprise en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En 2026, le plafond est de 77 700 euros pour les prestations de services (BIC et BNC) et de 188 700 euros pour la vente de marchandises. Au-delà, tu dois changer de régime fiscal et social."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Statuts juridiques France</p>
+            <h1>Comparatif statuts entreprise : revenu, droits et impôts</h1>
+            <p class="content-lead">Salarié, micro-entreprise, entreprise individuelle, EURL ou SASU : les différences ne se limitent pas au revenu net. Ce comparatif croise cotisations, impôts, droits sociaux et protection pour t'aider à te situer avant de te lancer ou de changer de statut.</p>
+
+            <div class="content-note">
+                <p><strong>Attention :</strong> simulation pédagogique avec hypothèses simplifiées (35 % de charges, barème IR 2026, IS PME 15/25 %). Chaque situation réelle dépend de ta situation familiale, de tes charges et de ton secteur. Consulte un expert-comptable pour une décision définitive.</p>
+            </div>
+
+            <form id="calc-statuts-entreprise" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="st-mode">Mode de simulation</label>
+                        <select id="st-mode" name="mode">
+                            <option value="ca">CA ou brut annuel (euros)</option>
+                            <option value="net">Net mensuel visé (euros)</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="st-montant">Montant</label>
+                        <input type="number" id="st-montant" name="montant" value="50000" min="1000" step="500">
+                    </div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="st-activite">Type d'activité (micro-entreprise)</label>
+                        <select id="st-activite" name="activite">
+                            <option value="bic">Prestations de services BIC (21,2 %)</option>
+                            <option value="bnc">Prestations BNC (25,6 %)</option>
+                            <option value="vente">Vente de marchandises (12,3 %)</option>
+                            <option value="cipav">Professions libérales CIPAV (23,2 %)</option>
+                        </select>
+                    </div>
+                    <div class="calc-field calc-field-checkbox">
+                        <label>
+                            <input type="checkbox" id="st-acre" name="acre">
+                            ACRE active (réduction 25 % des cotisations micro en 2026)
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Comparer les statuts</button>
+                <div id="st-results" class="calc-results" hidden>
+                    <h3>Revenu net annuel estimé</h3>
+                    <div class="calc-result-row">
+                        <span>Salarié (CDI, brut équivalent)</span>
+                        <span class="calc-result-value" id="st-result-salarie">0 €</span>
+                    </div>
+                    <p class="calc-result-hint" id="st-detail-salarie"></p>
+                    <div class="calc-result-row">
+                        <span>Micro-entreprise</span>
+                        <span class="calc-result-value" id="st-result-micro">0 €</span>
+                    </div>
+                    <p class="calc-result-hint" id="st-detail-micro"></p>
+                    <div class="calc-result-row">
+                        <span>EI / EURL à l'impôt sur le revenu</span>
+                        <span class="calc-result-value" id="st-result-ei">0 €</span>
+                    </div>
+                    <p class="calc-result-hint" id="st-detail-ei"></p>
+                    <div class="calc-result-row">
+                        <span>SASU à l'IS (dividendes)</span>
+                        <span class="calc-result-value" id="st-result-sasu-div">0 €</span>
+                    </div>
+                    <p class="calc-result-hint" id="st-detail-sasu-div"></p>
+                    <div class="calc-result-row">
+                        <span>SASU (rémunération en salaire)</span>
+                        <span class="calc-result-value" id="st-result-sasu-sal">0 €</span>
+                    </div>
+                    <p class="calc-result-hint" id="st-detail-sasu-sal"></p>
+                    <div id="st-chart" class="calc-chart-wrap" hidden aria-hidden="true"></div>
+                    <div class="compare-table-wrap" style="margin-top: 1.5rem;">
+                        <table class="compare-table calc-scenario-table" aria-label="Détail simulation par statut">
+                            <thead>
+                                <tr>
+                                    <th>Statut</th>
+                                    <th>CA / brut annuel</th>
+                                    <th>Cotisations / IS</th>
+                                    <th>Impôt</th>
+                                    <th>Net annuel</th>
+                                    <th>Net mensuel</th>
+                                </tr>
+                            </thead>
+                            <tbody id="st-sim-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+
+            <h2>Tableau comparatif : droits, protection et formalités</h2>
+            <p>Au-delà du revenu net, le choix de statut impacte ta protection sociale, ta responsabilité patrimoniale et tes obligations administratives.</p>
+            <div class="compare-table-wrap">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Critère</th>
+                            <th>Salarié</th>
+                            <th>Micro-entreprise</th>
+                            <th>EI / EURL IR</th>
+                            <th>SASU / EURL IS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Assurance chômage</td>
+                            <td>Oui (Pôle emploi)</td>
+                            <td>Non (sauf option volontaire)</td>
+                            <td>Non</td>
+                            <td>Non (président non salarié)</td>
+                        </tr>
+                        <tr>
+                            <td>Congés payés</td>
+                            <td>Oui (5 semaines/an)</td>
+                            <td>Non</td>
+                            <td>Non</td>
+                            <td>Non</td>
+                        </tr>
+                        <tr>
+                            <td>Retraite</td>
+                            <td>Régime général + complémentaire</td>
+                            <td>Base TNS allégée</td>
+                            <td>TNS (cotisations sur bénéfice)</td>
+                            <td>Assimilé salarié si rémunération</td>
+                        </tr>
+                        <tr>
+                            <td>Plafond d'activité</td>
+                            <td>Non applicable</td>
+                            <td>77 700 € services / 188 700 € vente</td>
+                            <td>Aucun plafond</td>
+                            <td>Aucun plafond</td>
+                        </tr>
+                        <tr>
+                            <td>Responsabilité</td>
+                            <td>Limitée (employeur)</td>
+                            <td>Patrimoine perso (sauf option EIRL)</td>
+                            <td>Patrimoine perso (sauf EIRL)</td>
+                            <td>Limitée aux apports</td>
+                        </tr>
+                        <tr>
+                            <td>Comptabilité</td>
+                            <td>Non (fiche de paie)</td>
+                            <td>Livre des recettes</td>
+                            <td>Comptabilité réelle obligatoire</td>
+                            <td>Comptabilité réelle + bilan</td>
+                        </tr>
+                        <tr>
+                            <td>Création</td>
+                            <td>Contrat de travail</td>
+                            <td>Gratuit en ligne (URSSAF)</td>
+                            <td>Immatriculation greffe si société</td>
+                            <td>~200 à 500 € (greffe + annonces)</td>
+                        </tr>
+                        <tr>
+                            <td>Coût comptable annuel</td>
+                            <td>Inclus employeur</td>
+                            <td>0 à 500 €</td>
+                            <td>800 à 2 000 €</td>
+                            <td>1 200 à 3 000 €</td>
+                        </tr>
+                        <tr>
+                            <td>Impôt sur les bénéfices</td>
+                            <td>IR sur salaire net imposable</td>
+                            <td>Micro-fiscal (abattement forfaitaire)</td>
+                            <td>IR sur bénéfice réel</td>
+                            <td>IS 15 % puis 25 % (PME)</td>
+                        </tr>
+                        <tr>
+                            <td>TVA</td>
+                            <td>Non applicable</td>
+                            <td>Franchise possible (seuils 2026)</td>
+                            <td>Réel normal ou simplifié</td>
+                            <td>Réel normal ou simplifié</td>
+                        </tr>
+                        <tr>
+                            <td>Levée de fonds / associés</td>
+                            <td>Non</td>
+                            <td>Non (entreprise individuelle)</td>
+                            <td>EURL possible (associé unique)</td>
+                            <td>SASU évolutive en SAS</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Comparatif fiscal et cotisations sociales</h2>
+            <div class="compare-table-wrap">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Statut</th>
+                            <th>Base de cotisations</th>
+                            <th>Taux indicatif 2026</th>
+                            <th>Impôt sur le revenu</th>
+                            <th>Profil type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Salarié cadre / non-cadre</td>
+                            <td>Salaire brut</td>
+                            <td>22 à 25 % salarial (+ part patronale)</td>
+                            <td>Barème progressif sur net imposable</td>
+                            <td>Activité salariée classique</td>
+                        </tr>
+                        <tr>
+                            <td>Micro-entreprise BIC services</td>
+                            <td>Chiffre d'affaires</td>
+                            <td>21,2 % du CA (12,3 % vente)</td>
+                            <td>Abattement 50 % puis barème</td>
+                            <td>Freelance débutant, side project</td>
+                        </tr>
+                        <tr>
+                            <td>Micro-entreprise BNC</td>
+                            <td>Chiffre d'affaires</td>
+                            <td>25,6 % du CA</td>
+                            <td>Abattement 34 % puis barème</td>
+                            <td>Consultant, profession libérale</td>
+                        </tr>
+                        <tr>
+                            <td>EI / EURL à l'IR</td>
+                            <td>Bénéfice imposable</td>
+                            <td>~42 % TNS sur bénéfice</td>
+                            <td>Barème sur bénéfice après cotisations</td>
+                            <td>CA &gt; plafond micro, charges élevées</td>
+                        </tr>
+                        <tr>
+                            <td>SASU à l'IS (dividendes)</td>
+                            <td>Bénéfice société</td>
+                            <td>IS 15/25 % sur bénéfice</td>
+                            <td>Flat tax 30 % sur dividendes versés</td>
+                            <td>Optimisation si bénéfices conservés</td>
+                        </tr>
+                        <tr>
+                            <td>SASU (rémunération salaire)</td>
+                            <td>Salaire brut président</td>
+                            <td>~65 à 75 % coût total employeur</td>
+                            <td>Barème sur salaire net</td>
+                            <td>Protection sociale proche du salarié</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Quand choisir quel statut en 2026</h2>
+            <h3>Reste salarié si...</h3>
+            <ul>
+                <li>Tu privilégies la sécurité de l'emploi, les congés payés et l'assurance chômage</li>
+                <li>Tu ne veux pas gérer la comptabilité ni la prospection commerciale</li>
+                <li>Ton employeur finance ta formation et tes outils</li>
+            </ul>
+            <h3>Choisis la micro-entreprise si...</h3>
+            <ul>
+                <li>Tu démarres une activité complémentaire ou un test marché</li>
+                <li>Ton CA reste sous les plafonds (77 700 euros en services)</li>
+                <li>Tu veux une gestion administrative minimale</li>
+            </ul>
+            <h3>Passe en EURL ou SASU si...</h3>
+            <ul>
+                <li>Tu dépasses les plafonds micro ou tu as des charges professionnelles importantes</li>
+                <li>Tu veux limiter ta responsabilité patrimoniale</li>
+                <li>Tu envisages de t'associer ou de lever des fonds à terme</li>
+            </ul>
+
+            <h2>Ce qui change en juillet 2026 pour les créateurs</h2>
+            <p>Depuis le 1er juillet 2026, l'exonération Acre pour les nouvelles micro-entreprises et sociétés est passée de 50 % à 25 % sur les cotisations sociales la première année. Cela réduit l'avantage fiscal initial pour les créateurs, mais la micro-entreprise reste le statut le plus accessible pour démarrer.</p>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-micro-entreprise">Calculateur micro-entreprise détaillé</a>
+                <a href="/outils/calculateur-salaire-brut-net">Salaire brut en net</a>
+                <a href="/outils/calculateur-impot-revenu">Simulateur impôt sur le revenu</a>
+                <a href="/outils/salaire-et-travail">Hub salaire et travail</a>
+                <a href="/#hero">Comprendre la finance avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.autoentrepreneur.urssaf.fr/portail/accueil/une-question/toutes-les-fiches-pratiques/fiche-pratique-micro-entrepreneur-2026.html" rel="noopener noreferrer" target="_blank">Urssaf, fiche pratique micro-entrepreneur 2026</a></li>
+                    <li><a href="https://mon-entreprise.urssaf.fr/simulateurs/sasu-vs-ei" rel="noopener noreferrer" target="_blank">Urssaf Mon Entreprise, simulateur SASU vs EI</a></li>
+                    <li><a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23264" rel="noopener noreferrer" target="_blank">Service-public.fr, régimes sociaux des travailleurs indépendants</a></li>
+                    <li><a href="https://www.economie.gouv.fr/entreprises/creation-entreprise-statuts" rel="noopener noreferrer" target="_blank">Ministère de l'Économie, choix du statut juridique</a></li>
+                    <li><a href="https://www.journaldeleconomie.fr/juillet-2026-ce-qui-change/" rel="noopener noreferrer" target="_blank">Journal de l'Économie, réforme Acre juillet 2026</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../charts.js"></script>
+    <script src="../calculators.js"></script>
+</body>
+</html>

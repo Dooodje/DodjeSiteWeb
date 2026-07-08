@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur inflation | Pouvoir d'achat France 2026</title>
+    <meta name="description" content="Calcule l'érosion de ton pouvoir d'achat avec l'inflation. Taux Insee de 1,8 % en juin 2026. Simulateur pédagogique gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-inflation">
+    <meta property="og:title" content="Calculateur d'inflation">
+    <meta property="og:description" content="Estime la perte de pouvoir d'achat de ton épargne face à l'inflation en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-inflation">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur d'inflation Dodje",
+      "description": "Simulateur de l'érosion du pouvoir d'achat face à l'inflation en France.",
+      "url": "https://dodje.fr/outils/calculateur-inflation",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" }
+    }
+    </script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel est le taux d'inflation en France en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": "L'Insee a publié une inflation de 1,8 % sur un an en juin 2026."}}, {"@type": "Question", "name": "Comment l'inflation affecte mon épargne ?", "acceptedAnswer": {"@type": "Answer", "text": "Si le rendement de ton placement est inférieur à l'inflation, ton pouvoir d'achat réel diminue même si le montant nominal reste stable."}}, {"@type": "Question", "name": "Montant mensuel ou annuel dans le calculateur ?", "acceptedAnswer": {"@type": "Answer", "text": "Tu peux saisir un montant annuel ou mensuel pour voir l'érosion en équivalent mensuel et annuel."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Pouvoir d'achat</p>
+            <h1>Calculateur d'inflation</h1>
+            <p class="content-lead">L'inflation réduit silencieusement le pouvoir d'achat de ton épargne. Ce simulateur te montre combien vaudront réellement tes euros dans le futur, selon un taux d'inflation que tu peux ajuster.</p>
+
+            <div class="content-note">
+                <p><strong>Contexte :</strong> l'Insee a publié une inflation de 1,8 % sur un an en juin 2026. Ce taux est prérempli par défaut, mais tu peux le modifier pour tester d'autres scénarios.</p>
+            </div>
+
+            <form id="calc-inflation" class="calc-widget" data-auto-calc="true">
+                <div class="calc-segments" role="group" aria-label="Période du montant">
+                    <label class="calc-segment"><input type="radio" name="montant_periode" value="annuel" checked><span>Montant annuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="montant_periode" value="mensuel"><span>Montant mensuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="inf-montant" id="inf-montant-label">Montant actuel annuel (euros)</label>
+                        <input type="number" id="inf-montant" name="montant" value="10000" min="0" step="100">
+                    </div>
+                    <div class="calc-field">
+                        <label for="inf-taux">Taux d'inflation annuel (%)</label>
+                        <input type="number" id="inf-taux" name="taux" value="1.8" min="0" max="20" step="0.1">
+                    </div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="inf-annees">Horizon (années)</label>
+                        <input type="number" id="inf-annees" name="annees" value="10" min="1" max="50" step="1">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Calculer le pouvoir d'achat</button>
+                <div id="inf-results" class="calc-results" hidden>
+                    <h3>Résultats estimés</h3>
+                    <div class="calc-result-row">
+                        <span>Pouvoir d'achat futur équivalent</span>
+                        <span class="calc-result-value" id="inf-result-pouvoir">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Perte de pouvoir d'achat estimée</span>
+                        <span class="calc-result-value" id="inf-result-perte">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Montant annuel de référence</span>
+                        <span class="calc-result-value" id="inf-result-montant-a">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Pouvoir d'achat / mois équivalent</span>
+                        <span class="calc-result-value" id="inf-result-pouvoir-m">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Perte / mois équivalent</span>
+                        <span class="calc-result-value" id="inf-result-perte-m">0 €</span>
+                    </div>
+                </div>
+            </form>
+
+            <h2>Comment lire les résultats ?</h2>
+            <p>Le « pouvoir d'achat futur équivalent » indique ce que ton montant actuel vaudra en euros constants d'aujourd'hui après l'effet cumulé de l'inflation. La « perte de pouvoir d'achat » correspond à la différence entre le montant nominal et sa valeur réelle.</p>
+            <p>Exemple : 10 000 euros avec une inflation de 1,8 % par an pendant 10 ans valent environ 8 340 euros en pouvoir d'achat d'aujourd'hui. Tu perds ainsi environ 1 660 euros de valeur réelle sans que le chiffre sur ton compte ne bouge.</p>
+
+            <h2>Inflation en France en juin 2026</h2>
+            <p>Selon l'Insee, l'inflation annuelle s'établit à 1,8 % en juin 2026. Après un pic en 2022-2023, la hausse des prix ralentit mais reste positive. Cela signifie que la monnaie perd encore du pouvoir d'achat, même si le rythme est moins intense qu'il y a quelques années.</p>
+
+            <h2>Impact sur l'épargne réglementée</h2>
+            <p>Le Livret A affiche un taux brut de 1,50 % depuis le 1er février 2026. Tant que l'inflation dépasse ce taux, l'épargne placée sur un livret réglementé voit son rendement réel rester légèrement négatif. Une hausse du taux est attendue au 1er août 2026, mais le rendement réel dépendra du niveau d'inflation à cette date.</p>
+
+            <h2>Comment se protéger de l'inflation ?</h2>
+            <ul>
+                <li>Placer une partie de son épargne sur des supports dont le rendement dépasse l'inflation sur le long terme</li>
+                <li>Diversifier entre épargne de précaution (livrets) et investissements (actions, ETF, immobilier)</li>
+                <li>Éviter de laisser de grosses sommes dormir sur un compte courant sans rémunération</li>
+                <li>Réévaluer régulièrement son budget face à la hausse des prix</li>
+            </ul>
+
+            <h2>Questions fréquentes</h2>
+            <h3>Inflation en France 2026 ?</h3>
+            <p>1,8 % sur un an en juin selon l'Insee.</p>
+            <h3>Impact sur l'épargne ?</h3>
+            <p>Rendement &lt; inflation = pouvoir d'achat réel en baisse.</p>
+            <h3>Mensuel ou annuel ?</h3>
+            <p>Choisis la période du montant ; résultats en M et A.</p>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-livret-a">Calculateur Livret A</a>
+                <a href="/outils/calculateur-interets-composes">Calculateur d'intérêts composés</a>
+                <a href="/#hero">Comprendre l'épargne avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.insee.fr/fr/statistiques" rel="noopener noreferrer" target="_blank">Insee, indice des prix à la consommation (inflation 1,8 % en juin 2026)</a></li>
+                    <li><a href="https://actu.orange.fr/france/le-ministre-de-l-economie-annonce-une-hausse-du-taux-du-livret-a-magic-CNT000002qfU5e.html" rel="noopener noreferrer" target="_blank">Orange Actu, contexte inflation et taux Livret A 2026</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>

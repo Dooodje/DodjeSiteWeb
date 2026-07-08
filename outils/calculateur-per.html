@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur PER 2026 | Plan épargne retraite France</title>
+    <meta name="description" content="Simule ton Plan d'Épargne Retraite (PER) en France : plafond de déduction, économie d'impôt, capital estimé et versements. Outil pédagogique gratuit 2026.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-per">
+    <meta property="og:title" content="Calculateur PER 2026">
+    <meta property="og:description" content="Estime ton plafond de déduction, ton économie d'impôt et le capital de ton Plan d'Épargne Retraite en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-per">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur PER Dodje",
+      "description": "Simulateur pédagogique du Plan d'Épargne Retraite en France : plafond, déduction fiscale et projection de capital.",
+      "url": "https://dodje.fr/outils/calculateur-per",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" },
+      "publisher": { "@id": "https://dodje.fr/#organization" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quel est le plafond de déduction du PER en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le plafond annuel de déduction est de 10 % des revenus professionnels de l'année précédente, dans la limite de 35 194 euros en 2026. Les revenus pris en compte incluent salaires, BIC, BNC et certaines pensions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le PER est-il bloqué jusqu'à la retraite ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En principe oui, les fonds sont bloqués jusqu'à la retraite. Des cas de déblocage anticipé existent toutefois : invalidité, surendettement, achat de résidence principale (PER individuel uniquement) ou expiration des droits au chômage."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Épargne retraite France</p>
+            <h1>Calculateur PER 2026</h1>
+            <p class="content-lead">Le Plan d'Épargne Retraite (PER) permet de constituer une épargne long terme tout en réduisant son impôt sur le revenu. Ce simulateur estime ton plafond de déduction, ton économie d'impôt et la projection de ton capital à la retraite.</p>
+
+            <div class="content-note">
+                <p><strong>Information :</strong> ce calculateur ne modélise pas les frais de gestion du contrat, la fiscalité au moment du retrait ni les options de sortie en rente ou en capital. Il sert à comprendre le mécanisme de déduction et de capitalisation.</p>
+            </div>
+
+            <form id="calc-per" class="calc-widget" data-auto-calc="true">
+                <div class="calc-segments" role="group" aria-label="Revenus">
+                    <label class="calc-segment"><input type="radio" name="revenu_periode" value="annuel" checked><span>Revenus annuels</span></label>
+                    <label class="calc-segment"><input type="radio" name="revenu_periode" value="mensuel"><span>Revenus mensuels</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="per-revenu" id="per-revenu-label">Revenus professionnels annuels (€)</label>
+                        <input type="number" id="per-revenu" name="revenu" value="45000" min="0" step="1000">
+                    </div>
+                    <div class="calc-field">
+                        <label for="per-tmi">Tranche marginale d'imposition</label>
+                        <select id="per-tmi" name="tmi">
+                            <option value="0">0 %</option>
+                            <option value="11">11 %</option>
+                            <option value="30" selected>30 %</option>
+                            <option value="41">41 %</option>
+                            <option value="45">45 %</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="calc-segments" role="group" aria-label="Versements">
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="annuel" checked><span>Versement annuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="mensuel"><span>Versement mensuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="per-versement" id="per-versement-label">Versement annuel souhaité (€)</label>
+                        <input type="number" id="per-versement" name="versement" value="4500" min="0" step="100">
+                    </div>
+                    <div class="calc-field">
+                        <label for="per-duree">Durée d'épargne (années)</label>
+                        <input type="number" id="per-duree" name="duree" value="20" min="1" max="40" step="1">
+                    </div>
+                </div>
+                <div class="calc-field">
+                    <label for="per-taux">Rendement annuel estimé (%)</label>
+                    <input type="number" id="per-taux" name="taux" value="3" min="0" max="10" step="0.5">
+                </div>
+                <button type="submit" class="calc-btn">Simuler mon PER</button>
+                <div id="per-results" class="calc-results" hidden>
+                    <h3>Résultats estimés</h3>
+                    <div class="calc-result-row"><span>Plafond déduction max (annuel)</span><span class="calc-result-value" id="per-result-plafond-max">0 €</span></div>
+                    <div class="calc-result-row calc-result-highlight"><span>Versement déductible (annuel)</span><span class="calc-result-value" id="per-result-plafond">0 €</span></div>
+                    <div class="calc-result-row"><span>Versement déductible (mensuel)</span><span class="calc-result-value" id="per-result-plafond-m">0 €</span></div>
+                    <div class="calc-result-row calc-result-highlight"><span>Économie d'impôt (annuelle)</span><span class="calc-result-value" id="per-result-economie">0 €</span></div>
+                    <div class="calc-result-row"><span>Économie d'impôt (mensuelle)</span><span class="calc-result-value" id="per-result-economie-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Coût réel après déduction</span><span class="calc-result-value" id="per-result-cout-net">0 €</span></div>
+                    <div class="calc-result-row calc-result-highlight"><span>Capital estimé à terme</span><span class="calc-result-value" id="per-result-capital">0 €</span></div>
+                    <div class="calc-result-row"><span>Total des versements</span><span class="calc-result-value" id="per-result-verse">0 €</span></div>
+                    <div class="calc-result-row"><span>Plus-values estimées</span><span class="calc-result-value" id="per-result-gains">0 €</span></div>
+                </div>
+            </form>
+
+            <h2>Le PER en France en 2026</h2>
+            <p>Le Plan d'Épargne Retraite a remplacé en 2019 les anciens dispositifs (PERP, Madelin, Perco, Article 83). Il existe en trois formes : PER individuel (ouvert par l'épargnant), PER collectif (proposé par l'employeur) et PER obligatoire (créé par accord d'entreprise).</p>
+            <p>L'atout principal du PER individuel : chaque versement est déductible de l'impôt sur le revenu dans la limite d'un plafond annuel. En contrepartie, l'épargne est bloquée jusqu'à la retraite, sauf cas de déblocage anticipé.</p>
+
+            <h2>Plafond de déduction : 10 % des revenus, max 35 194 euros</h2>
+            <p>En 2026, le plafond de déduction annuelle est calculé ainsi :</p>
+            <ul>
+                <li><strong>10 % des revenus professionnels nets</strong> de l'année N-1 (salaires, BIC, BNC, pensions)</li>
+                <li><strong>Plafond absolu :</strong> 35 194 euros par an</li>
+                <li><strong>Plancher :</strong> 4 399 euros minimum si tes revenus dépassent ce seuil</li>
+            </ul>
+            <p>Exemple : avec 45 000 euros de revenus, ton plafond est de 4 500 euros (10 % de 45 000). Avec 400 000 euros de revenus, le plafond est plafonné à 35 194 euros.</p>
+            <p>Les plafonds non utilisés peuvent être reportés sur les 3 années suivantes.</p>
+
+            <h2>Économie d'impôt immédiate</h2>
+            <p>Chaque euro versé sur le PER (dans la limite du plafond) réduit ton revenu imposable. L'économie dépend de ta tranche marginale d'imposition (TMI) :</p>
+            <ul>
+                <li>TMI 11 % : 100 euros versés = 11 euros d'économie</li>
+                <li>TMI 30 % : 100 euros versés = 30 euros d'économie</li>
+                <li>TMI 41 % : 100 euros versés = 41 euros d'économie</li>
+            </ul>
+            <p>L'économie est immédiate : elle se traduit par une baisse de l'impôt à payer ou une augmentation du remboursement lors de la déclaration de revenus.</p>
+
+            <h2>Fiscalité au moment du retrait</h2>
+            <p>Au moment de la retraite, tu choisis entre une sortie en capital (total ou fractionné) ou en rente viagère. Les versements déduits sont réintégrés dans le revenu imposable, mais tu bénéficies d'un abattement de 10 % (plafonné). Les plus-values sont soumises aux prélèvements sociaux (18,6 % en 2026).</p>
+            <p>La sortie en rente offre une fiscalité plus avantageuse sur les gains, mais l'épargne est transformée en revenus réguliers à vie.</p>
+
+            <h2>PER ou PEA : lequel choisir ?</h2>
+            <p>Le PER cible la retraite avec une déduction immédiate à l'entrée. Le PEA cible l'investissement en bourse avec une exonération d'impôt sur le revenu après 5 ans. Les deux ne répondent pas aux mêmes objectifs. Consulte notre <a href="/guides/per-vs-pea-2026">comparatif PER vs PEA</a> pour approfondir.</p>
+
+            <div class="content-links">
+                <a href="/guides/per-vs-pea-2026">PER vs PEA : guide comparatif</a>
+                <a href="/guides/donnees-finance-france">Données finance France</a>
+                <a href="/outils/calculateur-impot-revenu">Simulateur impôt</a>
+                <a href="/outils/calculateur-assurance-vie">Calculateur assurance vie</a>
+                <a href="/outils/epargne">Hub épargne</a>
+                <a href="/#hero">Apprendre avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.service-public.fr/particuliers/vosdroits/F34982" rel="noopener noreferrer" target="_blank">Service-public.fr, Plan d'Épargne Retraite (PER)</a></li>
+                    <li><a href="https://www.economie.gouv.fr/particuliers/preparer-ma-retraite/plan-depargne-retraite-per" rel="noopener noreferrer" target="_blank">Ministère de l'Économie, le PER</a></li>
+                    <li><a href="https://www.impots.gouv.fr/particulier/les-produits-depargne-retraite" rel="noopener noreferrer" target="_blank">impots.gouv.fr, produits d'épargne retraite</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../calculators.js"></script>
+    <script>
+    (function(){
+      var form = document.getElementById('calc-per');
+      if (!form) return;
+      function syncLabels(){
+        var rp = form.querySelector('[name=revenu_periode]:checked');
+        var vp = form.querySelector('[name=versement_periode]:checked');
+        var rl = document.getElementById('per-revenu-label');
+        var vl = document.getElementById('per-versement-label');
+        if (rl) rl.textContent = rp && rp.value === 'mensuel' ? 'Revenus professionnels mensuels (€)' : 'Revenus professionnels annuels (€)';
+        if (vl) vl.textContent = vp && vp.value === 'mensuel' ? 'Versement mensuel souhaité (€)' : 'Versement annuel souhaité (€)';
+      }
+      form.querySelectorAll('[name=revenu_periode],[name=versement_periode]').forEach(function(el){ el.addEventListener('change', syncLabels); });
+    })();
+    </script>
+</body>
+</html>

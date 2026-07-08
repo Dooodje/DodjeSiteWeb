@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur Livret A 2026 | Simulation intérêts France</title>
+    <meta name="description" content="Simule les intérêts de ton Livret A en France : taux 1,50 % au 1er août 2026, plafond 22 950 euros, versements mensuels. Outil gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-livret-a">
+    <meta property="og:title" content="Calculateur Livret A 2026">
+    <meta property="og:description" content="Estime les intérêts de ton Livret A avec le taux réglementé français en vigueur.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-livret-a">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur Livret A Dodje",
+      "description": "Simulateur pédagogique des intérêts du Livret A en France.",
+      "url": "https://dodje.fr/outils/calculateur-livret-a",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" },
+      "publisher": { "@id": "https://dodje.fr/#organization" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quel est le taux du Livret A en juillet 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le taux du Livret A est de 1,50 % brut par an depuis le 1er février 2026, selon les données publiées par la Banque de France et reprises par les établissements bancaires."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel est le plafond du Livret A ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le plafond des versements sur un Livret A est de 22 950 euros. Les intérêts capitalisés peuvent faire dépasser ce montant sur le solde total."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Calculateur France</p>
+            <h1>Calculateur Livret A</h1>
+            <p class="content-lead">Estime la croissance de ton Livret A avec le taux réglementé français. Le simulateur intègre le plafond de versement et une capitalisation annuelle simplifiée.</p>
+
+            <div class="content-note">
+                <p><strong>Information :</strong> le gouvernement a confirmé une hausse des taux des livrets réglementés au 1er août 2026. Le niveau exact sera fixé à la mi-juillet. Ce calculateur te permet de tester différents scénarios.</p>
+            </div>
+
+            <form id="calc-livret-a" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="la-capital">Capital initial (€)</label>
+                        <input type="number" id="la-capital" name="capital" value="5000" min="0" step="100">
+                    </div>
+                    <div class="calc-field">
+                        <label for="la-versement" id="la-versement-label">Versement mensuel (€)</label>
+                        <input type="number" id="la-versement" name="versement" value="100" min="0" step="10">
+                    </div>
+                </div>
+                <div class="calc-segments" role="group" aria-label="Période des versements">
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="mensuel" checked><span>Mensuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="annuel"><span>Annuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="la-duree">Durée (années)</label>
+                        <input type="number" id="la-duree" name="duree" value="5" min="1" max="30" step="1">
+                    </div>
+                    <div class="calc-field">
+                        <label for="la-taux">Taux annuel (%)</label>
+                        <input type="number" id="la-taux" name="taux" value="1.50" min="0" max="10" step="0.05">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Calculer</button>
+                <div id="la-results" class="calc-results" hidden>
+                    <h3>Résultats estimés</h3>
+                    <div class="calc-result-row calc-result-highlight"><span>Capital final</span><span class="calc-result-value" id="la-result-capital">0 €</span></div>
+                    <div class="calc-result-row"><span>Versements totaux</span><span class="calc-result-value" id="la-result-versements">0 €</span></div>
+                    <div class="calc-result-row"><span>Intérêts cumulés</span><span class="calc-result-value" id="la-result-interets">0 €</span></div>
+                    <div class="calc-result-row"><span>Versement / mois</span><span class="calc-result-value" id="la-result-versement-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Versement / an</span><span class="calc-result-value" id="la-result-versement-a">0 €</span></div>
+                    <div class="calc-result-row"><span>Intérêts moyens / mois</span><span class="calc-result-value" id="la-result-interets-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Intérêts estimés / an (fin)</span><span class="calc-result-value" id="la-result-interets-a">0 €</span></div>
+                    <div class="calc-result-row"><span>Plafond versements</span><span class="calc-result-value" id="la-result-plafond">22 950 €</span></div>
+                    <p id="la-plafond-hint" class="calc-result-hint" hidden>Le plafond de versement (22 950 €) est atteint : les versements supplémentaires ne sont plus pris en compte.</p>
+                    <div id="la-chart" class="calc-chart-wrap" hidden aria-hidden="true"></div>
+                </div>
+            </form>
+
+            <h2>Comment fonctionne le Livret A en France</h2>
+            <p>Le Livret A est un produit d'épargne réglementé, exonéré d'impôt sur le revenu et de prélèvements sociaux. Son taux est identique dans toutes les banques françaises. Depuis le 1er février 2026, il est fixé à 1,50 %, après une baisse depuis 1,70 % au second semestre 2025.</p>
+            <p>Les intérêts sont calculés selon la règle des quinzaines : un dépôt effectué avant le 1er ou le 16 du mois commence à produire des intérêts à partir de la quinzaine suivante. Les intérêts sont ajoutés au capital chaque 31 décembre.</p>
+
+            <h2>Ce qui change en août 2026</h2>
+            <p>Le 30 juin 2026, Roland Lescure, ministre de l'Économie, a confirmé une revalorisation du Livret A au 1er août. Selon les analyses publiées par <a href="https://www.moneyvox.fr/livret-a/actualites/109577/on-est-en-train-de-finaliser-les-calculs-suspense-pour-le-futur-taux-du-livret-a" rel="noopener noreferrer" target="_blank">MoneyVox</a>, le taux pourrait se situer entre 1,70 % et 1,80 % si la formule légale est appliquée strictement.</p>
+
+            <div class="content-links">
+                <a href="/guides/top-5-livrets-epargne-2026">Top 5 livrets 2026</a>
+                <a href="/actualites/taux-livret-a-hausse-aout-2026">Actu hausse Livret A août</a>
+                <a href="/guides/epargne-de-precaution-france">Épargne de précaution</a>
+                <a href="/guides/donnees-finance-france">Données finance France</a>
+                <a href="/outils/simulateur-projection-patrimoine-2026">Projection patrimoine</a>
+                <a href="/#hero">Apprendre l'épargne avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.boursorama.com/epargne/simulateurs/simulateur-livret-a" rel="noopener noreferrer" target="_blank">Boursorama, simulateur et règles du Livret A (taux 1,50 % au 1er février 2026)</a></li>
+                    <li><a href="https://www.toutsurmesfinances.com/placements/taux-livret-a.html" rel="noopener noreferrer" target="_blank">ToutSurMesFinances, historique et révision des taux 2026</a></li>
+                    <li><a href="https://actu.orange.fr/france/le-ministre-de-l-economie-annonce-une-hausse-du-taux-du-livret-a-magic-CNT000002qfU5e.html" rel="noopener noreferrer" target="_blank">Orange Actu, annonce de hausse du taux par le ministre de l'Économie (30 juin 2026)</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../charts.js"></script>
+    <script src="../calculators.js"></script>
+    <script>
+    (function(){
+      var form = document.getElementById('calc-livret-a');
+      if (!form) return;
+      function syncLabel(){
+        var p = form.querySelector('[name=versement_periode]:checked');
+        var l = document.getElementById('la-versement-label');
+        if (l) l.textContent = p && p.value === 'annuel' ? 'Versement annuel (€)' : 'Versement mensuel (€)';
+      }
+      form.querySelectorAll('[name=versement_periode]').forEach(function(el){ el.addEventListener('change', syncLabel); });
+    })();
+    </script>
+</body>
+</html>

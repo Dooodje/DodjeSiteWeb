@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur prêt immobilier 2026 | Mensualité et coût total</title>
+    <meta name="description" content="Simule ta mensualité de crédit immobilier en France : montant emprunté, taux, durée, assurance. Coût total et intérêts calculés. Barème juillet 2026.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-pret-immobilier">
+    <meta property="og:title" content="Calculateur prêt immobilier 2026">
+    <meta property="og:description" content="Estime ta mensualité, les intérêts et le coût total de ton crédit immo.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-pret-immobilier">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur prêt immobilier Dodje","url":"https://dodje.fr/outils/calculateur-pret-immobilier","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment est calculée la mensualité d'un prêt immobilier ?","acceptedAnswer":{"@type":"Answer","text":"La mensualité suit la formule des annuités constantes : capital × taux mensuel / (1 − (1 + taux)^−nb mois). Le simulateur Dodje intègre le capital emprunté, le taux annuel et la durée en années."}},{"@type":"Question","name":"Quel taux utiliser en juillet 2026 ?","acceptedAnswer":{"@type":"Answer","text":"Les taux moyens crédit immobilier tournent autour de 3,3 % sur 20-25 ans en juillet 2026. Ajuste selon ton profil et ta banque."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar visible"><div class="nav-container"><div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div><div class="nav-menu"><a href="/outils" class="nav-link">Outils</a><a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a></div></div></nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Crédit immobilier</p>
+            <h1>Calculateur <span class="legal-title-accent">prêt immobilier</span></h1>
+            <p class="content-lead">Estime ta mensualité de crédit, le coût des intérêts et le total remboursé sur la durée du prêt.</p>
+
+            <form id="calc-pret-immo" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="pi-montant">Montant emprunté (€)</label>
+                        <input type="number" id="pi-montant" name="montant" value="250000" min="0" step="5000">
+                    </div>
+                    <div class="calc-field">
+                        <label for="pi-taux">Taux d'intérêt annuel (%)</label>
+                        <input type="number" id="pi-taux" name="taux" value="3.31" min="0" max="10" step="0.05">
+                    </div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="pi-duree">Durée (années)</label>
+                        <input type="number" id="pi-duree" name="duree" value="20" min="5" max="25" step="1">
+                    </div>
+                    <div class="calc-field">
+                        <label for="pi-assurance">Assurance emprunteur (€/mois)</label>
+                        <input type="number" id="pi-assurance" name="assurance" value="30" min="0" step="5">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Calculer ma mensualité</button>
+                <div id="pi-results" class="calc-results" hidden>
+                    <h3>Résultat</h3>
+                    <div class="calc-result-row calc-result-highlight"><span>Mensualité crédit (hors assurance)</span><span class="calc-result-value" id="pi-result-mensualite">0 €</span></div>
+                    <div class="calc-result-row"><span>Assurance emprunteur</span><span class="calc-result-value" id="pi-result-assurance">0 €</span></div>
+                    <div class="calc-result-row calc-result-highlight"><span>Mensualité totale</span><span class="calc-result-value" id="pi-result-total-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Intérêts totaux</span><span class="calc-result-value" id="pi-result-interets">0 €</span></div>
+                    <div class="calc-result-row"><span>Coût total remboursé</span><span class="calc-result-value" id="pi-result-cout-total">0 €</span></div>
+                </div>
+            </form>
+
+            <h2>À compléter avec</h2>
+            <p>Les frais de notaire (7-8 % dans l'ancien), le taux d'endettement HCSF (35 %) et ton apport personnel ne sont pas inclus ici. Utilise le <a href="/outils/calculateur-capacite-emprunt">calculateur capacité d'emprunt</a> pour savoir combien tu peux emprunter.</p>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-capacite-emprunt">Capacité d'emprunt</a>
+                <a href="/outils/calculateur-rendement-locatif">Rendement locatif</a>
+                <a href="/guides/donnees-finance-france">Données finance France</a>
+                <a href="/guides/prix-metre-carre-investissement-locatif-france-2026">Baromètre prix m²</a>
+                <a href="/guides/premier-achat-immobilier-france-2026">Premier achat immo</a>
+                <a href="/actualites/taux-credit-immobilier-juillet-2026">Taux crédit juillet 2026</a>
+            </div>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>

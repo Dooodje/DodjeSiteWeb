@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de budget mensuel gratuit | France 2026</title>
+    <meta name="description" content="Calcule ton budget mensuel en France avec graphique donut et règle 50/30/20 : revenus, loyer, courses, transport, loisirs. Visualise ton taux d'épargne.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-budget-mensuel">
+    <meta property="og:title" content="Calculateur de budget mensuel">
+    <meta property="og:description" content="Estime tes dépenses et le montant disponible chaque mois en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-budget-mensuel">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur de budget mensuel Dodje",
+      "description": "Outil gratuit pour estimer un budget personnel mensuel en France.",
+      "url": "https://dodje.fr/outils/calculateur-budget-mensuel",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" }
+    }
+    </script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Comment calculer son reste à vivre ?", "acceptedAnswer": {"@type": "Answer", "text": "Soustrais tes dépenses fixes (loyer, transport, courses) de tes revenus nets mensuels. Le simulateur Dodje affiche le reste à vivre et le taux d'épargne potentiel."}}, {"@type": "Question", "name": "Quel taux d'épargne viser en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": "Les experts recommandent 10 à 20 % des revenus nets pour l'épargne de précaution et les projets, selon ta situation."}}, {"@type": "Question", "name": "Budget 50/30/20 : comment l'appliquer ?", "acceptedAnswer": {"@type": "Answer", "text": "50 % besoins essentiels, 30 % loisirs, 20 % épargne et remboursements. Ajuste selon ton loyer et tes charges fixes."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Budget France</p>
+            <h1>Calculateur de budget mensuel</h1>
+            <p class="content-lead">Répartis tes revenus par grandes catégories de dépenses et vois immédiatement ce qu'il te reste en fin de mois. Premier pas avant d'épargner ou d'investir.</p>
+
+            <form id="calc-budget" class="calc-widget" data-auto-calc="true">
+                <div class="calc-field">
+                    <label for="bg-revenus">Revenus nets mensuels (euros)</label>
+                    <input type="number" id="bg-revenus" name="revenus" value="2200" min="0" step="50">
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="bg-loyer">Loyer et charges (euros)</label>
+                        <input type="number" id="bg-loyer" name="loyer" value="750" min="0" step="10">
+                    </div>
+                    <div class="calc-field">
+                        <label for="bg-courses">Courses et alimentation (euros)</label>
+                        <input type="number" id="bg-courses" name="courses" value="350" min="0" step="10">
+                    </div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="bg-transport">Transport (euros)</label>
+                        <input type="number" id="bg-transport" name="transport" value="80" min="0" step="10">
+                    </div>
+                    <div class="calc-field">
+                        <label for="bg-loisirs">Loisirs et sorties (euros)</label>
+                        <input type="number" id="bg-loisirs" name="loisirs" value="150" min="0" step="10">
+                    </div>
+                </div>
+                <div class="calc-field">
+                    <label for="bg-autres">Autres dépenses (euros)</label>
+                    <input type="number" id="bg-autres" name="autres" value="200" min="0" step="10">
+                </div>
+                <button type="submit" class="calc-btn">Calculer mon budget</button>
+                <div id="bg-results" class="calc-results" hidden>
+                    <h3>Bilan mensuel</h3>
+                    <div class="calc-result-row">
+                        <span>Total des dépenses</span>
+                        <span class="calc-result-value" id="bg-result-depenses">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Taux d'épargne potentiel</span>
+                        <span class="calc-result-value" id="bg-result-taux">0 %</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Reste à vivre</span>
+                        <span class="calc-result-value" id="bg-result-reste">0 €</span>
+                    </div>
+                    <div id="bg-chart-donut" class="calc-chart-wrap" hidden aria-hidden="true"></div>
+                    <div id="bg-chart-bars" class="calc-chart-wrap" hidden aria-hidden="true"></div>
+                </div>
+            </form>
+
+            <h2>Pourquoi faire un budget en France en 2026</h2>
+            <p>Le contexte budgétaire des ménages français est marqué par plusieurs évolutions au cours de l'été 2026. Dès le 1er juillet, le prix repère du gaz a augmenté de 7,4 %, soit environ 2,70 euros de plus sur la facture mensuelle d'un foyer moyen selon la Commission de régulation de l'énergie, comme le rapporte le <a href="https://www.journaldeleconomie.fr/juillet-2026-ce-qui-change/" rel="noopener noreferrer" target="_blank">Journal de l'Économie</a>.</p>
+            <p>À la même date, la réduction de l'exonération Acre pour les nouvelles micro-entreprises est passée de 50 % à 25 %. Pour les indépendants, cela modifie directement le reste disponible chaque mois.</p>
+
+            <h2>Les postes à ne pas oublier</h2>
+            <ul>
+                <li>Abonnements (téléphone, internet, streaming)</li>
+                <li>Assurances (habitation, auto, santé complémentaire)</li>
+                <li>Impôts et charges si tu n'es pas au prélèvement à la source mensuel</li>
+                <li>Épargne de précaution avant tout placement risqué</li>
+            </ul>
+
+            <h2>Questions fréquentes</h2>
+            <h3>Comment calculer son reste à vivre ?</h3>
+            <p>Revenus nets − dépenses fixes = reste à vivre. Le simulateur le calcule automatiquement.</p>
+            <h3>Quel taux d'épargne viser ?</h3>
+            <p>10 à 20 % des revenus nets est un objectif courant en 2026.</p>
+            <h3>Règle 50/30/20 ?</h3>
+            <p>50 % besoins, 30 % loisirs, 20 % épargne — à adapter selon ton loyer.</p>
+
+            <div class="content-links">
+                <a href="/actualites/changements-budget-juillet-2026">Actualité : ce qui change pour ton budget en juillet</a>
+                <a href="/guides/epargne-de-precaution-france">Combien mettre de côté en épargne de précaution</a>
+                <a href="/#hero">Apprendre le budget avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.journaldeleconomie.fr/juillet-2026-ce-qui-change/" rel="noopener noreferrer" target="_blank">Journal de l'Économie, changements budget juillet 2026</a></li>
+                    <li><a href="https://www.service-public.fr/particuliers/vosdroits/F1991" rel="noopener noreferrer" target="_blank">Service-public.fr, comprendre son budget familial</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../charts.js"></script>
+    <script src="../calculators.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projection patrimoine 2026 | Livret A, fonds euros, ETF</title>
+    <meta name="description" content="Compare la projection de ton patrimoine sur 5 à 30 ans : Livret A 1,50 %, fonds euros 2,5 %, ETF 7 %. Versements mensuels ou annuels. Simulateur gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/outils/simulateur-projection-patrimoine-2026">
+    <meta property="og:title" content="Projection patrimoine 2026 — Livret A vs fonds euros vs ETF">
+    <meta property="og:description" content="Visualise la croissance de ton épargne selon 3 profils de rendement en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/simulateur-projection-patrimoine-2026">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur projection patrimoine Dodje","url":"https://dodje.fr/outils/simulateur-projection-patrimoine-2026","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel rendement utiliser pour un ETF monde en projection ?","acceptedAnswer":{"@type":"Answer","text":"Historiquement, un ETF MSCI World a rapporté environ 7 à 8 % par an en moyenne sur le long terme, mais avec une forte volatilité. Ce simulateur utilise 7 % à titre pédagogique, sans garantie future."}},{"@type":"Question","name":"Pourquoi comparer Livret A, fonds euros et ETF ?","acceptedAnswer":{"@type":"Answer","text":"Ce sont les trois piliers de l'épargne française : le Livret A (sécurisé, 1,50 % en 2026), le fonds euros d'assurance vie (sécurisé, ~2,5 %) et les ETF en PEA/CTO (dynamique, rendement variable)."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar visible"><div class="nav-container"><div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div><div class="nav-menu"><a href="/outils/epargne" class="nav-link">Épargne</a><a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a></div></div></nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Projection 2026</p>
+            <h1>Projection <span class="legal-title-accent">patrimoine</span></h1>
+            <p class="content-lead"><strong>En bref :</strong> compare la croissance de ton épargne sur 3 scénarios — Livret A (1,50 %), fonds euros assurance vie (2,5 %), ETF monde (7 %) — avec les mêmes versements.</p>
+
+            <form id="calc-projection-patrimoine" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="pp-capital">Capital initial (€)</label>
+                        <input type="number" id="pp-capital" name="capital" value="5000" min="0" step="500">
+                    </div>
+                    <div class="calc-field">
+                        <label for="pp-versement" id="pp-versement-label">Versement mensuel (€)</label>
+                        <input type="number" id="pp-versement" name="versement" value="150" min="0" step="10">
+                    </div>
+                </div>
+                <div class="calc-segments" role="group" aria-label="Période versements">
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="mensuel" checked><span>Mensuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="annuel"><span>Annuel</span></label>
+                </div>
+                <div class="calc-field">
+                    <label for="pp-duree">Horizon (années)</label>
+                    <input type="number" id="pp-duree" name="duree" value="15" min="1" max="40" step="1">
+                </div>
+                <button type="submit" class="calc-btn">Comparer les scénarios</button>
+                <div id="pp-results" class="calc-results" hidden>
+                    <h3>Capital final par scénario</h3>
+                    <div class="compare-table-wrap">
+                        <table class="compare-table">
+                            <thead><tr><th>Support</th><th>Taux</th><th>Capital final</th><th>Gains</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Livret A</strong></td><td>1,50 %</td><td id="pp-result-livret">0 €</td><td id="pp-result-livret-gains">0 €</td></tr>
+                                <tr><td><strong>Fonds euros</strong></td><td>2,50 %</td><td id="pp-result-fonds">0 €</td><td id="pp-result-fonds-gains">0 €</td></tr>
+                                <tr><td><strong>ETF monde (PEA)</strong></td><td>7,00 %</td><td id="pp-result-etf">0 €</td><td id="pp-result-etf-gains">0 €</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="pp-chart" class="calc-chart-wrap" hidden aria-hidden="true"></div>
+                </div>
+            </form>
+
+            <div class="content-note"><p><strong>Limites :</strong> projection pédagogique sans frais, sans fiscalité ni volatilité. Le Livret A intègre le plafond 22 950 €. Les ETF peuvent perdre de la valeur sur des horizons courts.</p></div>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-livret-a">Calculateur Livret A</a>
+                <a href="/outils/calculateur-per">Calculateur PER</a>
+                <a href="/guides/donnees-finance-france">Données finance France</a>
+                <a href="/guides/assurance-vie-debutant-france-2026">Assurance vie débutant</a>
+            </div>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>
+    <script src="../charts.js"></script>
+    <script src="../calculators.js"></script>
+    <script>
+    (function(){
+      var form = document.getElementById('calc-projection-patrimoine');
+      if (!form) return;
+      form.querySelectorAll('[name=versement_periode]').forEach(function(el){
+        el.addEventListener('change', function(){
+          var l = document.getElementById('pp-versement-label');
+          var p = form.querySelector('[name=versement_periode]:checked');
+          if (l) l.textContent = p && p.value === 'annuel' ? 'Versement annuel (€)' : 'Versement mensuel (€)';
+        });
+      });
+    })();
+    </script>
+</body>
+</html>

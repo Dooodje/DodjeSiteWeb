@@ -1,32 +1,64 @@
+# Dodje - dodje.fr
+# Education financiere France (fr-FR)
+
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://dodje.fr/sitemap.xml
+# Hubs SEO prioritaires
+Allow: /outils/
+Allow: /guides/
+Allow: /actualites/
 
-# Optimisation pour les moteurs de recherche spécifiques
+# Sitemap et fichiers IA
+Sitemap: https://dodje.fr/sitemap.xml
+# LLM context: https://dodje.fr/llms.txt
+# Feed: https://dodje.fr/feed.xml
+
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-# Crawlers IA connus
+# Crawlers IA (indexation autorisee pour visibilite geo France)
 User-agent: GPTBot
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
-# Éviter l'indexation des fichiers système
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Fichiers techniques (non servis en prod, par securite)
 Disallow: /node_modules/
 Disallow: /.git/
-Disallow: /package.json
-Disallow: /package-lock.json
-Disallow: /vite.config.js
+Disallow: /dist/
+Disallow: /src/

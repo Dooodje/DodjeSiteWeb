@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur micro-entreprise 2026 | Cotisations URSSAF France</title>
+    <meta name="description" content="Simule les cotisations et le revenu net en micro-entreprise 2026 : BIC, BNC, vente, ACRE. Plafonds 77 700 € et 188 700 €. Outil gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-micro-entreprise">
+    <meta property="og:title" content="Calculateur micro-entreprise 2026">
+    <meta property="og:description" content="Estime ton revenu net auto-entrepreneur selon le type d'activité et l'ACRE.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-micro-entreprise">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur micro-entreprise Dodje","url":"https://dodje.fr/outils/calculateur-micro-entreprise","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel est le taux de cotisations en micro-entreprise en 2026 ?","acceptedAnswer":{"@type":"Answer","text":"En 2026, les taux URSSAF sont d'environ 21,2 % pour les prestations BNC, 21,8 % pour les prestations BIC, 12,3 % pour la vente de marchandises et 23,2 % pour les professions libérales CIPAV. L'ACRE réduit ces taux de 25 % la première année."}},{"@type":"Question","name":"Quel est le plafond de CA en micro-entreprise ?","acceptedAnswer":{"@type":"Answer","text":"77 700 euros pour les prestations de services et 188 700 euros pour la vente de marchandises en 2026. Au-delà, tu dois changer de régime."}},{"@type":"Question","name":"Micro-entreprise ou salariat : lequel rapporte plus net ?","acceptedAnswer":{"@type":"Answer","text":"Cela dépend du CA et des charges. Compare avec le simulateur de statuts Dodje pour croiser micro, salarié, EURL et SASU sur un même montant."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar visible"><div class="nav-container"><div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div><div class="nav-menu"><a href="/outils" class="nav-link">Outils</a><a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a></div></div></nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Auto-entrepreneur</p>
+            <h1>Calculateur <span class="legal-title-accent">micro-entreprise</span></h1>
+            <p class="content-lead"><strong>En bref :</strong> estime tes cotisations URSSAF et ton revenu net selon ton chiffre d'affaires, le type d'activité (BIC, BNC, vente) et l'ACRE 2026.</p>
+            <div class="content-note"><p><strong>Information :</strong> simulation pédagogique sans charges réelles déductibles. Pour comparer micro, salarié et SASU, utilise le <a href="/outils/comparatif-statuts-entreprise-france-2026">comparatif statuts</a>.</p></div>
+
+            <form id="calc-micro-entreprise" class="calc-widget" data-auto-calc="true">
+                <div class="calc-segments" role="group" aria-label="Période du CA">
+                    <label class="calc-segment"><input type="radio" name="ca_periode" value="annuel" checked><span>CA annuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="ca_periode" value="mensuel"><span>CA mensuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="me-ca" id="me-ca-label">Chiffre d'affaires annuel (€)</label>
+                        <input type="number" id="me-ca" name="ca" value="50000" min="0" step="500">
+                    </div>
+                    <div class="calc-field">
+                        <label for="me-activite">Type d'activité</label>
+                        <select id="me-activite" name="activite">
+                            <option value="bic">Prestations BIC (21,8 %)</option>
+                            <option value="bnc">Prestations BNC (21,2 %)</option>
+                            <option value="vente">Vente marchandises (12,3 %)</option>
+                            <option value="cipav">Professions libérales CIPAV (23,2 %)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="calc-field calc-field-checkbox">
+                    <label><input type="checkbox" id="me-acre" name="acre"> ACRE active (−25 % cotisations 1re année)</label>
+                </div>
+                <button type="submit" class="calc-btn">Calculer mon net micro</button>
+                <div id="me-results" class="calc-results" hidden>
+                    <h3>Résultats micro-entreprise</h3>
+                    <div class="calc-result-row calc-result-highlight"><span>Revenu net annuel estimé</span><span class="calc-result-value" id="me-result-net-a">0 €</span></div>
+                    <div class="calc-result-row"><span>Revenu net mensuel</span><span class="calc-result-value" id="me-result-net-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Cotisations URSSAF / an</span><span class="calc-result-value" id="me-result-cot-a">0 €</span></div>
+                    <div class="calc-result-row"><span>Cotisations / mois</span><span class="calc-result-value" id="me-result-cot-m">0 €</span></div>
+                    <div class="calc-result-row"><span>Taux de cotisation appliqué</span><span class="calc-result-value" id="me-result-taux">0 %</span></div>
+                    <div class="calc-result-row"><span>CA annuel retenu</span><span class="calc-result-value" id="me-result-ca-a">0 €</span></div>
+                </div>
+            </form>
+
+            <h2>Plafonds micro-entreprise 2026</h2>
+            <ul>
+                <li>Prestations de services : <strong>77 700 €</strong> de CA maximum</li>
+                <li>Vente de marchandises : <strong>188 700 €</strong> de CA maximum</li>
+            </ul>
+
+            <h2>Questions fréquentes</h2>
+            <h3>Quel taux de cotisations en micro-entreprise ?</h3>
+            <p>De 12,3 % (vente) à 23,2 % (CIPAV) selon l'activité. L'ACRE réduit ces taux de 25 % la première année.</p>
+            <h3>Micro ou salariat ?</h3>
+            <p>Compare sur le <a href="/outils/comparatif-statuts-entreprise-france-2026">comparatif statuts entreprise</a>.</p>
+
+            <div class="content-links">
+                <a href="/outils/comparatif-statuts-entreprise-france-2026">Comparatif tous statuts</a>
+                <a href="/guides/quiz-quel-statut-entreprise-2026">Quiz quel statut choisir</a>
+                <a href="/outils/salaire-et-travail">Hub salaire et travail</a>
+            </div>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>

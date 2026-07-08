@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur DCA ETF 2026 | Investissement programmé France</title>
+    <meta name="description" content="Simule un plan DCA en ETF : versements mensuels, durée, rendement estimé et frais de courtage. Comprends la stratégie d'investissement programmé en France.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-dca-etf">
+    <meta property="og:title" content="Calculateur DCA ETF 2026">
+    <meta property="og:description" content="Projette la croissance d'un portefeuille ETF avec investissement programmé et frais de courtage.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-dca-etf">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur DCA ETF Dodje",
+      "description": "Simulateur pédagogique d'investissement programmé en ETF avec prise en compte des frais de courtage.",
+      "url": "https://dodje.fr/outils/calculateur-dca-etf",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" },
+      "publisher": { "@id": "https://dodje.fr/#organization" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qu'est-ce que le DCA en bourse ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le DCA (Dollar Cost Averaging), ou investissement programmé, consiste à investir un montant fixe à intervalles réguliers, par exemple chaque mois, plutôt que tout le capital en une seule fois. Cette méthode lisse le prix d'achat moyen et réduit l'impact du timing de marché."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Pourquoi investir en ETF avec un plan programmé ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les ETF offrent une diversification à faible coût en répliquant un indice boursier. Combinés au DCA, ils permettent de construire un portefeuille progressivement, avec des frais de gestion généralement inférieurs à 0,30 % par an sur les trackers les plus courants en Europe."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Bourse France</p>
+            <h1>Calculateur DCA ETF</h1>
+            <p class="content-lead">Projette la croissance d'un portefeuille construit par versements mensuels réguliers en ETF. Le simulateur intègre un taux de rendement estimé et des frais de courtage par ordre.</p>
+
+            <div class="content-note">
+                <p><strong>Rappel :</strong> les performances passées ne préjugent pas des performances futures. Un ETF actions peut perdre de la valeur. Ce calculateur ne tient pas compte de la fiscalité (PEA, CTO, assurance vie).</p>
+            </div>
+
+            <form id="calc-dca" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="dca-versement" id="dca-versement-label">Versement mensuel (euros)</label>
+                        <input type="number" id="dca-versement" name="versement" value="200" min="10" step="10">
+                    </div>
+                    <div class="calc-field">
+                        <label for="dca-duree">Durée (années)</label>
+                        <input type="number" id="dca-duree" name="duree" value="15" min="1" max="40" step="1">
+                    </div>
+                </div>
+                <div class="calc-segments" role="group" aria-label="Période des versements">
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="mensuel" checked><span>Mensuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="annuel"><span>Annuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="dca-taux">Rendement annuel estimé (%)</label>
+                        <input type="number" id="dca-taux" name="taux" value="7" min="0" max="15" step="0.5">
+                    </div>
+                    <div class="calc-field">
+                        <label for="dca-frais">Frais par ordre (euros)</label>
+                        <input type="number" id="dca-frais" name="frais" value="1" min="0" step="0.5">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Projeter mon DCA</button>
+                <div id="dca-results" class="calc-results" hidden>
+                    <h3>Projection</h3>
+                    <div class="calc-result-row">
+                        <span>Capital final estimé</span>
+                        <span class="calc-result-value" id="dca-result-final">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Total versé</span>
+                        <span class="calc-result-value" id="dca-result-verse">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Frais cumulés</span>
+                        <span class="calc-result-value" id="dca-result-frais">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Versement / mois</span>
+                        <span class="calc-result-value" id="dca-result-verse-m">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Versement / an</span>
+                        <span class="calc-result-value" id="dca-result-verse-a">0 €</span>
+                    </div>
+                    <div id="dca-chart" class="calc-chart-wrap" hidden aria-hidden="true"></div>
+                </div>
+            </form>
+
+            <h2>La stratégie DCA expliquée</h2>
+            <p>Le DCA (Dollar Cost Averaging), ou investissement programmé, consiste à verser un montant fixe à chaque période, souvent chaque mois. Plutôt que de chercher le « bon moment » pour investir, tu achètes régulièrement, que le marché monte ou baisse.</p>
+            <p>Quand les cours sont bas, ton versement achète plus de parts. Quand les cours sont hauts, tu en achètes moins. Sur la durée, ton prix d'achat moyen se lisse. C'est une approche disciplinée, adaptée aux débutants qui veulent investir sans stresser sur le timing.</p>
+
+            <h2>Pourquoi les ETF pour le DCA</h2>
+            <p>Un ETF (Exchange Traded Fund) réplique un indice boursier, comme le MSCI World ou le CAC 40. En achetant un seul ETF, tu obtiens une exposition à des dizaines ou centaines d'entreprises. Les frais de gestion annuels sont en général inférieurs à 0,30 % sur les trackers les plus liquides.</p>
+            <p>En France, le DCA en ETF se pratique via un PEA (après 5 ans, fiscalité allégée), un compte-titres ordinaire ou une assurance vie en unités de compte. Le choix du support dépend de ton horizon et de ta situation fiscale.</p>
+
+            <h2>Impact des frais de courtage</h2>
+            <p>Chaque ordre d'achat génère des frais chez ton courtier. Sur un plan mensuel de 200 euros avec 1 euro de frais par ordre, cela représente 0,5 % de frais par versement, soit environ 180 euros sur 15 ans. Certains courtiers comme Trade Republic proposent des ordres à 1 euro, d'autres facturent un pourcentage du montant.</p>
+            <p>Pour limiter l'impact des frais, privilégie un courtier à tarif fixe bas et des versements suffisamment importants pour que le ratio frais/montant reste raisonnable.</p>
+
+            <h2>Ordres de grandeur de rendement</h2>
+            <p>Historiquement, les marchés actions développés ont affiché un rendement annualisé d'environ 7 à 8 % sur de longues périodes, avant inflation et fiscalité. Ce chiffre n'est pas une garantie : des décennies entières peuvent afficher des performances négatives. Un scénario prudent utilise 5 à 6 %, un scénario optimiste 8 à 9 %.</p>
+
+            <div class="content-links">
+                <a href="/outils/comparatif-courtiers-bourse">Comparer les courtiers en bourse</a>
+                <a href="/guides/investir-en-bourse-france-debutant">Guide investir en bourse en France</a>
+                <a href="/#hero">Découvrir l'investissement avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.mylittlemoney.com/investir/dca-investissement-programme/" rel="noopener noreferrer" target="_blank">MyLittleMoney, DCA et investissement programmé en bourse</a></li>
+                    <li><a href="https://www.investir-simple.fr/etf-investissement-programme/" rel="noopener noreferrer" target="_blank">Investir Simple, ETF et plan d'investissement programmé</a></li>
+                    <li><a href="https://www.amf-france.org/fr/espace-epargnants/les-produits-financiers/les-etfs" rel="noopener noreferrer" target="_blank">AMF, les ETF expliqués aux épargnants</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../charts.js"></script>
+    <script src="../calculators.js"></script>
+</body>
+</html>

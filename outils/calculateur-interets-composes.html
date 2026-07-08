@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur intérêts composés | Projection épargne France</title>
+    <meta name="description" content="Calcule la croissance de ton capital avec intérêts composés : versements mensuels, durée et taux. Graphique de projection gratuit.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-interets-composes">
+    <meta property="og:title" content="Calculateur d'intérêts composés">
+    <meta property="og:description" content="Projette la croissance de ton épargne avec versements réguliers en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-interets-composes">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur d'intérêts composés Dodje",
+      "url": "https://dodje.fr/outils/calculateur-interets-composes",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" }
+    }
+    </script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Comment fonctionnent les intérêts composés ?", "acceptedAnswer": {"@type": "Answer", "text": "Les intérêts générés chaque période sont réinvestis et produisent à leur tour des intérêts. Sur le long terme, l'effet est exponentiel."}}, {"@type": "Question", "name": "Versements mensuels ou annuels ?", "acceptedAnswer": {"@type": "Answer", "text": "Les versements mensuels lissent l'effort d'épargne. Un versement annuel unique au début de l'année maximise légèrement les intérêts composés."}}, {"@type": "Question", "name": "Quel taux utiliser pour une simulation en France ?", "acceptedAnswer": {"@type": "Answer", "text": "Livret A 1,50 %, LEP 2,50 %, fonds euros 2-3 %, ETF actions 5-7 % (avec risque de perte)."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Projection</p>
+            <h1>Calculateur d'intérêts composés</h1>
+            <p class="content-lead">Les intérêts composés font travailler les gains déjà acquis. Ce simulateur projette un capital avec versements mensuels réguliers sur la durée que tu choisis.</p>
+
+            <div class="content-note">
+                <p><strong>Attention :</strong> un taux élevé implique en général plus de risque. Ce calculateur ne prévoit pas les baisses de marché ni la fiscalité applicable à chaque produit.</p>
+            </div>
+
+            <form id="calc-interets" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="ic-capital">Capital initial (euros)</label>
+                        <input type="number" id="ic-capital" name="capital" value="1000" min="0" step="100">
+                    </div>
+                    <div class="calc-field">
+                        <label for="ic-versement" id="ic-versement-label">Versement mensuel (euros)</label>
+                        <input type="number" id="ic-versement" name="versement" value="150" min="0" step="10">
+                    </div>
+                </div>
+                <div class="calc-segments" role="group" aria-label="Période des versements">
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="mensuel" checked><span>Mensuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="annuel"><span>Annuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="ic-duree">Durée (années)</label>
+                        <input type="number" id="ic-duree" name="duree" value="10" min="1" max="40" step="1">
+                    </div>
+                    <div class="calc-field">
+                        <label for="ic-taux">Taux annuel net (%)</label>
+                        <input type="number" id="ic-taux" name="taux" value="3" min="0" max="15" step="0.1">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Projeter mon épargne</button>
+                <div id="ic-results" class="calc-results" hidden>
+                    <h3>Projection</h3>
+                    <div class="calc-result-row">
+                        <span>Total versé</span>
+                        <span class="calc-result-value" id="ic-result-versements">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Gains estimés</span>
+                        <span class="calc-result-value" id="ic-result-gains">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Capital final estimé</span>
+                        <span class="calc-result-value" id="ic-result-final">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Versement / mois</span>
+                        <span class="calc-result-value" id="ic-result-verse-m">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Versement / an</span>
+                        <span class="calc-result-value" id="ic-result-verse-a">0 €</span>
+                    </div>
+                    <div id="ic-chart" class="calc-chart-wrap" hidden aria-hidden="true"></div>
+                    <div id="ic-chart-bars" class="calc-chart-wrap" hidden aria-hidden="true"></div>
+                </div>
+            </form>
+
+            <h2>Repères de taux en France (juillet 2026)</h2>
+            <p>Pour situer ton scénario, voici des ordres de grandeur observés sur le marché français, sans garantie future :</p>
+            <ul>
+                <li>Livret A et LDDS : 1,50 % brut depuis le 1er février 2026</li>
+                <li>LEP (sous conditions de revenus) : 2,50 %</li>
+                <li>Assurance vie en fonds euros : autour de 2 à 3 % sur les contrats les plus récents</li>
+                <li>Actions et ETF : rendement variable, avec risque de perte en capital</li>
+            </ul>
+
+            <h2>Inflation et rendement réel</h2>
+            <p>L'Insee a estimé l'inflation à 1,8 % sur un an en juin 2026. Un placement à 1,50 % comme le Livret A peut donc encore afficher un rendement réel légèrement négatif tant que l'inflation reste au-dessus du taux brut.</p>
+
+            <h2>Questions fréquentes</h2>
+            <h3>Comment fonctionnent les intérêts composés ?</h3>
+            <p>Les intérêts sont réinvestis et produisent à leur tour des intérêts — effet exponentiel.</p>
+            <h3>Versements mensuels ou annuels ?</h3>
+            <p>Mensuel = effort lissé ; annuel début d'année = intérêts légèrement supérieurs.</p>
+            <h3>Quel taux en France ?</h3>
+            <p>1,50 % Livret A, 2,50 % LEP, 2-3 % fonds euros, 5-7 % ETF (risqué).</p>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-livret-a">Comparer avec le calculateur Livret A</a>
+                <a href="/guides/investir-en-bourse-france-debutant">Guide investir en bourse en France</a>
+                <a href="/#hero">Approfondir avec l'app Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.boursorama.com/epargne/simulateurs/simulateur-livret-a" rel="noopener noreferrer" target="_blank">Boursorama, taux Livret A février 2026</a></li>
+                    <li><a href="https://actu.orange.fr/france/le-ministre-de-l-economie-annonce-une-hausse-du-taux-du-livret-a-magic-CNT000002qfU5e.html" rel="noopener noreferrer" target="_blank">Orange Actu, inflation juin 2026 (Insee)</a></li>
+                    <li><a href="https://onlinetoolkit.co/fr/calcul-interets-composes-livret-a/" rel="noopener noreferrer" target="_blank">OnlineToolkit, mécanisme des intérêts composés sur le Livret A</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../charts.js"></script>
+    <script src="../calculators.js"></script>
+</body>
+</html>

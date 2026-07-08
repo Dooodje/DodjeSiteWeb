@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur prêt consommation 2026 | Mensualités France</title>
+    <meta name="description" content="Simule les mensualités d'un prêt à la consommation en France : montant emprunté, durée et taux d'intérêt. Estime le coût total du crédit. Outil gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-pret-consommation">
+    <meta property="og:title" content="Calculateur prêt consommation 2026">
+    <meta property="og:description" content="Estime tes mensualités et le coût total d'un crédit à la consommation en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-pret-consommation">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur prêt consommation Dodje",
+      "description": "Simulateur pédagogique des mensualités et du coût total d'un crédit à la consommation en France.",
+      "url": "https://dodje.fr/outils/calculateur-pret-consommation",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" },
+      "publisher": { "@id": "https://dodje.fr/#organization" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Comment est calculée la mensualité d'un prêt consommation ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La mensualité d'un prêt à amortissement constant se calcule à partir du capital emprunté, du taux d'intérêt annuel et de la durée en mois. Ce simulateur applique la formule classique d'annuité constante, sans frais de dossier ni assurance emprunteur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel taux pour un crédit consommation en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les taux varient selon le profil emprunteur, le montant et l'organisme prêteur. En juillet 2026, les crédits personnels se situent souvent entre 4 % et 9 % selon la durée et le fichier bancaire. Le taux affiché dans une publicité doit toujours être comparé au TAEG, qui inclut les frais."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Crédit France</p>
+            <h1>Calculateur prêt consommation</h1>
+            <p class="content-lead">Estime la mensualité et le coût total d'un crédit à la consommation. Ce simulateur applique une formule d'amortissement constant, sans frais annexes ni assurance.</p>
+
+            <div class="content-note">
+                <p><strong>Attention :</strong> un crédit t'engage et doit être remboursé. Vérifie ta capacité de remboursement avant de t'endetter. Compare toujours le TAEG, pas seulement le taux nominal.</p>
+            </div>
+
+            <form id="calc-pret-conso" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="pco-montant">Montant emprunté (euros)</label>
+                        <input type="number" id="pco-montant" name="montant" value="10000" min="500" step="500">
+                    </div>
+                    <div class="calc-field">
+                        <label for="pco-duree">Durée (années)</label>
+                        <input type="number" id="pco-duree" name="duree" value="5" min="1" max="7" step="1">
+                    </div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="pco-taux">Taux annuel (%)</label>
+                        <input type="number" id="pco-taux" name="taux" value="6.5" min="0" max="20" step="0.1">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Calculer ma mensualité</button>
+                <div id="pco-results" class="calc-results" hidden>
+                    <h3>Résultats estimés</h3>
+                    <div class="calc-result-row">
+                        <span>Mensualité</span>
+                        <span class="calc-result-value" id="pco-result-mensualite">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Coût total des intérêts</span>
+                        <span class="calc-result-value" id="pco-result-cout">0 €</span>
+                    </div>
+                </div>
+            </form>
+
+            <h2>Comprendre le crédit à la consommation</h2>
+            <p>Le crédit à la consommation finance des achats ou des projets personnels : véhicule, travaux, équipement ou besoin de trésorerie. En France, la durée maximale légale est en général de 7 ans pour un prêt personnel classique.</p>
+            <p>La mensualité dépend de trois variables : le capital emprunté, le taux d'intérêt annuel et la durée. Plus la durée est longue, plus la mensualité baisse, mais le coût total des intérêts augmente.</p>
+
+            <h2>TAEG et taux nominal</h2>
+            <p>Le taux nominal indique le coût du crédit hors frais. Le TAEG (taux annuel effectif global) intègre les frais de dossier, l'assurance emprunteur éventuelle et les commissions. C'est le TAEG qu'il faut comparer entre plusieurs offres.</p>
+            <p>Depuis 2022, la publicité pour les crédits à la consommation doit afficher un exemple représentatif avec un TAEG. Méfie-toi des offres trop attractives qui masquent des frais annexes.</p>
+
+            <h2>Alternatives avant d'emprunter</h2>
+            <p>Avant de contracter un crédit consommation, pose-toi ces questions : l'achat peut-il attendre ? Peux-tu épargner sur quelques mois ? Un découvert autorisé ponctuel coûte souvent plus cher qu'un crédit amortissable, mais un crédit inutile alourdit ton budget sur plusieurs années.</p>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-budget-mensuel">Vérifier mon budget mensuel</a>
+                <a href="/guides/epargne-de-precaution-france">Guide épargne de précaution</a>
+                <a href="/#hero">Apprendre à gérer son argent avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.service-public.fr/particuliers/vosdroits/F21571" rel="noopener noreferrer" target="_blank">Service-public.fr, crédit à la consommation et durée maximale</a></li>
+                    <li><a href="https://www.banque-france.fr/stabilite-financiere/protection-de-la-clientele/credit" rel="noopener noreferrer" target="_blank">Banque de France, encadrement des crédits à la consommation</a></li>
+                    <li><a href="https://www.economie.gouv.fr/particuliers/emprunter-argent" rel="noopener noreferrer" target="_blank">Ministère de l'Économie, emprunter de l'argent en toute sécurité</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>

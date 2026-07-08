@@ -42,6 +42,57 @@ function GooglePlayIcon() {
   );
 }
 
+function StoreButtons({
+  className,
+  style,
+  stacked = false
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+  stacked?: boolean;
+}) {
+  const btnWidth = stacked ? 'w-full min-w-0' : 'flex-1';
+  const btnPadding = stacked ? 'px-6 py-4' : 'px-4 sm:px-5 py-3 sm:py-3.5';
+  const labelSize = stacked ? 'text-base' : 'text-sm sm:text-base';
+  const kickerSize = stacked ? 'text-[0.65rem]' : 'text-[0.6rem] sm:text-[0.65rem]';
+
+  return (
+    <div className={stacked ? `w-full ${className ?? ''}` : className} style={style}>
+      <a
+        href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
+        style={{
+          background: 'linear-gradient(to bottom, #9BEC00 0%, #06D001 100%)'
+        }}
+      >
+        <AppleIcon />
+        <span className="flex flex-col leading-tight text-left">
+          <span className={`${kickerSize} uppercase tracking-wide opacity-70`}>
+            Télécharger sur
+          </span>
+          <span className={labelSize}>App Store</span>
+        </span>
+      </a>
+      <a
+        href="https://play.google.com/store/apps/details?id=xyz.dodje.app"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl bg-white text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-8px_rgba(255,255,255,0.25)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
+      >
+        <GooglePlayIcon />
+        <span className="flex flex-col leading-tight text-left">
+          <span className={`${kickerSize} uppercase tracking-wide opacity-70`}>
+            Télécharger sur
+          </span>
+          <span className={labelSize}>Google Play</span>
+        </span>
+      </a>
+    </div>
+  );
+}
+
 export default function Hero() {
   const reducedMotion = usePrefersReducedMotion();
 
@@ -75,8 +126,8 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 sm:px-10 lg:px-16 pt-32 pb-14 sm:pt-24 lg:pt-12 lg:pb-20">
         <div className="grid lg:grid-cols-[0.8fr_1.4fr] gap-6 lg:gap-10 items-center">
-          {/* LEFT: Text + CTAs */}
-          <div className="flex flex-col gap-2 lg:gap-3 max-w-2xl">
+          {/* Texte — au-dessus de l'animation sur mobile */}
+          <div className="order-1 flex flex-col gap-2 lg:gap-3 max-w-2xl lg:order-none">
           {/* Eyebrow chip */}
           <div
             className="inline-flex items-center gap-2 self-start rounded-full
@@ -125,63 +176,45 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* CTAs */}
-          <div
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
+          {/* CTAs desktop — à gauche de l'animation */}
+          <StoreButtons
+            className="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
             style={{ animationDelay: '850ms' }}
-          >
-            <a
-              href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]"
-              style={{
-                background: 'linear-gradient(to bottom, #9BEC00 0%, #06D001 100%)'
-              }}
-            >
-              <AppleIcon />
-              <span className="flex flex-col leading-tight text-left">
-                <span className="text-[0.65rem] uppercase tracking-wide opacity-70">
-                  Télécharger sur
-                </span>
-                <span className="text-base">App Store</span>
-              </span>
-            </a>
-            <a
-              href="https://play.google.com/store/apps/details?id=xyz.dodje.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-white text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-8px_rgba(255,255,255,0.25)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]"
-            >
-              <GooglePlayIcon />
-              <span className="flex flex-col leading-tight text-left">
-                <span className="text-[0.65rem] uppercase tracking-wide opacity-70">
-                  Télécharger sur
-                </span>
-                <span className="text-base">Google Play</span>
-              </span>
-            </a>
-          </div>
+          />
 
-          {/* Trust note */}
+          {/* Trust note desktop */}
           <p
-            className="text-xs sm:text-sm font-outfit text-white/55 max-w-xl mt-2 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
+            className="hidden lg:block text-xs sm:text-sm font-outfit text-white/55 max-w-xl mt-2 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
             style={{ animationDelay: '1000ms' }}
           >
             {TRUST_NOTE}
           </p>
           </div>
 
-          {/* RIGHT: Mascotte Salut (Lottie) */}
-          <div className="relative flex items-center justify-center min-h-[320px] sm:min-h-[420px] lg:min-h-[640px]">
+          {/* Animation — entre le titre et les boutons sur mobile */}
+          <div className="order-2 relative flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:order-none lg:min-h-[640px]">
             <SegmentLottie
               loadAnimation={segmentLottie.salut}
               alt="Mascotte Dodje qui salue"
               reducedMotion={reducedMotion}
-              className="relative z-10 w-[min(100%,560px)] sm:w-[min(100%,820px)] lg:w-[min(100%,1080px)] xl:w-[min(100%,1200px)] aspect-square select-none motion-safe:animate-[heroMascot_900ms_cubic-bezier(0.4,0,0.2,1)_300ms_both]"
+              className="relative z-10 w-[min(100%,420px)] sm:w-[min(100%,560px)] lg:w-[min(100%,1080px)] xl:w-[min(100%,1200px)] aspect-square select-none motion-safe:animate-[heroMascot_900ms_cubic-bezier(0.4,0,0.2,1)_300ms_both]"
               style={{ pointerEvents: 'none' }}
             />
           </div>
+
+          {/* CTAs mobile — sous l'animation, pleine largeur, empilés */}
+          <StoreButtons
+            stacked
+            className="order-3 flex w-full flex-col gap-3 lg:hidden motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
+            style={{ animationDelay: '850ms' }}
+          />
+
+          <p
+            className="order-4 lg:hidden text-xs sm:text-sm font-outfit text-white/55 text-center max-w-xl mx-auto mt-1 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
+            style={{ animationDelay: '1000ms' }}
+          >
+            {TRUST_NOTE}
+          </p>
         </div>
       </div>
     </section>

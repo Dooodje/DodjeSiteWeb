@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur rendement locatif 2026 | Brut, net et cash-flow</title>
+    <meta name="description" content="Simule le rendement locatif brut et net d'un bien en France : loyer, charges, taxe foncière et crédit. Cash-flow mensuel estimé. Outil gratuit Dodje juillet 2026.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-rendement-locatif">
+    <meta property="og:title" content="Calculateur rendement locatif 2026">
+    <meta property="og:description" content="Rendement brut, net et cash-flow d'un investissement locatif en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-rendement-locatif">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur rendement locatif Dodje","url":"https://dodje.fr/outils/calculateur-rendement-locatif","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce que le rendement locatif brut ?","acceptedAnswer":{"@type":"Answer","text":"Le rendement brut est le rapport entre les loyers annuels et le prix d'achat du bien, avant charges et impôts. Formule : (loyer mensuel × 12) / prix d'achat × 100."}},{"@type":"Question","name":"Quelle différence entre rendement brut et net ?","acceptedAnswer":{"@type":"Answer","text":"Le rendement net déduit les charges non récupérables (copropriété, assurance, gestion) et la taxe foncière du loyer annuel, toujours rapporté au prix d'achat. Il est plus proche de la réalité économique."}},{"@type":"Question","name":"Qu'est-ce que le cash-flow locatif ?","acceptedAnswer":{"@type":"Answer","text":"Le cash-flow est ce qui reste chaque mois après encaissement du loyer, paiement des charges, de la taxe foncière et de la mensualité de crédit. Un cash-flow négatif signifie que l'investissement demande un effort d'épargne mensuel."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar visible"><div class="nav-container"><div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div><div class="nav-menu"><a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a></div></div></nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Immobilier locatif</p>
+            <h1>Calculateur <span class="legal-title-accent">rendement locatif</span></h1>
+            <p class="content-lead"><strong>En bref :</strong> compare le rendement brut (loyers / prix) et le rendement net (après charges et taxe foncière), puis estime ton cash-flow mensuel si tu finances à crédit.</p>
+
+            <form id="calc-locatif" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field"><label for="loc-prix">Prix d'achat (€)</label><input type="number" id="loc-prix" name="prix" value="200000" min="0" step="5000"></div>
+                    <div class="calc-field"><label for="loc-apport">Apport personnel (€)</label><input type="number" id="loc-apport" name="apport" value="40000" min="0" step="5000"></div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field"><label for="loc-loyer">Loyer mensuel hors charges (€)</label><input type="number" id="loc-loyer" name="loyer" value="850" min="0" step="10"></div>
+                    <div class="calc-field"><label for="loc-notaire">Frais de notaire (€, ~8 %)</label><input type="number" id="loc-notaire" name="notaire" value="16000" min="0" step="500"></div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field"><label for="loc-charges">Charges annuelles non récupérables (€)</label><input type="number" id="loc-charges" name="charges" value="1200" min="0" step="50"></div>
+                    <div class="calc-field"><label for="loc-taxe">Taxe foncière annuelle (€)</label><input type="number" id="loc-taxe" name="taxe" value="900" min="0" step="50"></div>
+                </div>
+                <div class="calc-field"><label for="loc-mensualite">Mensualité de crédit (€, 0 si cash)</label><input type="number" id="loc-mensualite" name="mensualite" value="650" min="0" step="10"></div>
+                <button type="submit" class="calc-btn">Calculer le rendement</button>
+                <div id="loc-results" class="calc-results" hidden>
+                    <h3>Résultats estimés</h3>
+                    <div class="calc-result-row calc-result-highlight"><span>Rendement brut</span><span class="calc-result-value" id="loc-result-brut">0 %</span></div>
+                    <div class="calc-result-row"><span>Rendement net</span><span class="calc-result-value" id="loc-result-net">0 %</span></div>
+                    <div class="calc-result-row calc-result-highlight"><span>Cash-flow mensuel</span><span class="calc-result-value" id="loc-result-cashflow">0 €</span></div>
+                    <div class="calc-result-row"><span>Coût total acquisition (prix + notaire − apport)</span><span class="calc-result-value" id="loc-result-cout">0 €</span></div>
+                    <div class="calc-result-row"><span>Rendement sur apport</span><span class="calc-result-value" id="loc-result-rendement-apport">0 %</span></div>
+                </div>
+            </form>
+
+            <h2>Comment interpréter les chiffres en France ?</h2>
+            <p>En zone tendue, un rendement brut de 4 à 6 % est courant ; en province, 6 à 8 % peut être atteignable sur de l'ancien, au prix d'une plus-value moindre. Le rendement net est souvent 1 à 2 points en dessous du brut selon la taxe foncière et les charges de copropriété.</p>
+            <p>Le cash-flow t'indique si le bien est autofinancé : un montant négatif signifie que tu complètes chaque mois de ta poche, hors fiscalité et vacance locative.</p>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-pret-immobilier">Mensualité prêt immo</a>
+                <a href="/outils/calculateur-capacite-emprunt">Capacité d'emprunt</a>
+                <a href="/guides/premier-achat-immobilier-france-2026">Premier achat immobilier</a>
+                <a href="/actualites/taux-credit-immobilier-juillet-2026">Taux crédit juillet 2026</a>
+            </div>
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.service-public.fr/particuliers/vosdroits/F1319" rel="noopener noreferrer" target="_blank">Service-public.fr, investissement locatif</a></li>
+                    <li><a href="https://www.banque-france.fr/statistiques/credit/credit-aux-particuliers" rel="noopener noreferrer" target="_blank">Banque de France, crédit aux particuliers</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>

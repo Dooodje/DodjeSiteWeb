@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur frais de bourse | Comparatif courtiers France</title>
+    <meta name="description" content="Estime les frais de courtage annuels chez Trade Republic, Boursorama, Fortuneo et Bourse Direct. Outil gratuit Dodje 2026.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-frais-bourse">
+    <meta property="og:title" content="Calculateur de frais de bourse">
+    <meta property="og:description" content="Compare les frais de courtage des principaux brokers français selon ton profil d'investisseur.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-frais-bourse">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur de frais de bourse Dodje",
+      "description": "Simulateur des frais de courtage chez les principaux courtiers français.",
+      "url": "https://dodje.fr/outils/calculateur-frais-bourse",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" }
+    }
+    </script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quels sont les frais de courtage les plus bas en France ?", "acceptedAnswer": {"@type": "Answer", "text": "Trade Republic et Degiro facturent environ 1 € par ordre. Boursorama et Fortuneo autour de 1,95 à 1,99 €."}}, {"@type": "Question", "name": "Comment réduire l'impact des frais sur un DCA ?", "acceptedAnswer": {"@type": "Answer", "text": "Privilégie un courtier à tarif fixe bas et des versements suffisamment importants pour que le ratio frais/montant reste sous 0,5 %."}}, {"@type": "Question", "name": "Frais de courtage ou frais de gestion ETF ?", "acceptedAnswer": {"@type": "Answer", "text": "Les frais de courtage sont payés à chaque ordre. Les frais de gestion (TER) de l'ETF sont prélevés en continu sur le fonds, en moyenne 0,20 % à 0,30 % sur les trackers populaires."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Courtage</p>
+            <h1>Calculateur de frais de bourse</h1>
+            <p class="content-lead">Les frais de courtage grignotent ton rendement sur le long terme. Ce simulateur compare le coût annuel estimé chez quatre courtiers français selon le montant moyen de tes ordres et leur nombre par an.</p>
+
+            <div class="content-note">
+                <p><strong>Attention :</strong> les grilles tarifaires évoluent régulièrement. Ce calculateur intègre des barèmes simplifiés et ne prend pas en compte les frais de change, d'inactivité ou les offres promotionnelles temporaires.</p>
+            </div>
+
+            <form id="calc-frais-bourse" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="fb-montant">Montant moyen par ordre (euros)</label>
+                        <input type="number" id="fb-montant" name="montant" value="500" min="1" step="50">
+                    </div>
+                    <div class="calc-field">
+                        <label for="fb-ordres">Nombre d'ordres par an</label>
+                        <input type="number" id="fb-ordres" name="ordres" value="12" min="1" max="365" step="1">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Comparer les frais</button>
+                <div id="fb-results" class="calc-results" hidden>
+                    <h3>Comparatif des frais estimés</h3>
+                    <div class="compare-table-wrap">
+                        <table class="compare-table">
+                            <thead>
+                                <tr>
+                                    <th>Courtier</th>
+                                    <th>Frais par ordre</th>
+                                    <th>Coût annuel estimé</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fb-comparison-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+
+            <h2>Comment sont calculés les frais ?</h2>
+            <p>Chaque courtier applique sa propre grille tarifaire. En général, les frais sont exprimés en pourcentage du montant de l'ordre avec un minimum et un maximum par transaction. Trade Republic facture 1 euro par ordre, tandis que les courtiers traditionnels appliquent un pourcentage avec des bornes.</p>
+
+            <h2>Grilles tarifaires intégrées au simulateur</h2>
+            <div class="compare-table-wrap">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Courtier</th>
+                            <th>Formule appliquée</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Trade Republic</td>
+                            <td>1 euro fixe par ordre</td>
+                        </tr>
+                        <tr>
+                            <td>Boursorama</td>
+                            <td>0,60 % de l'ordre, minimum 1,99 euro, maximum 9,99 euro</td>
+                        </tr>
+                        <tr>
+                            <td>Fortuneo</td>
+                            <td>0,09 % de l'ordre, minimum 2 euro, maximum 15 euro</td>
+                        </tr>
+                        <tr>
+                            <td>Bourse Direct</td>
+                            <td>0,09 % de l'ordre, minimum 0,99 euro, maximum 9,90 euro</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Pourquoi les frais comptent sur le long terme</h2>
+            <p>Un investisseur qui passe 12 ordres de 500 euros par an avec des frais moyens de 3 euros par ordre paie 36 euros annuels. Sur 20 ans, cela représente plus de 700 euros hors effet des intérêts composés. Réduire les frais, surtout en DCA (dollar cost averaging), peut améliorer sensiblement le rendement net.</p>
+
+            <h2>Autres frais à surveiller</h2>
+            <ul>
+                <li>Frais de change pour les titres libellés en dollars ou en livres sterling</li>
+                <li>Frais de garde ou d'inactivité sur certains comptes</li>
+                <li>Frais de sortie ou de clôture de compte</li>
+                <li>Frais courants des ETF (TER) distincts des frais de courtage</li>
+            </ul>
+
+            <h2>Questions fréquentes</h2>
+            <h3>Frais les plus bas en France ?</h3>
+            <p>Environ 1 € par ordre chez Trade Republic et Degiro.</p>
+            <h3>Réduire l'impact sur un DCA ?</h3>
+            <p>Versements plus importants et courtier à tarif fixe bas.</p>
+            <h3>Courtage vs TER ETF ?</h3>
+            <p>Le courtage est par ordre ; le TER est annuel sur le fonds.</p>
+
+            <div class="content-links">
+                <a href="/outils/comparatif-pea-cto">Comparatif PEA vs CTO</a>
+                <a href="/guides/investir-en-bourse-france-debutant">Guide investir en bourse</a>
+                <a href="/#hero">Optimiser ton épargne avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.capital-malin.fr" rel="noopener noreferrer" target="_blank">Capital Malin, comparatif des frais de courtage</a></li>
+                    <li><a href="https://www.capitheos.fr" rel="noopener noreferrer" target="_blank">Capitheos, analyse des courtiers en ligne français</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>

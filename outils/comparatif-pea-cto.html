@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparatif PEA vs CTO | Fiscalité bourse France 2026</title>
+    <meta name="description" content="Compare PEA et CTO en France : PFU, prélèvements sociaux après 5 ans, plafonds et simulateur fiscal sur plus-values.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/comparatif-pea-cto">
+    <meta property="og:title" content="Comparatif PEA vs CTO">
+    <meta property="og:description" content="Simule la fiscalité d'une plus-value en PEA ou en compte-titres ordinaire en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/comparatif-pea-cto">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Comparatif PEA vs CTO Dodje",
+      "description": "Simulateur pédagogique de fiscalité PEA et compte-titres ordinaire en France.",
+      "url": "https://dodje.fr/outils/comparatif-pea-cto",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" }
+    }
+    </script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "PEA ou CTO : lequel choisir en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": "Le PEA est avantageux après 5 ans de détention pour les actions européennes (prélèvements sociaux uniquement). Le CTO convient aux actifs non éligibles et aux horizons courts."}}, {"@type": "Question", "name": "Quelle fiscalité PEA après 5 ans ?", "acceptedAnswer": {"@type": "Answer", "text": "Exonération d'impôt sur le revenu sur les plus-values. Seuls les prélèvements sociaux de 17,2 % s'appliquent (ou 18,6 % selon période)."}}, {"@type": "Question", "name": "Quel est le plafond de versement PEA ?", "acceptedAnswer": {"@type": "Answer", "text": "150 000 euros de versements cumulés, hors plus-values et intérêts capitalisés."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Bourse France</p>
+            <h1>Comparatif PEA vs compte-titres ordinaire</h1>
+            <p class="content-lead">Le PEA et le CTO permettent d'investir en actions et ETF, mais la fiscalité diffère fortement. Ce comparatif t'aide à estimer l'impact d'une plus-value selon l'enveloppe choisie et la durée de détention.</p>
+
+            <div class="content-note">
+                <p><strong>Rappel :</strong> ce simulateur ne tient pas compte de l'option au barème progressif, des abattements spécifiques ni des règles de report d'imposition. Il s'appuie sur le PFU (flat tax) et les prélèvements sociaux en vigueur en 2026.</p>
+            </div>
+
+            <form id="calc-pea-cto" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="pc-gain">Plus-value brute estimée (euros)</label>
+                        <input type="number" id="pc-gain" name="gain" value="10000" min="0" step="100">
+                    </div>
+                    <div class="calc-field">
+                        <label for="pc-duree">Durée de détention du PEA (années)</label>
+                        <input type="number" id="pc-duree" name="duree" value="5" min="1" max="30" step="1">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Comparer la fiscalité</button>
+                <div id="pc-results" class="calc-results" hidden>
+                    <h3>Résultats estimés</h3>
+                    <div class="calc-result-row">
+                        <span>Plus-value nette en PEA</span>
+                        <span class="calc-result-value" id="pc-result-pea">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Plus-value nette en CTO</span>
+                        <span class="calc-result-value" id="pc-result-cto">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Écart fiscal estimé (CTO vs PEA)</span>
+                        <span class="calc-result-value" id="pc-result-ecart">0 €</span>
+                    </div>
+                </div>
+            </form>
+
+            <h2>Fiscalité appliquée par le simulateur</h2>
+            <p>En France, les plus-values mobilières sont en principe soumises au prélèvement forfaitaire unique (PFU) de 31,4 %, soit 12,8 % d'impôt sur le revenu et 18,6 % de prélèvements sociaux.</p>
+            <p>Sur un PEA ouvert depuis au moins 5 ans, seuls les prélèvements sociaux de 18,6 % s'appliquent sur les gains retirés, hors cas d'exception. Avant 5 ans, le PEA est fiscalisé comme un CTO classique.</p>
+
+            <h2>Tableau comparatif PEA vs CTO</h2>
+            <div class="compare-table-wrap">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Critère</th>
+                            <th>PEA</th>
+                            <th>CTO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Plafond de versements</td>
+                            <td>150 000 euros</td>
+                            <td>Aucun plafond réglementaire</td>
+                        </tr>
+                        <tr>
+                            <td>Actifs éligibles</td>
+                            <td>Actions et ETF européens principalement</td>
+                            <td>Actions, ETF et titres du monde entier</td>
+                        </tr>
+                        <tr>
+                            <td>Fiscalité avant 5 ans</td>
+                            <td>PFU 31,4 % (12,8 % IR + 18,6 % PS)</td>
+                            <td>PFU 31,4 % (12,8 % IR + 18,6 % PS)</td>
+                        </tr>
+                        <tr>
+                            <td>Fiscalité après 5 ans</td>
+                            <td>18,6 % de prélèvements sociaux uniquement</td>
+                            <td>PFU 31,4 % (12,8 % IR + 18,6 % PS)</td>
+                        </tr>
+                        <tr>
+                            <td>Retrait avant 5 ans</td>
+                            <td>Clôture du plan en cas de retrait</td>
+                            <td>Retraits libres à tout moment</td>
+                        </tr>
+                        <tr>
+                            <td>Dividendes étrangers</td>
+                            <td>Souvent limités ou moins optimaux</td>
+                            <td>Accès plus large aux marchés internationaux</td>
+                        </tr>
+                        <tr>
+                            <td>Idéal pour</td>
+                            <td>Investissement long terme en Europe</td>
+                            <td>Diversification mondiale et flexibilité</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Quand privilégier le PEA ?</h2>
+            <p>Le PEA convient si tu investis sur le long terme, principalement en actions et ETF européens, et que tu peux laisser le plan ouvert au moins 5 ans sans retirer de capital. L'économie d'impôt sur le revenu (12,8 %) peut devenir significative sur de grosses plus-values.</p>
+
+            <h2>Quand privilégier le CTO ?</h2>
+            <p>Le compte-titres ordinaire est pertinent si tu veux accéder à des marchés hors zone euro, trader plus activement ou retirer des fonds sans contrainte de durée. La fiscalité est plus lourde, mais la flexibilité et l'univers d'investissement sont plus larges.</p>
+
+            <h2>Les deux enveloppes sont-elles cumulables ?</h2>
+            <p>Oui. Beaucoup d'investisseurs français combinent un PEA pour l'épargne long terme en Europe et un CTO pour compléter avec des titres internationaux. L'important est d'adapter chaque enveloppe à ton horizon et à tes objectifs, sans chercher à optimiser uniquement la fiscalité.</p>
+
+            <h2>Questions fréquentes</h2>
+            <h3>PEA ou CTO en 2026 ?</h3>
+            <p>PEA après 5 ans pour actions EU ; CTO pour flexibilité et actifs hors UE.</p>
+            <h3>Fiscalité PEA après 5 ans ?</h3>
+            <p>Plus-values exonérées d'IR, prélèvements sociaux uniquement.</p>
+            <h3>Plafond PEA ?</h3>
+            <p>150 000 € de versements cumulés.</p>
+
+            <div class="content-links">
+                <a href="/guides/investir-en-bourse-france-debutant">Guide investir en bourse en France</a>
+                <a href="/outils/calculateur-frais-bourse">Calculateur de frais de courtage</a>
+                <a href="/#hero">Approfondir avec l'app Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.invesse.fr" rel="noopener noreferrer" target="_blank">Invesse, fiscalité PEA et compte-titres</a></li>
+                    <li><a href="https://placement.meilleurtaux.com" rel="noopener noreferrer" target="_blank">Meilleurtaux Placement, comparatif PEA et CTO</a></li>
+                    <li><a href="https://www.moncalcul.fr/guides/pea-cto" rel="noopener noreferrer" target="_blank">MonCalcul, guide PEA vs CTO</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>

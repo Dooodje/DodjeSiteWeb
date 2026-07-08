@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur capacité d'emprunt 2026 | Crédit immobilier France</title>
+    <meta name="description" content="Estime ta capacité d'emprunt immobilier en France : règle HCSF 35 %, revenus, charges et apport. Taux crédit juillet 2026. Simulateur gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-capacite-emprunt">
+    <meta property="og:title" content="Calculateur capacité d'emprunt 2026">
+    <meta property="og:description" content="Combien peux-tu emprunter pour un crédit immobilier en France ?">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-capacite-emprunt">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur capacité d'emprunt Dodje","url":"https://dodje.fr/outils/calculateur-capacite-emprunt","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle est la règle des 35 % pour l'emprunt immobilier ?","acceptedAnswer":{"@type":"Answer","text":"Le HCSF limite l'endettement à 35 % des revenus nets, charges de crédit incluses, pour la majorité des dossiers en France."}},{"@type":"Question","name":"Quel taux utiliser en juillet 2026 ?","acceptedAnswer":{"@type":"Answer","text":"Les taux moyens crédit immobilier tournent autour de 3,3 % sur 20-25 ans en juillet 2026 selon les baromètres bancaires. Ajuste le taux dans le simulateur."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar visible"><div class="nav-container"><div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div><div class="nav-menu"><a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a></div></div></nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Crédit immobilier</p>
+            <h1>Capacité <span class="legal-title-accent">d'emprunt</span></h1>
+            <p class="content-lead">Estime le montant que tu peux emprunter selon la règle HCSF de 35 % d'endettement, tes revenus nets et tes charges de crédit existantes.</p>
+            <form id="calc-emprunt" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="emp-revenus">Revenus nets mensuels du foyer (euros)</label>
+                        <input type="number" id="emp-revenus" name="revenus" value="4500" min="0" step="100">
+                    </div>
+                    <div class="calc-field">
+                        <label for="emp-charges">Charges de crédit en cours (euros/mois)</label>
+                        <input type="number" id="emp-charges" name="charges" value="0" min="0" step="50">
+                    </div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="emp-apport">Apport personnel (euros)</label>
+                        <input type="number" id="emp-apport" name="apport" value="30000" min="0" step="1000">
+                    </div>
+                    <div class="calc-field">
+                        <label for="emp-taux">Taux d'intérêt annuel (%)</label>
+                        <input type="number" id="emp-taux" name="taux" value="3.31" min="0" max="10" step="0.05">
+                    </div>
+                </div>
+                <div class="calc-field">
+                    <label for="emp-duree">Durée du prêt (années)</label>
+                    <input type="number" id="emp-duree" name="duree" value="25" min="5" max="25" step="1">
+                </div>
+                <button type="submit" class="calc-btn">Calculer ma capacité</button>
+                <div id="emp-results" class="calc-results" hidden>
+                    <h3>Estimation</h3>
+                    <div class="calc-result-row"><span>Mensualité maximale (35 %)</span><span class="calc-result-value" id="emp-result-mensualite">0 €</span></div>
+                    <div class="calc-result-row"><span>Capacité d'achat totale (avec apport)</span><span class="calc-result-value" id="emp-result-capacite">0 €</span></div>
+                    <div class="calc-result-row"><span>Montant empruntable</span><span class="calc-result-value" id="emp-result-emprunt">0 €</span></div>
+                </div>
+            </form>
+            <h2>À savoir avant d'emprunter</h2>
+            <p>Les banques appliquent aussi un reste à vivre minimum et analysent la stabilité de tes revenus. L'assurance emprunteur et les frais de notaire (environ 7-8 % dans l'ancien) ne sont pas inclus dans ce simulateur simplifié.</p>
+            <div class="content-links"><a href="/outils/calculateur-pret-immobilier">Mensualité prêt immo</a><a href="/actualites/taux-credit-immobilier-juillet-2026">Taux crédit juillet 2026</a><a href="/guides/premier-achat-immobilier-france-2026">Premier achat immobilier</a><a href="/outils">Tous les calculateurs</a></div>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>

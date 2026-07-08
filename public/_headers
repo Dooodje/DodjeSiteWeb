@@ -8,9 +8,23 @@
   Cache-Control: public, max-age=3600
 
 /sitemap.xml
-  Cache-Control: public, max-age=3600
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=86400
 
 /robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
   Cache-Control: public, max-age=3600
 
 /*

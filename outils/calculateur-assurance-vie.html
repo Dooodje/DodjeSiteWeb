@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur assurance vie 2026 | Projection épargne France</title>
+    <meta name="description" content="Simule la croissance d'un contrat d'assurance vie : capital initial, versements mensuels, durée et rendement. Fiscalité après 8 ans expliquée. Outil gratuit Dodje.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/calculateur-assurance-vie">
+    <meta property="og:title" content="Calculateur assurance vie 2026">
+    <meta property="og:description" content="Projette ton épargne en assurance vie et comprends la fiscalité après 8 ans en France.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/outils/calculateur-assurance-vie">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/png" href="../assets/IconeApp.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur assurance vie Dodje",
+      "description": "Simulateur pédagogique de croissance d'un contrat d'assurance vie en France.",
+      "url": "https://dodje.fr/outils/calculateur-assurance-vie",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "inLanguage": "fr-FR",
+      "areaServed": { "@type": "Country", "name": "France" },
+      "publisher": { "@id": "https://dodje.fr/#organization" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quelle fiscalité sur l'assurance vie après 8 ans ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Après 8 ans de détention, les retraits bénéficient d'un abattement annuel de 4 600 euros sur les gains pour une personne seule (9 200 euros pour un couple). Au-delà, les gains sont imposés au prélèvement forfaitaire de 7,5 % ou au barème de l'impôt sur le revenu, plus 17,2 % de prélèvements sociaux."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel rendement pour un fonds euros en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les fonds euros des contrats d'assurance vie affichent en moyenne entre 2 % et 3 % en 2025-2026, selon les assureurs et les contrats. Les unités de compte (ETF, actions) offrent un rendement variable avec un risque de perte en capital."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <script src="../video-guard.js"></script>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Épargne France</p>
+            <h1>Calculateur assurance vie</h1>
+            <p class="content-lead">Projette la croissance d'un contrat d'assurance vie avec capital initial, versements mensuels et rendement annuel estimé. Ce simulateur applique une capitalisation annuelle simplifiée.</p>
+
+            <div class="content-note">
+                <p><strong>Information :</strong> ce calculateur ne modélise pas les frais de gestion du contrat, la répartition fonds euros / unités de compte ni la fiscalité des retraits. Il sert à comprendre le mécanisme de capitalisation.</p>
+            </div>
+
+            <form id="calc-assvie" class="calc-widget" data-auto-calc="true">
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="av-capital">Capital initial (euros)</label>
+                        <input type="number" id="av-capital" name="capital" value="5000" min="0" step="500">
+                    </div>
+                    <div class="calc-field">
+                        <label for="av-versement" id="av-versement-label">Versement mensuel (euros)</label>
+                        <input type="number" id="av-versement" name="versement" value="150" min="0" step="10">
+                    </div>
+                </div>
+                <div class="calc-segments" role="group" aria-label="Période des versements">
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="mensuel" checked><span>Mensuel</span></label>
+                    <label class="calc-segment"><input type="radio" name="versement_periode" value="annuel"><span>Annuel</span></label>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field">
+                        <label for="av-duree">Durée (années)</label>
+                        <input type="number" id="av-duree" name="duree" value="10" min="1" max="40" step="1">
+                    </div>
+                    <div class="calc-field">
+                        <label for="av-taux">Rendement annuel (%)</label>
+                        <input type="number" id="av-taux" name="taux" value="2.5" min="0" max="10" step="0.1">
+                    </div>
+                </div>
+                <button type="submit" class="calc-btn">Projeter mon contrat</button>
+                <div id="av-results" class="calc-results" hidden>
+                    <h3>Projection</h3>
+                    <div class="calc-result-row calc-result-highlight">
+                        <span>Capital final estimé</span>
+                        <span class="calc-result-value" id="av-result-final">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Gains estimés</span>
+                        <span class="calc-result-value" id="av-result-gains">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Versements totaux</span>
+                        <span class="calc-result-value" id="av-result-verse">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Versement / mois</span>
+                        <span class="calc-result-value" id="av-result-verse-m">0 €</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>Versement / an</span>
+                        <span class="calc-result-value" id="av-result-verse-a">0 €</span>
+                    </div>
+                </div>
+            </form>
+
+            <h2>L'assurance vie en France</h2>
+            <p>L'assurance vie est l'enveloppe d'épargne la plus populaire en France, avec plus de 1 900 milliards d'euros d'encours. Elle combine un fonds en euros (capital garanti, rendement modéré) et des unités de compte (actions, obligations, ETF) plus risquées mais potentiellement plus rémunératrices.</p>
+            <p>Le contrat est particulièrement intéressant pour les projets à moyen et long terme : achat immobilier, retraite complémentaire, transmission de patrimoine.</p>
+
+            <h2>Fiscalité après 8 ans</h2>
+            <p>La fiscalité de l'assurance vie devient avantageuse après 8 ans de détention du contrat. Voici les règles principales pour un retrait (rachat) :</p>
+            <ul>
+                <li><strong>Avant 8 ans :</strong> les gains sont soumis au PFU de 12,8 % ou au barème de l'impôt, plus 17,2 % de prélèvements sociaux</li>
+                <li><strong>Après 8 ans :</strong> abattement annuel de 4 600 euros sur les gains pour une personne seule, 9 200 euros pour un couple marié ou pacsé soumis à imposition commune</li>
+                <li><strong>Au-delà de l'abattement :</strong> prélèvement forfaitaire de 7,5 % sur les gains (si les primes versées après le 27 septembre 2017 ne dépassent pas 150 000 euros) ou imposition au barème progressif</li>
+                <li><strong>Prélèvements sociaux :</strong> 17,2 % sur la totalité des gains, sans abattement</li>
+            </ul>
+            <p>L'abattement de 4 600 euros se renouvelle chaque année civile. Si tu retires 10 000 euros de gains en une fois après 8 ans, seuls 5 400 euros seront imposés au taux réduit (hors prélèvements sociaux).</p>
+
+            <h2>Fonds euros vs unités de compte</h2>
+            <p>Le fonds en euros garantit ton capital et verse un rendement annuel fixé par l'assureur. En 2025-2026, les meilleurs contrats affichent entre 2,5 % et 3,5 %. Les unités de compte (UC) investissent sur les marchés financiers : le capital n'est pas garanti, mais le potentiel de rendement est plus élevé sur le long terme.</p>
+            <p>La stratégie classique consiste à placer l'épargne de précaution sur le fonds euros et à orienter progressivement vers les UC pour les horizons longs.</p>
+
+            <h2>Transmission et clause bénéficiaire</h2>
+            <p>L'assurance vie bénéficie d'un régime fiscal spécifique en cas de décès. Les capitaux transmis aux bénéficiaires désignés échappent en partie aux droits de succession, dans certaines limites. C'est un atout pour transmettre un patrimoine, mais la rédaction de la clause bénéficiaire mérite une attention particulière.</p>
+
+            <div class="content-links">
+                <a href="/outils/calculateur-interets-composes">Comparer avec les intérêts composés</a>
+                <a href="/guides/epargne-de-precaution-france">Guide épargne de précaution</a>
+                <a href="/#hero">Apprendre l'épargne avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://www.service-public.fr/particuliers/vosdroits/F15268" rel="noopener noreferrer" target="_blank">Service-public.fr, fiscalité de l'assurance vie</a></li>
+                    <li><a href="https://www.amf-france.org/fr/espace-epargnants/les-produits-financiers/lassurance-vie" rel="noopener noreferrer" target="_blank">AMF, l'assurance vie expliquée aux épargnants</a></li>
+                    <li><a href="https://www.economie.gouv.fr/particuliers/assurance-vie" rel="noopener noreferrer" target="_blank">Ministère de l'Économie, comprendre l'assurance vie</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../calculators.js"></script>
+</body>
+</html>
