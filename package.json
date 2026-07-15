@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "validate:seo": "node scripts/validate-seo.mjs",
+    "audit:seo": "node scripts/seo-audit.mjs"
   },
   "devDependencies": {
     "@types/react": "^18.3.29",

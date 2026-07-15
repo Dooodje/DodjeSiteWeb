@@ -99,7 +99,40 @@
     });
   }
 
+  function canPlayWebM() {
+    var probe = document.createElement('video');
+    return (
+      probe.canPlayType('video/webm; codecs="vp9"') !== '' ||
+      probe.canPlayType('video/webm; codecs="vp8"') !== '' ||
+      probe.canPlayType('video/webm') !== ''
+    );
+  }
+
+  function initBackgroundVideo() {
+    var video = document.getElementById('background-video');
+    if (!video || video.dataset.loaded === 'true') return;
+
+    if (
+      window.matchMedia('(max-width: 767px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      video.removeAttribute('src');
+      return;
+    }
+
+    var webm = video.dataset.webm;
+    var mp4 = video.dataset.mp4;
+    var src = webm && canPlayWebM() ? webm : mp4 || webm;
+    if (!src) return;
+
+    video.dataset.loaded = 'true';
+    video.loop = true;
+    video.src = src;
+    video.play().catch(function () {});
+  }
+
   function init() {
+    initBackgroundVideo();
     enhanceMobileMenuCtas();
     if (!document.getElementById('mobile-floating-bar')) {
       createFloatingBar();

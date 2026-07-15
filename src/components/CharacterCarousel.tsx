@@ -4,7 +4,7 @@ import type { LottieComponentProps } from 'lottie-react';
 
 export type CarouselItem = {
   id: string;
-  building: object;
+  buildingSrc: () => Promise<object>;
   tagline: string;
   title: string;
   description: string;
@@ -50,6 +50,7 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [Lottie, setLottie] = useState<LottieComponent | null>(null);
+  const [activeBuilding, setActiveBuilding] = useState<object | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const [stageDims, setStageDims] = useState<StageDims>({ width: 0, height: 0 });
 
@@ -80,6 +81,17 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
     };
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+    setActiveBuilding(null);
+    items[activeIndex].buildingSrc().then((data) => {
+      if (!cancelled) setActiveBuilding(data);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeIndex, items]);
+
   const navigate = (dir: 'next' | 'prev') => {
     if (isAnimating || n <= 1) return;
     setIsAnimating(true);
@@ -105,9 +117,9 @@ export default function CharacterCarousel({ items, className }: CharacterCarouse
               ...getCenterStyles(stageDims)
             }}
           >
-            {Lottie ? (
+            {Lottie && activeBuilding ? (
               <Lottie
-                animationData={active.building}
+                animationData={activeBuilding}
                 loop
                 autoplay
                 rendererSettings={LOTTIE_RENDERER_OPTS}

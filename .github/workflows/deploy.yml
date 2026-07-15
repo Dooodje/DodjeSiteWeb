@@ -35,6 +35,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Validate SEO artifacts
+        run: npm run validate:seo
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:

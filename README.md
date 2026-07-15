@@ -96,21 +96,23 @@ Tapez le code Konami (↑↑↓↓←→←→BA) pour une surprise ! 🎉
 - ✅ iOS Safari, Chrome Mobile
 - ✅ Responsive design (mobile, tablet, desktop)
 
-## 🚀 Prochaines étapes
+## SEO / GEO
 
-1. Ajouter la vraie vidéo de présentation
-2. Connecter le formulaire à un backend
-3. Ajouter des vraies captures d'écran de l'app
-4. Intégrer des analytics (Google Analytics, etc.)
-5. Optimiser pour le SEO
+Le site génère automatiquement au build (`vite-seo.mjs`) :
 
-## 🎯 Optimisations SEO à considérer
+- `sitemap.xml`, `feed.xml`, `llms.txt`, `llms-full.txt`
+- `.well-known/ai.txt` et `ai/summary.json` (découverte IA)
+- Injection breadcrumbs, schema.org, BLUF, YMYL, hreflang
 
-- Ajouter des balises meta (description, keywords)
-- Optimiser les images avec des alt texts
-- Ajouter un sitemap.xml
-- Implémenter les données structurées
-- Optimiser la vitesse de chargement
+Commandes :
+
+```bash
+npm run build          # build + génération SEO
+npm run validate:seo   # validation post-build (CI)
+npm run audit:seo      # audit live (hebdo via GitHub Actions)
+```
+
+Audit hebdomadaire : `.github/workflows/seo-audit.yml` (nécessite `RESEND_API_KEY` en secret GitHub).
 
 ---
 

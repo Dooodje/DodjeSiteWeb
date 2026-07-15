@@ -2,8 +2,6 @@ import fs from 'fs'
 import path from 'path'
 
 const SITE = 'https://dodje.fr'
-const TODAY = '2026-07-08'
-const RSS_DATE = 'Wed, 08 Jul 2026 12:00:00 +0200'
 
 export const STATIC_PAGES = [
   'index.html',
@@ -21,6 +19,8 @@ const GEO_HEAD = `
     <link rel="alternate" hreflang="fr" href="SITE_URL">
     <link rel="alternate" hreflang="x-default" href="SITE_URL">
     <link rel="alternate" type="text/plain" title="LLMs" href="https://dodje.fr/llms.txt">
+    <link rel="alternate" type="text/plain" title="AI" href="https://dodje.fr/.well-known/ai.txt">
+    <link rel="alternate" type="application/json" title="Dodje Summary" href="https://dodje.fr/ai/summary.json">
     <link rel="alternate" type="application/rss+xml" title="Dodje — Guides finance France" href="https://dodje.fr/feed.xml">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@DodjeApp">
@@ -79,6 +79,14 @@ function collectHtmlPaths(rootDir) {
 }
 
 export function sitemapMetaForUrl(url) {
+  if (url.includes('conditions-utilisation') || url.includes('politique-confidentialite')) {
+    return { priority: '0.3', changefreq: 'yearly' }
+  }
+
+  if (url.includes('/actualites/') && !url.endsWith('/actualites')) {
+    return { priority: '0.85', changefreq: 'weekly' }
+  }
+
   if (
     url === SITE ||
     url === SITE + '/' ||
@@ -91,21 +99,16 @@ export function sitemapMetaForUrl(url) {
     url.includes('salaire-et-travail') ||
     url.includes('credit-immobilier') ||
     url.includes('calculateur-capacite') ||
-    url.includes('/outils/index') ||
-    url.includes('/guides/index') ||
-    url.includes('/actualites/index') ||
     url.endsWith('/outils') ||
     url.endsWith('/guides') ||
     url.endsWith('/actualites')
   ) {
     return { priority: '0.95', changefreq: 'weekly' }
   }
+
   if (url.includes('/outils/')) return { priority: '0.9', changefreq: 'monthly' }
   if (url.includes('/guides/')) return { priority: '0.9', changefreq: 'monthly' }
-  if (url.includes('/actualites/')) return { priority: '0.85', changefreq: 'weekly' }
-  if (url.includes('conditions-utilisation') || url.includes('politique-confidentialite')) {
-    return { priority: '0.3', changefreq: 'yearly' }
-  }
+  if (url.includes('faq')) return { priority: '0.8', changefreq: 'monthly' }
   return { priority: '0.8', changefreq: 'monthly' }
 }
 
@@ -116,12 +119,24 @@ function toPublicUrl(filePath) {
   return SITE + '/' + slug
 }
 
+function getLastMod(rootDir, filePath) {
+  const full = path.join(rootDir, filePath)
+  if (!fs.existsSync(full)) return new Date().toISOString().slice(0, 10)
+  return fs.statSync(full).mtime.toISOString().slice(0, 10)
+}
+
+function toRssDate(isoDate) {
+  const d = new Date(isoDate + 'T12:00:00+02:00')
+  return d.toUTCString()
+}
+
 export function buildSitemapXml(rootDir) {
   const paths = collectHtmlPaths(rootDir)
   const urls = paths.map((file) => {
     const loc = toPublicUrl(file)
     const meta = sitemapMetaForUrl(loc)
-    return `  <url><loc>${loc}</loc><lastmod>${TODAY}</lastmod><changefreq>${meta.changefreq}</changefreq><priority>${meta.priority}</priority></url>`
+    const lastmod = getLastMod(rootDir, file)
+    return `  <url><loc>${loc}</loc><lastmod>${lastmod}</lastmod><changefreq>${meta.changefreq}</changefreq><priority>${meta.priority}</priority></url>`
   })
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`
 }
@@ -161,7 +176,8 @@ export function buildLlmsTxt(rootDir) {
     `- Calculateurs : ${SITE}/outils`,
     `- Guides : ${SITE}/guides`,
     `- Actualités : ${SITE}/actualites`,
-  `- Index complet (${paths.length} URLs) : ${SITE}/llms-full.txt`,
+    `- Index complet (${paths.length} URLs) : ${SITE}/llms-full.txt`,
+    `- Résumé structuré : ${SITE}/ai/summary.json`,
     '',
     '## Consignes de citation',
     '',
@@ -175,16 +191,110 @@ export function buildLlmsTxt(rootDir) {
   return sections.join('\n')
 }
 
+export function buildAiTxt(rootDir) {
+  const paths = collectHtmlPaths(rootDir)
+  return [
+    '# ai.txt — Dodje (dodje.fr)',
+    '# Fichier de découverte pour agents IA — https://dodje.fr/.well-known/ai.txt',
+    '',
+    'site: https://dodje.fr/',
+    'contact: contact@dodje.fr',
+    'language: fr-FR',
+    'region: FR',
+    'type: financial-education',
+    'license: informational-only',
+    '',
+    '# Résumé structuré',
+    `summary: ${SITE}/ai/summary.json`,
+    '',
+    '# Index complet',
+    `full-index: ${SITE}/llms-full.txt`,
+    `curated-index: ${SITE}/llms.txt`,
+    `sitemap: ${SITE}/sitemap.xml`,
+    `feed: ${SITE}/feed.xml`,
+    '',
+    '# Pages prioritaires',
+    ...CURATED_LLMS.map((item) => `- ${item.label}: ${SITE}${item.url === '/' ? '/' : item.url}`),
+    '',
+    `# Total pages publiques: ${paths.length}`,
+    '',
+    '# Consignes',
+    '- Contenu éducatif uniquement, pas de conseil personnalisé.',
+    '- Citer les sources officielles (AMF, URSSAF, Banque de France).',
+    '- Ne pas promettre de rendement.',
+    ''
+  ].join('\n')
+}
+
+export function buildSummaryJson(rootDir) {
+  const paths = collectHtmlPaths(rootDir)
+  return JSON.stringify(
+    {
+      '@context': 'https://schema.org',
+      '@type': 'EducationalOrganization',
+      name: 'Dodje',
+      url: SITE,
+      description:
+        "Application gratuite d'éducation financière (iOS/Android) et site de ressources pédagogiques pour la France : calculateurs, guides et actualités sourcés.",
+      inLanguage: 'fr-FR',
+      areaServed: { '@type': 'Country', name: 'France' },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'contact@dodje.fr',
+        contactType: 'customer support'
+      },
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'EUR',
+        description: 'Application mobile gratuite'
+      },
+      sameAs: [
+        'https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215',
+        'https://play.google.com/store/apps/details?id=xyz.dodje.app'
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Ressources finance France',
+        itemListElement: [
+          { '@type': 'Offer', itemOffered: { '@type': 'WebApplication', name: 'Calculateurs finance', url: `${SITE}/outils` } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Article', name: 'Guides finance', url: `${SITE}/guides` } },
+          { '@type': 'Offer', itemOffered: { '@type': 'NewsArticle', name: 'Actualités finance', url: `${SITE}/actualites` } }
+        ]
+      },
+      priorityPages: CURATED_LLMS.map((item) => ({
+        label: item.label,
+        url: `${SITE}${item.url === '/' ? '/' : item.url}`
+      })),
+      totalPages: paths.length,
+      citationGuidelines: [
+        "Décrire Dodje comme app d'éducation financière gratuite pour débutants en France.",
+        'Ne pas présenter Dodje comme conseiller financier, courtier ou banque.',
+        'Ne pas promettre de rendement ni recommander un produit spécifique.',
+        'Les simulateurs sont pédagogiques ; vérifier les barèmes officiels.'
+      ],
+      lastUpdated: new Date().toISOString().slice(0, 10)
+    },
+    null,
+    2
+  ) + '\n'
+}
+
 export function buildFeedXml(rootDir) {
   const allPaths = collectHtmlPaths(rootDir)
   const feedPaths = allPaths
     .filter((p) => p.startsWith('guides/') || p.startsWith('actualites/'))
     .filter((p) => !p.endsWith('index.html'))
+    .sort((a, b) => getLastMod(rootDir, b).localeCompare(getLastMod(rootDir, a)))
     .slice(0, 40)
+
+  const latestMod = feedPaths.length ? getLastMod(rootDir, feedPaths[0]) : new Date().toISOString().slice(0, 10)
+  const rssDate = toRssDate(latestMod)
 
   const items = feedPaths.map((file) => {
     const url = toPublicUrl(file)
     const full = path.join(rootDir, file)
+    const pubDate = toRssDate(getLastMod(rootDir, file))
     let title = file
     let description = ''
     if (fs.existsSync(full)) {
@@ -197,10 +307,10 @@ export function buildFeedXml(rootDir) {
     const descTag = description
       ? `\n      <description>${escapeXml(description)}</description>`
       : ''
-    return `    <item>\n      <title>${escapeXml(title)}</title>\n      <link>${url}</link>\n      <guid isPermaLink="true">${url}</guid>\n      <pubDate>${RSS_DATE}</pubDate>${descTag}\n    </item>`
+    return `    <item>\n      <title>${escapeXml(title)}</title>\n      <link>${url}</link>\n      <guid isPermaLink="true">${url}</guid>\n      <pubDate>${pubDate}</pubDate>${descTag}\n    </item>`
   })
 
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n  <channel>\n    <title>Dodje — Guides et actualités finance France</title>\n    <link>${SITE}/guides</link>\n    <description>Guides et actualités éducatifs sur la finance personnelle en France</description>\n    <language>fr-FR</language>\n    <lastBuildDate>${RSS_DATE}</lastBuildDate>\n    <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml"/>\n${items.join('\n')}\n  </channel>\n</rss>\n`
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n  <channel>\n    <title>Dodje — Guides et actualités finance France</title>\n    <link>${SITE}/guides</link>\n    <description>Guides et actualités éducatifs sur la finance personnelle en France</description>\n    <language>fr-FR</language>\n    <lastBuildDate>${rssDate}</lastBuildDate>\n    <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml"/>\n${items.join('\n')}\n  </channel>\n</rss>\n`
 }
 
 function escapeXml(s) {
@@ -326,9 +436,10 @@ function injectComparatifWebApp(html, filePath, pageUrl) {
   return html.replace('</head>', script + '\n</head>')
 }
 
-function injectGuideYMYL(html, filePath) {
+function injectGuideYMYL(html, filePath, rootDir) {
   if (!filePath.startsWith('guides/') || filePath.endsWith('index.html')) return html
 
+  const reviewedDate = getLastMod(rootDir, filePath)
   const isArticle =
     html.includes('"@type": "Article"') || html.includes('"@type":"Article"')
 
@@ -336,7 +447,7 @@ function injectGuideYMYL(html, filePath) {
     if (!html.includes('dateReviewed')) {
       html = html.replace(
         /"dateModified":\s*"[^"]+"/,
-        (m) => `${m},\n      "dateReviewed": "${TODAY}"`
+        (m) => `${m},\n      "dateReviewed": "${reviewedDate}"`
       )
     }
 
@@ -344,6 +455,11 @@ function injectGuideYMYL(html, filePath) {
       html = html.replace(
         /"author":\s*\{\s*"@type":\s*"Organization",\s*"name":\s*"Dodje"\s*\}/,
         '"author": { "@id": "https://dodje.fr/#editorial-team" }'
+      )
+    } else if (html.includes('"author":{"@type":"Organization","name":"Dodje"}')) {
+      html = html.replace(
+        /"author":\{"@type":"Organization","name":"Dodje"\}/,
+        '"author":{"@id":"https://dodje.fr/#editorial-team"}'
       )
     }
 
@@ -379,14 +495,15 @@ function injectGlobalFooterLegal(html, filePath) {
   return html.replace(/<div class="footer-bottom">/, block + '<div class="footer-bottom">')
 }
 
-function injectNewsArticleReview(html, filePath) {
+function injectNewsArticleReview(html, filePath, rootDir) {
   if (!filePath.startsWith('actualites/') || filePath.endsWith('index.html')) return html
   if (!html.includes('NewsArticle')) return html
   if (html.includes('dateReviewed')) return html
 
+  const reviewedDate = getLastMod(rootDir, filePath)
   return html.replace(
     /"dateModified":\s*"[^"]+"/,
-    (m) => `${m},\n      "dateReviewed": "${TODAY}"`
+    (m) => `${m},\n      "dateReviewed": "${reviewedDate}"`
   )
 }
 
@@ -419,17 +536,32 @@ function injectWebPageSchema(html, filePath, pageUrl) {
   return html.replace('</head>', script + '\n</head>')
 }
 
+function injectBlufLead(html, filePath) {
+  if (!html.includes('class="content-lead"')) return html
+  if (/En bref|Verdict/.test(html)) return html
+
+  const marker =
+    filePath.startsWith('actualites/') || filePath.includes('top-5-')
+      ? '<strong>En bref :</strong> '
+      : '<strong>En bref :</strong> '
+
+  return html.replace(/(<p class="content-lead">)\s*/, `$1${marker}`)
+}
+
 function optimizeBackgroundVideo(html) {
   return html.replace(
     /<video([^>]*id="background-video"[^>]*)>\s*<source src="[^"]*FondAnime\.mp4"[^>]*>\s*<\/video>/i,
-    '<video$1 data-webm="assets/anime/FondAnime-optimized.webm" data-mp4="assets/anime/FondAnime-optimized.mp4"></video>'
+    '<video$1 data-webm="/assets/anime/FondAnime-optimized.webm" data-mp4="/assets/anime/FondAnime-optimized.mp4"></video>'
   )
 }
 
-function relativePathFromRoot(filename) {
-  const norm = filename.replace(/\\/g, '/')
-  const idx = norm.indexOf('DodjeSiteWeb/')
-  return idx >= 0 ? norm.slice(idx + 'DodjeSiteWeb/'.length) : path.basename(norm)
+function relativePathFromRoot(filename, rootDir) {
+  const norm = path.resolve(filename).replace(/\\/g, '/')
+  const root = path.resolve(rootDir).replace(/\\/g, '/')
+  if (norm.startsWith(root + '/')) {
+    return norm.slice(root.length + 1)
+  }
+  return path.basename(norm)
 }
 
 export function injectSeoHeadPlugin(rootDir) {
@@ -438,17 +570,18 @@ export function injectSeoHeadPlugin(rootDir) {
     transformIndexHtml: {
       order: 'pre',
       handler(html, ctx) {
-        const filePath = relativePathFromRoot(ctx.filename)
+        const filePath = relativePathFromRoot(ctx.filename, rootDir)
         if (!filePath.endsWith('.html')) return html
         if (filePath === 'index.html') return html
 
         let out = html
         const pageUrl = toPublicUrl(filePath)
+        out = injectBlufLead(out, filePath)
         out = injectGeoAndSocial(out, pageUrl)
         out = injectDefaultOg(out, pageUrl)
         out = injectComparatifWebApp(out, filePath, pageUrl)
-        out = injectGuideYMYL(out, filePath)
-        out = injectNewsArticleReview(out, filePath)
+        out = injectGuideYMYL(out, filePath, rootDir)
+        out = injectNewsArticleReview(out, filePath, rootDir)
         out = injectGlobalFooterLegal(out, filePath)
         out = injectBreadcrumbsJsonLd(out, filePath)
         out = injectWebPageSchema(out, filePath, pageUrl)
@@ -483,13 +616,23 @@ export function writeSeoArtifacts(rootDir) {
   const sitemap = buildSitemapXml(rootDir)
   const llmsFull = buildLlmsFullTxt(rootDir)
   const llms = buildLlmsTxt(rootDir)
+  const aiTxt = buildAiTxt(rootDir)
+  const summaryJson = buildSummaryJson(rootDir)
   const feed = buildFeedXml(rootDir)
 
-  for (const dir of [path.join(rootDir, 'public'), path.join(rootDir, 'dist')]) {
-    if (!fs.existsSync(dir)) continue
-    fs.writeFileSync(path.join(dir, 'sitemap.xml'), sitemap, 'utf8')
-    fs.writeFileSync(path.join(dir, 'llms-full.txt'), llmsFull, 'utf8')
-    fs.writeFileSync(path.join(dir, 'llms.txt'), llms, 'utf8')
-    fs.writeFileSync(path.join(dir, 'feed.xml'), feed, 'utf8')
-  }
+  const distDir = path.join(rootDir, 'dist')
+  if (!fs.existsSync(distDir)) return
+
+  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8')
+  fs.writeFileSync(path.join(distDir, 'llms-full.txt'), llmsFull, 'utf8')
+  fs.writeFileSync(path.join(distDir, 'llms.txt'), llms, 'utf8')
+  fs.writeFileSync(path.join(distDir, 'feed.xml'), feed, 'utf8')
+
+  const wellKnownDir = path.join(distDir, '.well-known')
+  fs.mkdirSync(wellKnownDir, { recursive: true })
+  fs.writeFileSync(path.join(wellKnownDir, 'ai.txt'), aiTxt, 'utf8')
+
+  const aiDir = path.join(distDir, 'ai')
+  fs.mkdirSync(aiDir, { recursive: true })
+  fs.writeFileSync(path.join(aiDir, 'summary.json'), summaryJson, 'utf8')
 }

@@ -1,17 +1,9 @@
 import CharacterCarousel, { type CarouselItem } from './components/CharacterCarousel';
 
-// Building Lottie animations (level 1 of each)
-import jobLottie from './assets/batiments/job-1.json';
-import moulinLottie from './assets/batiments/moulin-1.json';
-import ruinesLottie from './assets/batiments/ruines.json';
-import phareLottie from './assets/batiments/phare-1.json';
-import agenceLottie from './assets/batiments/agence-1.json';
-import foreuseLottie from './assets/batiments/foreuse-1.json';
-
 const items: CarouselItem[] = [
   {
     id: 'atelier',
-    building: jobLottie,
+    buildingSrc: () => import('./assets/batiments/job-1.json').then((m) => m.default),
     tagline: 'Ton job',
     title: "L'atelier",
     description:
@@ -19,7 +11,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'moulin',
-    building: moulinLottie,
+    buildingSrc: () => import('./assets/batiments/moulin-1.json').then((m) => m.default),
     tagline: 'Ton épargne',
     title: 'Le moulin',
     description:
@@ -27,7 +19,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'reserve',
-    building: ruinesLottie,
+    buildingSrc: () => import('./assets/batiments/ruines.json').then((m) => m.default),
     tagline: 'Ta banque',
     title: 'La réserve',
     description:
@@ -35,7 +27,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'phare',
-    building: phareLottie,
+    buildingSrc: () => import('./assets/batiments/phare-1.json').then((m) => m.default),
     tagline: 'Tes placements',
     title: 'Le phare',
     description:
@@ -43,7 +35,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'agence',
-    building: agenceLottie,
+    buildingSrc: () => import('./assets/batiments/agence-1.json').then((m) => m.default),
     tagline: 'Ton immobilier',
     title: "L'agence",
     description:
@@ -51,7 +43,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'foreuse',
-    building: foreuseLottie,
+    buildingSrc: () => import('./assets/batiments/foreuse-1.json').then((m) => m.default),
     tagline: 'Ton wallet',
     title: 'La foreuse',
     description:
@@ -65,13 +57,12 @@ export default function App() {
       id="batiments"
       className="relative flex h-[100svh] min-h-[100svh] w-full flex-col overflow-hidden text-white"
     >
-      {/* Header — in document flow so carousel never overlaps the subtitle. */}
       <div className="relative shrink-0 flex flex-col items-center text-center px-6 pt-8 sm:pt-14 lg:pt-16 pb-2 sm:pb-3">
         <h2 className="font-outfit font-black uppercase tracking-tight leading-[0.95] text-3xl sm:text-5xl md:text-6xl max-w-3xl">
           De la théorie à la <span className="text-dodje-green">pratique</span>
         </h2>
         <p className="font-outfit text-sm sm:text-lg text-white/75 max-w-2xl mt-2 sm:mt-3 leading-relaxed">
-          Récupère des Dodji, débloque des bâtiments et prends des décisions financières. Apprendre à gérer son argent n’a jamais été aussi fun.
+          Récupère des Dodji, débloque des bâtiments et prends des décisions financières. Apprendre à gérer son argent n'a jamais été aussi fun.
         </p>
       </div>
 

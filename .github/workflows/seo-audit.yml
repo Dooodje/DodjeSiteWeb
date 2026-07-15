@@ -1,0 +1,29 @@
+name: SEO Audit
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run live SEO audit
+        env:
+          SITE_URL: https://dodje.fr
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          AUDIT_EMAIL: ${{ secrets.AUDIT_EMAIL }}
+        run: node scripts/seo-audit.mjs
