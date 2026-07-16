@@ -7,6 +7,10 @@ type SegmentLottieProps = {
   loop?: boolean;
   reducedMotion?: boolean | null;
   alignBottom?: boolean;
+  /** Static image shown until Lottie is ready (avoids empty flash). */
+  poster?: string;
+  /** Start loading immediately (above-the-fold), skip IntersectionObserver gate. */
+  eager?: boolean;
   className?: string;
   style?: CSSProperties;
 };
@@ -19,6 +23,8 @@ export default function SegmentLottie({
   loop = true,
   reducedMotion = false,
   alignBottom = false,
+  poster,
+  eager = false,
   className,
   style
 }: SegmentLottieProps) {
@@ -26,7 +32,7 @@ export default function SegmentLottie({
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [Lottie, setLottie] = useState<LottieComponent | null>(null);
   const [animationData, setAnimationData] = useState<object | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(eager);
   const [isReady, setIsReady] = useState(false);
 
   const syncPlayback = useCallback(() => {
@@ -41,6 +47,11 @@ export default function SegmentLottie({
   }, [isVisible, isReady, reducedMotion]);
 
   useEffect(() => {
+    if (eager) {
+      setIsVisible(true);
+      return;
+    }
+
     const el = rootRef.current;
     if (!el) return;
 
@@ -53,7 +64,7 @@ export default function SegmentLottie({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [eager]);
 
   useEffect(() => {
     if (!isVisible || Lottie) return;
@@ -89,15 +100,31 @@ export default function SegmentLottie({
     syncPlayback();
   }, [syncPlayback]);
 
+  const showLottie = Lottie !== null && animationData !== null;
+
   return (
     <div
       ref={rootRef}
       role="img"
       aria-label={alt}
       className={className}
-      style={style}
+      style={{ ...style, position: style?.position ?? 'relative' }}
     >
-      {Lottie && animationData ? (
+      {poster && !showLottie ? (
+        <img
+          src={poster}
+          alt=""
+          aria-hidden
+          decoding="async"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.45))'
+          }}
+        />
+      ) : null}
+      {showLottie ? (
         <Lottie
           lottieRef={lottieRef}
           animationData={animationData}

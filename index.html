@@ -46,6 +46,15 @@
 
     <!-- Preload the likely LCP assets used above the fold. -->
     <link rel="preload" as="image" href="assets/Logo_degrade_260.webp" fetchpriority="high" type="image/webp">
+    <link rel="preload" as="image" href="assets/MascotteSalut.png" fetchpriority="high">
+
+    <!-- First-paint fallback before the Vite CSS bundle arrives. -->
+    <style>
+      html { background-color: #000; color: #fff; }
+      body { margin: 0; background: transparent; }
+      #hero-root { min-height: 640px; }
+      @media (min-width: 1024px) { #hero-root { min-height: 720px; } }
+    </style>
 
     <!-- Preload critical Outfit variable font used above the fold (headings + UI). -->
     <link rel="preload" href="fonts/Outfit-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
@@ -461,17 +470,59 @@
 
     <main id="main-content">
     <!-- Hero Section (React).
-         Static H1 + intro lives inside #hero-root as a no-JS / crawler
-         fallback. React mounts on top of it and replaces the children when
-         the bundle loads, so end users only see the React UI. -->
+         Visible static shell paints immediately; React replaces it on mount
+         with the interactive hero (same layout, Lottie mascot). -->
     <div id="hero-root">
-        <h1 style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">
-            Dodje, l'application mobile gratuite d'éducation financière pour comprendre ton argent simplement et sans jargon.
-        </h1>
-        <p style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">
-            Dodje est l'application mobile française d'éducation financière lancée en 2024. Elle aide les débutants à comprendre le budget, l'épargne, la bourse et la crypto grâce à des parcours d'apprentissage ludiques, des quiz et un système de gamification. Disponible gratuitement sur iOS et Android, sans conseil personnalisé ni promesse de rendement.
-            Simulateurs financiers gratuits pour la France : <a href="/outils/calculateur-salaire-brut-net">calculateur salaire brut net</a>, <a href="/outils/salaire-3000-brut-en-net">3 000 euros brut en net</a>, <a href="/outils/salaire-et-travail">salaire et travail</a>, <a href="/outils/credit-immobilier">crédit immobilier</a>, <a href="/outils/calculateur-livret-a">calculateur Livret A</a>, <a href="/outils/calculateur-capacite-emprunt">capacité d'emprunt</a>, <a href="/outils/comparatif-pea-cto">PEA vs CTO</a>, <a href="/outils/calculateur-budget-mensuel">budget mensuel</a>, <a href="/outils/calculateur-micro-entreprise">micro-entreprise</a>. <a href="/outils">Tous les calculateurs Dodje</a>.
-        </p>
+        <section class="hero-shell" aria-label="Dodje">
+            <div class="hero-shell__inner">
+                <div class="hero-shell__grid">
+                    <div class="hero-shell__copy">
+                        <div class="hero-shell__eyebrow">Disponible sur iOS &amp; Android</div>
+                        <h1 class="hero-shell__title">
+                            Comprends ton argent
+                            <span class="hero-shell__title-accent">simplement et gratuitement.</span>
+                        </h1>
+                        <div class="hero-shell__stores hero-shell__stores--desktop">
+                            <a class="hero-shell__btn hero-shell__btn--apple" href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215" target="_blank" rel="noopener noreferrer">
+                                <span class="hero-shell__btn-text">
+                                    <span class="hero-shell__btn-kicker">Télécharger sur</span>
+                                    <span class="hero-shell__btn-name">App Store</span>
+                                </span>
+                            </a>
+                            <a class="hero-shell__btn hero-shell__btn--google" href="https://play.google.com/store/apps/details?id=xyz.dodje.app" target="_blank" rel="noopener noreferrer">
+                                <span class="hero-shell__btn-text">
+                                    <span class="hero-shell__btn-kicker">Télécharger sur</span>
+                                    <span class="hero-shell__btn-name">Google Play</span>
+                                </span>
+                            </a>
+                        </div>
+                        <p class="hero-shell__trust hero-shell__trust--desktop">Contenus éducatifs uniquement, sans conseil financier personnalisé.</p>
+                    </div>
+                    <div class="hero-shell__mascot">
+                        <img src="assets/MascotteSalut.png" alt="Mascotte Dodje qui salue" width="1080" height="1080" decoding="async" fetchpriority="high">
+                    </div>
+                    <div class="hero-shell__stores hero-shell__stores--mobile">
+                        <a class="hero-shell__btn hero-shell__btn--apple" href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215" target="_blank" rel="noopener noreferrer">
+                            <span class="hero-shell__btn-text">
+                                <span class="hero-shell__btn-kicker">Télécharger sur</span>
+                                <span class="hero-shell__btn-name">App Store</span>
+                            </span>
+                        </a>
+                        <a class="hero-shell__btn hero-shell__btn--google" href="https://play.google.com/store/apps/details?id=xyz.dodje.app" target="_blank" rel="noopener noreferrer">
+                            <span class="hero-shell__btn-text">
+                                <span class="hero-shell__btn-kicker">Télécharger sur</span>
+                                <span class="hero-shell__btn-name">Google Play</span>
+                            </span>
+                        </a>
+                    </div>
+                    <p class="hero-shell__trust hero-shell__trust--mobile">Contenus éducatifs uniquement, sans conseil financier personnalisé.</p>
+                </div>
+            </div>
+            <p class="hero-shell__seo">
+                Dodje est l'application mobile française d'éducation financière lancée en 2024. Elle aide les débutants à comprendre le budget, l'épargne, la bourse et la crypto grâce à des parcours d'apprentissage ludiques, des quiz et un système de gamification. Disponible gratuitement sur iOS et Android, sans conseil personnalisé ni promesse de rendement.
+                Simulateurs financiers gratuits pour la France : <a href="/outils/calculateur-salaire-brut-net">calculateur salaire brut net</a>, <a href="/outils/salaire-3000-brut-en-net">3 000 euros brut en net</a>, <a href="/outils/salaire-et-travail">salaire et travail</a>, <a href="/outils/credit-immobilier">crédit immobilier</a>, <a href="/outils/calculateur-livret-a">calculateur Livret A</a>, <a href="/outils/calculateur-capacite-emprunt">capacité d'emprunt</a>, <a href="/outils/comparatif-pea-cto">PEA vs CTO</a>, <a href="/outils/calculateur-budget-mensuel">budget mensuel</a>, <a href="/outils/calculateur-micro-entreprise">micro-entreprise</a>. <a href="/outils">Tous les calculateurs Dodje</a>.
+            </p>
+        </section>
     </div>
 
     <!-- Stats Section (React) -->

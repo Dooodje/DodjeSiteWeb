@@ -1,4 +1,5 @@
 import { Sparkles } from 'lucide-react';
+import mascotPoster from '../assets/mascotte/MascotteSalut.png';
 import { segmentLottie } from '../assets/lottie/segments';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import SegmentLottie from './SegmentLottie';
@@ -44,11 +45,9 @@ function GooglePlayIcon() {
 
 function StoreButtons({
   className,
-  style,
   stacked = false
 }: {
   className?: string;
-  style?: React.CSSProperties;
   stacked?: boolean;
 }) {
   const btnWidth = stacked ? 'w-full min-w-0' : 'flex-1';
@@ -57,7 +56,7 @@ function StoreButtons({
   const kickerSize = stacked ? 'text-[0.65rem]' : 'text-[0.6rem] sm:text-[0.65rem]';
 
   return (
-    <div className={stacked ? `w-full ${className ?? ''}` : className} style={style}>
+    <div className={stacked ? `w-full ${className ?? ''}` : className}>
       <a
         href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215"
         target="_blank"
@@ -132,8 +131,7 @@ export default function Hero() {
           <div
             className="inline-flex items-center gap-2 self-start rounded-full
                        bg-white/5 backdrop-blur
-                       px-3.5 py-1.5 text-xs sm:text-sm font-outfit
-                       motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
+                       px-3.5 py-1.5 text-xs sm:text-sm font-outfit"
           >
             <Sparkles size={14} className="text-dodje-green" />
             <span className="text-white/80">Disponible sur iOS &amp; Android</span>
@@ -145,8 +143,7 @@ export default function Hero() {
               {HEADLINE_LINE_1.map((word, i) => (
                 <span
                   key={`l1-${i}`}
-                  className="inline-block mr-[0.18em] last:mr-0 motion-safe:animate-[heroWord_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
-                  style={{ animationDelay: `${180 + i * 70}ms` }}
+                  className="inline-block mr-[0.18em] last:mr-0"
                 >
                   {word}
                 </span>
@@ -156,10 +153,9 @@ export default function Hero() {
               {HEADLINE_LINE_2.map((segment, i) => (
                 <span
                   key={`l2-${i}`}
-                  className={`inline-block mr-[0.18em] last:mr-0 motion-safe:animate-[heroWord_700ms_cubic-bezier(0.4,0,0.2,1)_both]${
+                  className={`inline-block mr-[0.18em] last:mr-0${
                     segment.nowrap ? ' whitespace-nowrap' : ''
                   }`}
-                  style={{ animationDelay: `${390 + i * 70}ms` }}
                 >
                   {segment.words.map((word, j) => (
                     <span
@@ -178,15 +174,11 @@ export default function Hero() {
 
           {/* CTAs desktop — à gauche de l'animation */}
           <StoreButtons
-            className="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
-            style={{ animationDelay: '850ms' }}
+            className="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1"
           />
 
           {/* Trust note desktop */}
-          <p
-            className="hidden lg:block text-xs sm:text-sm font-outfit text-white/55 max-w-xl mt-2 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
-            style={{ animationDelay: '1000ms' }}
-          >
+          <p className="hidden lg:block text-xs sm:text-sm font-outfit text-white/55 max-w-xl mt-2">
             {TRUST_NOTE}
           </p>
           </div>
@@ -196,8 +188,10 @@ export default function Hero() {
             <SegmentLottie
               loadAnimation={segmentLottie.salut}
               alt="Mascotte Dodje qui salue"
+              poster={mascotPoster}
+              eager
               reducedMotion={reducedMotion}
-              className="relative z-10 w-[min(100%,420px)] sm:w-[min(100%,560px)] lg:w-[min(100%,1080px)] xl:w-[min(100%,1200px)] aspect-square select-none motion-safe:animate-[heroMascot_900ms_cubic-bezier(0.4,0,0.2,1)_300ms_both]"
+              className="relative z-10 w-[min(100%,420px)] sm:w-[min(100%,560px)] lg:w-[min(100%,1080px)] xl:w-[min(100%,1200px)] aspect-square select-none"
               style={{ pointerEvents: 'none' }}
             />
           </div>
@@ -205,14 +199,10 @@ export default function Hero() {
           {/* CTAs mobile — sous l'animation, pleine largeur, empilés */}
           <StoreButtons
             stacked
-            className="order-3 flex w-full flex-col gap-3 lg:hidden motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
-            style={{ animationDelay: '850ms' }}
+            className="order-3 flex w-full flex-col gap-3 lg:hidden"
           />
 
-          <p
-            className="order-4 lg:hidden text-xs sm:text-sm font-outfit text-white/55 text-center max-w-xl mx-auto mt-1 motion-safe:animate-[heroFadeUp_700ms_cubic-bezier(0.4,0,0.2,1)_both]"
-            style={{ animationDelay: '1000ms' }}
-          >
+          <p className="order-4 lg:hidden text-xs sm:text-sm font-outfit text-white/55 text-center max-w-xl mx-auto mt-1">
             {TRUST_NOTE}
           </p>
         </div>
