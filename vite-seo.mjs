@@ -635,4 +635,54 @@ export function writeSeoArtifacts(rootDir) {
   const aiDir = path.join(distDir, 'ai')
   fs.mkdirSync(aiDir, { recursive: true })
   fs.writeFileSync(path.join(aiDir, 'summary.json'), summaryJson, 'utf8')
+
+  writeGhPagesRedirects(rootDir, distDir)
+}
+
+/**
+ * GitHub Pages ignores Netlify-style `_redirects`. Emit HTML stubs so old
+ * URLs return 200 with a canonical + meta/JS redirect (Google follows these).
+ */
+function writeGhPagesRedirects(rootDir, distDir) {
+  const redirectsFile = path.join(rootDir, 'public/_redirects')
+  if (!fs.existsSync(redirectsFile)) return
+
+  for (const line of fs.readFileSync(redirectsFile, 'utf8').split('\n')) {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith('#')) continue
+
+    const parts = trimmed.split(/\s+/)
+    if (parts.length < 3) continue
+
+    const [from, to, status] = parts
+    // Skip rewrites (200) and wildcards — GH Pages needs explicit HTML files.
+    if (status === '200' || from.includes('*') || !from.startsWith('/')) continue
+
+    const absoluteTo = to.startsWith('http') ? to : `${SITE}${to}`
+    const outFile = from.endsWith('/')
+      ? path.join(distDir, from.slice(1), 'index.html')
+      : path.join(distDir, `${from.slice(1)}.html`)
+
+    fs.mkdirSync(path.dirname(outFile), { recursive: true })
+    fs.writeFileSync(outFile, buildRedirectHtml(absoluteTo), 'utf8')
+  }
+}
+
+function buildRedirectHtml(targetUrl) {
+  const safe = targetUrl.replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="${safe}">
+  <meta http-equiv="refresh" content="0;url=${safe}">
+  <title>Redirection…</title>
+  <script>location.replace(${JSON.stringify(targetUrl)})</script>
+</head>
+<body>
+  <p>Cette page a déménagé. <a href="${safe}">Continuer vers ${safe}</a>.</p>
+</body>
+</html>
+`
 }

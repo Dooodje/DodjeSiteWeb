@@ -118,6 +118,39 @@ function validateBreadcrumbs() {
   }
 }
 
+function validateGhPagesRedirects() {
+  const redirectsFile = path.join(rootDir, 'public/_redirects')
+  if (!fs.existsSync(redirectsFile)) {
+    warn('public/_redirects missing')
+    return
+  }
+
+  let expected = 0
+  for (const line of fs.readFileSync(redirectsFile, 'utf8').split('\n')) {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith('#')) continue
+    const parts = trimmed.split(/\s+/)
+    if (parts.length < 3) continue
+    const [from, , status] = parts
+    if (status === '200' || from.includes('*') || !from.startsWith('/')) continue
+    expected++
+    const relative = from.endsWith('/')
+      ? path.join(from.slice(1), 'index.html')
+      : `${from.slice(1)}.html`
+    const full = path.join(distDir, relative)
+    if (!fs.existsSync(full)) {
+      fail(`Missing GH Pages redirect stub: ${relative}`)
+      continue
+    }
+    const html = fs.readFileSync(full, 'utf8')
+    if (!html.includes('http-equiv="refresh"') || !html.includes('noindex')) {
+      fail(`Invalid redirect stub content: ${relative}`)
+    }
+  }
+
+  if (expected === 0) warn('No redirect rules found in public/_redirects')
+}
+
 // --- Run validations ---
 
 if (!fs.existsSync(distDir)) {
@@ -140,6 +173,7 @@ validateSitemapPriorities()
 validateHreflangPaths()
 validateBreadcrumbs()
 validateBlufInDist()
+validateGhPagesRedirects()
 
 console.log('\n=== SEO Validation Report ===\n')
 

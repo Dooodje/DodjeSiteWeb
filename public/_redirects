@@ -1,3 +1,6 @@
+# Source of truth for legacy URL moves.
+# Netlify/Cloudflare honor this file; GitHub Pages does not — build emits
+# HTML redirect stubs from these rules (see writeGhPagesRedirects in vite-seo.mjs).
 /education-financiere /guides 301
 /apprendre-la-bourse /guides/investir-en-bourse-france-debutant 301
 /crypto-debutant /guides/premiers-pas-crypto-france 301
@@ -6,4 +9,3 @@
 /salaire-et-travail /outils/salaire-et-travail 301
 /credit-immobilier /outils/credit-immobilier 301
 /calculateur-micro-entreprise /outils/calculateur-micro-entreprise 301
-/favicon.ico /assets/favicon-48.png 200
