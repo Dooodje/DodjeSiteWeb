@@ -131,20 +131,11 @@ const earlyCriticalAssets = () => ({
       const moduleScripts = extractTag(result, moduleScriptPattern)
       result = moduleScripts.cleaned
 
-      const toAsyncStylesheet = (tag) => {
-        const href = tag.match(/href="([^"]+)"/)?.[1]
-        if (!href) return tag
-        return `<link rel="preload" as="style" crossorigin href="${href}" onload="this.onload=null;this.rel='stylesheet'"><noscript>${tag}</noscript>`
-      }
-
-      const syncStylesheets = stylesheets.tags.filter((tag) => tag.includes('main-'))
-      const deferredStylesheets = stylesheets.tags
-        .filter((tag) => !tag.includes('main-'))
-        .map(toAsyncStylesheet)
-
+      // Keep entry CSS render-blocking. Async preload caused FOUC because the
+      // critical bundle is named index-*.css (not main-*), and below-fold
+      // styles.css is already deferred via requestIdleCallback in main.tsx.
       const bundle = [
-        ...syncStylesheets,
-        ...deferredStylesheets,
+        ...stylesheets.tags,
         ...modulepreloads.tags,
         ...moduleScripts.tags
       ].join('\n    ')
