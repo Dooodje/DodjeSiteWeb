@@ -595,6 +595,11 @@ body {
     color: var(--secondary-green);
 }
 
+/* Hide until styles.css loads — otherwise store links flash top-left. */
+.mobile-floating-bar {
+    display: none;
+}
+
 /* Mobile Menu Styles */
 .mobile-menu {
     position: fixed;

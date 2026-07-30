@@ -54,6 +54,8 @@
       body { margin: 0; background: transparent; }
       #hero-root { min-height: 640px; }
       @media (min-width: 1024px) { #hero-root { min-height: 720px; } }
+      /* Prevent store-bar FOUC before deferred styles.css applies. */
+      .mobile-floating-bar { display: none; }
     </style>
 
     <!-- Preload critical Outfit variable font used above the fold (headings + UI). -->
