@@ -8,7 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "validate:seo": "node scripts/validate-seo.mjs",
-    "audit:seo": "node scripts/seo-audit.mjs"
+    "audit:seo": "node scripts/seo-audit.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
+    "new-article": "node scripts/new-article.mjs",
+    "publish:actu": "node scripts/publish-actu-daily.mjs",
+    "publish:guide": "node scripts/publish-guide-daily.mjs"
   },
   "devDependencies": {
     "@types/react": "^18.3.29",

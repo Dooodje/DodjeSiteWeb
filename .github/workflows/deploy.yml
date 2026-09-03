@@ -38,6 +38,12 @@ jobs:
       - name: Validate SEO artifacts
         run: npm run validate:seo
 
+      - name: Ping IndexNow
+        env:
+          SITE_URL: https://dodje.fr
+        run: node scripts/indexnow.mjs
+        continue-on-error: true
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:

@@ -2,10 +2,13 @@ import fs from 'fs'
 import path from 'path'
 
 const SITE = 'https://dodje.fr'
+const OG_IMAGE = `${SITE}/assets/og-default-1200x630.png`
 
 export const STATIC_PAGES = [
   'index.html',
   'faq.html',
+  'contact.html',
+  'mentions-legales.html',
   'conditions-utilisation.html',
   'politique-confidentialite.html'
 ]
@@ -33,6 +36,8 @@ const CURATED_LLMS = [
   { label: 'Classements notés /10', url: '/guides/classements-finance-france-2026' },
   { label: 'Actualités finance', url: '/actualites' },
   { label: 'FAQ Dodje', url: '/faq' },
+  { label: 'Contact', url: '/contact' },
+  { label: 'Mentions légales', url: '/mentions-legales' },
   { label: 'Salaire brut ↔ net', url: '/outils/calculateur-salaire-brut-net' },
   { label: 'Impôt sur le revenu', url: '/outils/calculateur-impot-revenu' },
   { label: "Capacité d'emprunt", url: '/outils/calculateur-capacite-emprunt' },
@@ -63,7 +68,9 @@ const CURATED_LLMS = [
   { label: 'Fiscalité crypto 2026', url: '/guides/fiscalite-crypto-france-2026' },
   { label: 'Premier achat immobilier', url: '/guides/premier-achat-immobilier-france-2026' },
   { label: 'Taux crédit immobilier', url: '/actualites/taux-credit-immobilier-juillet-2026' },
-  { label: 'Taux Livret A août 2026', url: '/actualites/taux-livret-a-hausse-aout-2026' }
+  { label: 'Taux Livret A août 2026', url: '/actualites/taux-livret-a-hausse-aout-2026' },
+  { label: 'Barèmes finance septembre 2026', url: '/actualites/baremes-finance-france-septembre-2026' },
+  { label: 'Combien épargner par mois', url: '/guides/combien-epargner-par-mois-france-2026' }
 ]
 
 function collectHtmlPaths(rootDir) {
@@ -79,7 +86,12 @@ function collectHtmlPaths(rootDir) {
 }
 
 export function sitemapMetaForUrl(url) {
-  if (url.includes('conditions-utilisation') || url.includes('politique-confidentialite')) {
+  if (
+    url.includes('conditions-utilisation') ||
+    url.includes('politique-confidentialite') ||
+    url.includes('mentions-legales') ||
+    url.includes('/contact')
+  ) {
     return { priority: '0.3', changefreq: 'yearly' }
   }
 
@@ -347,6 +359,10 @@ function buildCrumbs(filePath, html) {
     }
   } else if (filePath === 'faq.html') {
     crumbs.push({ name: 'FAQ', url: `${SITE}/faq` })
+  } else if (filePath === 'contact.html') {
+    crumbs.push({ name: 'Contact', url: `${SITE}/contact` })
+  } else if (filePath === 'mentions-legales.html') {
+    crumbs.push({ name: 'Mentions légales', url: `${SITE}/mentions-legales` })
   } else if (filePath === 'conditions-utilisation.html') {
     crumbs.push({ name: "Conditions d'utilisation", url: `${SITE}/conditions-utilisation` })
   } else if (filePath === 'politique-confidentialite.html') {
@@ -391,6 +407,35 @@ function injectVisibleBreadcrumbs(html, filePath) {
   )
 }
 
+function upgradeOgImage(html) {
+  return html
+    .replace(
+      /property="og:image" content="https:\/\/dodje\.fr\/assets\/(?:IconeApp|Logo_degrade_PNG)\.png"/g,
+      `property="og:image" content="${OG_IMAGE}"`
+    )
+    .replace(
+      /name="twitter:image" content="https:\/\/dodje\.fr\/assets\/(?:IconeApp|Logo_degrade_PNG)\.png"/g,
+      `name="twitter:image" content="${OG_IMAGE}"`
+    )
+}
+
+function injectSpeakable(html, pageUrl) {
+  if (html.includes('SpeakableSpecification')) return html
+  if (!html.includes('content-lead') && !html.includes('hero-shell__bluf')) return html
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    url: pageUrl,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['.content-lead', '.hero-shell__bluf', 'h1']
+    }
+  }
+  const script = `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
+  return html.replace('</head>', script + '\n</head>')
+}
+
 function injectDefaultOg(html, pageUrl) {
   if (html.includes('og:title')) return html
 
@@ -402,7 +447,9 @@ function injectDefaultOg(html, pageUrl) {
   const block = `
     <meta property="og:title" content="${escapeXml(title)}">
     <meta property="og:description" content="${escapeXml(desc)}">
-    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="${pageUrl}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">`
@@ -485,14 +532,112 @@ function injectGuideYMYL(html, filePath, rootDir) {
   return html
 }
 
-function injectGlobalFooterLegal(html, filePath) {
+function injectOutilsPrivacyNote(html, filePath) {
+  if (!filePath.startsWith('outils/')) return html
+  if (html.includes('content-calc-privacy')) return html
+  if (!html.includes('content-lead')) return html
+
+  const note =
+    '<div class="content-note content-calc-privacy"><p><strong>Simulation pédagogique :</strong> les données saisies restent dans ton navigateur et ne sont pas envoyées à Dodje. Résultats indicatifs, sans conseil personnalisé. <a href="/conditions-utilisation">CGU</a> · <a href="/politique-confidentialite">Confidentialité</a>.</p></div>'
+
+  return html.replace(
+    /(<p class="content-lead">[\s\S]*?<\/p>)/,
+    `$1\n            ${note}`
+  )
+}
+
+const SITE_FOOTER = `<footer class="footer site-footer">
+        <div class="container">
+            <nav class="footer-content" aria-label="Pied de page">
+                <div class="footer-section">
+                    <p class="footer-title">À propos</p>
+                    <ul>
+                        <li><a href="/">Accueil</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/guides/equipe-editoriale">Équipe éditoriale</a></li>
+                        <li><a href="/contact">Nous contacter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">Outils</p>
+                    <ul>
+                        <li><a href="/outils">Tous les calculateurs</a></li>
+                        <li><a href="/outils/salaire-et-travail">Salaire et travail</a></li>
+                        <li><a href="/outils/epargne">Épargne</a></li>
+                        <li><a href="/outils/credit-immobilier">Crédit immobilier</a></li>
+                        <li><a href="/outils/investissement">Investissement</a></li>
+                        <li><a href="/outils/crypto">Crypto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">Guides</p>
+                    <ul>
+                        <li><a href="/guides">Tous les guides</a></li>
+                        <li><a href="/guides/classements-finance-france-2026">Classements 2026</a></li>
+                        <li><a href="/guides/investir-en-bourse-france-debutant">Bourse débutant</a></li>
+                        <li><a href="/guides/premiers-pas-crypto-france">Premiers pas crypto</a></li>
+                        <li><a href="/guides/epargne-de-precaution-france">Épargne de précaution</a></li>
+                        <li><a href="/guides/glossaire-finance-investissement-2026">Glossaire</a></li>
+                        <li><a href="/actualites">Actualités</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">L'app</p>
+                    <ul>
+                        <li><a href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215" target="_blank" rel="noopener noreferrer">App Store</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=xyz.dodje.app" target="_blank" rel="noopener noreferrer">Google Play</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">Légal</p>
+                    <ul>
+                        <li><a href="/mentions-legales">Mentions légales</a></li>
+                        <li><a href="/conditions-utilisation">Conditions d'utilisation</a></li>
+                        <li><a href="/politique-confidentialite">Confidentialité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">Social</p>
+                    <ul>
+                        <li><a href="https://www.tiktok.com/@dodjeapp" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                        <li><a href="https://www.instagram.com/dodjeapp/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://discord.gg/qn7cp4nVFh" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                        <li><a href="https://x.com/DodjeApp" target="_blank" rel="noopener noreferrer">X</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje Solutions. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>`
+
+const SITE_HEADER = `<nav class="navbar navbar-simple visible">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Dodje, accueil">
+                <img src="/assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img" width="130" height="50">
+            </a>
+            <a href="/#hero" class="cta-button nav-cta">C'est parti</a>
+        </div>
+    </nav>`
+
+function injectGlobalHeader(html) {
+  const navPattern = /<nav class="navbar(?:-minimal)?[^"]*"[^>]*>[\s\S]*?<\/nav>/g
+  if (!navPattern.test(html)) return html
+  navPattern.lastIndex = 0
+  let first = true
+  return html.replace(navPattern, () => {
+    if (first) {
+      first = false
+      return SITE_HEADER
+    }
+    return ''
+  })
+}
+
+function injectGlobalFooter(html) {
   if (!html.includes('class="footer"')) return html
-  if (html.includes('footer-legal-links')) return html
-
-  const block =
-    '<div class="footer-legal-links" style="text-align:center;margin-bottom:0.75rem;font-size:0.9rem;"><a href="/conditions-utilisation">CGU</a> · <a href="/politique-confidentialite">Confidentialité</a> · <a href="/faq">FAQ</a> · <a href="/guides/equipe-editoriale">Équipe éditoriale</a></div>\n            '
-
-  return html.replace(/<div class="footer-bottom">/, block + '<div class="footer-bottom">')
+  return html.replace(/<footer\s+class="footer"[^>]*>[\s\S]*?<\/footer>/, SITE_FOOTER)
 }
 
 function injectNewsArticleReview(html, filePath, rootDir) {
@@ -529,7 +674,11 @@ function injectWebPageSchema(html, filePath, pageUrl) {
     inLanguage: 'fr-FR',
     isPartOf: { '@id': 'https://dodje.fr/#website' },
     about: { '@type': 'Country', name: 'France' },
-    publisher: { '@id': 'https://dodje.fr/#organization' }
+    publisher: { '@id': 'https://dodje.fr/#organization' },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['.content-lead', 'h1']
+    }
   }
 
   const script = `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
@@ -579,12 +728,16 @@ export function injectSeoHeadPlugin(rootDir) {
         out = injectBlufLead(out, filePath)
         out = injectGeoAndSocial(out, pageUrl)
         out = injectDefaultOg(out, pageUrl)
+        out = upgradeOgImage(out)
         out = injectComparatifWebApp(out, filePath, pageUrl)
         out = injectGuideYMYL(out, filePath, rootDir)
+        out = injectOutilsPrivacyNote(out, filePath)
         out = injectNewsArticleReview(out, filePath, rootDir)
-        out = injectGlobalFooterLegal(out, filePath)
+        out = injectGlobalHeader(out)
+        out = injectGlobalFooter(out)
         out = injectBreadcrumbsJsonLd(out, filePath)
         out = injectWebPageSchema(out, filePath, pageUrl)
+        out = injectSpeakable(out, pageUrl)
         out = injectVisibleBreadcrumbs(out, filePath)
         out = optimizeBackgroundVideo(out)
 
@@ -602,7 +755,7 @@ export function injectSeoHeadPlugin(rootDir) {
             '</head>',
             `    <meta name="twitter:title" content="${twTitle[1]}">\n` +
               (twDesc ? `    <meta name="twitter:description" content="${twDesc[1]}">\n` : '') +
-              `    <meta name="twitter:image" content="https://dodje.fr/assets/IconeApp.png">\n</head>`
+              `    <meta name="twitter:image" content="${OG_IMAGE}">\n</head>`
           )
         }
 

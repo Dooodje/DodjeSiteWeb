@@ -1,3 +1,4 @@
+https://dodje.fr/actualites/baremes-finance-france-septembre-2026
 https://dodje.fr/actualites/calendrier-fiscal-juillet-2026
 https://dodje.fr/actualites/changements-budget-juillet-2026
 https://dodje.fr/actualites/dispositif-jeanbrun-bailleur-prive-2026
@@ -11,6 +12,7 @@ https://dodje.fr/conditions-utilisation
 https://dodje.fr/faq
 https://dodje.fr/guides/assurance-vie-debutant-france-2026
 https://dodje.fr/guides/classements-finance-france-2026
+https://dodje.fr/guides/combien-epargner-par-mois-france-2026
 https://dodje.fr/guides/donnees-finance-france
 https://dodje.fr/guides/epargne-de-precaution-france
 https://dodje.fr/guides/equipe-editoriale
@@ -43,6 +45,7 @@ https://dodje.fr/guides/top-5-neobanques-france-2026
 https://dodje.fr/guides/top-5-outils-finance-2026
 https://dodje.fr/guides/wallet-crypto-guide-france-2026
 https://dodje.fr/
+https://dodje.fr/mentions-legales
 https://dodje.fr/outils/calculateur-allocation-chomage
 https://dodje.fr/outils/calculateur-assurance-vie
 https://dodje.fr/outils/calculateur-budget-mensuel

@@ -1,0 +1,126 @@
+{
+  "updated": "2026-09-03",
+  "disclaimer": "Barèmes pédagogiques Dodje. Vérifier les sources officielles avant toute décision. Pas de conseil personnalisé.",
+  "items": [
+    {
+      "id": "livret_a_taux",
+      "label": "Taux du Livret A",
+      "value": 1.5,
+      "unit": "%",
+      "display": "1,50 %",
+      "asOf": "2026-02-01",
+      "source": "Banque de France",
+      "sourceUrl": "https://www.banque-france.fr"
+    },
+    {
+      "id": "livret_a_plafond",
+      "label": "Plafond Livret A",
+      "value": 22950,
+      "unit": "EUR",
+      "display": "22 950 €",
+      "asOf": "2026-09-03",
+      "source": "Service-public.fr",
+      "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F2365"
+    },
+    {
+      "id": "ldds_plafond",
+      "label": "Plafond LDDS",
+      "value": 12000,
+      "unit": "EUR",
+      "display": "12 000 €",
+      "asOf": "2026-09-03",
+      "source": "Service-public.fr",
+      "sourceUrl": "https://www.service-public.fr"
+    },
+    {
+      "id": "lep_taux",
+      "label": "Taux du LEP",
+      "value": 3.5,
+      "unit": "%",
+      "display": "~3,50 %",
+      "asOf": "2026-09-03",
+      "source": "Banque de France",
+      "sourceUrl": "https://www.banque-france.fr"
+    },
+    {
+      "id": "lep_plafond",
+      "label": "Plafond LEP",
+      "value": 10000,
+      "unit": "EUR",
+      "display": "10 000 €",
+      "asOf": "2026-09-03",
+      "source": "Service-public.fr",
+      "sourceUrl": "https://www.service-public.fr"
+    },
+    {
+      "id": "smic_brut_mensuel",
+      "label": "SMIC brut mensuel (35 h)",
+      "value": 1823,
+      "unit": "EUR",
+      "display": "1 823 €",
+      "asOf": "2026-07-01",
+      "source": "URSSAF",
+      "sourceUrl": "https://www.urssaf.fr"
+    },
+    {
+      "id": "smic_net_estime",
+      "label": "SMIC net estimé",
+      "value": 1430,
+      "unit": "EUR",
+      "display": "~1 430 €",
+      "asOf": "2026-07-01",
+      "source": "URSSAF",
+      "sourceUrl": "https://www.urssaf.fr"
+    },
+    {
+      "id": "pmss",
+      "label": "PMSS (plafond Sécurité sociale mensuel)",
+      "value": 3925,
+      "unit": "EUR",
+      "display": "3 925 €",
+      "asOf": "2026-01-01",
+      "source": "URSSAF",
+      "sourceUrl": "https://www.urssaf.fr"
+    },
+    {
+      "id": "hcsf_effort",
+      "label": "Taux d'effort max crédit immobilier (HCSF)",
+      "value": 35,
+      "unit": "%",
+      "display": "35 %",
+      "asOf": "2026-09-03",
+      "source": "HCSF",
+      "sourceUrl": "https://www.economie.gouv.fr"
+    },
+    {
+      "id": "credit_immo_20ans",
+      "label": "Taux crédit immobilier moyen (20 ans)",
+      "value": 3.3,
+      "unit": "%",
+      "display": "~3,3 %",
+      "asOf": "2026-07-01",
+      "source": "Banque de France",
+      "sourceUrl": "https://www.banque-france.fr"
+    },
+    {
+      "id": "pea_plafond",
+      "label": "Plafond versement PEA",
+      "value": 150000,
+      "unit": "EUR",
+      "display": "150 000 €",
+      "asOf": "2026-09-03",
+      "source": "AMF",
+      "sourceUrl": "https://www.amf-france.org"
+    },
+    {
+      "id": "inflation_glissante",
+      "label": "Inflation glissante (IPC)",
+      "value": 1.8,
+      "unit": "%",
+      "display": "1,8 %",
+      "asOf": "2026-06-01",
+      "source": "INSEE",
+      "sourceUrl": "https://www.insee.fr/fr/statistiques/4265429"
+    }
+  ]
+}

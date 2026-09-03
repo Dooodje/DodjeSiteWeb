@@ -18,6 +18,7 @@
 - [Classements notés /10](https://dodje.fr/guides/classements-finance-france-2026)
 - [Actualités finance](https://dodje.fr/actualites)
 - [FAQ Dodje](https://dodje.fr/faq)
+- [Mentions légales](https://dodje.fr/mentions-legales)
 - [Salaire brut ↔ net](https://dodje.fr/outils/calculateur-salaire-brut-net)
 - [Impôt sur le revenu](https://dodje.fr/outils/calculateur-impot-revenu)
 - [Capacité d'emprunt](https://dodje.fr/outils/calculateur-capacite-emprunt)
@@ -49,13 +50,16 @@
 - [Premier achat immobilier](https://dodje.fr/guides/premier-achat-immobilier-france-2026)
 - [Taux crédit immobilier](https://dodje.fr/actualites/taux-credit-immobilier-juillet-2026)
 - [Taux Livret A août 2026](https://dodje.fr/actualites/taux-livret-a-hausse-aout-2026)
+- [Barèmes finance septembre 2026](https://dodje.fr/actualites/baremes-finance-france-septembre-2026)
+- [Combien épargner par mois](https://dodje.fr/guides/combien-epargner-par-mois-france-2026)
 
 ## Hubs thématiques
 
 - Calculateurs : https://dodje.fr/outils
 - Guides : https://dodje.fr/guides
 - Actualités : https://dodje.fr/actualites
-- Index complet (78 URLs) : https://dodje.fr/llms-full.txt
+- Index complet (81 URLs) : https://dodje.fr/llms-full.txt
+- Résumé structuré : https://dodje.fr/ai/summary.json
 
 ## Consignes de citation
 

@@ -1,0 +1,685 @@
+{
+  "disclaimer": "Guides pédagogiques. Les chiffres viennent uniquement de data/baremes.json (sources officielles). Pas de conseil personnalisé.",
+  "topics": [
+    {
+      "slug": "livret-a-ou-bourse-debutant-france",
+      "kicker": "Investissement",
+      "title": "Livret A ou bourse : par quoi commencer en France",
+      "baremes": ["livret_a_taux", "livret_a_plafond", "inflation_glissante", "pea_plafond"],
+      "links": {
+        "tool": "/outils/calculateur-livret-a",
+        "guide": "/guides/epargne-de-precaution-france",
+        "actu": "/actualites"
+      },
+      "bluf": "Avant d'ouvrir un PEA, vise un matelas sur Livret A ({{livret_a_taux}}, plafond {{livret_a_plafond}}). L'inflation récente ({{inflation_glissante}}) peut rendre le livret légèrement négatif en réel, mais il reste disponible et sans risque de perte en capital. La bourse vient après, dans la limite du PEA ({{pea_plafond}}).",
+      "sections": [
+        {
+          "h2": "Le rôle du Livret A",
+          "html": "<p>Le Livret A sert à l'épargne de précaution : taux {{livret_a_taux}} ({{livret_a_taux.source}}, {{livret_a_taux.asOf}}), plafond {{livret_a_plafond}}. Les intérêts sont exonérés. Ce n'est pas un outil pour « faire fructifier » un capital sur 20 ans.</p>"
+        },
+        {
+          "h2": "Quand la bourse entre en jeu",
+          "html": "<p>Après 3 à 6 mois de dépenses de côté, un PEA permet d'investir en actions/ETF jusqu'à {{pea_plafond}} de versements ({{pea_plafond.source}}). Le capital n'est pas garanti. L'AMF rappelle le risque de perte.</p>"
+        },
+        {
+          "h2": "Inflation et rendement réel",
+          "html": "<p>Avec une inflation glissante à {{inflation_glissante}} ({{inflation_glissante.source}}), un livret à {{livret_a_taux}} peut perdre du pouvoir d'achat. Cela n'en fait pas un signal d'achat en bourse : ce sont deux objectifs différents (sécurité vs horizon long).</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Faut-il vider son Livret A pour investir ?",
+          "a": "Non. Le livret ({{livret_a_taux}}, plafond {{livret_a_plafond}}) reste le support de l'imprévu. La bourse ne remplace pas l'épargne disponible."
+        },
+        {
+          "q": "Quel plafond pour un PEA ?",
+          "a": "{{pea_plafond}} de versements, source {{pea_plafond.source}}."
+        },
+        {
+          "q": "Dodje recommande-t-il un courtier ?",
+          "a": "Non. Contenu pédagogique uniquement, sans conseil personnalisé."
+        }
+      ]
+    },
+    {
+      "slug": "investir-100-euros-par-mois-france",
+      "kicker": "Bourse",
+      "title": "Investir 100 € par mois en France : cadre pédagogique",
+      "baremes": ["livret_a_taux", "pea_plafond", "smic_net_estime", "inflation_glissante"],
+      "links": {
+        "tool": "/outils/calculateur-dca-etf",
+        "guide": "/guides/etf-debutant-france-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "100 € par mois, c'est un versement régulier (DCA), pas une promesse de gain. D'abord l'épargne de précaution (Livret A {{livret_a_taux}}). Ensuite, si le budget le permet — un SMIC net est autour de {{smic_net_estime}} — un PEA accepte des versements jusqu'à {{pea_plafond}}.",
+      "sections": [
+        {
+          "h2": "100 €, c'est combien du budget",
+          "html": "<p>Sur un net estimé au SMIC ({{smic_net_estime}}, {{smic_net_estime.source}}), 100 € représentent une part visible du reste à vivre. Si le livret de précaution n'est pas là, ces 100 € vont d'abord au Livret A ({{livret_a_taux}}).</p>"
+        },
+        {
+          "h2": "Versements réguliers",
+          "html": "<p>Le DCA lisse le prix d'achat dans le temps. Ça n'annule pas le risque. Simule un rythme avec le <a href=\"/outils/calculateur-dca-etf\">calculateur DCA ETF</a> : c'est pédagogique, pas un conseil d'allocation.</p>"
+        },
+        {
+          "h2": "Plafond PEA",
+          "html": "<p>Les versements sur PEA sont plafonnés à {{pea_plafond}} ({{pea_plafond.source}}). 100 € × 12 = 1 200 € par an : le plafond n'est pas le sujet au début. L'inflation à {{inflation_glissante}} rappelle pourquoi un horizon long se discute après le matelas de sécurité.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Peut-on investir 100 € par mois sans Livret A ?",
+          "a": "Pédagogiquement, le livret ({{livret_a_taux}}) passe avant un PEA. Dodje ne prescrit pas ton ordre personnel."
+        },
+        {
+          "q": "Quel plafond de versement PEA ?",
+          "a": "{{pea_plafond}}, source {{pea_plafond.source}}."
+        },
+        {
+          "q": "100 € par mois garantissent-ils un gain ?",
+          "a": "Non. Aucun versement régulier n'élimine le risque de perte en capital."
+        }
+      ]
+    },
+    {
+      "slug": "pea-jeune-18-25-ans-france-2026",
+      "kicker": "PEA",
+      "title": "PEA jeune : ce qu'il faut savoir à 18–25 ans",
+      "baremes": ["pea_plafond", "livret_a_taux", "livret_a_plafond", "smic_net_estime"],
+      "links": {
+        "tool": "/outils/comparatif-pea-cto",
+        "guide": "/guides/investir-en-bourse-france-debutant",
+        "actu": "/actualites"
+      },
+      "bluf": "Le PEA (plafond de versement {{pea_plafond}}) est une enveloppe fiscale pour les actions européennes / ETF éligibles, pas un livret. À 18–25 ans, le Livret A ({{livret_a_taux}}, plafond {{livret_a_plafond}}) reste le premier étage si tu n'as pas d'épargne de précaution.",
+      "sections": [
+        {
+          "h2": "PEA ≠ livret",
+          "html": "<p>Le Livret A rémunère {{livret_a_taux}} sans risque de marché, jusqu'à {{livret_a_plafond}}. Le PEA peut perdre de la valeur. Le plafond de versement du PEA est {{pea_plafond}} ({{pea_plafond.source}}).</p>"
+        },
+        {
+          "h2": "Budget jeune",
+          "html": "<p>Autour d'un SMIC net estimé à {{smic_net_estime}}, un PEA n'a de sens que si les charges fixes sont tenues et qu'un matelas existe. Compare les enveloppes avec le <a href=\"/outils/comparatif-pea-cto\">comparatif PEA vs CTO</a>.</p>"
+        },
+        {
+          "h2": "Fiscalité en tête",
+          "html": "<p>L'avantage du PEA se joue surtout après 5 ans (exonération des plus-values sous conditions). Ce n'est pas un argument pour investir de l'argent dont tu auras besoin dans 6 mois.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond du PEA ?",
+          "a": "{{pea_plafond}} de versements ({{pea_plafond.source}})."
+        },
+        {
+          "q": "Le PEA jeune remplace-t-il le Livret A ?",
+          "a": "Non. {{livret_a_taux}} et plafond {{livret_a_plafond}} : c'est l'épargne disponible. Le PEA est du risque."
+        },
+        {
+          "q": "Dodje ouvre-t-il des PEA ?",
+          "a": "Non. Dodje est un site d'éducation, pas un courtier."
+        }
+      ]
+    },
+    {
+      "slug": "interets-composes-epargne-investissement-france",
+      "kicker": "Pédagogie",
+      "title": "Intérêts composés : livret vs investissement, en France",
+      "baremes": ["livret_a_taux", "livret_a_plafond", "inflation_glissante", "credit_immo_20ans"],
+      "links": {
+        "tool": "/outils/calculateur-interets-composes",
+        "guide": "/guides/epargne-de-precaution-france",
+        "actu": "/actualites"
+      },
+      "bluf": "Les intérêts composés, c'est « des intérêts sur les intérêts ». Sur un Livret A à {{livret_a_taux}} (plafond {{livret_a_plafond}}), l'effet est lent. L'inflation à {{inflation_glissante}} peut l'annuler en réel. En crédit immo (~{{credit_immo_20ans}} sur 20 ans), le mécanisme joue contre l'emprunteur.",
+      "sections": [
+        {
+          "h2": "Sur un livret réglementé",
+          "html": "<p>Taux {{livret_a_taux}} ({{livret_a_taux.source}}), capital plafonné à {{livret_a_plafond}}. Tu peux simuler avec le <a href=\"/outils/calculateur-interets-composes\">calculateur d'intérêts composés</a>.</p>"
+        },
+        {
+          "h2": "Inflation",
+          "html": "<p>IPC glissant {{inflation_glissante}} ({{inflation_glissante.source}}). Si l'inflation dépasse {{livret_a_taux}}, le pouvoir d'achat du livret recule malgré les intérêts capitalisés.</p>"
+        },
+        {
+          "h2": "Crédit immobilier",
+          "html": "<p>Un taux moyen autour de {{credit_immo_20ans}} sur 20 ans ({{credit_immo_20ans.source}}) montre l'autre face : tu paies des intérêts composés à la banque. Ce n'est pas comparable à un livret sans risque.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Le Livret A profite-t-il des intérêts composés ?",
+          "a": "Oui, les intérêts s'ajoutent au capital, au taux {{livret_a_taux}}, dans la limite de {{livret_a_plafond}}."
+        },
+        {
+          "q": "L'inflation change-t-elle le calcul ?",
+          "a": "Oui. À {{inflation_glissante}}, le rendement réel du livret peut être négatif."
+        },
+        {
+          "q": "Est-ce un conseil d'investir en bourse ?",
+          "a": "Non. Explication de mécanisme uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "ldds-ou-livret-a-france-2026",
+      "kicker": "Épargne",
+      "title": "LDDS ou Livret A : plafonds et usage en 2026",
+      "baremes": ["livret_a_taux", "livret_a_plafond", "ldds_plafond", "lep_taux", "lep_plafond"],
+      "links": {
+        "tool": "/outils/comparatif-livrets-reglementes",
+        "guide": "/guides/top-5-livrets-epargne-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Livret A et LDDS partagent en pratique le même taux ({{livret_a_taux}}). La différence, ce sont les plafonds : {{livret_a_plafond}} vs {{ldds_plafond}}. Le LEP, s'il est ouvert, reste plus rémunérateur ({{lep_taux}}) sous conditions de revenus.",
+      "sections": [
+        {
+          "h2": "Même taux, plafonds différents",
+          "html": "<p>Livret A : {{livret_a_taux}}, plafond {{livret_a_plafond}} ({{livret_a_plafond.source}}). LDDS : même logique de taux, plafond {{ldds_plafond}}.</p>"
+        },
+        {
+          "h2": "Ordre pédagogique fréquent",
+          "html": "<p>LEP si éligible ({{lep_taux}}), puis Livret A, puis LDDS. Voir le <a href=\"/outils/comparatif-livrets-reglementes\">comparatif des livrets</a>.</p>"
+        },
+        {
+          "h2": "Ce que ça n'est pas",
+          "html": "<p>Ni le LDDS ni le Livret A ne sont des supports de marché. Pas de promesse de battre l'inflation.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Le LDDS a-t-il le même taux que le Livret A ?",
+          "a": "En pratique oui, autour de {{livret_a_taux}}. Vérifie le taux affiché par ta banque."
+        },
+        {
+          "q": "Quels plafonds ?",
+          "a": "Livret A {{livret_a_plafond}}, LDDS {{ldds_plafond}}."
+        },
+        {
+          "q": "Et le LEP ?",
+          "a": "Environ {{lep_taux}}, sous conditions de revenus, plafond {{lep_plafond}}."
+        }
+      ]
+    },
+    {
+      "slug": "hcsf-35-pourcent-credit-immobilier-expliquer",
+      "kicker": "Immobilier",
+      "title": "Règle HCSF des 35 % : ce que ça change pour un crédit",
+      "baremes": ["hcsf_effort", "credit_immo_20ans", "smic_net_estime", "livret_a_taux"],
+      "links": {
+        "tool": "/outils/calculateur-capacite-emprunt",
+        "guide": "/guides/premier-achat-immobilier-france-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Le HCSF plafonne en principe l'effort de remboursement à {{hcsf_effort}} des revenus, durée max souvent 25 ans. Un taux moyen autour de {{credit_immo_20ans}} sur 20 ans ({{credit_immo_20ans.source}}) sert d'ordre de grandeur pédagogique, pas d'offre de banque.",
+      "sections": [
+        {
+          "h2": "35 %, c'est quoi",
+          "html": "<p>Charges de crédit / revenus, cible {{hcsf_effort}} ({{hcsf_effort.source}}). Simule avec la <a href=\"/outils/calculateur-capacite-emprunt\">capacité d'emprunt</a>.</p>"
+        },
+        {
+          "h2": "Taux et budget",
+          "html": "<p>Ordre de grandeur {{credit_immo_20ans}} sur 20 ans. Un net type SMIC ({{smic_net_estime}}) laisse une mensualité maximale basse : l'apport et l'épargne de précaution (Livret A {{livret_a_taux}}) restent décisifs.</p>"
+        },
+        {
+          "h2": "Pas une offre de prêt",
+          "html": "<p>Seul un établissement de crédit décide. Dodje n'est pas intermédiaire en opérations de banque.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel taux d'effort max ?",
+          "a": "{{hcsf_effort}} selon le cadre HCSF."
+        },
+        {
+          "q": "Quel taux d'emprunt retenir pour une simulation ?",
+          "a": "Un ordre de grandeur {{credit_immo_20ans}} ({{credit_immo_20ans.source}}), à vérifier en banque."
+        },
+        {
+          "q": "Dodje accorde-t-il des crédits ?",
+          "a": "Non."
+        }
+      ]
+    },
+    {
+      "slug": "pea-plafond-150000-euros-versements",
+      "kicker": "PEA",
+      "title": "Plafond PEA 150 000 € : versements, pas plus-values",
+      "baremes": ["pea_plafond", "livret_a_plafond", "livret_a_taux", "inflation_glissante"],
+      "links": {
+        "tool": "/outils/comparatif-pea-cto",
+        "guide": "/guides/pea-vs-cto-complet-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Le plafond du PEA ({{pea_plafond}}, {{pea_plafond.source}}) concerne les <em>versements</em>, pas la valeur du portefeuille. Un Livret A est plafonné à {{livret_a_plafond}} à {{livret_a_taux}} : autre logique, autre risque.",
+      "sections": [
+        {
+          "h2": "Versements vs valorisation",
+          "html": "<p>Tu verses au plus {{pea_plafond}}. Si le compte vaut davantage grâce aux marchés, ce n'est pas un dépassement de plafond de versement. Source : {{pea_plafond.source}}.</p>"
+        },
+        {
+          "h2": "Comparer aux livrets",
+          "html": "<p>Livret A : {{livret_a_plafond}} à {{livret_a_taux}}. Le livret ne fluctue pas avec la bourse. L'inflation à {{inflation_glissante}} pèse sur le réel du livret, pas sur la règle du plafond PEA.</p>"
+        },
+        {
+          "h2": "CTO en complément",
+          "html": "<p>Au-delà du PEA, un CTO n'a pas ce plafond de versement, avec une fiscalité différente (PFU). Voir <a href=\"/guides/pea-vs-cto-complet-2026\">PEA vs CTO</a>.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Le plafond PEA est-il de 150 000 € de valeur ?",
+          "a": "Non : {{pea_plafond}} de versements."
+        },
+        {
+          "q": "Quel plafond Livret A ?",
+          "a": "{{livret_a_plafond}}."
+        },
+        {
+          "q": "Faut-il remplir le PEA d'un coup ?",
+          "a": "Dodje ne le recommande pas. C'est une question d'horizon et de risque, pas un conseil."
+        }
+      ]
+    },
+    {
+      "slug": "inflation-et-livrets-reglementes-france",
+      "kicker": "Épargne",
+      "title": "Inflation et livrets réglementés : lire le rendement réel",
+      "baremes": ["inflation_glissante", "livret_a_taux", "lep_taux", "livret_a_plafond"],
+      "links": {
+        "tool": "/outils/calculateur-inflation",
+        "guide": "/guides/donnees-finance-france",
+        "actu": "/actualites"
+      },
+      "bluf": "Rendement réel ≈ taux du livret − inflation. Livret A {{livret_a_taux}}, inflation {{inflation_glissante}} ({{inflation_glissante.source}}) : le réel peut être légèrement négatif. Le LEP ({{lep_taux}}) reste plus haut pour les foyers éligibles. Plafond Livret A : {{livret_a_plafond}}.",
+      "sections": [
+        {
+          "h2": "Le calcul pédagogique",
+          "html": "<p>{{livret_a_taux}} − {{inflation_glissante}} ≈ écart de pouvoir d'achat. Utilise le <a href=\"/outils/calculateur-inflation\">calculateur d'inflation</a>. Ce n'est pas une prévision.</p>"
+        },
+        {
+          "h2": "LEP",
+          "html": "<p>Taux autour de {{lep_taux}} ({{lep_taux.source}}), sous conditions. Toujours vérifier l'éligibilité sur service-public.fr.</p>"
+        },
+        {
+          "h2": "Pourquoi garder un livret",
+          "html": "<p>Disponibilité et absence de risque de marché, jusqu'à {{livret_a_plafond}}, même si le réel est faible.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quelle inflation retenir ?",
+          "a": "{{inflation_glissante}} ({{inflation_glissante.source}}, {{inflation_glissante.asOf}})."
+        },
+        {
+          "q": "Taux du Livret A ?",
+          "a": "{{livret_a_taux}}."
+        },
+        {
+          "q": "Le LEP bat-il toujours l'inflation ?",
+          "a": "Pas « toujours ». {{lep_taux}} est un taux brut à comparer à l'IPC du moment."
+        }
+      ]
+    },
+    {
+      "slug": "capital-garanti-vs-risque-de-perte-france",
+      "kicker": "Risque",
+      "title": "Capital garanti ou risque de perte : deux familles de supports",
+      "baremes": ["livret_a_taux", "livret_a_plafond", "pea_plafond", "hcsf_effort"],
+      "links": {
+        "tool": "/outils",
+        "guide": "/guides/glossaire-finance-investissement-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Livrets réglementés : capital garanti, Livret A à {{livret_a_taux}} jusqu'à {{livret_a_plafond}}. PEA : versements jusqu'à {{pea_plafond}}, capital non garanti. Un crédit immo (effort {{hcsf_effort}}) n'est pas un « investissement sans risque ».",
+      "sections": [
+        {
+          "h2": "Garanti",
+          "html": "<p>Livret A {{livret_a_taux}}, plafond {{livret_a_plafond}}. Pas de fluctuation de marché.</p>"
+        },
+        {
+          "h2": "Non garanti",
+          "html": "<p>PEA jusqu'à {{pea_plafond}} de versements. L'AMF insiste sur le risque de perte en capital. Dodje ne promet aucun rendement.</p>"
+        },
+        {
+          "h2": "Crédit",
+          "html": "<p>L'effort {{hcsf_effort}} encadre l'emprunt, ça n'enlève ni les taux ni le risque de revenus. Ce n'est pas un livret.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Le PEA est-il garanti ?",
+          "a": "Non. Seuls les livrets type Livret A ({{livret_a_taux}}) offrent une garantie de capital dans leur cadre légal."
+        },
+        {
+          "q": "Plafond PEA ?",
+          "a": "{{pea_plafond}} de versements."
+        },
+        {
+          "q": "Dodje gère-t-il de l'argent ?",
+          "a": "Non."
+        }
+      ]
+    },
+    {
+      "slug": "ordre-epargne-puis-investissement-france",
+      "kicker": "Méthode",
+      "title": "Dans quel ordre : livret, PEA, immobilier",
+      "baremes": ["livret_a_taux", "lep_taux", "pea_plafond", "hcsf_effort"],
+      "links": {
+        "tool": "/outils/calculateur-budget-mensuel",
+        "guide": "/guides/epargne-de-precaution-france",
+        "actu": "/actualites"
+      },
+      "bluf": "Ordre pédagogique fréquent en France : LEP si éligible ({{lep_taux}}), Livret A ({{livret_a_taux}}), puis seulement un PEA (plafond {{pea_plafond}}), puis un projet immo cadré par {{hcsf_effort}} d'effort. Ce n'est pas une obligation légale ni un conseil personnalisé.",
+      "sections": [
+        {
+          "h2": "1. Disponible",
+          "html": "<p>LEP {{lep_taux}} si les conditions de revenus le permettent, sinon Livret A {{livret_a_taux}}. Objectif : 3 à 6 mois de dépenses.</p>"
+        },
+        {
+          "h2": "2. Horizon long",
+          "html": "<p>PEA, versements ≤ {{pea_plafond}}. Risque de marché. Budget d'abord : <a href=\"/outils/calculateur-budget-mensuel\">calculateur budget</a>.</p>"
+        },
+        {
+          "h2": "3. Immobilier",
+          "html": "<p>Règle d'effort {{hcsf_effort}}. Sans apport ni matelas, empiler crédit + PEA + livret vide est fragile — constat pédagogique, pas un diagnostic de ta situation.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Dois-je suivre cet ordre ?",
+          "a": "C'est un cadre de lecture, pas une règle Dodje obligatoire ni un conseil CIF."
+        },
+        {
+          "q": "Taux LEP et Livret A ?",
+          "a": "LEP {{lep_taux}}, Livret A {{livret_a_taux}}."
+        },
+        {
+          "q": "Plafond PEA ?",
+          "a": "{{pea_plafond}}."
+        }
+      ]
+    },
+    {
+      "slug": "locatif-vs-livret-a-rendement-pedagogique",
+      "kicker": "Immobilier",
+      "title": "Rendement locatif vs Livret A : comparer sans se tromper",
+      "baremes": ["livret_a_taux", "credit_immo_20ans", "hcsf_effort", "inflation_glissante"],
+      "links": {
+        "tool": "/outils/calculateur-rendement-locatif",
+        "guide": "/guides/prix-metre-carre-investissement-locatif-france-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Un Livret A verse {{livret_a_taux}} sans travail de gestion ni vacance locative. Un rendement locatif brut n'est comparable qu'après charges, crédit (~{{credit_immo_20ans}}), effort {{hcsf_effort}} et fiscalité. L'inflation {{inflation_glissante}} joue sur les deux, pas de la même façon.",
+      "sections": [
+        {
+          "h2": "Livret : simple",
+          "html": "<p>{{livret_a_taux}}, liquide, pas de locataire. Plafond à connaître sur la page données Dodje.</p>"
+        },
+        {
+          "h2": "Locatif : brut ≠ net",
+          "html": "<p>Utilise le <a href=\"/outils/calculateur-rendement-locatif\">calculateur de rendement locatif</a>. Un crédit à ~{{credit_immo_20ans}} et un effort {{hcsf_effort}} changent le cash-flow.</p>"
+        },
+        {
+          "h2": "Inflation",
+          "html": "<p>{{inflation_glissante}} (INSEE) érode le livret en réel ; un loyer peut être révisé, avec des règles et des risques (impayés, travaux).</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Le locatif bat-il forcément le Livret A ?",
+          "a": "Non. {{livret_a_taux}} est certain dans son cadre ; un rendement locatif ne l'est pas."
+        },
+        {
+          "q": "Quel taux de crédit pour une simu ?",
+          "a": "Ordre de grandeur {{credit_immo_20ans}} ({{credit_immo_20ans.source}})."
+        },
+        {
+          "q": "Dodje vend-il des biens ?",
+          "a": "Non."
+        }
+      ]
+    },
+    {
+      "slug": "dca-etf-pea-versements-reguliers",
+      "kicker": "ETF",
+      "title": "DCA sur ETF dans un PEA : verser régulièrement, sans illusion",
+      "baremes": ["pea_plafond", "livret_a_taux", "inflation_glissante", "smic_net_estime"],
+      "links": {
+        "tool": "/outils/calculateur-dca-etf",
+        "guide": "/guides/etf-debutant-france-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Le DCA, c'est verser un montant fixe à intervalle régulier. Dans un PEA, le total versé reste ≤ {{pea_plafond}}. Ça ne protège pas contre une baisse des marchés. Le Livret A à {{livret_a_taux}} reste le compartiment « disponible ».",
+      "sections": [
+        {
+          "h2": "Mécanique",
+          "html": "<p>Même somme, chaque mois, vers un ETF éligible PEA. Simulateur : <a href=\"/outils/calculateur-dca-etf\">DCA ETF</a>. Plafond de versements {{pea_plafond}}.</p>"
+        },
+        {
+          "h2": "Budget",
+          "html": "<p>Autour de {{smic_net_estime}} net SMIC, un DCA ne doit pas vider le livret de précaution ({{livret_a_taux}}).</p>"
+        },
+        {
+          "h2": "Inflation et horizon",
+          "html": "<p>L'IPC à {{inflation_glissante}} pousse à réfléchir long terme, pas à « timer » le marché. Aucun backtest Dodje n'est une performance future.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Le DCA garantit-il un meilleur prix ?",
+          "a": "Non. Il lisse, il ne garantit rien. Plafond PEA {{pea_plafond}}."
+        },
+        {
+          "q": "Faut-il DCA sans livret ?",
+          "a": "Pédagogiquement, {{livret_a_taux}} sur le matelas d'abord."
+        },
+        {
+          "q": "Dodje vend-il des ETF ?",
+          "a": "Non."
+        }
+      ]
+    },
+    {
+      "slug": "empiler-livret-a-ldds-lep-plafonds-france",
+      "kicker": "Épargne",
+      "title": "Empiler Livret A, LDDS et LEP : les plafonds en France",
+      "baremes": ["livret_a_plafond", "ldds_plafond", "lep_plafond", "livret_a_taux", "lep_taux"],
+      "links": {
+        "tool": "/outils/comparatif-livrets-reglementes",
+        "guide": "/guides/top-5-livrets-epargne-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Plafonds de versement distincts : Livret A {{livret_a_plafond}}, LDDS {{ldds_plafond}}, LEP {{lep_plafond}} (sous conditions). Taux type : Livret A {{livret_a_taux}}, LEP {{lep_taux}}. Ce n'est pas un produit unique : trois enveloppes, trois règles.",
+      "sections": [
+        {
+          "h2": "Trois plafonds, pas un seul coffre",
+          "html": "<p>Livret A {{livret_a_plafond}} ({{livret_a_plafond.source}}), LDDS {{ldds_plafond}}, LEP {{lep_plafond}}. On n'additionne pas les taux : on additionne éventuellement les versements, chacun dans sa limite.</p>"
+        },
+        {
+          "h2": "LEP d'abord si tu y as droit",
+          "html": "<p>Le LEP ({{lep_taux}}) est en général plus rémunérateur que le Livret A ({{livret_a_taux}}), mais il est conditionné aux revenus. Vérifie l'éligibilité sur service-public.fr, pas sur un forum.</p>"
+        },
+        {
+          "h2": "Ensuite Livret A puis LDDS",
+          "html": "<p>Même logique de taux autour de {{livret_a_taux}} pour A et LDDS, plafonds différents. Comparatif : <a href=\"/outils/comparatif-livrets-reglementes\">livrets réglementés</a>.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Peut-on avoir les trois livrets ?",
+          "a": "Sous conditions (résidence, un livret A par personne, LEP selon les revenus). Dodje ne vérifie pas ton éligibilité."
+        },
+        {
+          "q": "Quels plafonds retenir ?",
+          "a": "Livret A {{livret_a_plafond}}, LDDS {{ldds_plafond}}, LEP {{lep_plafond}}."
+        },
+        {
+          "q": "Quel taux est le plus haut ?",
+          "a": "Parmi ces barèmes, le LEP {{lep_taux}} est au-dessus du Livret A {{livret_a_taux}}. Toujours confirmer le taux affiché par ta banque."
+        }
+      ]
+    },
+    {
+      "slug": "smic-et-epargne-mensuelle-france-2026",
+      "kicker": "Budget",
+      "title": "SMIC et épargne mensuelle : ordres de grandeur 2026",
+      "baremes": ["smic_net_estime", "smic_brut_mensuel", "livret_a_taux", "livret_a_plafond"],
+      "links": {
+        "tool": "/outils/calculateur-budget-mensuel",
+        "guide": "/guides/combien-epargner-par-mois-france-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Un SMIC brut 35 h est à {{smic_brut_mensuel}} ({{smic_brut_mensuel.source}}), net estimé autour de {{smic_net_estime}}. L'épargne va d'abord sur un livret ({{livret_a_taux}}, plafond {{livret_a_plafond}}). Un pourcentage du net n'est pas une obligation : c'est un cadre pédagogique.",
+      "sections": [
+        {
+          "h2": "Brut, net, reste à vivre",
+          "html": "<p>Barème URSSAF : brut {{smic_brut_mensuel}}, net estimé {{smic_net_estime}} ({{smic_net_estime.asOf}}). Le « 10 % du net » n'a de sens qu'après loyer, transport et alimentation. Simulateur : <a href=\"/outils/calculateur-budget-mensuel\">budget mensuel</a>.</p>"
+        },
+        {
+          "h2": "Où va le premier euro mis de côté",
+          "html": "<p>Livret A {{livret_a_taux}} jusqu'à {{livret_a_plafond}}. Pas de PEA tant que le matelas de l'imprévu n'existe pas — lecture pédagogique, pas un diagnostic de ta fiche de paie.</p>"
+        },
+        {
+          "h2": "Ce que Dodje ne calcule pas",
+          "html": "<p>Pas d'impôt personnalisé, pas d'APL, pas de pension alimentaire. Les barèmes SMIC sont des moyennes nationales, pas ton net exact.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel SMIC retenir ?",
+          "a": "Brut {{smic_brut_mensuel}}, net estimé {{smic_net_estime}} ({{smic_brut_mensuel.source}})."
+        },
+        {
+          "q": "Faut-il épargner 10 % du SMIC ?",
+          "a": "Ce n'est pas une règle légale. Le reste à vivre passe avant tout pourcentage. Dodje ne calcule pas ton cas."
+        },
+        {
+          "q": "Sur quel livret ?",
+          "a": "Pédagogiquement le Livret A ({{livret_a_taux}}, plafond {{livret_a_plafond}}) ou le LEP si tu es éligible."
+        }
+      ]
+    },
+    {
+      "slug": "taux-credit-immo-et-livret-a-comparer-france",
+      "kicker": "Immobilier",
+      "title": "Taux de crédit immo vs Livret A : deux mécaniques",
+      "baremes": ["credit_immo_20ans", "livret_a_taux", "hcsf_effort", "inflation_glissante"],
+      "links": {
+        "tool": "/outils/calculateur-pret-immobilier",
+        "guide": "/guides/premier-achat-immobilier-france-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Un crédit ~{{credit_immo_20ans}} sur 20 ans ({{credit_immo_20ans.source}}) et un Livret A à {{livret_a_taux}} ne se « compensent » pas. L'un est une dette encadrée par {{hcsf_effort}} d'effort ; l'autre est de l'épargne disponible. L'inflation à {{inflation_glissante}} joue sur les deux, pas de la même façon.",
+      "sections": [
+        {
+          "h2": "Le crédit coûte des intérêts",
+          "html": "<p>Ordre de grandeur {{credit_immo_20ans}} sur 20 ans. Simule une mensualité avec le <a href=\"/outils/calculateur-pret-immobilier\">calculateur de prêt</a>. Ce n'est pas le taux de ta banque aujourd'hui.</p>"
+        },
+        {
+          "h2": "Le livret rémunère un stock",
+          "html": "<p>{{livret_a_taux}}, capital garanti dans son cadre. Garder un livret pendant un crédit, c'est souvent de la trésorerie, pas un arbitrage de rendement.</p>"
+        },
+        {
+          "h2": "Effort et inflation",
+          "html": "<p>HCSF : {{hcsf_effort}}. IPC {{inflation_glissante}}. Un crédit à taux fixe peut devenir plus « léger » en réel si l'inflation monte ; un livret peut perdre du pouvoir d'achat. Aucun des deux n'est un signal d'achat immobilier.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Faut-il vider le Livret A pour un apport ?",
+          "a": "Dodje ne le prescrit pas. {{livret_a_taux}} reste le compartiment de l'imprévu ; l'apport se discute avec la banque sous {{hcsf_effort}}."
+        },
+        {
+          "q": "Quel taux de crédit pédagogique ?",
+          "a": "{{credit_immo_20ans}} ({{credit_immo_20ans.source}})."
+        },
+        {
+          "q": "Dodje est-il courtier en crédit ?",
+          "a": "Non."
+        }
+      ]
+    },
+    {
+      "slug": "pea-plafond-et-smic-ordres-de-grandeur",
+      "kicker": "PEA",
+      "title": "Plafond PEA et SMIC : remettre les 150 000 € à l'échelle",
+      "baremes": ["pea_plafond", "smic_net_estime", "livret_a_plafond", "livret_a_taux"],
+      "links": {
+        "tool": "/outils/comparatif-pea-cto",
+        "guide": "/guides/pea-vs-cto-complet-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "Le plafond de versement PEA ({{pea_plafond}}) est un maximum légal, pas un objectif. Autour d'un SMIC net {{smic_net_estime}}, il se construit sur des années, après un Livret A ({{livret_a_taux}}, plafond {{livret_a_plafond}}).",
+      "sections": [
+        {
+          "h2": "Un plafond, pas une marche à franchir",
+          "html": "<p>{{pea_plafond}} de versements ({{pea_plafond.source}}). Rien n'oblige à s'en approcher. Un CTO n'a pas ce plafond, avec une autre fiscalité : <a href=\"/outils/comparatif-pea-cto\">PEA vs CTO</a>.</p>"
+        },
+        {
+          "h2": "Échelle budget",
+          "html": "<p>Net SMIC estimé {{smic_net_estime}}. Même 50 € / mois, c'est 600 € / an : le plafond PEA n'est pas le sujet de la première année. Le livret (plafond {{livret_a_plafond}}) l'est davantage.</p>"
+        },
+        {
+          "h2": "Risque",
+          "html": "<p>Le PEA peut perdre de la valeur. Le Livret A à {{livret_a_taux}} non, dans son cadre. Ne pas confondre horizon et urgence.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Dois-je viser {{pea_plafond}} ?",
+          "a": "Non. C'est un plafond de versements, pas une cible Dodje."
+        },
+        {
+          "q": "Quel SMIC pour l'échelle ?",
+          "a": "Net estimé {{smic_net_estime}} ({{smic_net_estime.source}})."
+        },
+        {
+          "q": "Dodje ouvre-t-il des PEA ?",
+          "a": "Non."
+        }
+      ]
+    },
+    {
+      "slug": "hcsf-35-pourcent-et-smic-capacite-emprunt",
+      "kicker": "Immobilier",
+      "title": "HCSF 35 % et SMIC : capacité d'emprunt pédagogique",
+      "baremes": ["hcsf_effort", "smic_net_estime", "credit_immo_20ans", "livret_a_taux"],
+      "links": {
+        "tool": "/outils/calculateur-capacite-emprunt",
+        "guide": "/guides/premier-achat-immobilier-france-2026",
+        "actu": "/actualites"
+      },
+      "bluf": "À {{hcsf_effort}} d'effort max, un net autour de {{smic_net_estime}} laisse une mensualité théorique limitée. Un taux ~{{credit_immo_20ans}} sur 20 ans n'est qu'un ordre de grandeur. Sans livret ({{livret_a_taux}}), la banque voit aussi le risque de trésorerie.",
+      "sections": [
+        {
+          "h2": "La règle d'effort",
+          "html": "<p>{{hcsf_effort}} des revenus ({{hcsf_effort.source}}). Outil : <a href=\"/outils/calculateur-capacite-emprunt\">capacité d'emprunt</a>. Les banques appliquent des exceptions, Dodje ne les simule pas.</p>"
+        },
+        {
+          "h2": "Échelle SMIC",
+          "html": "<p>Net estimé {{smic_net_estime}}. 35 % de ce net, c'est une mensualité max pédagogique, avant assurance et reste à vivre. Un taux {{credit_immo_20ans}} change le capital empruntable, pas la règle d'effort.</p>"
+        },
+        {
+          "h2": "Apport et matelas",
+          "html": "<p>Le Livret A à {{livret_a_taux}} n'augmente pas le taux d'effort, il montre qu'un imprévu n'oblige pas à revendre. Ce n'est pas un argument pour acheter.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "35 % de quel revenu ?",
+          "a": "Des revenus retenus par la banque, cadre {{hcsf_effort}}. Pas forcément le net affiché sur la fiche."
+        },
+        {
+          "q": "Quel net SMIC retenir ?",
+          "a": "{{smic_net_estime}} ({{smic_net_estime.source}}), estimation pédagogique."
+        },
+        {
+          "q": "Dodje accorde-t-il des prêts ?",
+          "a": "Non."
+        }
+      ]
+    }
+  ]
+}

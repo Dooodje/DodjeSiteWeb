@@ -3,11 +3,13 @@
 
 User-agent: *
 Allow: /
-
-# Hubs SEO prioritaires
 Allow: /outils/
 Allow: /guides/
 Allow: /actualites/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+Disallow: /src/
 
 # Sitemap et fichiers IA
 Sitemap: https://dodje.fr/sitemap.xml
@@ -58,9 +60,3 @@ Allow: /
 
 User-agent: Bytespider
 Allow: /
-
-# Fichiers techniques (non servis en prod, par securite)
-Disallow: /node_modules/
-Disallow: /.git/
-Disallow: /dist/
-Disallow: /src/

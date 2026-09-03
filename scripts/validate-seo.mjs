@@ -151,6 +151,108 @@ function validateGhPagesRedirects() {
   if (expected === 0) warn('No redirect rules found in public/_redirects')
 }
 
+function countNumericFacts(html) {
+  const text = html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+  const matches = text.match(/\d[\d\s.,]{0,12}\s*(?:%|€|euros?|ans?|mois)/gi) || []
+  return matches.length
+}
+
+function isRedirectStub(html) {
+  return html.includes('noindex') && html.includes('http-equiv="refresh"')
+}
+
+function validateNoindexOnlyOnStubs() {
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        if (['assets', 'node_modules'].includes(entry.name)) continue
+        walk(full)
+        continue
+      }
+      if (!entry.name.endsWith('.html')) continue
+      const html = fs.readFileSync(full, 'utf8')
+      if (!/name="robots"[^>]*noindex/i.test(html) && !html.includes('content="noindex')) continue
+      if (!isRedirectStub(html)) {
+        fail(`noindex hors stub de redirection: ${path.relative(distDir, full)}`)
+      }
+    }
+  }
+  walk(distDir)
+}
+
+function validateHomepageGeo() {
+  const home = path.join(distDir, 'index.html')
+  if (!fs.existsSync(home)) {
+    fail('dist/index.html missing')
+    return
+  }
+  const html = fs.readFileSync(home, 'utf8')
+  if (html.includes('hero-shell__seo')) fail('Homepage still has clipped .hero-shell__seo')
+  if (html.includes('id="chiffres-cles"') || html.includes('id="ressources"')) {
+    fail('Homepage still has post-community content blocks')
+  }
+  if (!html.includes('id="community"')) fail('Homepage missing community block')
+  if (!html.includes('og-default-1200x630.png')) fail('Homepage OG image is not 1200x630 default')
+  if (/href=["']\/?blog["']/.test(html)) fail('Homepage still links to /blog')
+}
+
+function validateRobotsGrouping() {
+  const robots = path.join(distDir, 'robots.txt')
+  if (!fs.existsSync(robots)) return
+  const text = fs.readFileSync(robots, 'utf8')
+  const starBlock = text.split(/User-agent:/i)[1] || ''
+  if (!starBlock.includes('Disallow: /src/')) {
+    fail('robots.txt: Disallow /src/ must live in the User-agent: * group')
+  }
+  const afterBytespider = text.split(/User-agent:\s*Bytespider/i)[1] || ''
+  const orphan = afterBytespider.split(/User-agent:/i)[0]
+  if (/Disallow:\s*\/src\//.test(orphan)) {
+    fail('robots.txt: trailing Disallow after Bytespider (orphan group)')
+  }
+}
+
+function validateIndexNowKey() {
+  const keyPath = path.join(rootDir, 'data/indexnow.json')
+  if (!fs.existsSync(keyPath)) {
+    warn('data/indexnow.json missing')
+    return
+  }
+  const config = JSON.parse(fs.readFileSync(keyPath, 'utf8'))
+  assertFileExists(`${config.key}.txt`)
+}
+
+function validateContentPagesGeo() {
+  const dirs = ['guides', 'actualites']
+  for (const dir of dirs) {
+    const fullDir = path.join(distDir, dir)
+    if (!fs.existsSync(fullDir)) continue
+    for (const file of fs.readdirSync(fullDir)) {
+      if (!file.endsWith('.html') || file === 'index.html') continue
+      const html = fs.readFileSync(path.join(fullDir, file), 'utf8')
+      if (isRedirectStub(html)) continue
+      if (html.includes('content-lead') && !/En bref|Verdict/.test(html)) {
+        fail(`Missing BLUF: ${dir}/${file}`)
+      }
+      if (dir === 'actualites' && !html.includes('NewsArticle') && !html.includes('"Article"')) {
+        fail(`Missing Article/NewsArticle JSON-LD: ${dir}/${file}`)
+      }
+      const facts = countNumericFacts(html)
+      if (facts < 3) {
+        warn(`${dir}/${file}: only ${facts} numeric facts detected (target ≥ 3)`)
+      }
+    }
+  }
+}
+
+function validateOgDefaultAsset() {
+  const pub = path.join(rootDir, 'public/assets/og-default-1200x630.png')
+  if (!fs.existsSync(pub)) fail('Missing public/assets/og-default-1200x630.png')
+}
+
 // --- Run validations ---
 
 if (!fs.existsSync(distDir)) {
@@ -174,6 +276,12 @@ validateHreflangPaths()
 validateBreadcrumbs()
 validateBlufInDist()
 validateGhPagesRedirects()
+validateNoindexOnlyOnStubs()
+validateHomepageGeo()
+validateRobotsGrouping()
+validateIndexNowKey()
+validateContentPagesGeo()
+validateOgDefaultAsset()
 
 console.log('\n=== SEO Validation Report ===\n')
 

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Dodje — Écrire à l'équipe</title>
+    <meta name="description" content="Contacte l'équipe Dodje : question sur l'app, un calculateur, un guide, ou une demande presse. Formulaire d'envoi direct, réponse à contact@dodje.fr.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://dodje.fr/contact">
+    <meta property="og:title" content="Contact Dodje">
+    <meta property="og:description" content="Écris à l'équipe Dodje depuis le site : question, correction, presse.">
+    <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
+    <meta property="og:url" content="https://dodje.fr/contact">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" type="image/svg+xml" href="assets/dodje-favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/dodje-favicon-48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/dodje-favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/dodje-apple-touch.png">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact Dodje",
+      "url": "https://dodje.fr/contact",
+      "inLanguage": "fr-FR",
+      "isPartOf": { "@id": "https://dodje.fr/#website" },
+      "publisher": { "@id": "https://dodje.fr/#organization" },
+      "about": { "@id": "https://dodje.fr/#organization" },
+      "mainEntity": {
+        "@type": "Organization",
+        "@id": "https://dodje.fr/#organization",
+        "email": "contact@dodje.fr"
+      }
+    }
+    </script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata"
+        data-webm="assets/anime/FondAnime-optimized.webm"
+        data-mp4="assets/anime/FondAnime-optimized.mp4"></video>
+    <div id="bg-overlay" aria-hidden="true"></div>
+    <nav class="navbar navbar-simple visible">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Dodje, accueil">
+                <img src="assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img" width="130" height="50">
+            </a>
+            <a href="/#hero" class="cta-button nav-cta">C'est parti</a>
+        </div>
+    </nav>
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Contact</p>
+            <h1>Écrire à <span class="legal-title-accent">Dodje</span></h1>
+            <p class="content-lead"><strong>En bref :</strong> une question sur l'app, un barème à corriger, une demande presse : envoie le message ici. On lit tout et on répond par email.</p>
+
+            <form id="contact-form" class="contact-form" novalidate>
+                <p class="contact-hp" aria-hidden="true">
+                    <label>Site web
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
+                    </label>
+                </p>
+                <div class="calc-field">
+                    <label for="contact-name">Nom</label>
+                    <input id="contact-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Ton prénom ou nom">
+                </div>
+                <div class="calc-field">
+                    <label for="contact-email">Email</label>
+                    <input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="120" placeholder="toi@email.fr">
+                </div>
+                <div class="calc-field">
+                    <label for="contact-subject">Sujet</label>
+                    <select id="contact-subject" name="subject">
+                        <option value="Question sur l'app">Question sur l'app</option>
+                        <option value="Calculateur ou guide">Calculateur ou guide</option>
+                        <option value="Compte et données">Compte et données personnelles</option>
+                        <option value="Presse et partenariats">Presse et partenariats</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+                <div class="calc-field">
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" name="message" required minlength="10" maxlength="4000" rows="7" placeholder="Dis-nous concrètement ce dont tu as besoin."></textarea>
+                </div>
+                <p class="contact-legal">Tes infos servent uniquement à traiter ta demande. Détails dans la <a href="/politique-confidentialite">politique de confidentialité</a>.</p>
+                <button type="submit" class="cta-button contact-submit">Envoyer le message</button>
+                <div id="contact-status" class="contact-status" hidden></div>
+            </form>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje Solutions.</p>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="script.js"></script>
+    <script src="/contact-form.js" defer></script>
+</body>
+</html>

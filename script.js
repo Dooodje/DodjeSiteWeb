@@ -80,23 +80,10 @@ function initBackgroundVideo() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // ==================== GESTION DU CACHE ====================
-    function getUserFromCache() {
-        const userData = localStorage.getItem('dodje_user');
-        return userData ? JSON.parse(userData) : null;
-    }
-    
-    function saveUserToCache(userData) {
-        localStorage.setItem('dodje_user', JSON.stringify(userData));
-    }
-    
-    function clearUserCache() {
+    try {
         localStorage.removeItem('dodje_user');
-    }
-    
-    // Note: Le dashboard a été retiré car l'application est maintenant disponible
-    console.log('Chargement de la landing page Dodje');
-    
+    } catch (e) {}
+
     // ==================== NAVIGATION DYNAMIQUE ====================
     const navbarMinimal = document.getElementById('navbar-minimal');
     const navbarScroll = document.getElementById('navbar-scroll');
@@ -138,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleScrollNavigation() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        if (navbarMinimal && navbarScroll) {
+        if (navbarMinimal && navbarScroll && !navbarScroll.classList.contains('navbar-simple')) {
             if (scrollTop > scrollThreshold) {
                 // Masquer le header minimal et afficher le header complet
                 if (!navbarMinimal.classList.contains('hidden')) {

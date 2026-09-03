@@ -6,13 +6,13 @@
     <title>Dodje - Application d'éducation financière gratuite</title>
     
     <!-- Favicon pour l'onglet du navigateur -->
-    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="assets/dodje-favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/dodje-favicon-48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/dodje-favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/dodje-apple-touch.png">
     
     <!-- SEO Meta Tags Optimises -->
-    <meta name="description" content="Dodje : app gratuite d'éducation financière en France. Budget, épargne, bourse, crypto et calculateurs (salaire, Livret A, PEA). iOS et Android, sans jargon.">
+    <meta name="description" content="Dodje : éducation financière gratuite en France. 22+ calculateurs et 30+ guides sourcés (Livret A, PEA, crypto). Télécharge l'app iOS/Android.">
     <meta name="keywords" content="dodje, éducation financière France, finance personnelle, budget, épargne, bourse débutant, crypto débutant, calculateur salaire, Livret A, PEA, application finance gratuite">
     <meta name="author" content="Dodje">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -65,10 +65,10 @@
 
     <!-- Open Graph pour Facebook, LinkedIn, etc. -->
     <meta property="og:title" content="Dodje - Application d'éducation financière gratuite">
-    <meta property="og:description" content="Dodje : app gratuite d'éducation financière en France. Budget, épargne, bourse, crypto et calculateurs (salaire, Livret A, PEA). iOS et Android, sans jargon.">
-    <meta property="og:image" content="https://dodje.fr/assets/Logo_degrade_PNG.png">
-    <meta property="og:image:width" content="500">
-    <meta property="og:image:height" content="195">
+    <meta property="og:description" content="Dodje : éducation financière gratuite en France. 22+ calculateurs et 30+ guides sourcés (Livret A, PEA, crypto). Télécharge l'app iOS/Android.">
+    <meta property="og:image" content="https://dodje.fr/assets/og-default-1200x630.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Dodje - Application d'éducation financière">
     <meta property="og:url" content="https://dodje.fr/">
     <meta property="og:type" content="website">
@@ -80,8 +80,8 @@
     <meta name="twitter:site" content="@DodjeApp">
     <meta name="twitter:creator" content="@DodjeApp">
     <meta name="twitter:title" content="Dodje - Application d'éducation financière gratuite">
-    <meta name="twitter:description" content="Dodje : app gratuite d'éducation financière en France. Budget, épargne, bourse, crypto et calculateurs (salaire, Livret A, PEA). iOS et Android, sans jargon.">
-    <meta name="twitter:image" content="https://dodje.fr/assets/Logo_degrade_PNG.png">
+    <meta name="twitter:description" content="Dodje : éducation financière gratuite en France. 22+ calculateurs et 30+ guides sourcés (Livret A, PEA, crypto). Télécharge l'app iOS/Android.">
+    <meta name="twitter:image" content="https://dodje.fr/assets/og-default-1200x630.png">
     <meta name="twitter:image:alt" content="Dodje - Application d'éducation financière">
 
     <!-- Donnees structurees JSON-LD pour le SEO et les moteurs IA -->
@@ -125,6 +125,7 @@
           "@type": "Place",
           "address": {
             "@type": "PostalAddress",
+            "streetAddress": "8 allée du Parc d'Orléans",
             "addressLocality": "Orléans",
             "postalCode": "45000",
             "addressCountry": "FR"
@@ -147,19 +148,17 @@
       },
       {
         "@context": "https://schema.org",
-        "@type": "FinancialService",
-        "@id": "https://dodje.fr/#financial-service",
+        "@type": "Service",
+        "@id": "https://dodje.fr/#education-service",
         "name": "Dodje — Éducation financière",
         "url": "https://dodje.fr/",
-        "description": "Service gratuit d'éducation et d'information financière en France : guides, calculateurs et application mobile. Sans conseil en investissement personnalisé.",
+        "description": "Service d'éducation et d'information financière en France : guides, calculateurs et application mobile. Accessible gratuitement ; achats in-app optionnels pour accélérer la progression. Sans conseil en investissement personnalisé.",
         "serviceType": [
           "Éducation financière",
           "Simulateurs pédagogiques",
           "Guides finance personnelle"
         ],
         "areaServed": { "@type": "Country", "name": "France" },
-        "currenciesAccepted": "EUR",
-        "feesAndCommissionsSpecification": "Gratuit — contenus et simulateurs sans frais, sans conseil personnalisé",
         "provider": { "@id": "https://dodje.fr/#organization" },
         "parentOrganization": { "@id": "https://dodje.fr/#organization" },
         "sameAs": [
@@ -174,7 +173,7 @@
         "name": "Équipe éditoriale Dodje",
         "jobTitle": "Rédaction éducation financière",
         "url": "https://dodje.fr/guides/equipe-editoriale",
-        "worksFor": { "@id": "https://dodje.fr/#financial-service" },
+        "worksFor": { "@id": "https://dodje.fr/#education-service" },
         "memberOf": { "@id": "https://dodje.fr/#organization" },
         "knowsAbout": [
           "Éducation financière",
@@ -247,6 +246,22 @@
       },
       {
         "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://dodje.fr/#webpage",
+        "url": "https://dodje.fr/",
+        "name": "Dodje - Application d'éducation financière gratuite",
+        "inLanguage": "fr-FR",
+        "isPartOf": { "@id": "https://dodje.fr/#website" },
+        "about": { "@type": "Country", "name": "France" },
+        "dateModified": "2026-09-03",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["h1", ".hero-shell__trust"]
+        },
+        "mainEntity": { "@id": "https://dodje.fr/#organization" }
+      },
+      {
+        "@context": "https://schema.org",
         "@type": "WebSite",
         "@id": "https://dodje.fr/#website",
         "name": "Dodje",
@@ -311,7 +326,7 @@
             "name": "Dodje est-il vraiment gratuit ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Oui, Dodje est 100% gratuit sur iOS et Android. Aucune carte bancaire n'est demandée à l'inscription et les parcours d'éducation financière (budget, épargne, bourse, crypto) sont accessibles sans abonnement."
+              "text": "Oui. L'application et les parcours sont accessibles gratuitement, sans abonnement ni carte bancaire à l'inscription. Des achats in-app optionnels (Dodjis) permettent d'accélérer la progression, sans rendre le reste du contenu payant."
             }
           },
           {
@@ -352,80 +367,17 @@
     <!-- Fluid background overlay above the video, beneath all section content -->
     <div id="bg-overlay" aria-hidden="true"></div>
 
-    <!-- Navigation minimale en haut de page -->
-    <nav class="navbar-minimal" id="navbar-minimal">
-        <div class="nav-minimal-container">
-            <div class="nav-logo-centered">
-                <picture>
-                        <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
-                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Application éducation financière gratuite" class="logo-img" width="130" height="50" fetchpriority="high" decoding="sync">
-                    </picture>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Navigation complète lors du scroll -->
-    <nav class="navbar navbar-scroll" id="navbar-scroll">
+    <nav class="navbar navbar-simple visible" id="navbar-scroll">
         <div class="nav-container">
-            <div class="nav-logo">
+            <a href="/" class="nav-logo" aria-label="Dodje, accueil">
                 <picture>
-                        <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
-                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Application finance ludique pour apprendre investissement" class="logo-img" width="130" height="50" loading="lazy" decoding="async">
-                    </picture>
-            </div>
-            <div class="nav-menu">
-                <a href="/" data-scroll-to="pillars" class="nav-link">À propos</a>
-                <a href="/" data-scroll-to="features" class="nav-link">Fonctionnalités</a>
-                <a href="/guides" class="nav-link">Guides</a>
-                <a href="/outils" class="nav-link">Outils</a>
-                <a href="/faq" class="nav-link">FAQ</a>
-                <a href="/" data-scroll-to="community" class="nav-link">Communauté</a>
-                <a href="/" data-scroll-to="hero" class="cta-button nav-cta">Télécharger</a>
-            </div>
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Menu">
-                <span class="burger" aria-hidden="true">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-            </button>
+                    <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
+                    <img src="assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img" width="130" height="50" fetchpriority="high" decoding="sync">
+                </picture>
+            </a>
+            <a href="/#hero" class="cta-button nav-cta">C'est parti</a>
         </div>
     </nav>
-
-    <!-- Menu Mobile -->
-    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
-    <div class="mobile-menu" id="mobile-menu">
-        <div class="mobile-menu-header">
-            <picture>
-                        <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
-                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - App gratuite formation finance" class="logo-img" width="130" height="50" loading="lazy" decoding="async">
-                    </picture>
-            <button class="mobile-menu-close" id="mobile-menu-close" type="button" aria-label="Fermer le menu">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </button>
-        </div>
-        <nav class="mobile-nav-links">
-            <a href="/" data-scroll-to="pillars" class="nav-link">À propos</a>
-            <a href="/" data-scroll-to="features" class="nav-link">Fonctionnalités</a>
-            <a href="/guides" class="nav-link">Blog</a>
-            <a href="/outils" class="nav-link">Outils</a>
-            <a href="/guides" class="nav-link">Guides</a>
-            <a href="/faq" class="nav-link">FAQ</a>
-            <a href="/" data-scroll-to="community" class="nav-link">Communauté</a>
-        </nav>
-        <div class="mobile-cta mobile-cta--stores">
-            <div class="mobile-cta__stores">
-                <a href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215" class="mobile-floating-bar__store mobile-floating-bar__store--apple" target="_blank" rel="noopener noreferrer">
-                    <svg class="mobile-floating-bar__icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z"/></svg>
-                    <span class="mobile-floating-bar__text"><span class="mobile-floating-bar__label">Télécharger sur</span><span class="mobile-floating-bar__name">App Store</span></span>
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=xyz.dodje.app" class="mobile-floating-bar__store mobile-floating-bar__store--google" target="_blank" rel="noopener noreferrer">
-                    <svg class="mobile-floating-bar__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z"/></svg>
-                    <span class="mobile-floating-bar__text"><span class="mobile-floating-bar__label">Télécharger sur</span><span class="mobile-floating-bar__name">Google Play</span></span>
-                </a>
-            </div>
-        </div>
-    </div>
 
     <!-- Barre flottante mobile (App Store / Google Play au scroll) -->
     <div
@@ -520,15 +472,27 @@
                     <p class="hero-shell__trust hero-shell__trust--mobile">Contenus éducatifs uniquement, sans conseil financier personnalisé.</p>
                 </div>
             </div>
-            <p class="hero-shell__seo">
-                Dodje est l'application mobile française d'éducation financière lancée en 2024. Elle aide les débutants à comprendre le budget, l'épargne, la bourse et la crypto grâce à des parcours d'apprentissage ludiques, des quiz et un système de gamification. Disponible gratuitement sur iOS et Android, sans conseil personnalisé ni promesse de rendement.
-                Simulateurs financiers gratuits pour la France : <a href="/outils/calculateur-salaire-brut-net">calculateur salaire brut net</a>, <a href="/outils/salaire-3000-brut-en-net">3 000 euros brut en net</a>, <a href="/outils/salaire-et-travail">salaire et travail</a>, <a href="/outils/credit-immobilier">crédit immobilier</a>, <a href="/outils/calculateur-livret-a">calculateur Livret A</a>, <a href="/outils/calculateur-capacite-emprunt">capacité d'emprunt</a>, <a href="/outils/comparatif-pea-cto">PEA vs CTO</a>, <a href="/outils/calculateur-budget-mensuel">budget mensuel</a>, <a href="/outils/calculateur-micro-entreprise">micro-entreprise</a>. <a href="/outils">Tous les calculateurs Dodje</a>.
-            </p>
         </section>
     </div>
 
-    <!-- Stats Section (React) -->
-    <div id="stats-root"></div>
+    <!-- Stats Section (static shell for crawlers; React hydrates on mount) -->
+    <div id="stats-root">
+        <section id="stats" class="home-stats-shell" aria-label="Pourquoi commencer avec Dodje">
+            <h2 class="home-stats-shell__title">La porte d'entrée pour <span>débuter</span></h2>
+            <ul class="home-stats-shell__list">
+                <li>
+                    <p class="home-stats-shell__value">0&nbsp;€</p>
+                    <p class="home-stats-shell__label">pour commencer</p>
+                    <p class="home-stats-shell__caption">Gratuit sur iOS et Android. Aucune carte demandée.</p>
+                </li>
+                <li>
+                    <p class="home-stats-shell__value">3&nbsp;min</p>
+                    <p class="home-stats-shell__label">par jour</p>
+                    <p class="home-stats-shell__caption">Une session courte suffit pour ancrer une habitude durable.</p>
+                </li>
+            </ul>
+        </section>
+    </div>
 
     <!-- Three Pillars Section (React) -->
     <div id="pillars-root"></div>
@@ -562,89 +526,70 @@
             </div>
         </div>
     </section>
-
-    <!-- Hub SEO : ressources gratuites finance France (crawl + utilisateurs) -->
-    <section class="content-page" id="ressources" aria-labelledby="ressources-title">
-        <div class="container content-layout">
-            <p class="legal-eyebrow">Ressources gratuites</p>
-            <h2 id="ressources-title" class="community-title" style="text-align:center;margin-bottom:0.5rem;">Finance personnelle <span class="legal-title-accent">en France</span></h2>
-            <p class="legal-lead" style="text-align:center;max-width:640px;margin:0 auto 2rem;">Calculateurs, guides et actualités sourcés pour comprendre ton argent, sans inscription et sans jargon.</p>
-            <div class="seo-hub-grid">
-                <a class="seo-hub-card" href="/outils">
-                    <span class="seo-kicker">Calculateurs</span>
-                    <h3>22+ simulateurs gratuits</h3>
-                    <p>Salaire, impôt, prêt immo, Livret A, locatif, PEA vs CTO, chômage.</p>
-                </a>
-                <a class="seo-hub-card" href="/guides">
-                    <span class="seo-kicker">Guides</span>
-                    <h3>30+ guides France 2026</h3>
-                    <p>PEA, crypto MiCA, baromètre immo, données INSEE, glossaire et quiz.</p>
-                </a>
-                <a class="seo-hub-card" href="/actualites">
-                    <span class="seo-kicker">Actualités</span>
-                    <h3>Finance France 2026</h3>
-                    <p>Taux crédit immo, Livret A, DPE, MiCA, calendrier fiscal et dispositif Jeanbrun.</p>
-                </a>
-            </div>
-            <div class="seo-hub-grid outils-popular-grid" style="margin-top:1.5rem;">
-                <a class="seo-hub-card" href="/outils/calculateur-salaire-brut-net"><span class="seo-kicker">Populaire</span><h3>Salaire brut en net</h3><p>Cadre, non-cadre, SMIC juin 2026.</p></a>
-                <a class="seo-hub-card" href="/outils/calculateur-livret-a"><span class="seo-kicker">Épargne</span><h3>Simulateur Livret A</h3><p>Taux 1,50 %, plafond 22 950 €.</p></a>
-                <a class="seo-hub-card" href="/outils/calculateur-capacite-emprunt"><span class="seo-kicker">Crédit</span><h3>Capacité d'emprunt</h3><p>Règle HCSF 35 %.</p></a>
-                <a class="seo-hub-card" href="/outils/calculateur-rendement-locatif"><span class="seo-kicker">Immo</span><h3>Rendement locatif</h3><p>Simule brut, net et cash-flow.</p></a>
-                <a class="seo-hub-card" href="/outils/calculateur-allocation-chomage"><span class="seo-kicker">Chômage</span><h3>Allocation chômage</h3><p>Estime ton ARE brute et nette.</p></a>
-                <a class="seo-hub-card" href="/guides/donnees-finance-france"><span class="seo-kicker">Données</span><h3>Chiffres finance France</h3><p>Graphiques INSEE, AMF, épargne.</p></a>
-                <a class="seo-hub-card" href="/guides/classements-finance-france-2026"><span class="seo-kicker">Classements</span><h3>Comparatifs notés</h3><p>Néobanques, crypto, apps investir.</p></a>
-                <a class="seo-hub-card" href="/guides/prix-metre-carre-investissement-locatif-france-2026"><span class="seo-kicker">Baromètre</span><h3>Prix m² par ville</h3><p>Investir en locatif en France 2026.</p></a>
-                <a class="seo-hub-card" href="/outils/salaire-et-travail"><span class="seo-kicker">Salaire</span><h3>Hub salaire et travail</h3><p>Brut net, impôt, chômage, budget.</p></a>
-                <a class="seo-hub-card" href="/outils/credit-immobilier"><span class="seo-kicker">Crédit</span><h3>Hub crédit immobilier</h3><p>Prêt, capacité, rendement locatif.</p></a>
-                <a class="seo-hub-card" href="/outils/calculateur-micro-entreprise"><span class="seo-kicker">Entreprise</span><h3>Micro-entreprise</h3><p>Cotisations URSSAF et net.</p></a>
-                <a class="seo-hub-card" href="/outils/comparatif-pea-cto"><span class="seo-kicker">Bourse</span><h3>PEA vs CTO</h3><p>Simule la fiscalité sur une plus-value.</p></a>
-                <a class="seo-hub-card" href="/outils/crypto"><span class="seo-kicker">Crypto</span><h3>Hub outils crypto</h3><p>Plateformes MiCA, guides et actus.</p></a>
-                <a class="seo-hub-card" href="/guides/meilleures-apps-budget-2026"><span class="seo-kicker">Apps</span><h3>Apps budget 2026</h3><p>Bankin, Linxo, YNAB comparées.</p></a>
-                <a class="seo-hub-card" href="/guides/equipe-editoriale"><span class="seo-kicker">Éditorial</span><h3>Équipe éditoriale</h3><p>Charte et sources officielles.</p></a>
-            </div>
-        </div>
-    </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer site-footer">
         <div class="container">
-            <div class="footer-content">
+            <nav class="footer-content" aria-label="Pied de page">
                 <div class="footer-section">
-                    <picture>
-                        <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
-                        <img src="assets/Logo_degrade_PNG.png" alt="Dodje - Logo application finance éducative gratuite" class="footer-logo" width="130" height="50" loading="lazy" decoding="async">
-                    </picture>
-                    <p>Dodje - la finance enfin expliquée simplement</p>
-                </div>
-                <div class="footer-section">
-                    <p class="footer-title">Rejoins le mouvement</p>
-                    <div class="social-links">
-                        <a href="https://www.tiktok.com/@dodjeapp" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur TikTok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.16 8.16 0 0 0 4.77 1.52V7.12a4.85 4.85 0 0 1-1-.43z"/></svg></a>
-                        <a href="https://www.instagram.com/dodjeapp/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
-                        <a href="https://discord.gg/qn7cp4nVFh" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Communauté Discord Dodje"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
-                        <a href="https://x.com/DodjeApp" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur X"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <p class="footer-title">Liens utiles</p>
+                    <p class="footer-title">À propos</p>
                     <ul>
-                        <li><a href="/outils">Calculateurs financiers</a></li>
-                        <li><a href="/guides">Guides finance</a></li>
-                        <li><a href="/actualites">Actualités</a></li>
-                        <li><a href="blog">Blog</a></li>
-                        <li><a href="faq">FAQ</a></li>
-                        <li><a href="/conditions-utilisation">Conditions d'utilisation</a></li>
-                        <li><a href="/politique-confidentialite">Confidentialité</a></li>
+                        <li><a href="/">Accueil</a></li>
+                        <li><a href="/faq">FAQ</a></li>
                         <li><a href="/guides/equipe-editoriale">Équipe éditoriale</a></li>
-                        <li><a href="mailto:contact@dodje.fr">contact@dodje.fr</a></li>
+                        <li><a href="/contact">Nous contacter</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="footer-legal-links" style="text-align:center;margin-bottom:0.75rem;font-size:0.9rem;"><a href="/conditions-utilisation">CGU</a> · <a href="/politique-confidentialite">Confidentialité</a> · <a href="/faq">FAQ</a> · <a href="/guides/equipe-editoriale">Équipe éditoriale</a></div>
+                <div class="footer-section">
+                    <p class="footer-title">Outils</p>
+                    <ul>
+                        <li><a href="/outils">Tous les calculateurs</a></li>
+                        <li><a href="/outils/salaire-et-travail">Salaire et travail</a></li>
+                        <li><a href="/outils/epargne">Épargne</a></li>
+                        <li><a href="/outils/credit-immobilier">Crédit immobilier</a></li>
+                        <li><a href="/outils/investissement">Investissement</a></li>
+                        <li><a href="/outils/crypto">Crypto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">Guides</p>
+                    <ul>
+                        <li><a href="/guides">Tous les guides</a></li>
+                        <li><a href="/guides/classements-finance-france-2026">Classements 2026</a></li>
+                        <li><a href="/guides/investir-en-bourse-france-debutant">Bourse débutant</a></li>
+                        <li><a href="/guides/premiers-pas-crypto-france">Premiers pas crypto</a></li>
+                        <li><a href="/guides/epargne-de-precaution-france">Épargne de précaution</a></li>
+                        <li><a href="/guides/glossaire-finance-investissement-2026">Glossaire</a></li>
+                        <li><a href="/actualites">Actualités</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">L'app</p>
+                    <ul>
+                        <li><a href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215" target="_blank" rel="noopener noreferrer">App Store</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=xyz.dodje.app" target="_blank" rel="noopener noreferrer">Google Play</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">Légal</p>
+                    <ul>
+                        <li><a href="/mentions-legales">Mentions légales</a></li>
+                        <li><a href="/conditions-utilisation">Conditions d'utilisation</a></li>
+                        <li><a href="/politique-confidentialite">Confidentialité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <p class="footer-title">Social</p>
+                    <ul>
+                        <li><a href="https://www.tiktok.com/@dodjeapp" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                        <li><a href="https://www.instagram.com/dodjeapp/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://discord.gg/qn7cp4nVFh" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                        <li><a href="https://x.com/DodjeApp" target="_blank" rel="noopener noreferrer">X</a></li>
+                    </ul>
+                </div>
+            </nav>
             <div class="footer-bottom">
-                <p>&copy; 2026 Dodje. Tous droits réservés.</p>
+                <p>&copy; 2026 Dodje Solutions. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
