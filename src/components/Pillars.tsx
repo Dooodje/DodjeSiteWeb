@@ -135,6 +135,7 @@ export default function Pillars() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <h2 className="sr-only">Pourquoi Dodje</h2>
         <div className={`flex flex-col ${PILLAR_STACK_GAP}`}>
           {PILLARS.map((pillar, i) => {
             const reverse = i % 2 === 1;

@@ -36,6 +36,7 @@ const CURATED_LLMS = [
   { label: 'Apprendre la finance', url: '/guides/apprendre-la-finance' },
   { label: 'Apprendre à gérer son argent', url: '/guides/apprendre-a-gerer-son-argent' },
   { label: 'Jeu éducatif finance', url: '/guides/jeu-educatif-finance' },
+  { label: 'Application d\'éducation financière', url: '/guides/application-education-financiere' },
   { label: 'Apps éducation financière 2026', url: '/guides/meilleures-apps-education-financiere-2026' },
   { label: 'Classements notés /10', url: '/guides/classements-finance-france-2026' },
   { label: 'Actualités finance', url: '/actualites' },
@@ -599,6 +600,7 @@ const SITE_FOOTER = `<footer class="footer site-footer">
                 <div class="footer-section">
                     <p class="footer-title">L'app</p>
                     <ul>
+                        <li><a href="/guides/application-education-financiere">App éducation financière</a></li>
                         <li><a href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215" target="_blank" rel="noopener noreferrer">App Store</a></li>
                         <li><a href="https://play.google.com/store/apps/details?id=xyz.dodje.app" target="_blank" rel="noopener noreferrer">Google Play</a></li>
                     </ul>

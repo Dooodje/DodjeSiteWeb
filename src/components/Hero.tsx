@@ -11,7 +11,7 @@ const HEADLINE_LINE_2 = [
 ];
 
 const TRUST_NOTE =
-  'Contenus éducatifs uniquement, sans conseil financier personnalisé.';
+  "Dodje est l'application d'éducation financière gratuite (0 €), dès 16 ans. Sans conseil personnalisé.";
 
 function AppleIcon() {
   return (
@@ -134,7 +134,7 @@ export default function Hero() {
                        px-3.5 py-1.5 text-xs sm:text-sm font-outfit"
           >
             <Sparkles size={14} className="text-dodje-green" />
-            <span className="text-white/80">Disponible sur iOS &amp; Android</span>
+            <span className="text-white/80">App d'éducation financière · iOS &amp; Android</span>
           </div>
 
           {/* Headline */}
@@ -178,7 +178,7 @@ export default function Hero() {
           />
 
           {/* Trust note desktop */}
-          <p className="hidden lg:block text-xs sm:text-sm font-outfit text-white/55 max-w-xl mt-2">
+          <p className="hero-shell__trust hidden lg:block text-xs sm:text-sm font-outfit text-white/55 max-w-xl mt-2">
             {TRUST_NOTE}
           </p>
           </div>
@@ -202,7 +202,7 @@ export default function Hero() {
             className="order-3 flex w-full flex-col gap-3 lg:hidden"
           />
 
-          <p className="order-4 lg:hidden text-xs sm:text-sm font-outfit text-white/55 text-center max-w-xl mx-auto mt-1">
+          <p className="hero-shell__trust order-4 lg:hidden text-xs sm:text-sm font-outfit text-white/55 text-center max-w-xl mx-auto mt-1">
             {TRUST_NOTE}
           </p>
         </div>

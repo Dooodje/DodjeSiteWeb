@@ -136,6 +136,7 @@ export default function Features() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <h2 className="sr-only">Comment tu apprends</h2>
         <div className={`flex flex-col ${FEATURE_STACK_GAP}`}>
           {FEATURES.map((f, i) => {
             const reverse = i % 2 === 1;
