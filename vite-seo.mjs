@@ -601,6 +601,7 @@ const SITE_FOOTER = `<footer class="footer site-footer">
                     <p class="footer-title">L'app</p>
                     <ul>
                         <li><a href="/guides/application-education-financiere">App éducation financière</a></li>
+                        <li><a href="/guides/meilleures-apps-education-financiere-2026">Comparatif 2026</a></li>
                         <li><a href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215" target="_blank" rel="noopener noreferrer">App Store</a></li>
                         <li><a href="https://play.google.com/store/apps/details?id=xyz.dodje.app" target="_blank" rel="noopener noreferrer">Google Play</a></li>
                     </ul>

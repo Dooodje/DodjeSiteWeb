@@ -26,7 +26,7 @@ const PILLARS: Pillar[] = [
     titleLine1: 'Un parcours',
     titleAccent: 'progressif',
     body:
-      'Avec Dodje, tu avances à ton rythme. Tu commences par les bases, tu débloques de nouvelles notions petit à petit, et tu comprends enfin la finance sans te sentir perdu.',
+      'Avec Dodje, tu avances à ton rythme. C’est une application d’éducation financière : tu commences par les bases, tu débloques de nouvelles notions, et tu comprends enfin la finance sans te sentir perdu.',
     media: {
       kind: 'lottie',
       loadAnimation: segmentLottie.parcours,

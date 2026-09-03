@@ -11,7 +11,7 @@ const HEADLINE_LINE_2 = [
 ];
 
 const TRUST_NOTE =
-  "Dodje est l'application d'éducation financière gratuite (0 €), dès 16 ans. Sans conseil personnalisé.";
+  "Dodje est l'application d'éducation financière gratuite (0 €) pour apprendre à gérer son argent, dès 16 ans. Pas une banque, pas un jeu d'argent.";
 
 function AppleIcon() {
   return (

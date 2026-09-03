@@ -1768,55 +1768,6 @@ body {
     max-width: 540px;
 }
 
-.home-app-intro {
-    position: relative;
-    z-index: 2;
-    max-width: 40rem;
-    margin: -1rem auto 0;
-    padding: 0 1.5rem 3.5rem;
-    color: rgba(255, 255, 255, 0.72);
-    font-family: var(--font-family);
-    text-align: center;
-    line-height: 1.65;
-}
-
-.home-app-intro__title {
-    font-family: var(--font-family);
-    font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--secondary-green);
-    margin: 0 0 0.85rem;
-}
-
-.home-app-intro__bluf {
-    margin: 0;
-    font-size: 1rem;
-}
-
-.home-app-intro__list {
-    list-style: none;
-    margin: 1.1rem 0 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.58);
-}
-
-.home-app-intro__more {
-    margin: 1.15rem 0 0;
-    font-size: 0.9rem;
-}
-
-.home-app-intro__more a {
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
-}
-
 .home-copy-shell {
     position: relative;
     z-index: 2;

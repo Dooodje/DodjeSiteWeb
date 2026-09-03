@@ -54,7 +54,7 @@ const FEATURES: Feature[] = [
     titleLine1: 'Un apprentissage',
     titleAccent: 'ludique',
     body:
-      'Avec des quiz, des défis et des récompenses à collectionner, apprendre devient plus motivant. Tu pratiques souvent, tu retiens mieux, et tu prends plaisir à continuer.',
+      'Avec des quiz, des défis et des récompenses à collectionner, apprendre devient plus motivant. Tu pratiques souvent, tu retiens mieux — et ce n’est pas un jeu d’argent : pas de mises, pas de gains d’euros.',
     media: {
       kind: 'lottie',
       loadAnimation: segmentLottie.apprentissageLudique,
