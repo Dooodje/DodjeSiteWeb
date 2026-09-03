@@ -7499,14 +7499,45 @@ a:focus-visible {
 
 .site-footer .footer-content {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: minmax(180px, 1.2fr) repeat(5, minmax(0, 1fr));
     gap: 2rem 1.5rem;
     margin-bottom: 2.5rem;
     text-align: left;
+    align-items: start;
 }
 
 .site-footer .footer-section {
     text-align: left;
+}
+
+.site-footer .footer-section--brand {
+    min-width: 0;
+}
+
+.site-footer .footer-brand {
+    display: inline-block;
+    margin-bottom: 1.1rem;
+    text-decoration: none;
+}
+
+.site-footer .footer-logo {
+    height: 50px;
+    width: auto;
+    display: block;
+    margin: 0;
+}
+
+.site-footer .social-links {
+    margin-top: 0;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.site-footer .social-link {
+    width: 40px;
+    height: 40px;
+    color: #0a0a0a;
 }
 
 .site-footer .footer-title {
@@ -7527,7 +7558,7 @@ a:focus-visible {
     margin-bottom: 0.65rem;
 }
 
-.site-footer .footer-section a {
+.site-footer .footer-section a:not(.social-link) {
     color: var(--gray-300);
     text-decoration: none;
     font-weight: 400;
@@ -7535,8 +7566,8 @@ a:focus-visible {
     line-height: 1.35;
 }
 
-.site-footer .footer-section a:hover,
-.site-footer .footer-section a:focus-visible {
+.site-footer .footer-section a:not(.social-link):hover,
+.site-footer .footer-section a:not(.social-link):focus-visible {
     color: var(--accent-light-green);
     text-decoration: none;
 }
@@ -7572,6 +7603,10 @@ a:focus-visible {
 
     .site-footer .footer-section {
         text-align: left;
+    }
+
+    .site-footer .footer-section--brand {
+        grid-column: 1 / -1;
     }
 }
 
