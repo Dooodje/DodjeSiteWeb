@@ -1,14 +1,14 @@
 {
-  "updated": "2026-09-03",
+  "updated": "2026-09-04",
   "disclaimer": "Barèmes pédagogiques Dodje. Vérifier les sources officielles avant toute décision. Pas de conseil personnalisé.",
   "items": [
     {
       "id": "livret_a_taux",
       "label": "Taux du Livret A",
-      "value": 1.5,
+      "value": 1.7,
       "unit": "%",
-      "display": "1,50 %",
-      "asOf": "2026-02-01",
+      "display": "1,7 %",
+      "asOf": "2026-09-04",
       "source": "Banque de France",
       "sourceUrl": "https://www.banque-france.fr"
     },
