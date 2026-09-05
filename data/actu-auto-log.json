@@ -1,12 +1,18 @@
 {
   "seen": [
-    "https://www.service-public.fr/particuliers/vosdroits/F2365"
+    "https://www.service-public.fr/particuliers/vosdroits/F2365",
+    "https://www.service-public.fr/particuliers/vosdroits/F2300"
   ],
   "published": [
     {
       "slug": "livret-a-baremes-officiels-au-4-septembre-2026-2026-09-04",
       "url": "https://www.service-public.fr/particuliers/vosdroits/F2365",
       "date": "2026-09-04"
+    },
+    {
+      "slug": "smic-baremes-officiels-au-5-septembre-2026-2026-09-05",
+      "url": "https://www.service-public.fr/particuliers/vosdroits/F2300",
+      "date": "2026-09-05"
     }
   ],
   "fingerprints": [
@@ -14,6 +20,11 @@
       "url": "https://www.service-public.fr/particuliers/vosdroits/F2365",
       "fingerprint": "1,5 €|1,7 %|10 €|100 000 €|2 %|22 950 €|50 €|76 500 €",
       "date": "2026-09-04"
+    },
+    {
+      "url": "https://www.service-public.fr/particuliers/vosdroits/F2300",
+      "fingerprint": "1 477,93 €|1 500 €|1 867,02 €|11,08 €|12,31 €|17 735,19 €|22 404,20 €|9,74 €",
+      "date": "2026-09-05"
     }
   ]
 }
