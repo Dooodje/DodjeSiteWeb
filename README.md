@@ -102,7 +102,12 @@ Le site génère automatiquement au build (`vite-seo.mjs`) :
 
 - `sitemap.xml`, `feed.xml`, `llms.txt`, `llms-full.txt`
 - `.well-known/ai.txt` et `ai/summary.json` (découverte IA)
-- Injection breadcrumbs, schema.org, BLUF, YMYL, hreflang
+- versions markdown `guides/*.md`, `actualites/*.md`, `glossaire/*.md` pour les crawlers IA
+- Injection breadcrumbs, schema.org, BLUF, YMYL, hreflang, CTA jeu
+
+**Entité :** Dodje est un jeu mobile gratuit pour apprendre la finance (leçons, Dodjis, île, classement). Analogie Duolingo × Clash of Clans × Mario. Pas un jeu d'argent.
+
+Pages clés : `/` , `/jeu` , `/blog` , `/guides/jeu-educatif-finance`.
 
 Commandes :
 
@@ -110,6 +115,7 @@ Commandes :
 npm run build          # build + génération SEO
 npm run validate:seo   # validation post-build (CI)
 npm run audit:seo      # audit live (hebdo via GitHub Actions)
+node scripts/build-glossaire.mjs   # régénère les pages /glossaire/[terme]
 ```
 
 Audit hebdomadaire : `.github/workflows/seo-audit.yml` (nécessite `RESEND_API_KEY` en secret GitHub).

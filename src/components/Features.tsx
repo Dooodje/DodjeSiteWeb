@@ -40,7 +40,7 @@ const FEATURES: Feature[] = [
     titleLine1: 'Un progrès',
     titleAccent: 'visible',
     body:
-      'Chaque leçon te fait avancer. Tu gagnes de l’XP, tu débloques de nouvelles étapes, et tu vois clairement ce que tu comprends mieux qu’avant.',
+      'Chaque leçon te fait avancer. Tu gagnes de l’XP et des Dodjis, tu débloques de nouveaux bâtiments, tu montes de niveau et tu vois clairement ce que tu comprends mieux qu’avant.',
     media: {
       kind: 'lottie',
       loadAnimation: segmentLottie.progresVisible,
@@ -54,7 +54,7 @@ const FEATURES: Feature[] = [
     titleLine1: 'Un apprentissage',
     titleAccent: 'ludique',
     body:
-      'Avec des quiz, des défis et des récompenses à collectionner, apprendre devient plus motivant. Tu pratiques souvent, tu retiens mieux — et ce n’est pas un jeu d’argent : pas de mises, pas de gains d’euros.',
+      'Avec des quiz, des défis quotidiens, une île à faire grandir et un classement mondial, apprendre devient un jeu. Tu pratiques souvent, tu retiens mieux — et ce n’est pas un jeu d’argent : pas de mises, pas de gains d’euros.',
     media: {
       kind: 'lottie',
       loadAnimation: segmentLottie.apprentissageLudique,

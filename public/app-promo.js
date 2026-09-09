@@ -2,7 +2,7 @@
   'use strict';
 
   var APP_STORE =
-    'https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215';
+    'https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215';
   var PLAY_STORE =
     'https://play.google.com/store/apps/details?id=xyz.dodje.app';
   var MOBILE_MQ = window.matchMedia('(max-width: 767px)');

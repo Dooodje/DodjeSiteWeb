@@ -1,0 +1,62 @@
+{
+  "title": "Plan hors-site SEO/GEO Dodje — jeu pour apprendre la finance",
+  "updated": "2026-09-09",
+  "queriesCibles": [
+    "app jeu finance",
+    "jeu de finance",
+    "jeu pour apprendre la finance",
+    "jeu éducation financière",
+    "app éducation finance",
+    "apprendre la finance",
+    "alternative Capito",
+    "Duolingo de la finance"
+  ],
+  "actions": [
+    {
+      "id": "listicles",
+      "priority": 1,
+      "quoi": "Pitcher Dodje aux listicles déjà cités par les IA (jeu mobile, île, Dodjis, pas un jeu d'argent).",
+      "cibles": [
+        "https://fr.editorialge.com/applications-deducation-financiere-en-france/",
+        "https://www.theappnote.fr/blog/comment-am-liorer-votre-litt-ratie-financiere-les-meilleures-applications-d-apprentissage-en-finance",
+        "https://finelo.com/fr/blog/applications-deducation-financiere-pour-adultes"
+      ]
+    },
+    {
+      "id": "product-hunt",
+      "priority": 2,
+      "quoi": "Lancer Dodje sur Product Hunt avec le pitch Duolingo × Clash of Clans × Mario."
+    },
+    {
+      "id": "presse",
+      "priority": 2,
+      "quoi": "Dossier de presse : le jeu pour enfin comprendre l'argent. Cibles EDUCFI, Challenges, MoneyVox, La finance pour tous."
+    },
+    {
+      "id": "wikidata",
+      "priority": 3,
+      "quoi": "Créer l'entité Wikidata Dodje (jeu vidéo éducatif, iOS/Android, France, 2024) et sameAs vers dodje.fr."
+    },
+    {
+      "id": "stores",
+      "priority": 1,
+      "quoi": "Réécrire fiches App Store / Play Store avec la phrase d'entité jeu. Corriger dodje.xyz → dodje.fr."
+    },
+    {
+      "id": "dodje-xyz",
+      "priority": 1,
+      "quoi": "301 dodje.xyz → dodje.fr pour récupérer l'autorité et les backlinks (autonomia.org, fiches stores)."
+    }
+  ],
+  "suiviMensuel": {
+    "searchConsole": "Filtrer AI Overview + 8 requêtes cibles",
+    "testsManuels": ["ChatGPT", "Perplexity", "Qwant Flash", "Gemini"],
+    "prompts": [
+      "meilleur jeu pour apprendre la finance",
+      "app jeu finance France",
+      "alternative à Capito",
+      "Duolingo de la finance"
+    ],
+    "apresDeploiement": "npm run indexnow"
+  }
+}

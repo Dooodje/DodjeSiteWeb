@@ -4,14 +4,19 @@ import { segmentLottie } from '../assets/lottie/segments';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import SegmentLottie from './SegmentLottie';
 
-const HEADLINE_LINE_1 = ['Comprends', 'ton', 'argent'];
+const HEADLINE_LINE_1 = ['Le', 'jeu', 'pour', 'enfin'];
 const HEADLINE_LINE_2 = [
-  { words: ['simplement', 'et'], nowrap: true },
-  { words: ['gratuitement.'] }
+  { words: ['comprendre'], nowrap: true },
+  { words: ["l'argent"] }
 ];
 
-const TRUST_NOTE =
-  "Dodje est l'application d'éducation financière gratuite (0 €) pour apprendre à gérer son argent, dès 16 ans. Pas une banque, pas un jeu d'argent.";
+const BLUF =
+  "Imagine si Duolingo, Clash of Clans et Mario s'étaient réunis. Bienvenue dans Dodje.";
+
+const APP_STORE_URL =
+  'https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215';
+const PLAY_STORE_URL =
+  'https://play.google.com/store/apps/details?id=xyz.dodje.app&hl=fr';
 
 function AppleIcon() {
   return (
@@ -58,7 +63,7 @@ function StoreButtons({
   return (
     <div className={stacked ? `w-full ${className ?? ''}` : className}>
       <a
-        href="https://apps.apple.com/us/app/dodje-%C3%A9ducation-financi%C3%A8re/id6743447215"
+        href={APP_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
         className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
@@ -75,7 +80,7 @@ function StoreButtons({
         </span>
       </a>
       <a
-        href="https://play.google.com/store/apps/details?id=xyz.dodje.app"
+        href={PLAY_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
         className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl bg-white text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-8px_rgba(255,255,255,0.25)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
@@ -125,62 +130,59 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 sm:px-10 lg:px-16 pt-32 pb-14 sm:pt-24 lg:pt-12 lg:pb-20">
         <div className="grid lg:grid-cols-[0.8fr_1.4fr] gap-6 lg:gap-10 items-center">
-          {/* Texte — au-dessus de l'animation sur mobile */}
-          <div className="order-1 flex flex-col gap-2 lg:gap-3 max-w-2xl lg:order-none">
-          {/* Eyebrow chip */}
-          <div
-            className="inline-flex items-center gap-2 self-start rounded-full
-                       bg-white/5 backdrop-blur
-                       px-3.5 py-1.5 text-xs sm:text-sm font-outfit"
-          >
-            <Sparkles size={14} className="text-dodje-green" />
-            <span className="text-white/80">App d'éducation financière · iOS &amp; Android</span>
-          </div>
+          <div className="order-1 flex w-full flex-col items-center gap-2 lg:gap-3 lg:order-none">
+            <div className="flex w-full flex-col items-center text-center">
+              <div
+                className="inline-flex items-center gap-2 rounded-full
+                           bg-white/5 backdrop-blur
+                           px-3.5 py-1.5 text-xs sm:text-sm font-outfit"
+              >
+                <Sparkles size={14} className="text-dodje-green" />
+                <span className="text-white/80">Le jeu pour apprendre la finance · iOS &amp; Android</span>
+              </div>
 
-          {/* Headline */}
-          <h1 className="font-outfit font-black uppercase tracking-tight leading-[0.92] text-[clamp(2.35rem,10.6vw,3rem)] sm:text-6xl md:text-7xl lg:text-[clamp(3.35rem,4.1vw,4.5rem)] xl:text-[5rem]">
-            <span className="block">
-              {HEADLINE_LINE_1.map((word, i) => (
-                <span
-                  key={`l1-${i}`}
-                  className="inline-block mr-[0.18em] last:mr-0"
-                >
-                  {word}
-                </span>
-              ))}
-            </span>
-            <span className="block text-dodje-green">
-              {HEADLINE_LINE_2.map((segment, i) => (
-                <span
-                  key={`l2-${i}`}
-                  className={`inline-block mr-[0.18em] last:mr-0${
-                    segment.nowrap ? ' whitespace-nowrap' : ''
-                  }`}
-                >
-                  {segment.words.map((word, j) => (
+              <h1 className="mt-2 w-full font-outfit font-extrabold uppercase tracking-tight leading-[1.12] text-center text-[clamp(2.1rem,7vw,2.85rem)] sm:text-[2.85rem] md:text-[3.25rem] lg:text-[3.5rem]">
+                <span className="block">
+                  {HEADLINE_LINE_1.map((word, i) => (
                     <span
-                      key={`l2-${i}-${j}`}
-                      className={`inline-block last:mr-0 ${
-                        j < segment.words.length - 1 ? 'mr-[0.18em]' : ''
-                      }`}
+                      key={`l1-${i}`}
+                      className="inline-block mr-[0.18em] last:mr-0"
                     >
                       {word}
                     </span>
                   ))}
                 </span>
-              ))}
-            </span>
-          </h1>
+                <span className="block text-dodje-green">
+                  {HEADLINE_LINE_2.map((segment, i) => (
+                    <span
+                      key={`l2-${i}`}
+                      className={`inline-block mr-[0.18em] last:mr-0${
+                        segment.nowrap ? ' whitespace-nowrap' : ''
+                      }`}
+                    >
+                      {segment.words.map((word, j) => (
+                        <span
+                          key={`l2-${i}-${j}`}
+                          className={`inline-block last:mr-0 ${
+                            j < segment.words.length - 1 ? 'mr-[0.18em]' : ''
+                          }`}
+                        >
+                          {word}
+                        </span>
+                      ))}
+                    </span>
+                  ))}
+                </span>
+              </h1>
 
-          {/* CTAs desktop — à gauche de l'animation */}
-          <StoreButtons
-            className="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1"
-          />
+              <p className="hero-shell__bluf mt-3 font-outfit text-sm sm:text-base text-white/80 max-w-xl leading-relaxed text-center">
+                {BLUF}
+              </p>
+            </div>
 
-          {/* Trust note desktop */}
-          <p className="hero-shell__trust hidden lg:block text-xs sm:text-sm font-outfit text-white/55 max-w-xl mt-2">
-            {TRUST_NOTE}
-          </p>
+            <StoreButtons
+              className="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1"
+            />
           </div>
 
           {/* Animation — entre le titre et les boutons sur mobile */}
@@ -201,10 +203,6 @@ export default function Hero() {
             stacked
             className="order-3 flex w-full flex-col gap-3 lg:hidden"
           />
-
-          <p className="hero-shell__trust order-4 lg:hidden text-xs sm:text-sm font-outfit text-white/55 text-center max-w-xl mx-auto mt-1">
-            {TRUST_NOTE}
-          </p>
         </div>
       </div>
     </section>

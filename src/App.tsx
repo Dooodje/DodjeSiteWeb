@@ -62,7 +62,7 @@ export default function App() {
           De la théorie à la <span className="text-dodje-green">pratique</span>
         </h2>
         <p className="font-outfit text-sm sm:text-lg text-white/75 max-w-2xl mt-2 sm:mt-3 leading-relaxed">
-          Récupère des Dodji, débloque des bâtiments et prends des décisions financières. Apprendre à gérer son argent n'a jamais été aussi fun.
+          Récupère des Dodjis, débloque des bâtiments et prends des décisions financières sur ton île. Apprendre à gérer son argent n'a jamais été aussi fun.
         </p>
       </div>
 

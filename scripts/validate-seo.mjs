@@ -197,7 +197,67 @@ function validateHomepageGeo() {
   }
   if (!html.includes('id="community"')) fail('Homepage missing community block')
   if (!html.includes('og-default-1200x630.png')) fail('Homepage OG image is not 1200x630 default')
-  if (/href=["']\/?blog["']/.test(html)) fail('Homepage still links to /blog')
+  if (!/<title>[^<]*jeu[^<]*<\/title>/i.test(html)) fail('Homepage title must contain « jeu »')
+  if (!/<h1[^>]*>[\s\S]*jeu[\s\S]*<\/h1>/i.test(html)) fail('Homepage H1 must contain « jeu »')
+  if (!html.includes('"VideoGame"')) fail('Homepage JSON-LD missing VideoGame')
+  if (!html.includes('/jeu')) fail('Homepage must link to /jeu')
+  if (html.includes('apps.apple.com/us/')) fail('Homepage still links to App Store /us/')
+}
+
+function validateLlmsGameEntity() {
+  const llmsPath = path.join(distDir, 'llms.txt')
+  if (!fs.existsSync(llmsPath)) return
+  const text = fs.readFileSync(llmsPath, 'utf8')
+  if (!/jeu mobile/i.test(text)) fail('llms.txt must describe Dodje as a jeu mobile')
+  if (!/Dodjis/i.test(text)) fail('llms.txt missing Dodjis')
+  if (/Décrire Dodje comme app d'éducation financière gratuite pour débutants/.test(text)) {
+    fail('llms.txt still uses the old « app d\'éducation » citation guideline')
+  }
+}
+
+function validateNoUsStoreLinks() {
+  const home = path.join(distDir, 'index.html')
+  const summary = path.join(distDir, 'ai/summary.json')
+  const llms = path.join(distDir, 'llms.txt')
+  for (const file of [home, summary, llms]) {
+    if (!fs.existsSync(file)) continue
+    const text = fs.readFileSync(file, 'utf8')
+    if (text.includes('apps.apple.com/us/')) {
+      fail(`${path.relative(distDir, file)} still links to App Store /us/`)
+    }
+  }
+}
+
+function validateHomepageFaqSync() {
+  const home = path.join(distDir, 'index.html')
+  if (!fs.existsSync(home)) return
+  const html = fs.readFileSync(home, 'utf8')
+  if (!html.includes('id="home-seo-crawl"')) {
+    fail('Homepage missing #home-seo-crawl (SEO/GEO copy off the visual landing)')
+  }
+  const faqSection = html.match(/<section id="faq-home"[\s\S]*?<\/section>/)
+  if (!faqSection) {
+    fail('Homepage missing #faq-home (kept in #home-seo-crawl for crawlers)')
+    return
+  }
+  const summaries = [...faqSection[0].matchAll(/<summary>([^<]+)<\/summary>/g)].map((m) => m[1].trim())
+  if (summaries.length < 8) fail(`Homepage FAQ visible has only ${summaries.length} questions`)
+  for (const q of summaries) {
+    if (!html.includes(`"name": "${q}"`) && !html.includes(`"name":"${q}"`)) {
+      fail(`Homepage FAQ JSON-LD missing question: ${q}`)
+    }
+  }
+}
+
+function validateMarkdownRoutes() {
+  const sample = path.join(distDir, 'guides/jeu-educatif-finance.md')
+  if (!fs.existsSync(sample)) {
+    fail('Missing markdown route: guides/jeu-educatif-finance.md')
+    return
+  }
+  const md = fs.readFileSync(sample, 'utf8')
+  if (!md.startsWith('#')) fail('Markdown route does not start with a heading')
+  if (!/jeu/i.test(md)) fail('jeu-educatif-finance.md should mention jeu')
 }
 
 function validateRobotsGrouping() {
@@ -278,6 +338,10 @@ validateBlufInDist()
 validateGhPagesRedirects()
 validateNoindexOnlyOnStubs()
 validateHomepageGeo()
+validateLlmsGameEntity()
+validateNoUsStoreLinks()
+validateHomepageFaqSync()
+validateMarkdownRoutes()
 validateRobotsGrouping()
 validateIndexNowKey()
 validateContentPagesGeo()

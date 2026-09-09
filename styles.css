@@ -1768,6 +1768,20 @@ body {
     max-width: 540px;
 }
 
+.home-seo-crawl {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    pointer-events: none !important;
+}
+
 .home-copy-shell {
     position: relative;
     z-index: 2;
@@ -7647,4 +7661,164 @@ a:focus-visible {
     .site-footer .footer-content {
         grid-template-columns: 1fr;
     }
+}
+/* Navigation principale : Le jeu · Guides · Outils · Actus (masquée < 640px,
+   les mêmes liens vivent dans le footer). */
+.nav-menu--site {
+    display: flex !important;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.nav-menu--site > .nav-link {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .nav-menu--site > .nav-link {
+        display: inline-block;
+        font-family: var(--font-family);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.78);
+        text-decoration: none;
+    }
+
+    .nav-menu--site > .nav-link:hover,
+    .nav-menu--site > .nav-link:focus-visible,
+    .nav-menu--site > .nav-link.is-active {
+        color: var(--secondary-green);
+    }
+}
+
+/* Bloc CTA « Apprends ça en jouant dans Dodje » sur les guides. */
+.content-cta-game {
+    margin: var(--space-8) 0;
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, rgba(155, 236, 0, 0.14), rgba(6, 208, 1, 0.06));
+    border: 1px solid rgba(155, 236, 0, 0.25);
+}
+
+.content-cta-game h2,
+.content-cta-game h3 {
+    margin: 0 0 var(--space-2);
+    color: #fff;
+    font-size: 1.25rem;
+    text-align: left;
+}
+
+.content-cta-game p {
+    margin: 0 0 var(--space-4);
+    color: var(--gray-300);
+}
+
+.content-cta-game__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.content-cta-game__actions a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.7rem 1.2rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.content-cta-game__actions a:first-child {
+    background: linear-gradient(to bottom, #9bec00 0%, #06d001 100%);
+    color: #0b0b0b;
+}
+
+.content-cta-game__actions a:not(:first-child) {
+    color: var(--secondary-green);
+    border: 1px solid rgba(155, 236, 0, 0.4);
+}
+
+/* Landing /jeu : étapes HowTo et grille des bâtiments. */
+.game-steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0;
+    display: grid;
+    gap: var(--space-4);
+}
+
+.game-steps li {
+    position: relative;
+    padding: var(--space-4) var(--space-4) var(--space-4) 3.5rem;
+    border-radius: var(--radius-xl);
+    background: rgba(17, 17, 17, 0.72);
+}
+
+.game-steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    color: #0b0b0b;
+    background: linear-gradient(to bottom, #9bec00 0%, #06d001 100%);
+}
+
+.game-steps h3 {
+    margin: 0 0 var(--space-2);
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+.game-steps p {
+    margin: 0;
+}
+
+.game-buildings {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 1fr;
+    margin: var(--space-6) 0;
+}
+
+@media (min-width: 640px) {
+    .game-buildings {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .game-buildings {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.game-buildings article {
+    padding: var(--space-5);
+    border-radius: var(--radius-xl);
+    background: rgba(17, 17, 17, 0.72);
+}
+
+.game-buildings h3 {
+    margin: 0 0 var(--space-1);
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+.game-buildings .seo-kicker {
+    display: inline-block;
+    margin-bottom: var(--space-2);
+}
+
+.game-buildings p {
+    margin: 0;
+    font-size: 0.95rem;
 }

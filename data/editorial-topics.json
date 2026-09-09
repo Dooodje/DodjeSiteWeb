@@ -680,6 +680,42 @@
           "a": "Non."
         }
       ]
+    },
+    {
+      "slug": "jeu-education-financiere-vs-jeu-dargent",
+      "kicker": "Jeu",
+      "title": "Jeu d'éducation financière ou jeu d'argent : la différence",
+      "baremes": ["livret_a_taux"],
+      "links": {
+        "tool": "/outils",
+        "guide": "/guides/jeu-educatif-finance",
+        "actu": "/actualites"
+      },
+      "bluf": "Un jeu éducatif enseigne (leçons, quiz) sans miser d'argent. Un jeu d'argent (ANJ) implique mises et gains. Dodje est le premier. Le Livret A ({{livret_a_taux}}) n'a rien à voir avec des paris.",
+      "sections": [
+        {
+          "h2": "La frontière légale",
+          "html": "<p>L'ANJ encadre les jeux d'argent. Dodje n'en est pas un : Dodjis sans valeur, pas de mises. Voir <a href=\"/guides/jeu-educatif-finance\">le pilier jeu</a>.</p>"
+        },
+        {
+          "h2": "À quoi sert le livret dans ce débat",
+          "html": "<p>Le Livret A ({{livret_a_taux}}) est de l'épargne réglementée, pas un gain de jeu. Dans Dodje, le moulin représente cette idée.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Dodje est-il un jeu d'argent ?",
+          "a": "Non."
+        },
+        {
+          "q": "Quel est le taux du Livret A ?",
+          "a": "{{livret_a_taux}}, source {{livret_a_taux.source}}."
+        },
+        {
+          "q": "Où jouer pour apprendre ?",
+          "a": "Sur /jeu. Contenu pédagogique, sans conseil personnalisé."
+        }
+      ]
     }
   ]
 }

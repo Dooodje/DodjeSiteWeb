@@ -1,0 +1,226 @@
+{
+  "hub": "/guides/glossaire-finance-investissement-2026",
+  "updated": "2026-09-09",
+  "terms": [
+    {
+      "slug": "pea",
+      "term": "PEA",
+      "title": "PEA — Plan d'Épargne en Actions",
+      "category": "Enveloppes fiscales",
+      "definition": "Enveloppe fiscale française créée en 1992 pour investir en actions et ETF éligibles de l'Union européenne et de l'Espace économique européen. Plafond de versements : 150 000 euros. Après 5 ans de détention, les plus-values sont exonérées d'impôt sur le revenu (18,6 % de prélèvements sociaux uniquement). Les crypto-actifs purs ne sont pas éligibles.",
+      "faqQ": "C'est quoi un PEA en France ?",
+      "sourceTitle": "Service-public.fr, PEA",
+      "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F2367",
+      "related": ["/guides/comprendre-la-bourse", "/guides/investir-en-bourse-france-debutant", "/outils/comparatif-pea-cto"]
+    },
+    {
+      "slug": "cto",
+      "term": "CTO",
+      "title": "CTO — Compte-Titres Ordinaire",
+      "category": "Enveloppes fiscales",
+      "definition": "Compte de bourse sans plafond ni restriction géographique. Permet d'acheter des actions du monde entier, des ETF, des obligations et certains produits dérivés. Fiscalité : PFU de 30 % (12,8 % IR + 17,2 % prélèvements sociaux), sauf option au barème progressif.",
+      "faqQ": "Quelle différence entre PEA et CTO ?",
+      "sourceTitle": "AMF, le compte-titres",
+      "sourceUrl": "https://www.amf-france.org/fr/epargne-info-service/le-compte-titres",
+      "related": ["/guides/pea-vs-cto-complet-2026", "/outils/comparatif-pea-cto"]
+    },
+    {
+      "slug": "etf",
+      "term": "ETF",
+      "title": "ETF — Exchange Traded Fund",
+      "category": "Bourse",
+      "definition": "Fonds indiciel coté en bourse qui réplique un indice (MSCI World, CAC 40, etc.). Faibles frais de gestion (TER souvent 0,10 à 0,30 %). Permet de diversifier instantanément sur des centaines d'entreprises. Éligible au PEA si l'ETF investit majoritairement en actions européennes.",
+      "faqQ": "C'est quoi un ETF ?",
+      "sourceTitle": "AMF, les ETF",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/les-produits-financiers/les-etfs",
+      "related": ["/guides/etf-debutant-france-2026", "/guides/meilleurs-etf-pea-2026", "/guides/comprendre-la-bourse"]
+    },
+    {
+      "slug": "action",
+      "term": "Action",
+      "title": "Action — titre de propriété d'une entreprise",
+      "category": "Bourse",
+      "definition": "Titre de propriété d'une part du capital d'une entreprise cotée. L'investisseur peut percevoir des dividendes et espérer une plus-value si le cours monte. Risque de perte totale en cas de faillite. Cours fluctuant selon les résultats et le sentiment de marché.",
+      "faqQ": "C'est quoi une action en bourse ?",
+      "sourceTitle": "AMF, les actions",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions",
+      "related": ["/guides/comprendre-la-bourse", "/guides/investir-en-bourse-france-debutant"]
+    },
+    {
+      "slug": "dca",
+      "term": "DCA",
+      "title": "DCA — Dollar Cost Averaging",
+      "category": "Stratégies",
+      "definition": "Stratégie consistant à investir un montant fixe à intervalles réguliers (souvent mensuel), indépendamment du cours. Lisse le prix d'achat moyen dans le temps et réduit le risque de timing. Recommandée pour les débutants en ETF. Ça n'annule pas le risque de perte en capital.",
+      "faqQ": "C'est quoi le DCA ?",
+      "sourceTitle": "AMF, investir via ETF",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/les-produits-financiers/les-etfs",
+      "related": ["/outils/calculateur-dca-etf", "/guides/investissement-debutant"]
+    },
+    {
+      "slug": "livret-a",
+      "term": "Livret A",
+      "title": "Livret A — épargne réglementée",
+      "category": "Épargne",
+      "definition": "Livret d'épargne réglementé français, exonéré d'impôt. Taux fixé par l'État (1,50 % depuis février 2026 selon les barèmes Dodje). Plafond 22 950 euros. Disponibilité immédiate. Intérêts calculés selon la règle des quinzaines.",
+      "faqQ": "Quel est le taux du Livret A ?",
+      "sourceTitle": "Service-public.fr, Livret A",
+      "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F2365",
+      "related": ["/outils/calculateur-livret-a", "/guides/epargne-de-precaution-france"]
+    },
+    {
+      "slug": "inflation",
+      "term": "Inflation",
+      "title": "Inflation — perte de pouvoir d'achat",
+      "category": "Épargne",
+      "definition": "Hausse générale et durable des prix. Elle érode le pouvoir d'achat de l'épargne : un Livret A à 1,50 % perd en valeur réelle si l'inflation est à 2 %. Mesurée en France par l'Insee (IPC).",
+      "faqQ": "Pourquoi l'inflation compte pour l'épargne ?",
+      "sourceTitle": "Insee, inflation",
+      "sourceUrl": "https://www.insee.fr/fr/statistiques/4265429",
+      "related": ["/outils/calculateur-inflation", "/guides/faire-son-budget"]
+    },
+    {
+      "slug": "mica",
+      "term": "MiCA",
+      "title": "MiCA — Markets in Crypto-Assets",
+      "category": "Crypto",
+      "definition": "Règlement européen pleinement applicable au 1er juillet 2026. Harmonise la régulation des crypto-actifs et des prestataires de services crypto (CASP) dans l'UE. Remplace le statut PSAN français pour les opérateurs souhaitant continuer en Europe.",
+      "faqQ": "C'est quoi MiCA ?",
+      "sourceTitle": "AMF, règlement MiCA",
+      "sourceUrl": "https://www.amf-france.org/fr/actualites-publications/actualites/reglement-mica",
+      "related": ["/guides/comprendre-la-crypto", "/guides/premiers-pas-crypto-france"]
+    },
+    {
+      "slug": "bitcoin",
+      "term": "Bitcoin",
+      "title": "Bitcoin (BTC)",
+      "category": "Crypto",
+      "definition": "Premier crypto-actif décentralisé (2009), fonctionnant sans banque centrale. Offre plafonnée à 21 millions d'unités. Très volatile. En France, considéré comme un actif numérique soumis à la flat tax de 30 % sur les plus-values (régime des biens incorporels).",
+      "faqQ": "Le Bitcoin est-il légal en France ?",
+      "sourceTitle": "AMF, crypto-actifs",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/crypto-actifs",
+      "related": ["/guides/comprendre-la-crypto", "/guides/fiscalite-crypto-france-2026"]
+    },
+    {
+      "slug": "ethereum",
+      "term": "Ethereum",
+      "title": "Ethereum (ETH)",
+      "category": "Crypto",
+      "definition": "Blockchain programmable lancée en 2015, support des smart contracts et de la majorité des applications DeFi et NFT. Passage au proof-of-stake en 2022. Deuxième crypto-actif par capitalisation après Bitcoin. Volatil, risque de perte en capital.",
+      "faqQ": "C'est quoi Ethereum ?",
+      "sourceTitle": "AMF, crypto-actifs",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/crypto-actifs",
+      "related": ["/guides/comprendre-la-crypto", "/guides/staking-crypto-france-2026"]
+    },
+    {
+      "slug": "amf",
+      "term": "AMF",
+      "title": "AMF — Autorité des Marchés Financiers",
+      "category": "Régulation",
+      "definition": "Régulateur français des marchés financiers. Protège l'épargne, veille à l'information des investisseurs et agrée les acteurs financiers. Publie la liste noire des sites frauduleux et encadre les prestataires crypto en France.",
+      "faqQ": "Quel est le rôle de l'AMF ?",
+      "sourceTitle": "amf-france.org",
+      "sourceUrl": "https://www.amf-france.org/fr",
+      "related": ["/guides/equipe-editoriale", "/guides/donnees-finance-france"]
+    },
+    {
+      "slug": "assurance-vie",
+      "term": "Assurance vie",
+      "title": "Assurance vie",
+      "category": "Enveloppes fiscales",
+      "definition": "Contrat d'épargne combinant un support en euros (capital garanti) et des unités de compte (UC, supports risqués). Fiscalité avantageuse après 8 ans : abattement annuel de 4 600 euros (9 200 euros pour un couple) sur les gains retirés. Transmission facilitée avec abattement de 152 500 euros par bénéficiaire.",
+      "faqQ": "Pourquoi l'assurance vie après 8 ans ?",
+      "sourceTitle": "Service-public.fr, assurance vie",
+      "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F15262",
+      "related": ["/guides/assurance-vie-debutant-france-2026", "/outils/calculateur-assurance-vie"]
+    },
+    {
+      "slug": "pfu",
+      "term": "PFU",
+      "title": "PFU — Prélèvement Forfaitaire Unique",
+      "category": "Fiscalité",
+      "definition": "Taxation forfaitaire de 30 % sur les revenus du capital mobilier : 12,8 % d'impôt sur le revenu + 17,2 % de prélèvements sociaux. S'applique par défaut aux plus-values, dividendes et intérêts des comptes-titres, et aux plus-values crypto.",
+      "faqQ": "C'est quoi la flat tax à 30 % ?",
+      "sourceTitle": "impots.gouv.fr, revenus de placements",
+      "sourceUrl": "https://www.impots.gouv.fr/particulier/les-revenus-de-vos-placements",
+      "related": ["/guides/fiscalite-crypto-france-2026", "/guides/pea-vs-cto-complet-2026"]
+    },
+    {
+      "slug": "lep",
+      "term": "LEP",
+      "title": "LEP — Livret d'Épargne Populaire",
+      "category": "Épargne",
+      "definition": "Livret réglementé réservé aux foyers modestes (plafonds de revenus). Taux bonifié, plafond 10 000 euros, exonéré d'impôt. Meilleur rendement sans risque pour les éligibles, à vérifier chaque année sur service-public.fr.",
+      "faqQ": "Qui a droit au LEP ?",
+      "sourceTitle": "Service-public.fr, LEP",
+      "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F2365",
+      "related": ["/outils/calculateur-lep", "/guides/top-5-livrets-epargne-2026"]
+    },
+    {
+      "slug": "cfd",
+      "term": "CFD",
+      "title": "CFD — Contract For Difference",
+      "category": "Risques",
+      "definition": "Produit dérivé permettant de spéculer sur la variation de prix d'un actif sans en devenir propriétaire. Effet de levier élevé, pertes pouvant dépasser le capital investi. L'AMF estime que plus de 80 % des particuliers perdent de l'argent sur les CFD.",
+      "faqQ": "Les CFD sont-ils adaptés aux débutants ?",
+      "sourceTitle": "AMF, les CFD",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/les-produits-a-haut-risque/les-cfd",
+      "related": ["/guides/investissement-debutant", "/guides/apprendre-a-investir"]
+    },
+    {
+      "slug": "staking",
+      "term": "Staking",
+      "title": "Staking crypto",
+      "category": "Crypto",
+      "definition": "Blocage de crypto-actifs pour sécuriser une blockchain proof-of-stake et recevoir des récompenses. En France, revenus imposables (PFU 30 % ou barème). Risque de slashing et de baisse du cours. Ce n'est pas un livret.",
+      "faqQ": "Le staking est-il imposable en France ?",
+      "sourceTitle": "impots.gouv.fr, crypto-actifs",
+      "sourceUrl": "https://www.impots.gouv.fr/particulier/les-precisions-sur-les-crypto-monnaies-ou-crypto-actifs",
+      "related": ["/guides/staking-crypto-france-2026", "/guides/comprendre-la-crypto"]
+    },
+    {
+      "slug": "rug-pull",
+      "term": "Rug pull",
+      "title": "Rug pull — arnaque crypto",
+      "category": "Crypto",
+      "definition": "Arnaque où les créateurs retirent brutalement la liquidité d'un pool ou abandonnent le projet, laissant les investisseurs avec des jetons sans valeur. L'AMF rappelle de n'utiliser que des plateformes agréées.",
+      "faqQ": "C'est quoi un rug pull ?",
+      "sourceTitle": "AMF, liste noire crypto",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/crypto-actifs/liste-noire",
+      "related": ["/guides/erreurs-crypto-debutant", "/guides/premiers-pas-crypto-france"]
+    },
+    {
+      "slug": "obligation",
+      "term": "Obligation",
+      "title": "Obligation — titre de dette",
+      "category": "Bourse",
+      "definition": "Titre de dette émis par un État ou une entreprise. L'investisseur prête de l'argent et reçoit des intérêts (coupons) puis le remboursement du capital à l'échéance. Moins volatile que les actions, mais sensible aux taux d'intérêt et au risque de défaut.",
+      "faqQ": "Une obligation est-elle sans risque ?",
+      "sourceTitle": "AMF, les obligations",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/obligations",
+      "related": ["/guides/comprendre-la-bourse", "/guides/apprendre-a-investir"]
+    },
+    {
+      "slug": "per",
+      "term": "PER",
+      "title": "PER — Plan Épargne Retraite",
+      "category": "Enveloppes fiscales",
+      "definition": "Enveloppe d'épargne retraite permettant de déduire les versements du revenu imposable (dans la limite de plafonds fiscaux). L'épargne est bloquée jusqu'à la retraite sauf cas de déblocage anticipé. Sortie en rente ou capital, imposée à la réception.",
+      "faqQ": "Le PER est-il bloqué jusqu'à la retraite ?",
+      "sourceTitle": "Service-public.fr, PER",
+      "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F34920",
+      "related": ["/outils/calculateur-per", "/guides/per-vs-pea-2026"]
+    },
+    {
+      "slug": "volatilite",
+      "term": "Volatilité",
+      "title": "Volatilité",
+      "category": "Bourse",
+      "definition": "Ampleur des variations de prix d'un actif sur une période. Plus la volatilité est élevée, plus le risque (et le potentiel de mouvement) est important. Une action volatile peut gagner ou perdre plusieurs pourcents en une séance.",
+      "faqQ": "La volatilité mesure-t-elle le risque ?",
+      "sourceTitle": "AMF, glossaire épargne",
+      "sourceUrl": "https://www.amf-france.org/fr/epargne-info-service/glossaire",
+      "related": ["/guides/comprendre-la-bourse", "/guides/investissement-debutant"]
+    }
+  ]
+}

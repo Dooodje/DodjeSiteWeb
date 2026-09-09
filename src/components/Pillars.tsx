@@ -26,7 +26,7 @@ const PILLARS: Pillar[] = [
     titleLine1: 'Un parcours',
     titleAccent: 'progressif',
     body:
-      'Avec Dodje, tu avances à ton rythme. C’est une application d’éducation financière : tu commences par les bases, tu débloques de nouvelles notions, et tu comprends enfin la finance sans te sentir perdu.',
+      'Tu commences par les bases (budget, épargne), tu débloques les mondes suivants (bourse, crypto, immobilier, fiscalité) et tu comprends enfin la finance sans te sentir perdu.',
     media: {
       kind: 'lottie',
       loadAnimation: segmentLottie.parcours,
@@ -40,7 +40,7 @@ const PILLARS: Pillar[] = [
     titleLine1: 'Ton argent',
     titleAccent: 'en clair',
     body:
-      'On parle souvent d’argent, mais rarement de façon simple. Dodje t’aide à prendre de bonnes habitudes et à mieux comprendre les décisions qui comptent dans ta vie.',
+      'On parle souvent d’argent, mais rarement de façon simple. Dodje traduit chaque notion en décision de jeu : investir tes Dodjis dans le phare, c’est comprendre les placements ; les laisser dormir dans la réserve, c’est subir l’inflation.',
     media: {
       kind: 'lottie',
       loadAnimation: segmentLottie.mouvementNecessaire,
@@ -54,7 +54,7 @@ const PILLARS: Pillar[] = [
     titleLine1: 'Gratuit. Simple.',
     titleAccent: 'Ludique.',
     body:
-      'Apprendre avec Dodje, c’est gratuit, clair et motivant. Les leçons sont courtes, les quiz te font pratiquer, et chaque progrès te donne envie de continuer.',
+      'Apprendre avec Dodje, c’est gratuit, clair et motivant. Les leçons sont courtes, les quiz te font pratiquer, et chaque Dodji gagné te donne envie de continuer à construire ton île.',
     media: {
       kind: 'lottie',
       loadAnimation: segmentLottie.gratuitSimpleLudique,
@@ -135,7 +135,7 @@ export default function Pillars() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        <h2 className="sr-only">Pourquoi Dodje</h2>
+        <h2 className="sr-only">Pourquoi un jeu plutôt qu'un cours ?</h2>
         <div className={`flex flex-col ${PILLAR_STACK_GAP}`}>
           {PILLARS.map((pillar, i) => {
             const reverse = i % 2 === 1;

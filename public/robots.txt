@@ -1,11 +1,14 @@
 # Dodje - dodje.fr
-# Education financiere France (fr-FR)
+# Jeu mobile pour apprendre la finance (France, fr-FR)
 
 User-agent: *
 Allow: /
+Allow: /jeu
+Allow: /blog
 Allow: /outils/
 Allow: /guides/
 Allow: /actualites/
+Allow: /glossaire/
 Disallow: /node_modules/
 Disallow: /.git/
 Disallow: /dist/

@@ -13,14 +13,15 @@ const STATS: Stat[] = [
     value: 0,
     prefix: '',
     suffix: '€',
-    label: 'pour commencer',
-    caption: 'Gratuit sur iPhone et Android. Aucune carte. 22 calculateurs et 30 guides sur dodje.fr.'
+    label: 'pour jouer',
+    caption:
+      'Gratuit sur iPhone et Android, sans carte bancaire. En bonus sur dodje.fr : 22 calculateurs et 40+ guides.'
   },
   {
     value: 3,
-    suffix: ' min',
-    label: 'par jour',
-    caption: 'Leçons, quiz, progression visible — une session courte par jour.'
+    suffix: '',
+    label: 'min/jour',
+    caption: 'Des sessions rapides pour une habitude simple'
   }
 ];
 
@@ -58,7 +59,7 @@ export default function Stats() {
             <span className="text-dodje-green whitespace-nowrap">débuter</span>
           </h2>
 
-          <ul className="mt-14 sm:mt-20 flex w-full max-w-3xl flex-col items-center justify-center gap-12 sm:flex-row sm:items-start sm:gap-16 lg:gap-20">
+          <ul className="mt-14 sm:mt-20 flex w-full max-w-5xl flex-col items-center justify-center gap-12 sm:flex-row sm:items-start sm:gap-10 lg:gap-16">
             {STATS.map((stat, i) => (
               <li
                 key={stat.label}

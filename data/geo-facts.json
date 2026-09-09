@@ -1,0 +1,19 @@
+{
+  "comment": "Chiffres propriétaires à remplacer avant communication presse / stores. Tant qu'une valeur contient A_COMPLETER, le site affiche le marqueur [À COMPLÉTER].",
+  "lecons": "A_COMPLETER",
+  "niveaux": "A_COMPLETER",
+  "batimentsIle": 6,
+  "telechargements": "A_COMPLETER",
+  "noteStore": "A_COMPLETER",
+  "avisStore": "A_COMPLETER",
+  "modeIleDate": "A_COMPLETER",
+  "dureeLeconMinutes": 3,
+  "ageMinimum": 16,
+  "prixEuros": 0,
+  "horsCode": {
+    "dodjeXyz301": "Remettre le DNS/hébergement de dodje.xyz avec une redirection 301 domaine entier vers https://dodje.fr/",
+    "appStore": "Mettre à jour titre, sous-titre, description et mots-clés iOS/Android avec la phrase d'entité jeu. Lien CGU vers https://dodje.fr/conditions-utilisation",
+    "appStoreUrlFr": "https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215",
+    "playStoreUrlFr": "https://play.google.com/store/apps/details?id=xyz.dodje.app&hl=fr"
+  }
+}

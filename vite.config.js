@@ -14,7 +14,7 @@ function collectHtmlInputs(rootDir) {
     const key = file.replace('.html', '').replace(/-/g, '_')
     inputs[key] = resolve(rootDir, file)
   })
-  ;['outils', 'actualites', 'guides'].forEach((dir) => {
+  ;['outils', 'actualites', 'guides', 'glossaire'].forEach((dir) => {
     const fullDir = resolve(rootDir, dir)
     if (!fs.existsSync(fullDir)) return
     fs.readdirSync(fullDir).forEach((file) => {
@@ -36,11 +36,12 @@ const seoBuildPlugin = (rootDir) => ({
 
 function appPromoScriptPath(filename) {
   const normalized = filename.replace(/\\/g, '/')
-  if (
-    normalized.includes('/guides/') ||
-    normalized.includes('/outils/') ||
-    normalized.includes('/actualites/')
-  ) {
+      if (
+        normalized.includes('/guides/') ||
+        normalized.includes('/outils/') ||
+        normalized.includes('/actualites/') ||
+        normalized.includes('/glossaire/')
+      ) {
     return '../app-promo.js'
   }
   return 'app-promo.js'
