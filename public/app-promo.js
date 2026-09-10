@@ -6,7 +6,6 @@
   var PLAY_STORE =
     'https://play.google.com/store/apps/details?id=xyz.dodje.app';
   var MOBILE_MQ = window.matchMedia('(max-width: 767px)');
-  var SCROLL_THRESHOLD = 100;
 
   var APPLE_SVG =
     '<svg class="mobile-floating-bar__icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">' +
@@ -40,12 +39,11 @@
     if (document.getElementById('mobile-floating-bar')) return;
 
     var bar = document.createElement('div');
-    bar.className = 'mobile-floating-bar';
+    bar.className = 'mobile-floating-bar visible';
     bar.id = 'mobile-floating-bar';
     bar.setAttribute('role', 'region');
     bar.setAttribute('aria-label', 'Télécharger Dodje');
-    bar.setAttribute('aria-hidden', 'true');
-    bar.setAttribute('inert', '');
+    bar.setAttribute('aria-hidden', 'false');
 
     bar.innerHTML =
       '<div class="mobile-floating-bar__shell">' +
@@ -81,9 +79,7 @@
       return;
     }
     createFloatingBar();
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-    var shouldShow = scrollTop > SCROLL_THRESHOLD && !isMenuOpen();
-    setBarVisible(shouldShow);
+    setBarVisible(!isMenuOpen());
   }
 
   function enhanceMobileMenuCtas() {

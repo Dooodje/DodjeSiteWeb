@@ -114,10 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const menuEl = document.getElementById('mobile-menu');
         const menuOpen = menuEl && menuEl.classList.contains('active');
-        const shouldShow = !forceHidden && scrollTop > scrollThreshold && !menuOpen;
+        const shouldShow = !forceHidden && !menuOpen;
         setMobileFloatingBarVisible(shouldShow);
     }
     

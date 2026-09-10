@@ -149,14 +149,14 @@ export default function Features() {
               >
                 <RevealBlock
                   reverse={reverse}
-                  className="relative z-20 flex flex-col gap-4 [direction:ltr]"
+                  className="relative z-20 flex flex-col gap-4 items-center text-center lg:items-start lg:text-left [direction:ltr]"
                 >
                   <h3 className="font-outfit font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl">
                     {f.titleLine1}
                     <br />
                     <span className="text-dodje-green">{f.titleAccent}</span>
                   </h3>
-                  <p className="font-outfit text-base sm:text-lg text-white/75 max-w-xl mt-2 leading-relaxed">
+                  <p className="font-outfit text-base sm:text-lg text-white/75 max-w-xl mt-2 leading-relaxed mx-auto lg:mx-0">
                     {f.body}
                   </p>
                 </RevealBlock>

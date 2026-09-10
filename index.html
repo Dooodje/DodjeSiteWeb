@@ -13,7 +13,7 @@
     
     <!-- SEO Meta Tags Optimises -->
     <meta name="description" content="L'app d'éducation financière gratuite qui transforme la finance en jeu : Duolingo, Clash of Clans et Mario réunis pour t'aider à comprendre l'argent.">
-    <meta name="keywords" content="dodje, jeu pour apprendre la finance, jeu de finance, jeu éducation financière, app jeu finance, app éducation finance, application éducation financière, apprendre la finance, apprendre à investir, comprendre la bourse, comprendre la crypto, gérer son argent, budget, épargne, investissement débutant">
+    <meta name="keywords" content="dodje, app éducation financiere, app éducation financière, jeu pour apprendre la finance, jeu de finance, jeu éducation financière, app jeu finance, app éducation finance, application éducation financière, apprendre la finance, apprendre à investir, comprendre la bourse, comprendre la crypto, gérer son argent, budget, épargne, investissement débutant">
     <meta name="author" content="Dodje">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="language" content="fr-FR">
@@ -54,8 +54,30 @@
       body { margin: 0; background: transparent; }
       #hero-root { min-height: 640px; }
       @media (min-width: 1024px) { #hero-root { min-height: 720px; } }
-      /* Prevent store-bar FOUC before deferred styles.css applies. */
+      /* Store bar: hidden on desktop; painted immediately on mobile. */
       .mobile-floating-bar { display: none; }
+      @media (max-width: 767px) {
+        .mobile-floating-bar {
+          display: block;
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 85;
+          padding: 0 0.75rem max(0.75rem, env(safe-area-inset-bottom, 0px));
+        }
+        .mobile-floating-bar__inner { display: flex; gap: 0.5rem; }
+        .mobile-floating-bar__store {
+          display: flex; flex: 1; align-items: center; justify-content: center;
+          gap: 0.55rem; min-height: 3rem; padding: 0.55rem 0.65rem;
+          border-radius: 0.85rem; text-decoration: none;
+        }
+        .mobile-floating-bar__store--apple { color: #ffffff; background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%); }
+        .mobile-floating-bar__store--google { color: #0a0a0a; background: #fff; }
+        .mobile-floating-bar__text { display: flex; flex-direction: column; line-height: 1.05; }
+        .mobile-floating-bar__label { font-size: 0.58rem; font-weight: 600; text-transform: uppercase; opacity: 0.72; }
+        .mobile-floating-bar__name { font-size: 0.82rem; font-weight: 700; }
+      }
     </style>
 
     <!-- Preload critical Outfit variable font used above the fold (headings + UI). -->
@@ -99,6 +121,8 @@
           "DodjeApp",
           "Dodje Solutions",
           "le jeu pour apprendre la finance Dodje",
+          "app éducation financière",
+          "app éducation financiere",
           "application d'éducation financière Dodje"
         ],
         "url": "https://dodje.fr/",
@@ -211,6 +235,8 @@
           "jeu pour apprendre la finance",
           "jeu d'éducation financière",
           "app jeu finance",
+          "app éducation financière",
+          "app éducation financiere",
           "application d'éducation financière Dodje"
         ],
         "applicationCategory": "GameApplication",
@@ -280,6 +306,8 @@
           "jeu de finance",
           "jeu education financiere",
           "app jeu finance",
+          "app éducation financière",
+          "app éducation financiere",
           "app education finance",
           "application education financiere",
           "apprendre la finance",
@@ -337,7 +365,7 @@
           { "@type": "WebPage", "name": "Faire son budget", "url": "https://dodje.fr/guides/faire-son-budget" },
           { "@type": "WebPage", "name": "Investissement débutant", "url": "https://dodje.fr/guides/investissement-debutant" },
           { "@type": "WebPage", "name": "Apprendre à gérer son argent", "url": "https://dodje.fr/guides/apprendre-a-gerer-son-argent" },
-          { "@type": "WebPage", "name": "Application d'éducation financière", "url": "https://dodje.fr/guides/application-education-financiere" },
+          { "@type": "WebPage", "name": "App éducation financière", "url": "https://dodje.fr/guides/application-education-financiere" },
           { "@type": "WebPage", "name": "Apps éducation financière 2026", "url": "https://dodje.fr/guides/meilleures-apps-education-financiere-2026" },
           { "@type": "CollectionPage", "name": "Glossaire finance", "url": "https://dodje.fr/guides/glossaire-finance-investissement-2026" },
           { "@type": "CollectionPage", "name": "Calculateurs financiers", "url": "https://dodje.fr/outils" },
@@ -370,7 +398,7 @@
             "name": "Dodje est-il un jeu ou une application d'éducation financière ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Les deux. Dodje est une application d'éducation financière construite comme un jeu. L'apprentissage (budget, épargne, bourse, crypto, immobilier, fiscalité) passe par des leçons courtes et des quiz façon Duolingo ; la pratique passe par ton île, où tu investis tes Dodjis dans 6 bâtiments façon Clash of Clans ; et tu progresses de niveau en niveau façon Mario."
+              "text": "Les deux. Dodje est une application d'éducation financière construite comme un jeu. L'apprentissage (budget, épargne, bourse, crypto, immobilier, fiscalité) passe par des leçons courtes et des quiz façon Duolingo ; la pratique passe par ton île, où tu investis tes Dodjis dans 6 bâtiments façon Clash of Clans ; et tu progresses de niveau en niveau façon Mario. Fiche : app éducation financière et app éducation financiere, https://dodje.fr/guides/application-education-financiere."
             }
           },
           {
@@ -477,14 +505,13 @@
         </div>
     </nav>
 
-    <!-- Barre flottante mobile (App Store / Google Play au scroll) -->
+    <!-- Barre flottante mobile (App Store / Google Play) -->
     <div
-        class="mobile-floating-bar"
+        class="mobile-floating-bar visible"
         id="mobile-floating-bar"
         role="region"
         aria-label="Télécharger Dodje"
-        aria-hidden="true"
-        inert
+        aria-hidden="false"
     >
         <div class="mobile-floating-bar__shell">
             <div class="mobile-floating-bar__inner">
@@ -530,7 +557,6 @@
                 <div class="hero-shell__grid">
                     <div class="hero-shell__copy">
                         <div class="hero-shell__intro">
-                            <div class="hero-shell__eyebrow">Le jeu pour apprendre la finance · iOS &amp; Android</div>
                             <h1 class="hero-shell__title">
                                 Le jeu pour enfin
                                 <span class="hero-shell__title-accent">comprendre l'argent</span>
@@ -653,6 +679,7 @@
             <li><strong>Monte de niveau.</strong> Ton île grandit, tu débloques de nouveaux mondes (bourse, crypto, immobilier, fiscalité) et tu grimpes au classement mondial des joueurs de Dodje.</li>
         </ol>
         <p class="home-copy-shell__note">Chiffres du jeu : <span data-fact="lecons">[À COMPLÉTER : nombre de leçons]</span> leçons, <span data-fact="niveaux">[À COMPLÉTER : nombre de niveaux]</span> niveaux, mode île lancé en <span data-fact="ile-date">[À COMPLÉTER : mois année]</span>. Détails sur la page <a href="/jeu">Le jeu Dodje</a>.</p>
+        <p>Si tu cherches une <strong>app éducation financière</strong> ou une <strong>app éducation financiere</strong> (sans accent), Dodje est cette app : jeu gratuit iOS et Android. Fiche : <a href="/guides/application-education-financiere">app éducation financière</a>.</p>
     </section>
 
     <!-- Pourquoi jouer : faits chiffrés sourcés -->
@@ -720,7 +747,7 @@
         <h2 id="faq-home-title" class="home-copy-shell__title">Questions fréquentes</h2>
         <div class="faq-list">
             <details class="faq-item" open><summary>Qu'est-ce que Dodje ?</summary><p>Dodje est un jeu mobile gratuit pour apprendre la finance (iOS et Android). Tu suis des leçons d'environ 3 minutes, tu réponds à des quiz, tu gagnes des Dodjis, tu les investis pour développer ton île et tu grimpes au classement mondial. Lancé en 2024 par Dodje Solutions (Orléans), 0&nbsp;€ pour commencer, dès 16&nbsp;ans. Ce n'est ni un jeu d'argent, ni un courtier.</p></details>
-            <details class="faq-item"><summary>Dodje est-il un jeu ou une application d'éducation financière ?</summary><p>Les deux. Dodje est une application d'éducation financière construite comme un jeu. L'apprentissage (budget, épargne, bourse, crypto, immobilier, fiscalité) passe par des leçons courtes et des quiz façon Duolingo ; la pratique passe par ton île, où tu investis tes Dodjis dans 6 bâtiments façon Clash of Clans ; et tu progresses de niveau en niveau façon Mario.</p></details>
+            <details class="faq-item"><summary>Dodje est-il un jeu ou une application d'éducation financière ?</summary><p>Les deux. Dodje est une application d'éducation financière construite comme un jeu. L'apprentissage (budget, épargne, bourse, crypto, immobilier, fiscalité) passe par des leçons courtes et des quiz façon Duolingo ; la pratique passe par ton île, où tu investis tes Dodjis dans 6 bâtiments façon Clash of Clans ; et tu progresses de niveau en niveau façon Mario. Fiche : <a href="/guides/application-education-financiere">app éducation financière</a> (aussi app éducation financiere, sans accent).</p></details>
             <details class="faq-item"><summary>Comment on joue à Dodje ?</summary><p>En 4 étapes : 1) tu suis une leçon d'environ 3 minutes et tu valides un quiz ; 2) tu gagnes des Dodjis, la monnaie du jeu ; 3) tu les investis sur ton île dans 6 bâtiments qui représentent ton job (l'atelier), ton épargne (le moulin), ta banque (la réserve), tes placements (le phare), ton immobilier (l'agence) et ton wallet crypto (la foreuse) ; 4) ton île grandit, tu montes de niveau et tu grimpes au classement mondial des joueurs.</p></details>
             <details class="faq-item"><summary>C'est quoi les Dodjis ?</summary><p>Les Dodjis sont la monnaie virtuelle du jeu Dodje. Tu en gagnes en terminant des leçons, des quiz et des défis quotidiens, puis tu les investis dans les bâtiments de ton île pour la faire grandir. Ils n'ont aucune valeur monétaire réelle et ne peuvent pas être convertis en euros.</p></details>
             <details class="faq-item"><summary>Dodje est-il un jeu d'argent ?</summary><p>Non. Dodje est un jeu éducatif : il n'y a ni mises, ni paris, ni argent réel à gagner. Les Dodjis sont une monnaie virtuelle sans valeur. Ce n'est pas un casino, pas un site de paris et pas une plateforme de trading.</p></details>

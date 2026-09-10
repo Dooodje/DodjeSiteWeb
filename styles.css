@@ -484,8 +484,8 @@ body {
     font-size: var(--font-size-sm);
     font-weight: 600;
     line-height: var(--line-height-none);
-    color: #0a0a0a !important;
-    background: linear-gradient(135deg, #9BEC00, #06D001);
+    color: #ffffff !important;
+    background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%);
     border: none;
     border-radius: var(--radius-full);
     padding: var(--space-4) var(--space-8);
@@ -500,8 +500,8 @@ body {
 .cta-button:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
-    background: linear-gradient(135deg, #B8FF20, #08E003);
-    color: #0a0a0a !important;
+    background: linear-gradient(180deg, #08E003 0%, #B8FF20 100%);
+    color: #ffffff !important;
 }
 
 /* App Download Buttons */
@@ -559,7 +559,7 @@ body {
     font-weight: 700;
 }
 
-/* Barre flottante mobile — App Store / Google Play au scroll (inspirée armlab.fr) */
+/* Barre flottante mobile — App Store / Google Play (visible dès l'ouverture) */
 .mobile-floating-bar {
     display: none;
 }
@@ -570,29 +570,32 @@ body {
         position: fixed;
         inset: auto 0 0;
         z-index: 85;
-        padding: 0 var(--space-3) max(0.5rem, env(safe-area-inset-bottom, 0px));
-        pointer-events: none;
-        opacity: 0;
-        transform: translateY(calc(100% + 0.75rem));
+        padding: 0 var(--space-3) max(0.75rem, env(safe-area-inset-bottom, 0px));
+        pointer-events: auto;
+        opacity: 1;
+        transform: translateY(0);
         transition:
             transform 480ms cubic-bezier(0.16, 1, 0.3, 1),
             opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .mobile-floating-bar.visible {
-        pointer-events: auto;
-        opacity: 1;
-        transform: translateY(0);
+    .mobile-floating-bar:not(.visible) {
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(calc(100% + 0.75rem));
     }
 
+    #main-content,
     body.mobile-floating-bar-active #main-content {
         padding-bottom: calc(var(--mobile-floating-bar-height) + env(safe-area-inset-bottom, 0px));
     }
 
+    main.content-page,
     body.mobile-floating-bar-active main.content-page {
         padding-bottom: calc(var(--mobile-floating-bar-height) + env(safe-area-inset-bottom, 0px) + 1.5rem);
     }
 
+    .site-footer,
     body.mobile-floating-bar-active .site-footer {
         padding-bottom: calc(var(--mobile-floating-bar-height) + 1.75rem);
     }
@@ -633,8 +636,8 @@ body {
     }
 
     .mobile-floating-bar__store--apple {
-        color: #0a0a0a;
-        background: linear-gradient(180deg, #9BEC00 0%, #06D001 100%);
+        color: #ffffff;
+        background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%);
         box-shadow: 0 8px 20px -10px rgba(6, 208, 1, 0.65);
     }
 
@@ -1837,8 +1840,8 @@ body {
     font-family: inherit;
     font-size: 18px;
     font-weight: 700;
-    background: linear-gradient(to bottom, #9BEC00 0%, #06D001 100%);
-    color: #0a0a0a;
+    background: linear-gradient(to bottom, #06D001 0%, #9BEC00 100%);
+    color: #ffffff;
     padding: 0.8em 1.2em;
     display: inline-flex;
     align-items: center;
@@ -1871,7 +1874,7 @@ body {
 .community-cta svg {
     width: 22px;
     height: 22px;
-    fill: #0a0a0a;
+    fill: #ffffff;
     transition: all 0.3s;
 }
 
@@ -2027,8 +2030,8 @@ body {
     height: 28px;
     flex: 0 0 28px;
     border-radius: var(--radius-full);
-    color: var(--black);
-    background: linear-gradient(135deg, var(--accent-light-green), var(--secondary-green));
+    color: var(--white);
+    background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
     font-weight: 900;
     transition: transform 0.2s ease;
 }
@@ -2237,12 +2240,12 @@ body {
 .social-link {
     width: 44px;
     height: 44px;
-    background: linear-gradient(135deg, #9BEC00, #06D001);
+    background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%);
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0a0a0a;
+    color: #ffffff;
     /* Kill iOS double-tap-to-activate: no tap highlight, fire on first tap. */
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
@@ -3427,8 +3430,8 @@ a:focus-visible {
 }
 
 .leaderboard-button-header {
-    background: linear-gradient(45deg, var(--accent-yellow), var(--accent-light-green));
-    color: var(--black);
+    background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
+    color: var(--white);
     border: none;
     border-radius: 8px;
     padding: var(--space-3) var(--space-5);
@@ -3565,8 +3568,8 @@ a:focus-visible {
 
 .start-button,
 .restart-button {
-    background: linear-gradient(45deg, var(--secondary-green), var(--accent-light-green));
-    color: var(--black);
+    background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
+    color: var(--white);
     border: none;
     border-radius: 10px;
     padding: var(--space-4) var(--space-8);
@@ -3784,9 +3787,9 @@ a:focus-visible {
 }
 
 .share-leaderboard-button {
-    background: linear-gradient(135deg, var(--secondary-green), var(--accent-light-green));
+    background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
     border: none;
-    color: var(--black);
+    color: var(--white);
     cursor: pointer;
     font-size: var(--font-size-sm);
     font-weight: 700;
@@ -5435,8 +5438,8 @@ a:focus-visible {
 .mobile-share-button {
     width: 100%;
     padding: 0.875rem 1.5rem;
-    background: linear-gradient(135deg, var(--secondary-green), var(--accent-light-green));
-    color: var(--black);
+    background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
+    color: var(--white);
     border: none;
     border-radius: 12px;
     font-family: var(--font-family);
@@ -6486,7 +6489,7 @@ a:focus-visible {
 }
 
 .back-to-home .cta-button {
-    color: var(--black);
+    color: var(--white);
 }
 
 /* Mobile styles for legal pages */
@@ -6531,8 +6534,8 @@ a:focus-visible {
 .share-button {
     width: 100%;
     padding: 0.875rem 1.5rem;
-    background: linear-gradient(135deg, var(--secondary-green), var(--accent-light-green));
-    color: var(--black);
+    background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
+    color: var(--white);
     border: none;
     border-radius: 12px;
     font-family: var(--font-family);
@@ -7023,8 +7026,8 @@ a:focus-visible {
     padding: 0.85rem 1.5rem;
     border: none;
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, #9BEC00, #06D001);
-    color: #0a0a0a !important;
+    background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%);
+    color: #ffffff !important;
     font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
@@ -7038,8 +7041,8 @@ a:focus-visible {
 .quiz-btn-next:hover,
 .quiz-btn-submit:hover,
 .content-layout .cta-button:hover {
-    background: linear-gradient(135deg, #B8FF20, #08E003);
-    color: #0a0a0a !important;
+    background: linear-gradient(180deg, #08E003 0%, #B8FF20 100%);
+    color: #ffffff !important;
     transform: translateY(-1px);
 }
 
@@ -7314,8 +7317,8 @@ a:focus-visible {
 }
 
 .calc-segment input:checked + span {
-    background: linear-gradient(to bottom, #9BEC00 0%, #06D001 100%);
-    color: #0a0a0a;
+    background: linear-gradient(to bottom, #06D001 0%, #9BEC00 100%);
+    color: #ffffff;
 }
 
 .calc-result-highlight .calc-result-value {
@@ -7599,7 +7602,7 @@ a:focus-visible {
 .site-footer .social-link {
     width: 40px;
     height: 40px;
-    color: #0a0a0a;
+    color: #ffffff;
 }
 
 .site-footer .footer-title {
@@ -7745,8 +7748,8 @@ a:focus-visible {
 }
 
 .content-cta-game__actions a:first-child {
-    background: linear-gradient(to bottom, #9bec00 0%, #06d001 100%);
-    color: #0b0b0b;
+    background: linear-gradient(to bottom, #06d001 0%, #9bec00 100%);
+    color: #ffffff;
 }
 
 .content-cta-game__actions a:not(:first-child) {

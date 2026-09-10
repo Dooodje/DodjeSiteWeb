@@ -19,6 +19,13 @@
     transform: translate3d(2rem, 0, 0);
   }
 
+  @media (max-width: 1023px) {
+    .reveal-text,
+    .reveal-text--reverse {
+      transform: translate3d(0, 1.25rem, 0);
+    }
+  }
+
   .reveal-text.is-visible {
     opacity: 1;
     transform: translate3d(0, 0, 0);

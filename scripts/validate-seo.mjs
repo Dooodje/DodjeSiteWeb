@@ -285,6 +285,34 @@ function validateIndexNowKey() {
   assertFileExists(`${config.key}.txt`)
 }
 
+function validateAppEducationFinanciereQuery() {
+  const page = path.join(distDir, 'guides/application-education-financiere.html')
+  if (!fs.existsSync(page)) {
+    fail('Missing guides/application-education-financiere.html')
+    return
+  }
+  const html = fs.readFileSync(page, 'utf8')
+  if (!html.includes('app éducation financière')) {
+    fail('App page missing exact query « app éducation financière »')
+  }
+  if (!html.includes('app éducation financiere')) {
+    fail('App page missing exact query « app éducation financiere »')
+  }
+  if (!/<title>[^<]*app éducation financière[^<]*app éducation financiere/i.test(html)) {
+    fail('App page title must contain both « app éducation financière » and « app éducation financiere »')
+  }
+  const home = path.join(distDir, 'index.html')
+  if (fs.existsSync(home)) {
+    const homeHtml = fs.readFileSync(home, 'utf8')
+    if (!homeHtml.includes('app éducation financière')) {
+      fail('Homepage missing exact query « app éducation financière »')
+    }
+    if (!homeHtml.includes('app éducation financiere')) {
+      fail('Homepage missing exact query « app éducation financiere »')
+    }
+  }
+}
+
 function validateContentPagesGeo() {
   const dirs = ['guides', 'actualites']
   for (const dir of dirs) {
@@ -344,6 +372,7 @@ validateHomepageFaqSync()
 validateMarkdownRoutes()
 validateRobotsGrouping()
 validateIndexNowKey()
+validateAppEducationFinanciereQuery()
 validateContentPagesGeo()
 validateOgDefaultAsset()
 

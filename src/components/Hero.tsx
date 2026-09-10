@@ -1,4 +1,3 @@
-import { Sparkles } from 'lucide-react';
 import mascotPoster from '../assets/mascotte/MascotteSalut.png';
 import { segmentLottie } from '../assets/lottie/segments';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
@@ -66,9 +65,9 @@ function StoreButtons({
         href={APP_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
+        className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl text-white font-outfit font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
         style={{
-          background: 'linear-gradient(to bottom, #9BEC00 0%, #06D001 100%)'
+          background: 'linear-gradient(to bottom, #06D001 0%, #9BEC00 100%)'
         }}
       >
         <AppleIcon />
@@ -132,16 +131,7 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           <div className="order-1 flex w-full flex-col items-center gap-2 lg:gap-4 lg:order-none">
             <div className="flex w-full flex-col items-center text-center">
-              <div
-                className="inline-flex items-center gap-2 rounded-full
-                           bg-white/5 backdrop-blur
-                           px-3.5 py-1.5 text-xs sm:text-sm font-outfit"
-              >
-                <Sparkles size={14} className="text-dodje-green" />
-                <span className="text-white/80">Le jeu pour apprendre la finance · iOS &amp; Android</span>
-              </div>
-
-              <h1 className="mt-3 w-full font-outfit font-extrabold uppercase tracking-tight leading-[0.95] text-center text-[clamp(2.25rem,8vw,3rem)] sm:text-[3.25rem] md:text-[3.75rem] lg:text-[clamp(4.25rem,5.4vw,6.25rem)]">
+              <h1 className="w-full font-outfit font-extrabold uppercase tracking-tight leading-[0.95] text-center text-[clamp(2.25rem,8vw,3rem)] sm:text-[3.25rem] md:text-[3.75rem] lg:text-[clamp(4.25rem,5.4vw,6.25rem)]">
                 <span className="block">
                   {HEADLINE_LINE_1.map((word, i) => (
                     <span
