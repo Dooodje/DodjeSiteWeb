@@ -26,12 +26,12 @@ const PILLARS: Pillar[] = [
     titleLine1: 'Un parcours',
     titleAccent: 'progressif',
     body:
-      'Tu commences par les bases (budget, épargne), tu débloques les mondes suivants (bourse, crypto, immobilier, fiscalité) et tu comprends enfin la finance sans te sentir perdu.',
+      'Avec Dodje, tu avances à ton rythme. Tu commences par les bases, tu débloques de nouveaux mondes, et tu comprends enfin la finance sans te sentir perdu.',
     media: {
       kind: 'lottie',
       loadAnimation: segmentLottie.parcours,
       aspectClass: 'aspect-square',
-      scaleClass: 'scale-[1.1] sm:scale-[1.2] lg:scale-[1.3]'
+      scaleClass: 'lg:scale-[1.3]'
     },
     alt: 'Parcours d’apprentissage progressif'
   },
@@ -45,7 +45,7 @@ const PILLARS: Pillar[] = [
       kind: 'lottie',
       loadAnimation: segmentLottie.mouvementNecessaire,
       aspectClass: 'aspect-square',
-      scaleClass: 'scale-[0.95] sm:scale-[1.05] lg:scale-[1.15]'
+      scaleClass: 'lg:scale-[1.15]'
     },
     alt: 'Notification Dodje — ton argent en clair'
   },
@@ -59,7 +59,7 @@ const PILLARS: Pillar[] = [
       kind: 'lottie',
       loadAnimation: segmentLottie.gratuitSimpleLudique,
       aspectClass: 'aspect-square',
-      scaleClass: 'scale-[1.35] sm:scale-[1.5] lg:scale-[1.7]'
+      scaleClass: 'lg:scale-[1.7]'
     },
     alt: 'Daily reward Dodje — gratuit, simple et ludique'
   }
@@ -68,9 +68,9 @@ const PILLARS: Pillar[] = [
 /** Same vertical rhythm as Features. */
 const PILLAR_STACK_GAP = 'gap-32 lg:gap-36';
 const PILLAR_ROW =
-  'grid lg:grid-cols-2 gap-10 lg:gap-x-20 items-center lg:min-h-[540px]';
+  'grid lg:grid-cols-2 gap-10 lg:gap-x-20 items-center lg:min-h-[540px] overflow-hidden lg:overflow-visible';
 const VISUAL_SLOT =
-  'relative flex h-[380px] sm:h-[440px] lg:h-[500px] w-full items-center justify-center overflow-visible [direction:ltr]';
+  'relative z-0 flex h-[380px] sm:h-[440px] lg:h-[500px] w-full items-center justify-center overflow-hidden lg:overflow-visible [direction:ltr]';
 
 type RevealBlockProps = {
   reverse?: boolean;
@@ -144,11 +144,11 @@ export default function Pillars() {
                 key={pillar.number}
                 className={`${PILLAR_ROW} ${
                   reverse ? 'lg:[direction:rtl]' : ''
-                } overflow-visible`}
+                }`}
               >
                 <RevealBlock
                   reverse={reverse}
-                  className="flex flex-col gap-4 [direction:ltr]"
+                  className="relative z-20 flex flex-col gap-4 [direction:ltr]"
                 >
                   <h3 className="font-outfit font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl">
                     {pillar.titleLine1}

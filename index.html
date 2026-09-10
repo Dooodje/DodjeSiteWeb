@@ -582,7 +582,7 @@
                 <li>
                     <p class="home-stats-shell__value">0&nbsp;€</p>
                     <p class="home-stats-shell__label">pour jouer</p>
-                    <p class="home-stats-shell__caption">Gratuit sur iPhone et Android, sans carte bancaire. En bonus sur dodje.fr : 22 calculateurs et 40+ guides.</p>
+                    <p class="home-stats-shell__caption">Gratuit sur iPhone et Android</p>
                 </li>
                 <li>
                     <p class="home-stats-shell__value">3</p>
@@ -595,10 +595,10 @@
 
     <!-- Three Pillars Section (static copy for crawlers; React hydrates on mount) -->
     <div id="pillars-root">
-        <section class="home-copy-shell" aria-label="Pourquoi Dodje">
+        <section class="home-copy-shell home-island-shell" aria-hidden="true" aria-label="Pourquoi Dodje">
             <h2 class="home-copy-shell__title">Pourquoi un jeu plutôt qu'un cours ?</h2>
             <h3>Un parcours progressif, comme les mondes d'un jeu</h3>
-            <p>Tu commences par les bases (budget, épargne), tu débloques les mondes suivants (bourse, crypto, immobilier, fiscalité) et tu comprends enfin la finance sans te sentir perdu. Ce n'est pas une banque ni un agrégateur de comptes.</p>
+            <p>Avec Dodje, tu avances à ton rythme. Tu commences par les bases, tu débloques de nouveaux mondes, et tu comprends enfin la finance sans te sentir perdu.</p>
             <h3>Ton argent en clair</h3>
             <p>On parle souvent d'argent, mais rarement de façon simple. Dodje traduit chaque notion en décision de jeu : investir tes Dodjis dans le phare, c'est comprendre les placements ; les laisser dormir dans la réserve, c'est subir l'inflation.</p>
             <h3>Gratuit. Simple. Ludique.</h3>
@@ -609,7 +609,7 @@
     <!-- Biome Carousel Section (React). Static shell so crawlers and LLMs
          read the game mechanics even without JavaScript. -->
     <div id="carousel-root">
-        <section id="batiments-shell" class="home-copy-shell" aria-label="Les bâtiments de ton île">
+        <section id="batiments-shell" class="home-copy-shell home-island-shell" aria-hidden="true" aria-label="Les bâtiments de ton île">
             <h2 class="home-copy-shell__title">De la théorie à la pratique</h2>
             <p>Récupère des Dodjis, débloque des bâtiments et prends des décisions financières sur ton île. Apprendre à gérer son argent n'a jamais été aussi fun. Chaque bâtiment représente une brique de ta vie financière :</p>
             <h3>L'atelier, ton job</h3>
@@ -629,7 +629,7 @@
 
     <!-- Features Section (static copy for crawlers; React hydrates on mount) -->
     <div id="features-root">
-        <section class="home-copy-shell" aria-label="Comment tu apprends">
+        <section class="home-copy-shell home-island-shell" aria-hidden="true" aria-label="Comment tu apprends">
             <h2 class="home-copy-shell__title">Comment tu apprends</h2>
             <h3>Une expérience personnalisée</h3>
             <p>Tu choisis le chemin qui t'intéresse, Dodje te guide pour avancer dans le bon ordre. Tu explores les sujets à ton rythme, avec des étapes claires pour ne jamais te sentir perdu.</p>
@@ -642,7 +642,7 @@
 
     <!-- Copy SEO/GEO hors parcours visuel : crawlers et JSON-LD, pas le landing.
          Version lisible : /jeu, /faq, /guides/jeu-educatif-finance -->
-    <div id="home-seo-crawl" class="home-seo-crawl" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">
+    <div id="home-seo-crawl" class="home-seo-crawl" aria-hidden="true">
     <section id="comment-jouer" class="home-copy-shell" aria-labelledby="comment-jouer-title">
         <h2 id="comment-jouer-title" class="home-copy-shell__title">Comment on joue à Dodje ?</h2>
         <p><strong>En bref :</strong> tu apprends, tu gagnes des Dodjis, tu les investis sur ton île, tu grimpes au classement. Quatre étapes, répétées quelques minutes par jour.</p>

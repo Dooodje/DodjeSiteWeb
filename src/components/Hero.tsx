@@ -129,8 +129,8 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 sm:px-10 lg:px-16 pt-32 pb-14 sm:pt-24 lg:pt-12 lg:pb-20">
-        <div className="grid lg:grid-cols-[0.8fr_1.4fr] gap-6 lg:gap-10 items-center">
-          <div className="order-1 flex w-full flex-col items-center gap-2 lg:gap-3 lg:order-none">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+          <div className="order-1 flex w-full flex-col items-center gap-2 lg:gap-4 lg:order-none">
             <div className="flex w-full flex-col items-center text-center">
               <div
                 className="inline-flex items-center gap-2 rounded-full
@@ -141,7 +141,7 @@ export default function Hero() {
                 <span className="text-white/80">Le jeu pour apprendre la finance · iOS &amp; Android</span>
               </div>
 
-              <h1 className="mt-2 w-full font-outfit font-extrabold uppercase tracking-tight leading-[1.12] text-center text-[clamp(2.1rem,7vw,2.85rem)] sm:text-[2.85rem] md:text-[3.25rem] lg:text-[3.5rem]">
+              <h1 className="mt-3 w-full font-outfit font-extrabold uppercase tracking-tight leading-[0.95] text-center text-[clamp(2.25rem,8vw,3rem)] sm:text-[3.25rem] md:text-[3.75rem] lg:text-[clamp(4.25rem,5.4vw,6.25rem)]">
                 <span className="block">
                   {HEADLINE_LINE_1.map((word, i) => (
                     <span
@@ -175,7 +175,7 @@ export default function Hero() {
                 </span>
               </h1>
 
-              <p className="hero-shell__bluf mt-3 font-outfit text-sm sm:text-base text-white/80 max-w-xl leading-relaxed text-center">
+              <p className="hero-shell__bluf mt-4 font-outfit text-sm sm:text-base lg:text-lg text-white/80 max-w-xl leading-relaxed text-center">
                 {BLUF}
               </p>
             </div>
@@ -186,14 +186,14 @@ export default function Hero() {
           </div>
 
           {/* Animation — entre le titre et les boutons sur mobile */}
-          <div className="order-2 relative flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:order-none lg:min-h-[640px]">
+          <div className="order-2 relative flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:order-none lg:min-h-[560px]">
             <SegmentLottie
               loadAnimation={segmentLottie.salut}
               alt="Mascotte Dodje qui salue"
               poster={mascotPoster}
               eager
               reducedMotion={reducedMotion}
-              className="relative z-10 w-[min(100%,420px)] sm:w-[min(100%,560px)] lg:w-[min(100%,1080px)] xl:w-[min(100%,1200px)] aspect-square select-none"
+              className="relative z-10 w-[min(100%,420px)] sm:w-[min(100%,560px)] lg:w-full lg:max-w-[640px] aspect-square select-none"
               style={{ pointerEvents: 'none' }}
             />
           </div>

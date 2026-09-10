@@ -31,7 +31,7 @@ const FEATURES: Feature[] = [
       kind: 'lottie',
       loadAnimation: segmentLottie.experiencePersonnalisee,
       aspectClass: 'aspect-[19/10]',
-      scaleClass: 'scale-[1.35] sm:scale-[1.6] lg:scale-[1.95]'
+      scaleClass: 'lg:scale-[1.95]'
     },
     alt: 'Expérience personnalisée Dodje'
   },
@@ -45,7 +45,7 @@ const FEATURES: Feature[] = [
       kind: 'lottie',
       loadAnimation: segmentLottie.progresVisible,
       aspectClass: 'aspect-[6/7]',
-      scaleClass: 'scale-[1.1] sm:scale-[1.2] lg:scale-[1.3]'
+      scaleClass: 'lg:scale-[1.3]'
     },
     alt: 'Progression de niveau Dodje'
   },
@@ -59,7 +59,7 @@ const FEATURES: Feature[] = [
       kind: 'lottie',
       loadAnimation: segmentLottie.apprentissageLudique,
       aspectClass: 'aspect-square',
-      scaleClass: 'scale-[1.1] sm:scale-[1.2] lg:scale-[1.3]'
+      scaleClass: 'lg:scale-[1.3]'
     },
     alt: 'Apprentissage ludique Dodje'
   }
@@ -67,9 +67,9 @@ const FEATURES: Feature[] = [
 
 const FEATURE_STACK_GAP = 'gap-32 lg:gap-36';
 const FEATURE_ROW =
-  'grid lg:grid-cols-2 gap-10 lg:gap-x-20 items-center lg:min-h-[540px]';
+  'grid lg:grid-cols-2 gap-10 lg:gap-x-20 items-center lg:min-h-[540px] overflow-hidden lg:overflow-visible';
 const VISUAL_SLOT =
-  'relative flex h-[380px] sm:h-[440px] lg:h-[500px] w-full items-center justify-center overflow-visible [direction:ltr]';
+  'relative z-0 flex h-[380px] sm:h-[440px] lg:h-[500px] w-full items-center justify-center overflow-hidden lg:overflow-visible [direction:ltr]';
 
 type RevealBlockProps = {
   reverse?: boolean;
@@ -145,11 +145,11 @@ export default function Features() {
                 key={f.index}
                 className={`${FEATURE_ROW} ${
                   reverse ? 'lg:[direction:rtl]' : ''
-                } overflow-visible`}
+                }`}
               >
                 <RevealBlock
                   reverse={reverse}
-                  className="flex flex-col gap-4 [direction:ltr]"
+                  className="relative z-20 flex flex-col gap-4 [direction:ltr]"
                 >
                   <h3 className="font-outfit font-black uppercase tracking-tight leading-[0.95] text-4xl sm:text-5xl md:text-6xl">
                     {f.titleLine1}

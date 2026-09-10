@@ -23,13 +23,24 @@ const Pillars = lazy(() => import('./components/Pillars'));
 const App = lazy(() => import('./App'));
 const Features = lazy(() => import('./components/Features'));
 
-type Island = { id: string; render: () => JSX.Element; eager?: boolean };
+type Island = {
+  id: string;
+  render: () => JSX.Element;
+  eager?: boolean;
+  rootMargin?: string;
+  threshold?: number;
+};
 
 const islands: Island[] = [
   { id: 'hero-root', render: () => <Hero />, eager: true },
   { id: 'stats-root', render: () => <Stats /> },
   { id: 'pillars-root', render: () => <Pillars /> },
-  { id: 'carousel-root', render: () => <App /> },
+  {
+    id: 'carousel-root',
+    render: () => <App />,
+    rootMargin: '4000px 0px',
+    threshold: 0
+  },
   { id: 'features-root', render: () => <Features /> }
 ];
 
@@ -41,7 +52,11 @@ function mountIsland(el: HTMLElement, render: () => JSX.Element, eager?: boolean
   createRoot(el).render(<StrictMode>{node}</StrictMode>);
 }
 
-function mountWhenNearViewport(el: HTMLElement, render: () => JSX.Element) {
+function mountWhenNearViewport(
+  el: HTMLElement,
+  render: () => JSX.Element,
+  options?: { rootMargin?: string; threshold?: number }
+) {
   if (!('IntersectionObserver' in window)) {
     mountIsland(el, render);
     return;
@@ -54,8 +69,8 @@ function mountWhenNearViewport(el: HTMLElement, render: () => JSX.Element) {
       mountIsland(el, render);
     },
     {
-      rootMargin: '0px 0px -10% 0px',
-      threshold: 0.12
+      rootMargin: options?.rootMargin ?? '0px 0px -10% 0px',
+      threshold: options?.threshold ?? 0.12
     }
   );
 
@@ -108,14 +123,14 @@ function scrollToSection(retries = 30) {
   }
 }
 
-for (const { id, render, eager } of islands) {
+for (const { id, render, eager, rootMargin, threshold } of islands) {
   const el = document.getElementById(id);
   if (!el) continue;
 
   if (eager || shouldEagerMount(id)) {
     mountIsland(el, render, true);
   } else {
-    mountWhenNearViewport(el, render);
+    mountWhenNearViewport(el, render, { rootMargin, threshold });
   }
 }
 

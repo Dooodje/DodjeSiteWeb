@@ -14,8 +14,7 @@ const STATS: Stat[] = [
     prefix: '',
     suffix: '€',
     label: 'pour jouer',
-    caption:
-      'Gratuit sur iPhone et Android, sans carte bancaire. En bonus sur dodje.fr : 22 calculateurs et 40+ guides.'
+    caption: 'Gratuit sur iPhone et Android'
   },
   {
     value: 3,

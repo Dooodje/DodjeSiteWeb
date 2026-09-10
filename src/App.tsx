@@ -1,9 +1,15 @@
 import CharacterCarousel, { type CarouselItem } from './components/CharacterCarousel';
+import atelierImg from './assets/batiments/stills/job-1.png';
+import moulinImg from './assets/batiments/stills/moulin-1.png';
+import reserveImg from './assets/batiments/stills/ruines.png';
+import phareImg from './assets/batiments/stills/phare-1.png';
+import agenceImg from './assets/batiments/stills/agence-1.png';
+import foreuseImg from './assets/batiments/stills/foreuse-1.png';
 
 const items: CarouselItem[] = [
   {
     id: 'atelier',
-    buildingSrc: () => import('./assets/batiments/job-1.json').then((m) => m.default),
+    image: atelierImg,
     tagline: 'Ton job',
     title: "L'atelier",
     description:
@@ -11,7 +17,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'moulin',
-    buildingSrc: () => import('./assets/batiments/moulin-1.json').then((m) => m.default),
+    image: moulinImg,
     tagline: 'Ton épargne',
     title: 'Le moulin',
     description:
@@ -19,7 +25,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'reserve',
-    buildingSrc: () => import('./assets/batiments/ruines.json').then((m) => m.default),
+    image: reserveImg,
     tagline: 'Ta banque',
     title: 'La réserve',
     description:
@@ -27,7 +33,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'phare',
-    buildingSrc: () => import('./assets/batiments/phare-1.json').then((m) => m.default),
+    image: phareImg,
     tagline: 'Tes placements',
     title: 'Le phare',
     description:
@@ -35,7 +41,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'agence',
-    buildingSrc: () => import('./assets/batiments/agence-1.json').then((m) => m.default),
+    image: agenceImg,
     tagline: 'Ton immobilier',
     title: "L'agence",
     description:
@@ -43,7 +49,7 @@ const items: CarouselItem[] = [
   },
   {
     id: 'foreuse',
-    buildingSrc: () => import('./assets/batiments/foreuse-1.json').then((m) => m.default),
+    image: foreuseImg,
     tagline: 'Ton wallet',
     title: 'La foreuse',
     description:
