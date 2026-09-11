@@ -665,12 +665,14 @@ body {
         letter-spacing: 0.08em;
         text-transform: uppercase;
         opacity: 0.72;
+        white-space: nowrap;
     }
 
     .mobile-floating-bar__name {
         font-size: 0.82rem;
         font-weight: 700;
         letter-spacing: -0.01em;
+        white-space: nowrap;
     }
 }
 

@@ -655,11 +655,13 @@ body {
         letter-spacing: 0.08em;
         text-transform: uppercase;
         opacity: 0.72;
+        white-space: nowrap;
     }
 
     .mobile-floating-bar__name {
         font-size: 0.82rem;
         font-weight: 700;
+        white-space: nowrap;
     }
 
     #main-content {
@@ -899,6 +901,7 @@ body {
     flex-direction: column;
     line-height: 1.15;
     text-align: left;
+    white-space: nowrap;
 }
 
 .hero-shell__btn-kicker {
@@ -906,10 +909,12 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.025em;
     opacity: 0.7;
+    white-space: nowrap;
 }
 
 .hero-shell__btn-name {
     font-size: 1rem;
+    white-space: nowrap;
 }
 
 .hero-shell__bluf {
@@ -1064,6 +1069,8 @@ body {
 
     .hero-shell__btn {
         width: auto;
+        min-width: fit-content;
+        flex: 1 1 0;
         padding: 0.875rem 1.25rem;
     }
 

@@ -54,7 +54,7 @@ function StoreButtons({
   className?: string;
   stacked?: boolean;
 }) {
-  const btnWidth = stacked ? 'w-full min-w-0' : 'flex-1';
+  const btnWidth = stacked ? 'w-full' : 'min-w-fit flex-1';
   const btnPadding = stacked ? 'px-6 py-4' : 'px-4 sm:px-5 py-3 sm:py-3.5';
   const labelSize = stacked ? 'text-base' : 'text-sm sm:text-base';
   const kickerSize = stacked ? 'text-[0.65rem]' : 'text-[0.6rem] sm:text-[0.65rem]';
@@ -71,7 +71,7 @@ function StoreButtons({
         }}
       >
         <AppleIcon />
-        <span className="flex flex-col leading-tight text-left">
+        <span className="flex flex-col leading-tight text-left whitespace-nowrap">
           <span className={`${kickerSize} uppercase tracking-wide opacity-70`}>
             Télécharger sur
           </span>
@@ -85,7 +85,7 @@ function StoreButtons({
         className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl bg-white text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-8px_rgba(255,255,255,0.25)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
       >
         <GooglePlayIcon />
-        <span className="flex flex-col leading-tight text-left">
+        <span className="flex flex-col leading-tight text-left whitespace-nowrap">
           <span className={`${kickerSize} uppercase tracking-wide opacity-70`}>
             Télécharger sur
           </span>
