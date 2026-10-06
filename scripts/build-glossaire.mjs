@@ -108,13 +108,13 @@ for (const item of data.terms) {
             <p class="content-lead"><strong>En bref :</strong> ${escapeHtml(item.definition)}</p>
             <h2>Définition</h2>
             <p>${escapeHtml(item.definition)}</p>
-            <p>Cette page fait partie du <a href="${data.hub}">glossaire finance Dodje</a>. Pour pratiquer le concept dans un jeu (sans miser d'argent), voir <a href="/jeu">comment on joue à Dodje</a>.</p>
+            <p>Cette page fait partie du <a href="${data.hub}">glossaire finance Dodje</a>. Pour pratiquer le concept dans un jeu (sans miser d'argent), voir <a href="https://dodje.fr/">Dodje</a>.</p>
             <h2>Questions fréquentes</h2>
             ${faq.map((f) => `<h3>${escapeHtml(f.q)}</h3>\n            <p>${escapeHtml(f.a)}</p>`).join('\n            ')}
             <div class="content-links">
                 <a href="${data.hub}">Glossaire complet</a>
                 ${related}
-                <a href="/jeu">Le jeu Dodje</a>
+                <a href="https://dodje.fr/">Dodje</a>
             </div>
             <aside class="content-sources">
                 <h2>Sources</h2>

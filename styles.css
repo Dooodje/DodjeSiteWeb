@@ -484,7 +484,7 @@ body {
     font-size: var(--font-size-sm);
     font-weight: 600;
     line-height: var(--line-height-none);
-    color: #ffffff !important;
+    color: #0A0400 !important;
     background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%);
     border: none;
     border-radius: var(--radius-full);
@@ -501,7 +501,7 @@ body {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
     background: linear-gradient(180deg, #08E003 0%, #B8FF20 100%);
-    color: #ffffff !important;
+    color: #0A0400 !important;
 }
 
 /* App Download Buttons */
@@ -636,7 +636,7 @@ body {
     }
 
     .mobile-floating-bar__store--apple {
-        color: #ffffff;
+        color: #0A0400;
         background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%);
         box-shadow: 0 8px 20px -10px rgba(6, 208, 1, 0.65);
     }
@@ -1843,7 +1843,7 @@ body {
     font-size: 18px;
     font-weight: 700;
     background: linear-gradient(to bottom, #06D001 0%, #9BEC00 100%);
-    color: #ffffff;
+    color: #0A0400;
     padding: 0.8em 1.2em;
     display: inline-flex;
     align-items: center;
@@ -1876,7 +1876,7 @@ body {
 .community-cta svg {
     width: 22px;
     height: 22px;
-    fill: #ffffff;
+    fill: #0A0400;
     transition: all 0.3s;
 }
 
@@ -2032,7 +2032,7 @@ body {
     height: 28px;
     flex: 0 0 28px;
     border-radius: var(--radius-full);
-    color: var(--white);
+    color: #0A0400;
     background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
     font-weight: 900;
     transition: transform 0.2s ease;
@@ -2247,7 +2247,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: #0A0400;
     /* Kill iOS double-tap-to-activate: no tap highlight, fire on first tap. */
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
@@ -3433,7 +3433,7 @@ a:focus-visible {
 
 .leaderboard-button-header {
     background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
-    color: var(--white);
+    color: #0A0400;
     border: none;
     border-radius: 8px;
     padding: var(--space-3) var(--space-5);
@@ -3571,7 +3571,7 @@ a:focus-visible {
 .start-button,
 .restart-button {
     background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
-    color: var(--white);
+    color: #0A0400;
     border: none;
     border-radius: 10px;
     padding: var(--space-4) var(--space-8);
@@ -3791,7 +3791,7 @@ a:focus-visible {
 .share-leaderboard-button {
     background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
     border: none;
-    color: var(--white);
+    color: #0A0400;
     cursor: pointer;
     font-size: var(--font-size-sm);
     font-weight: 700;
@@ -5441,7 +5441,7 @@ a:focus-visible {
     width: 100%;
     padding: 0.875rem 1.5rem;
     background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
-    color: var(--white);
+    color: #0A0400;
     border: none;
     border-radius: 12px;
     font-family: var(--font-family);
@@ -6491,7 +6491,7 @@ a:focus-visible {
 }
 
 .back-to-home .cta-button {
-    color: var(--white);
+    color: #0A0400;
 }
 
 /* Mobile styles for legal pages */
@@ -6537,7 +6537,7 @@ a:focus-visible {
     width: 100%;
     padding: 0.875rem 1.5rem;
     background: linear-gradient(180deg, var(--secondary-green), var(--accent-light-green));
-    color: var(--white);
+    color: #0A0400;
     border: none;
     border-radius: 12px;
     font-family: var(--font-family);
@@ -7029,7 +7029,7 @@ a:focus-visible {
     border: none;
     border-radius: var(--radius-lg);
     background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%);
-    color: #ffffff !important;
+    color: #0A0400 !important;
     font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
@@ -7044,7 +7044,7 @@ a:focus-visible {
 .quiz-btn-submit:hover,
 .content-layout .cta-button:hover {
     background: linear-gradient(180deg, #08E003 0%, #B8FF20 100%);
-    color: #ffffff !important;
+    color: #0A0400 !important;
     transform: translateY(-1px);
 }
 
@@ -7320,7 +7320,7 @@ a:focus-visible {
 
 .calc-segment input:checked + span {
     background: linear-gradient(to bottom, #06D001 0%, #9BEC00 100%);
-    color: #ffffff;
+    color: #0A0400;
 }
 
 .calc-result-highlight .calc-result-value {
@@ -7604,7 +7604,7 @@ a:focus-visible {
 .site-footer .social-link {
     width: 40px;
     height: 40px;
-    color: #ffffff;
+    color: #0A0400;
 }
 
 .site-footer .footer-title {
@@ -7751,7 +7751,7 @@ a:focus-visible {
 
 .content-cta-game__actions a:first-child {
     background: linear-gradient(to bottom, #06d001 0%, #9bec00 100%);
-    color: #ffffff;
+    color: #0A0400;
 }
 
 .content-cta-game__actions a:not(:first-child) {
@@ -7841,4 +7841,312 @@ a:focus-visible {
 .game-buildings p {
     margin: 0;
     font-size: 0.95rem;
+}
+
+/* Fiche produit /guides/application-education-financiere */
+.app-fiche {
+    max-width: 980px;
+}
+
+.app-fiche h1,
+.app-fiche .legal-eyebrow,
+.app-fiche .content-lead {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.app-fiche h1 {
+    max-width: 11ch;
+    margin-bottom: var(--space-4);
+}
+
+.app-fiche h2 {
+    text-align: left;
+}
+
+.app-fiche__hero {
+    display: grid;
+    gap: var(--space-8);
+    align-items: start;
+    margin-bottom: var(--space-4);
+}
+
+.app-fiche__intro .content-lead {
+    max-width: 38rem;
+}
+
+.app-fiche .legal-eyebrow {
+    letter-spacing: 0.08em;
+}
+
+.app-fiche__note {
+    margin: var(--space-4) 0 0;
+    max-width: 36rem;
+    font-size: var(--font-size-sm) !important;
+    color: var(--gray-400) !important;
+}
+
+.app-fiche__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin: var(--space-6) 0 0;
+}
+
+.app-fiche__store {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-full);
+    background: linear-gradient(to bottom, #06d001 0%, #9bec00 100%);
+    color: #0A0400 !important;
+    font-weight: 700;
+    text-decoration: none !important;
+}
+
+.app-fiche__store--ghost {
+    background: transparent;
+    color: var(--secondary-green) !important;
+    box-shadow: inset 0 0 0 1px rgba(155, 236, 0, 0.45);
+}
+
+.app-fiche__store:hover {
+    text-decoration: none !important;
+    filter: brightness(1.05);
+}
+
+.app-fiche__specs {
+    margin: 0;
+    padding: 1.25rem 1.35rem 1.1rem;
+    border-radius: 1.25rem;
+    background: rgba(0, 0, 0, 0.38);
+}
+
+.app-fiche__specs h2 {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-light-green);
+}
+
+.app-fiche__specs ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.app-fiche__specs li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin: 0;
+    padding: 0.72rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 1rem;
+}
+
+.app-fiche__specs li span {
+    color: var(--gray-400);
+}
+
+.app-fiche__specs li strong {
+    color: var(--white);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.app-fiche__specs > p {
+    margin: 0.9rem 0 0;
+    font-size: 0.88rem !important;
+    line-height: 1.45 !important;
+    color: var(--gray-500) !important;
+}
+
+.app-fiche__block {
+    margin-top: var(--space-12);
+}
+
+.app-fiche__block > h2 {
+    margin-top: 0;
+    margin-bottom: var(--space-5);
+}
+
+.app-fiche__split {
+    display: grid;
+    gap: var(--space-6);
+    align-items: start;
+}
+
+.app-fiche__split p {
+    margin-top: 0;
+}
+
+.app-fiche__not {
+    list-style: none;
+    margin: 0;
+    padding: 0.25rem 0 0;
+}
+
+.app-fiche__not li {
+    margin: 0;
+    padding: 0.85rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.app-fiche__not li:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.app-fiche__not strong,
+.app-fiche__not span {
+    display: block;
+}
+
+.app-fiche__not strong {
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.app-fiche__not span {
+    margin-top: 0.15rem;
+    color: var(--gray-400);
+    font-size: 0.92rem;
+}
+
+.app-fiche__who {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+}
+
+.app-fiche__who li {
+    margin: 0;
+    padding: 1.15rem 1.2rem 1.2rem;
+    border-radius: 1.1rem;
+    background: rgba(0, 0, 0, 0.32);
+}
+
+.app-fiche__who h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+.app-fiche__who p {
+    margin: 0;
+    font-size: 0.98rem !important;
+}
+
+.app-fiche__aside {
+    margin: var(--space-5) 0 0;
+    max-width: 42rem;
+}
+
+.app-fiche__vs {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.app-fiche__vs article {
+    padding: 1.15rem 1.2rem 0.4rem;
+    border-radius: 1.1rem;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.app-fiche__vs .is-dodje {
+    background: rgba(155, 236, 0, 0.08);
+}
+
+.app-fiche__vs h3 {
+    margin: 0.2rem 0 0.85rem;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.app-fiche__vs dl {
+    margin: 0;
+}
+
+.app-fiche__vs dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.app-fiche__vs dt {
+    color: var(--gray-500);
+    font-size: 0.88rem;
+}
+
+.app-fiche__vs dd {
+    margin: 0;
+    color: var(--white);
+    font-weight: 700;
+    text-align: right;
+}
+
+.app-fiche .game-steps {
+    margin-top: 0;
+}
+
+.app-fiche .faq-list {
+    max-width: none;
+    margin: 0;
+}
+
+.app-fiche .content-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.25rem;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.app-fiche .content-links a {
+    padding: 0;
+    background: none;
+    text-align: left;
+}
+
+.app-fiche .content-links a:hover {
+    background: none;
+}
+
+.app-fiche .content-sources,
+.app-fiche .content-cta-game,
+.app-fiche .content-updated {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.app-fiche .content-updated {
+    text-align: left;
+}
+
+@media (min-width: 840px) {
+    .app-fiche__hero {
+        grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.8fr);
+        gap: var(--space-10);
+    }
+
+    .app-fiche__split {
+        grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.75fr);
+        gap: var(--space-10);
+    }
+
+    .app-fiche__who,
+    .app-fiche__vs {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }

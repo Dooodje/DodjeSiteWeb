@@ -65,7 +65,7 @@ function StoreButtons({
         href={APP_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl text-white font-outfit font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
+        className={`group flex ${btnWidth} items-center justify-center gap-3 ${btnPadding} rounded-2xl text-dodje-ink font-outfit font-bold shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)] transition-transform duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] active:scale-[0.98]`}
         style={{
           background: 'linear-gradient(to bottom, #06D001 0%, #9BEC00 100%)'
         }}

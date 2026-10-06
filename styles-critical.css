@@ -465,7 +465,7 @@ body {
     font-size: var(--font-size-sm);
     font-weight: 600;
     line-height: var(--line-height-none);
-    color: #ffffff !important;
+    color: #0A0400 !important;
     background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%);
     border: none;
     border-radius: var(--radius-full);
@@ -482,7 +482,7 @@ body {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
     background: linear-gradient(180deg, #08E003 0%, #B8FF20 100%);
-    color: #ffffff !important;
+    color: #0A0400 !important;
 }
 
 /* App Download Buttons */
@@ -632,7 +632,7 @@ body {
     }
 
     .mobile-floating-bar__store--apple {
-        color: #ffffff;
+        color: #0A0400;
         background: linear-gradient(180deg, #06d001 0%, #9bec00 100%);
     }
 
@@ -887,7 +887,7 @@ body {
 }
 
 .hero-shell__btn--apple {
-    color: #ffffff;
+    color: #0A0400;
     background: linear-gradient(to bottom, #06d001 0%, #9bec00 100%);
 }
 

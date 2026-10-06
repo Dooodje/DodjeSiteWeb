@@ -104,7 +104,7 @@ function article({
             <h2>Questions fréquentes</h2>
             ${faqHtml}
             <div class="content-links">
-                <a href="/jeu">Le jeu Dodje</a>
+                <a href="https://dodje.fr/">Dodje</a>
                 <a href="/guides">Guides</a>
                 <a href="/outils">Calculateurs</a>
                 <a href="/faq">FAQ</a>
@@ -151,7 +151,7 @@ pages.push({
         'https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215',
         'https://play.google.com/store/apps/details?id=xyz.dodje.app&hl=fr'
       ],
-      url: `${SITE}/jeu`
+      url: `${SITE}/`
     })}</script>
     <script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org',
@@ -182,8 +182,6 @@ pages.push({
                 <article><span class="seo-kicker">Immo</span><h3>L'agence</h3><p>Portefeuille immobilier : acheter, louer, valoriser.</p></article>
                 <article><span class="seo-kicker">Crypto</span><h3>La foreuse</h3><p>Wallet crypto : Bitcoin, Ethereum, blockchain — comprendre avant d'agir.</p></article>
             </div>
-            <h2>Chiffres du jeu</h2>
-            <p>Gratuit (0 €), dès 16 ans, lancé en 2024 par Dodje Solutions (Orléans). Durée d'une leçon : environ 3 minutes. Nombre de leçons : <span data-fact="lecons">[À COMPLÉTER : nombre de leçons]</span>. Niveaux : <span data-fact="niveaux">[À COMPLÉTER : nombre de niveaux]</span>. Mode île lancé en <span data-fact="ile-date">[À COMPLÉTER : mois année]</span>.</p>
             <p>En 2025, le score de culture financière des Français était de 12,82/20 (Banque de France / CSA, enquête EDUCFI publiée le 6 mai 2026, 2 217 adultes). Objectif OCDE : 14/20. Un jeu répète et fait pratiquer, là où un cours s'oublie.</p>
             <h2>Dodje n'est pas un jeu d'argent</h2>
             <p>Aucune mise, aucun pari, aucun gain en euros. Les Dodjis sont une monnaie virtuelle. Dodje n'est ni un courtier, ni une banque, ni un conseiller réglementé. Voir le pilier <a href="/guides/jeu-educatif-finance">jeu pour apprendre la finance</a> et le comparatif <a href="/guides/dodje-vs-capito">Dodje vs Capito</a>.</p>
@@ -273,7 +271,7 @@ const guides = [
             <p>Freeman et al. (PNAS 2014, 225 études) : le taux d'échec passe de 34 % en cours magistral à 22 % en apprentissage actif. C'est le principe des quiz et des décisions de jeu. La répétition courte bat le cours de 2 heures oublié.</p>
             <h2>Tableau comparatif 2026</h2>
             <div class="compare-table-wrap"><table class="compare-table">
-                <thead><tr><th>Critère</th><th>Dodje</th><th>Capito</th><th>Scènes d'argent</th><th>Simulateurs de trading</th><th>Jeux de plateau</th></tr></thead>
+                <thead><tr><th>Critère</th><th><a href="https://dodje.fr/">Dodje</a></th><th>Capito</th><th>Scènes d'argent</th><th>Simulateurs de trading</th><th>Jeux de plateau</th></tr></thead>
                 <tbody>
                     <tr><th>Format</th><td>Jeu mobile : leçons + île</td><td>Micro-leçons à swiper</td><td>Jeu narratif web/app</td><td>Portefeuille virtuel</td><td>Cashflow, Monopoly</td></tr>
                     <tr><th>Mécanique</th><td>Dodjis, 6 bâtiments, classement</td><td>XP, streaks, ligues</td><td>Choix de vie, conséquences</td><td>Gains/pertes virtuels</td><td>Tours de table</td></tr>
@@ -285,7 +283,7 @@ const guides = [
             <p>Sources : sites Capito, Banque de France, Trading Game, consultés le 9 septembre 2026. Aucun classement officiel. Voir aussi <a href="/guides/dodje-vs-capito">Dodje vs Capito</a> et <a href="/guides/meilleurs-jeux-pour-apprendre-la-finance-2026">meilleurs jeux 2026</a>.</p>
             <h2>Comment on joue à Dodje</h2>
             <p>Quatre étapes, quelques minutes par jour : 1) leçon d'environ 3 minutes + quiz ; 2) Dodjis gagnés ; 3) investissement dans l'atelier (job), le moulin (épargne), la réserve (banque), le phare (placements), l'agence (immobilier) ou la foreuse (crypto) ; 4) niveaux et classement mondial. Analogie : Duolingo pour les leçons, Clash of Clans pour l'île, Mario pour les paliers.</p>
-            <p>Chiffres : 0 € pour commencer, dès 16 ans, lancé en 2024, 6 bâtiments. Nombre de leçons : [À COMPLÉTER]. Détail : <a href="/jeu">le jeu Dodje</a>.</p>
+            <p>Chiffres : 0 € pour commencer, dès 16 ans, lancé en 2024, 6 bâtiments. Nombre de leçons : [À COMPLÉTER]. Détail : <a href="https://dodje.fr/">Dodje</a>.</p>
             <h2>Capito : le concurrent le plus proche</h2>
             <p>Capito se présente comme « Apprends la finance comme un jeu, 5 min/jour ». Micro-leçons, streaks, XP, ligues, 20 000 leçons revendiquées, Premium 6,99 €/mois. C'est une app d'éducation <em>gamifiée</em>. Dodje est un <em>jeu</em> : ce que tu apprends s'investit dans une île. Les deux sont français, éducatifs, sans conseil personnalisé. Choisir selon le format, pas selon une note magique.</p>
             <h2>Scènes d'argent et simulateurs</h2>
@@ -318,7 +316,7 @@ const guides = [
     body: `
             <h2>Comment on a comparé</h2>
             <p>Critères : enseigne-t-on vraiment (leçons ou scénarios) ? Y a-t-il de l'argent réel en jeu ? Le contenu est-il calé sur la France (Livret A, PEA, MiCA) ? Est-ce un jeu ou une app de suivi de comptes ? Notes : aucune note magique /10 ici — uniquement des formats.</p>
-            <h2>1. Dodje — jeu d'île pour débutants</h2>
+            <h2>1. <a href="https://dodje.fr/">Dodje</a> — jeu d'île pour débutants</h2>
             <p>Jeu mobile gratuit (iOS/Android), dès 16 ans. Leçons d'environ 3 minutes, Dodjis, 6 bâtiments, classement mondial. Analogie Duolingo × Clash of Clans × Mario. 0 € pour commencer. Idéal si tu cherches une <strong>app jeu finance</strong> et un <strong>jeu éducation financière</strong>, pas un suivi de comptes.</p>
             <h2>2. Capito — micro-leçons façon Duolingo</h2>
             <p>App française, « 5 min/jour », streaks, XP, ligues. Gratuit limité à 3 leçons/jour, Premium 6,99 €/mois. Très bon si tu veux du volume de cartes à swiper. Pas d'île. Détail : <a href="/guides/dodje-vs-capito">Dodje vs Capito</a>.</p>
@@ -350,7 +348,7 @@ const guides = [
     body: `
             <h2>En un coup d'œil</h2>
             <div class="compare-table-wrap"><table class="compare-table">
-                <thead><tr><th>Critère</th><th>Dodje</th><th>Capito</th></tr></thead>
+                <thead><tr><th>Critère</th><th><a href="https://dodje.fr/">Dodje</a></th><th>Capito</th></tr></thead>
                 <tbody>
                     <tr><th>Promesse</th><td>Le jeu pour enfin comprendre l'argent</td><td>Apprends la finance comme un jeu, 5 min/jour</td></tr>
                     <tr><th>Mécanique</th><td>Dodjis, île, 6 bâtiments, niveaux, classement</td><td>XP, streaks, badges, ligues, smart feed</td></tr>
@@ -369,7 +367,7 @@ const guides = [
             <p>Ni l'un ni l'autre n'est un courtier, une banque ou un conseiller. Pas de promesse de rendement. Pour le détail du jeu Dodje : <a href="/jeu">comment on joue</a>. Pour le marché : <a href="/guides/meilleurs-jeux-pour-apprendre-la-finance-2026">meilleurs jeux 2026</a>.</p>
             <aside class="content-sources"><h2>Sources</h2><ul>
                 <li><a href="https://capito-app.com/" rel="noopener noreferrer" target="_blank">Capito, site officiel</a></li>
-                <li><a href="/jeu">Dodje, page jeu</a></li>
+                <li><a href="https://dodje.fr/">Dodje, site officiel</a></li>
             </ul></aside>`,
     faq: [
       { q: 'Dodje est-il une alternative à Capito ?', a: 'Oui, sur le même marché (éducation financière gamifiée en français), avec un format jeu d\'île plutôt que micro-leçons + ligues.' },
@@ -421,7 +419,7 @@ const guides = [
             <p>Freeman et al., PNAS 2014 : méta-analyse de 225 études STEM. Taux d'échec 34 % en magistral, 22 % en actif. Un quiz après 3 minutes de leçon, ou une décision d'île (moulin vs phare), c'est de l'actif. Un PDF de 40 pages lu une fois, non.</p>
             <h2>Ce que ça ne prouve pas</h2>
             <p>Aucune étude ne dit « jouer à Dodje multiplie ton patrimoine ». Le jeu prépare le vocabulaire et l'habitude. L'investissement réel reste risqué. Sources institutionnelles : Banque de France, OCDE, AMF.</p>
-            <p>Pour le produit : <a href="/jeu">le jeu Dodje</a>. Pour le marché : <a href="/guides/jeu-educatif-finance">jeu pour apprendre la finance</a>.</p>
+            <p>Pour le produit : <a href="https://dodje.fr/">Dodje</a>. Pour le marché : <a href="/guides/jeu-educatif-finance">jeu pour apprendre la finance</a>.</p>
             <aside class="content-sources"><h2>Sources</h2><ul>
                 <li><a href="https://www.banque-france.fr" rel="noopener noreferrer" target="_blank">Banque de France, EDUCFI</a></li>
                 <li><a href="https://www.pnas.org/doi/10.1073/pnas.1319030111" rel="noopener noreferrer" target="_blank">Freeman et al., PNAS 2014</a></li>

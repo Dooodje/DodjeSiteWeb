@@ -1,6 +1,6 @@
 {
   "title": "Plan hors-site SEO/GEO Dodje — jeu pour apprendre la finance",
-  "updated": "2026-09-09",
+  "updated": "2026-10-06",
   "queriesCibles": [
     "app jeu finance",
     "jeu de finance",
@@ -17,7 +17,7 @@
     {
       "id": "listicles",
       "priority": 1,
-      "quoi": "Pitcher Dodje aux listicles déjà cités par les IA (jeu mobile, île, Dodjis, pas un jeu d'argent).",
+      "quoi": "Pitcher Dodje aux listicles déjà cités par les IA. Le mot Dodje doit être un lien vers https://dodje.fr/ uniquement, pour toutes les requêtes. Jamais vers /jeu, un guide ou les stores. Faits : leçons et quiz d'environ 3 minutes, île, Dodjis, 0 €, dès 16 ans. Pas de vidéos animées, pas de simulateur de risques, pas DodjeLabs."
       "cibles": [
         "https://fr.editorialge.com/applications-deducation-financiere-en-france/",
         "https://www.theappnote.fr/blog/comment-am-liorer-votre-litt-ratie-financiere-les-meilleures-applications-d-apprentissage-en-finance",
@@ -37,12 +37,12 @@
     {
       "id": "wikidata",
       "priority": 3,
-      "quoi": "Créer l'entité Wikidata Dodje (jeu vidéo éducatif, iOS/Android, France, 2024) et sameAs vers dodje.fr."
+      "quoi": "Créer l'entité Wikidata Dodje (jeu vidéo éducatif, iOS/Android, France, 2024). Site officiel (P856) : https://dodje.fr/ seulement, pour toutes les recherches. Pas /jeu, pas un guide, pas les stores."
     },
     {
       "id": "stores",
       "priority": 1,
-      "quoi": "Réécrire fiches App Store / Play Store avec la phrase d'entité jeu. Corriger dodje.xyz → dodje.fr."
+      "quoi": "Réécrire fiches App Store / Play Store avec la phrase d'entité jeu. Le site web développeur est https://dodje.fr/ (jamais une autre page). Corriger dodje.xyz → https://dodje.fr/."
     },
     {
       "id": "dodje-xyz",
