@@ -1,0 +1,519 @@
+{
+  "disclaimer": "Un article de blog = une question du quotidien. Les chiffres viennent des mêmes champs nommés que les actualités.",
+  "topics": [
+    {
+      "slug": "epargner-avec-le-smic",
+      "kicker": "Budget",
+      "extractor": "smic",
+      "requireLive": ["smic_net_mensuel", "smic_brut_mensuel"],
+      "leadFact": "smic_net_mensuel",
+      "baremes": ["smic_net_mensuel", "smic_brut_mensuel", "livret_a_taux"],
+      "title": "Épargner avec un SMIC de {{smic_net_mensuel}} net",
+      "bluf": "Avec un SMIC net de {{smic_net_mensuel}}, l'épargne commence par ce qui reste après les charges, pas par un pourcentage magique ({{smic_net_mensuel.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-budget-mensuel",
+        "guide": "/guides/combien-epargner-par-mois-france-2026"
+      },
+      "sections": [
+        {
+          "h2": "Partir du net, pas du brut",
+          "html": "<p>Le brut officiel est {{smic_brut_mensuel}}. Le net du même tableau est {{smic_net_mensuel}}. Un virement d'épargne se calcule sur le net, après loyer et charges.</p>"
+        },
+        {
+          "h2": "Où poser le matelas",
+          "html": "<p>Le Livret A recensé rémunère {{livret_a_taux}}, sans risque de marché. Il sert d'épargne disponible. Ce n'est pas une consigne de tout y verser, ni d'en sortir pour investir.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel net de SMIC sert de base ?",
+          "a": "{{smic_net_mensuel}}, source {{smic_net_mensuel.source}}."
+        },
+        {
+          "q": "Faut-il un taux d'épargne fixe ?",
+          "a": "Non. Avec {{smic_net_mensuel}} net, le reste après charges compte plus qu'une règle unique."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "le-livret-a-face-a-linflation",
+      "kicker": "Épargne",
+      "extractor": "livret_a",
+      "requireLive": ["livret_a_taux"],
+      "leadFact": "livret_a_taux",
+      "baremes": ["livret_a_taux", "inflation_glissante", "livret_a_plafond"],
+      "title": "Livret A à {{livret_a_taux}} face à l'inflation",
+      "bluf": "Le Livret A rémunère {{livret_a_taux}} pendant que l'inflation glissante recensée est {{inflation_glissante}} ({{livret_a_taux.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-inflation",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Deux chiffres, deux questions",
+          "html": "<p>{{livret_a_taux}} dit combien le livret rapporte. {{inflation_glissante}} dit comment les prix ont bougé dans l'indice recensé. Si l'inflation est plus haute, le pouvoir d'achat de l'épargne baisse, sans que le capital en euros disparaisse.</p>"
+        },
+        {
+          "h2": "Le plafond reste une limite de dépôt",
+          "html": "<p>Le plafond recensé est {{livret_a_plafond}}. Il ne change pas le taux {{livret_a_taux}} et ne dit pas s'il faut vider le livret.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le taux du Livret A utilisé ici ?",
+          "a": "{{livret_a_taux}}, source {{livret_a_taux.source}}."
+        },
+        {
+          "q": "Quelle inflation est mise en regard ?",
+          "a": "{{inflation_glissante}}, source {{inflation_glissante.source}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "une-heure-payee-au-smic",
+      "kicker": "Salaire",
+      "extractor": "smic",
+      "requireLive": ["smic_horaire_brut", "smic_horaire_net"],
+      "leadFact": "smic_horaire_brut",
+      "baremes": ["smic_horaire_brut", "smic_horaire_net", "smic_net_mensuel"],
+      "title": "Une heure au SMIC : {{smic_horaire_brut}} brut",
+      "bluf": "Une heure au SMIC, c'est {{smic_horaire_brut}} brut et {{smic_horaire_net}} net dans le tableau officiel ({{smic_horaire_brut.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-salaire-brut-net",
+        "guide": "/guides/faire-son-budget"
+      },
+      "sections": [
+        {
+          "h2": "Lire une vacation",
+          "html": "<p>{{smic_horaire_brut}} brut est le plancher horaire adulte. Le net indiqué à côté est {{smic_horaire_net}}. Une mission de quelques heures se rapproche de ces montants, pas du mensuel {{smic_net_mensuel}}.</p>"
+        },
+        {
+          "h2": "Le mois complet est un autre total",
+          "html": "<p>Trente-cinq heures ramènent au mensuel du même tableau. Additionner des heures sans le contrat ne donne pas un salaire.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Combien est payée une heure au SMIC brut ?",
+          "a": "{{smic_horaire_brut}}, source {{smic_horaire_brut.source}}."
+        },
+        {
+          "q": "Quel net horaire est indiqué ?",
+          "a": "{{smic_horaire_net}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "a-qui-sadresse-le-lep",
+      "kicker": "Épargne",
+      "leadFact": "lep_taux",
+      "baremes": ["lep_taux", "lep_plafond", "livret_a_taux"],
+      "title": "LEP : un taux recensé de {{lep_taux}}",
+      "bluf": "Le LEP est recensé à {{lep_taux}}, avec un plafond de {{lep_plafond}}, et il est réservé aux foyers sous un plafond de revenus ({{lep_taux.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-lep",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Plus rémunérateur, pas ouvert à tous",
+          "html": "<p>{{lep_taux}} dépasse le Livret A recensé à {{livret_a_taux}} dans le fichier Dodje. L'ouverture dépend des revenus. Le site officiel, pas une pub, dit si tu es éligible.</p>"
+        },
+        {
+          "h2": "Un petit plafond",
+          "html": "<p>{{lep_plafond}} borne les dépôts. Une fois atteint, le surplus pédagogique va plutôt vers un autre livret réglementé, sans que Dodje te dise quoi faire de ton argent.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel taux de LEP est recensé ?",
+          "a": "{{lep_taux}}, source {{lep_taux.source}}."
+        },
+        {
+          "q": "Tout le monde peut-il l'ouvrir ?",
+          "a": "Non. Le taux {{lep_taux}} va avec des conditions de revenus à vérifier à la source."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "job-dete-et-smic-mineur",
+      "kicker": "Salaire",
+      "extractor": "smic",
+      "requireLive": ["smic_mineur_17", "smic_mineur_16", "smic_horaire_brut"],
+      "leadFact": "smic_mineur_17",
+      "baremes": ["smic_mineur_17", "smic_mineur_16", "smic_horaire_brut"],
+      "title": "Job d'été à 17 ans : SMIC {{smic_mineur_17}}",
+      "bluf": "À 17 ans, le SMIC horaire brut minoré est {{smic_mineur_17}} tant que tu n'as pas 6 mois de pratique dans la branche ({{smic_mineur_17.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-salaire-brut-net",
+        "guide": "/guides/faire-son-budget"
+      },
+      "sections": [
+        {
+          "h2": "17 ans et 16 ans",
+          "html": "<p>Le tableau officiel indique {{smic_mineur_17}} à 17 ans et {{smic_mineur_16}} à 16 ans ou moins. Le SMIC horaire adulte est {{smic_horaire_brut}}. La minoration disparaît après 6 mois de pratique dans la branche, selon la même page.</p>"
+        },
+        {
+          "h2": "Ce que ça change sur la paie",
+          "html": "<p>Quelques heures d'été se lisent avec l'horaire minoré, pas avec le mensuel plein temps. Vérifie l'âge et l'ancienneté sur le contrat.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel SMIC horaire à 17 ans ?",
+          "a": "{{smic_mineur_17}} brut minoré, source {{smic_mineur_17.source}}."
+        },
+        {
+          "q": "Et à 16 ans ?",
+          "a": "{{smic_mineur_16}} dans le même tableau."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "remplir-son-livret-a",
+      "kicker": "Épargne",
+      "extractor": "livret_a",
+      "requireLive": ["livret_a_plafond", "livret_a_taux"],
+      "leadFact": "livret_a_plafond",
+      "baremes": ["livret_a_plafond", "livret_a_taux", "ldds_plafond"],
+      "title": "Livret A plein : le plafond est {{livret_a_plafond}}",
+      "bluf": "Une personne physique ne dépose plus au-delà de {{livret_a_plafond}} sur un Livret A ({{livret_a_plafond.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-livret-a",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Quand les versements s'arrêtent",
+          "html": "<p>Le plafond {{livret_a_plafond}} concerne les dépôts. Les intérêts peuvent faire dépasser ce solde, puis les nouveaux versements sont bloqués, comme l'explique la page officielle. Le taux reste {{livret_a_taux}}.</p>"
+        },
+        {
+          "h2": "La suite pédagogique",
+          "html": "<p>Le LDDS recensé plafonne à {{ldds_plafond}}. C'est un autre livret, pas une obligation de l'ouvrir.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond du Livret A ?",
+          "a": "{{livret_a_plafond}}, source {{livret_a_plafond.source}}."
+        },
+        {
+          "q": "Le taux change-t-il une fois le plafond atteint ?",
+          "a": "Non. Le taux indiqué est {{livret_a_taux}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "emprunter-avec-la-regle-des-35",
+      "kicker": "Crédit",
+      "leadFact": "hcsf_effort",
+      "baremes": ["hcsf_effort", "credit_immo_20ans", "smic_net_estime"],
+      "title": "Emprunter sans dépasser {{hcsf_effort}} d'effort",
+      "bluf": "Le cadre HCSF recensé limite l'effort d'un crédit immobilier à {{hcsf_effort}} des revenus retenus par la banque ({{hcsf_effort.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-capacite-emprunt",
+        "guide": "/guides/donnees-finance-france"
+      },
+      "sections": [
+        {
+          "h2": "Une part du revenu, pas un montant",
+          "html": "<p>{{hcsf_effort}} ne dit pas combien tu peux emprunter en euros. Sur un net proche du SMIC recensé {{smic_net_estime}}, la mensualité maximale pédagogique est bien plus basse que sur un salaire plus haut.</p>"
+        },
+        {
+          "h2": "Le prix du crédit",
+          "html": "<p>Le taux moyen 20 ans recensé est {{credit_immo_20ans}}. Il s'ajoute à la question de l'effort, il ne la remplace pas. Le calculateur Dodje reste une simulation.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel taux d'effort est recensé ?",
+          "a": "{{hcsf_effort}}, source {{hcsf_effort.source}}."
+        },
+        {
+          "q": "Ce pourcentage est-il une mensualité ?",
+          "a": "Non. {{hcsf_effort}} est une part des revenus retenus, pas un montant en euros."
+        },
+        {
+          "q": "Dodje accorde-t-il des prêts ?",
+          "a": "Non."
+        }
+      ]
+    },
+    {
+      "slug": "le-plafond-du-pea-en-clair",
+      "kicker": "Bourse",
+      "leadFact": "pea_plafond",
+      "baremes": ["pea_plafond", "livret_a_taux", "livret_a_plafond"],
+      "title": "PEA : {{pea_plafond}} de versements",
+      "bluf": "Un PEA accepte jusqu'à {{pea_plafond}} de versements recensés ({{pea_plafond.source}}), et cet argent peut perdre de la valeur.",
+      "links": {
+        "tool": "/outils/comparatif-pea-cto",
+        "guide": "/guides/apprendre-a-investir"
+      },
+      "sections": [
+        {
+          "h2": "Loin d'un premier salaire",
+          "html": "<p>{{pea_plafond}} est un plafond de carrière, pas un objectif du mois. Le Livret A, lui, plafonne à {{livret_a_plafond}} avec un taux recensé de {{livret_a_taux}} et sans risque de marché.</p>"
+        },
+        {
+          "h2": "Enveloppe fiscale, pas un produit magique",
+          "html": "<p>Le PEA change la fiscalité des gains sous conditions, surtout après 5 ans. Il ne supprime pas le risque de perte. Dodje n'ouvre pas de compte-titres.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond de versement du PEA ?",
+          "a": "{{pea_plafond}}, source {{pea_plafond.source}}."
+        },
+        {
+          "q": "Faut-il viser ce plafond tout de suite ?",
+          "a": "Non. {{pea_plafond}} est un maximum légal de versements, pas une cible de départ."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Dodje n'est pas un courtier."
+        }
+      ]
+    },
+    {
+      "slug": "ldds-le-deuxieme-livret",
+      "kicker": "Épargne",
+      "leadFact": "ldds_plafond",
+      "baremes": ["ldds_plafond", "livret_a_plafond", "livret_a_taux"],
+      "title": "LDDS : un plafond de {{ldds_plafond}}",
+      "bluf": "Le LDDS recensé plafonne à {{ldds_plafond}}, en plus d'un Livret A plafonné à {{livret_a_plafond}} ({{ldds_plafond.source}}).",
+      "links": {
+        "tool": "/outils/comparatif-livrets-reglementes",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Deux plafonds, deux livrets",
+          "html": "<p>Remplir le Livret A jusqu'à {{livret_a_plafond}} n'empêche pas, sur le papier, un LDDS jusqu'à {{ldds_plafond}}. Le taux du Livret A recensé est {{livret_a_taux}}. Le LDDS suit en pratique le même taux réglementé, à vérifier sur la source le jour du versement.</p>"
+        },
+        {
+          "h2": "Pourquoi ce n'est pas de la bourse",
+          "html": "<p>Ces livrets restent disponibles et sans risque de perte en capital au sens du livret réglementé. Ils ne remplacent pas un PEA.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond du LDDS ?",
+          "a": "{{ldds_plafond}}, source {{ldds_plafond.source}}."
+        },
+        {
+          "q": "Peut-on avoir un LDDS et un Livret A ?",
+          "a": "Oui, ce sont deux livrets. Leurs plafonds recensés sont {{ldds_plafond}} et {{livret_a_plafond}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "lire-un-taux-de-credit-immobilier",
+      "kicker": "Crédit",
+      "leadFact": "credit_immo_20ans",
+      "baremes": ["credit_immo_20ans", "hcsf_effort", "livret_a_taux"],
+      "title": "Taux de crédit : {{credit_immo_20ans}} sur 20 ans",
+      "bluf": "Le taux moyen recensé d'un crédit immobilier sur 20 ans est {{credit_immo_20ans}} ({{credit_immo_20ans.source}}). Ce n'est pas le taux de ton offre.",
+      "links": {
+        "tool": "/outils/calculateur-pret-immobilier",
+        "guide": "/guides/investissement-debutant"
+      },
+      "sections": [
+        {
+          "h2": "Une moyenne pour se repérer",
+          "html": "<p>{{credit_immo_20ans}} situe le marché recensé. Ta banque regarde aussi l'apport, la durée et le taux d'effort, recensé à {{hcsf_effort}} maximum.</p>"
+        },
+        {
+          "h2": "Ne pas le comparer comme un livret",
+          "html": "<p>Le Livret A recensé à {{livret_a_taux}} rémunère une épargne disponible. {{credit_immo_20ans}} est le coût d'un emprunt. Les mettre côte à côte éclaire la différence, sans trancher un achat.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel taux moyen sur 20 ans est recensé ?",
+          "a": "{{credit_immo_20ans}}, source {{credit_immo_20ans.source}}."
+        },
+        {
+          "q": "Ce taux est-il celui de toutes les banques ?",
+          "a": "Non. C'est une moyenne pédagogique, à côté d'un effort max de {{hcsf_effort}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Dodje n'est pas une banque."
+        }
+      ]
+    },
+    {
+      "slug": "inflation-et-courses",
+      "kicker": "Pouvoir d'achat",
+      "leadFact": "inflation_glissante",
+      "baremes": ["inflation_glissante", "livret_a_taux", "smic_net_estime"],
+      "title": "Inflation : {{inflation_glissante}} sur les prix",
+      "bluf": "L'indice des prix recensé avance de {{inflation_glissante}}, ce qui change ce qu'un salaire ou un livret permet d'acheter ({{inflation_glissante.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-inflation",
+        "guide": "/guides/faire-son-budget"
+      },
+      "sections": [
+        {
+          "h2": "Le caddie, pas seulement le taux",
+          "html": "<p>{{inflation_glissante}} est une moyenne de prix. Ton ticket de courses peut bouger autrement. Un SMIC net recensé autour de {{smic_net_estime}} n'est pas revalorisé automatiquement par cet indice.</p>"
+        },
+        {
+          "h2": "L'épargne aussi",
+          "html": "<p>Un Livret A à {{livret_a_taux}} peut faire moins que {{inflation_glissante}}. Le capital en euros reste là. C'est le pouvoir d'achat qui bouge.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quelle inflation est recensée ?",
+          "a": "{{inflation_glissante}}, source {{inflation_glissante.source}}."
+        },
+        {
+          "q": "Mon loyer suit-il exactement cet indice ?",
+          "a": "Pas forcément. {{inflation_glissante}} est un indice national, pas ton bail."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "le-pmss-a-quoi-ca-sert",
+      "kicker": "Salaire",
+      "leadFact": "pmss",
+      "baremes": ["pmss", "smic_net_estime", "hcsf_effort"],
+      "title": "PMSS : {{pmss}} par mois",
+      "bluf": "Le plafond mensuel de la Sécurité sociale recensé est {{pmss}} ({{pmss.source}}). Il sert de base à des cotisations, pas de salaire minimum.",
+      "links": {
+        "tool": "/outils/salaire-et-travail",
+        "guide": "/guides/donnees-finance-france"
+      },
+      "sections": [
+        {
+          "h2": "Un plafond, pas un net à payer",
+          "html": "<p>{{pmss}} est le PMSS recensé. Il est bien au-dessus d'un SMIC net estimé à {{smic_net_estime}}. Beaucoup de cotisations et de droits s'expriment en nombre de PMSS.</p>"
+        },
+        {
+          "h2": "Rien à voir avec un crédit",
+          "html": "<p>Le taux d'effort immobilier recensé est {{hcsf_effort}}. Le PMSS ne dit pas combien emprunter.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le PMSS recensé ?",
+          "a": "{{pmss}}, source {{pmss.source}}."
+        },
+        {
+          "q": "Le PMSS est-il le SMIC ?",
+          "a": "Non. Le SMIC net estimé recensé est {{smic_net_estime}}, le PMSS est {{pmss}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "empiler-livret-a-ldds-et-lep",
+      "kicker": "Épargne",
+      "leadFact": "livret_a_plafond",
+      "baremes": ["livret_a_plafond", "ldds_plafond", "lep_plafond"],
+      "title": "Trois livrets : Livret A jusqu'à {{livret_a_plafond}}",
+      "bluf": "Les plafonds recensés sont {{livret_a_plafond}} pour le Livret A, {{ldds_plafond}} pour le LDDS et {{lep_plafond}} pour le LEP ({{livret_a_plafond.source}}).",
+      "links": {
+        "tool": "/outils/comparatif-livrets-reglementes",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Trois enveloppes, pas une seule",
+          "html": "<p>Additionner {{livret_a_plafond}}, {{ldds_plafond}} et {{lep_plafond}} donne un ordre de grandeur d'épargne réglementée possible. Le LEP reste conditionné aux revenus. Ce total n'est pas un objectif à atteindre.</p>"
+        },
+        {
+          "h2": "L'ordre pédagogique",
+          "html": "<p>On comprend d'abord le livret disponible, ensuite les conditions du LEP, ensuite seulement le risque d'un placement. Dodje ne classe pas tes comptes.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond du Livret A dans ce comparatif ?",
+          "a": "{{livret_a_plafond}}, source {{livret_a_plafond.source}}."
+        },
+        {
+          "q": "Quels sont les deux autres plafonds ?",
+          "a": "{{ldds_plafond}} pour le LDDS et {{lep_plafond}} pour le LEP."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "le-matelas-avant-la-bourse",
+      "kicker": "Investir",
+      "leadFact": "livret_a_taux",
+      "baremes": ["livret_a_taux", "livret_a_plafond", "pea_plafond"],
+      "title": "Avant la bourse : un Livret A à {{livret_a_taux}}",
+      "bluf": "Le Livret A recensé à {{livret_a_taux}} sert d'épargne disponible, alors qu'un PEA jusqu'à {{pea_plafond}} de versements peut perdre de la valeur ({{livret_a_taux.source}}).",
+      "links": {
+        "tool": "/outils/comparatif-pea-cto",
+        "guide": "/guides/apprendre-a-investir"
+      },
+      "sections": [
+        {
+          "h2": "Deux métiers différents",
+          "html": "<p>{{livret_a_taux}} et un plafond de {{livret_a_plafond}} décrivent un matelas. {{pea_plafond}} décrit une enveloppe d'actions ou d'ETF éligibles. Le second ne remplace pas le premier pour payer une facture imprévue.</p>"
+        },
+        {
+          "h2": "Dans Dodje, c'est l'ordre des bâtiments",
+          "html": "<p>Le jeu fait d'abord comprendre l'épargne, ensuite le risque. Ce n'est pas une allocation à copier avec de l'argent réel.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel taux de Livret A est utilisé ?",
+          "a": "{{livret_a_taux}}, source {{livret_a_taux.source}}."
+        },
+        {
+          "q": "Le PEA garantit-il le capital ?",
+          "a": "Non. Son plafond de versement recensé est {{pea_plafond}}, et la valeur peut baisser."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Dodje n'est pas un courtier."
+        }
+      ]
+    }
+  ]
+}

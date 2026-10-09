@@ -14,7 +14,7 @@ function collectHtmlInputs(rootDir) {
     const key = file.replace('.html', '').replace(/-/g, '_')
     inputs[key] = resolve(rootDir, file)
   })
-  ;['outils', 'actualites', 'guides', 'glossaire'].forEach((dir) => {
+  ;['outils', 'actualites', 'guides', 'glossaire', 'blog'].forEach((dir) => {
     const fullDir = resolve(rootDir, dir)
     if (!fs.existsSync(fullDir)) return
     fs.readdirSync(fullDir).forEach((file) => {
@@ -40,7 +40,8 @@ function appPromoScriptPath(filename) {
         normalized.includes('/guides/') ||
         normalized.includes('/outils/') ||
         normalized.includes('/actualites/') ||
-        normalized.includes('/glossaire/')
+        normalized.includes('/glossaire/') ||
+        normalized.includes('/blog/')
       ) {
     return '../app-promo.js'
   }

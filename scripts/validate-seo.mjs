@@ -314,7 +314,7 @@ function validateAppEducationFinanciereQuery() {
 }
 
 function validateContentPagesGeo() {
-  const dirs = ['guides', 'actualites']
+  const dirs = ['guides', 'actualites', 'blog']
   for (const dir of dirs) {
     const fullDir = path.join(distDir, dir)
     if (!fs.existsSync(fullDir)) continue
@@ -327,6 +327,9 @@ function validateContentPagesGeo() {
       }
       if (dir === 'actualites' && !html.includes('NewsArticle') && !html.includes('"Article"')) {
         fail(`Missing Article/NewsArticle JSON-LD: ${dir}/${file}`)
+      }
+      if (dir === 'blog' && !html.includes('"Article"') && !html.includes('"@type": "Article"')) {
+        fail(`Missing Article JSON-LD: ${dir}/${file}`)
       }
       const facts = countNumericFacts(html)
       if (facts < 3) {

@@ -1,4 +1,4 @@
-name: Contenu auto (actu + guides)
+name: Contenu auto (actu + blog)
 
 on:
   schedule:
@@ -29,13 +29,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Extraire les chiffres officiels et publier une actu si ≥ 3 faits
+      - name: Vérifier les extracteurs de barèmes
+        run: node scripts/editorial-extractors.test.mjs
+
+      - name: Publier l'actualité du jour
+        id: actu
         env:
           AUTO_COMMIT: '1'
         run: node scripts/publish-actu-daily.mjs
         continue-on-error: true
 
-      - name: Publier un guide investissement sourcé (file d'attente)
+      - name: Publier l'article de blog du jour
+        id: blog
+        if: always()
         env:
           AUTO_COMMIT: '1'
-        run: node scripts/publish-guide-daily.mjs
+        run: node scripts/publish-blog-daily.mjs
+
+      - name: Échouer si une publication a échoué
+        if: always() && (steps.actu.outcome == 'failure' || steps.blog.outcome == 'failure')
+        run: exit 1

@@ -1,0 +1,523 @@
+{
+  "disclaimer": "Une actualité = une requête de barème. Le chiffre du titre est un champ nommé, jamais le premier montant de la page.",
+  "topics": [
+    {
+      "slug": "smic-mensuel-brut-et-net",
+      "kicker": "Salaire",
+      "extractor": "smic",
+      "requireLive": ["smic_brut_mensuel", "smic_net_mensuel", "smic_horaire_brut"],
+      "leadFact": "smic_brut_mensuel",
+      "baremes": ["smic_brut_mensuel", "smic_net_mensuel", "smic_horaire_brut"],
+      "title": "SMIC mensuel : {{smic_brut_mensuel}} brut",
+      "bluf": "Le SMIC mensuel brut est {{smic_brut_mensuel}}, soit {{smic_net_mensuel}} net après cotisations salariales ({{smic_brut_mensuel.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-salaire-brut-net",
+        "guide": "/guides/faire-son-budget"
+      },
+      "sections": [
+        {
+          "h2": "Brut et net, ce n'est pas le même nombre",
+          "html": "<p>Le brut {{smic_brut_mensuel}} est le minimum légal pour 35 heures. Le net {{smic_net_mensuel}} est ce qui reste après les cotisations salariales indiquées par Service-public. Une amende employeur n'est pas le SMIC : elle ne figure pas dans ce total.</p>"
+        },
+        {
+          "h2": "L'horaire qui va avec",
+          "html": "<p>Le même tableau donne un SMIC horaire brut de {{smic_horaire_brut}}. Pour passer du brut au net sur ton bulletin, le <a href=\"/outils/calculateur-salaire-brut-net\">calculateur salaire</a> reste une simulation pédagogique.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le SMIC mensuel brut ?",
+          "a": "{{smic_brut_mensuel}} brut, et {{smic_net_mensuel}} net, d'après {{smic_brut_mensuel.source}}."
+        },
+        {
+          "q": "Le SMIC net est-il le chiffre à retenir pour un budget ?",
+          "a": "Pour le reste à vivre, pars du net {{smic_net_mensuel}}, pas du brut {{smic_brut_mensuel}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement, sans recommandation d'investissement."
+        }
+      ]
+    },
+    {
+      "slug": "smic-net-mensuel",
+      "kicker": "Salaire",
+      "extractor": "smic",
+      "requireLive": ["smic_net_mensuel", "smic_brut_mensuel"],
+      "leadFact": "smic_net_mensuel",
+      "baremes": ["smic_net_mensuel", "smic_brut_mensuel", "smic_horaire_net"],
+      "title": "SMIC net : {{smic_net_mensuel}} par mois",
+      "bluf": "Le SMIC net mensuel est {{smic_net_mensuel}}, pour un brut de {{smic_brut_mensuel}} ({{smic_net_mensuel.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-budget-mensuel",
+        "guide": "/guides/combien-epargner-par-mois-france-2026"
+      },
+      "sections": [
+        {
+          "h2": "Pourquoi le net compte pour le quotidien",
+          "html": "<p>{{smic_net_mensuel}} est le montant après cotisations salariales du tableau Service-public. C'est la base pour un loyer, des courses ou une épargne, pas une promesse de fiche de paie identique dans chaque entreprise.</p>"
+        },
+        {
+          "h2": "Le net horaire",
+          "html": "<p>Le tableau indique aussi {{smic_horaire_net}} de SMIC horaire net. Un temps partiel se rapproche de ce tarif, pas du mensuel plein.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le SMIC net mensuel ?",
+          "a": "{{smic_net_mensuel}}, source {{smic_net_mensuel.source}}."
+        },
+        {
+          "q": "Le net inclut-il les primes ?",
+          "a": "Non. {{smic_net_mensuel}} est le minimum du tableau officiel, avant primes éventuelles."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "smic-horaire-brut",
+      "kicker": "Salaire",
+      "extractor": "smic",
+      "requireLive": ["smic_horaire_brut", "smic_horaire_net", "smic_brut_mensuel"],
+      "leadFact": "smic_horaire_brut",
+      "baremes": ["smic_horaire_brut", "smic_horaire_net", "smic_brut_mensuel"],
+      "title": "SMIC horaire : {{smic_horaire_brut}} brut",
+      "bluf": "Le SMIC horaire brut est {{smic_horaire_brut}}, soit {{smic_horaire_net}} net ({{smic_horaire_brut.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-salaire-brut-net",
+        "guide": "/guides/faire-son-budget"
+      },
+      "sections": [
+        {
+          "h2": "À quoi sert l'horaire",
+          "html": "<p>{{smic_horaire_brut}} brut est le plancher pour une heure au SMIC. Le mensuel plein temps du même tableau est {{smic_brut_mensuel}} brut.</p>"
+        },
+        {
+          "h2": "Net de l'heure",
+          "html": "<p>Le net horaire indiqué est {{smic_horaire_net}}. Utile pour un contrat court, sans en faire un salaire mensuel.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le SMIC horaire brut ?",
+          "a": "{{smic_horaire_brut}}, et {{smic_horaire_net}} net, source {{smic_horaire_brut.source}}."
+        },
+        {
+          "q": "L'horaire remplace-t-il le mensuel ?",
+          "a": "Non. Le mensuel brut du tableau est {{smic_brut_mensuel}} pour 35 heures."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "smic-mineur-16-et-17-ans",
+      "kicker": "Salaire",
+      "extractor": "smic",
+      "requireLive": ["smic_mineur_17", "smic_mineur_16", "smic_horaire_brut"],
+      "leadFact": "smic_mineur_17",
+      "baremes": ["smic_mineur_17", "smic_mineur_16", "smic_horaire_brut"],
+      "title": "SMIC mineur : {{smic_mineur_17}} à 17 ans",
+      "bluf": "Le SMIC horaire brut minoré est {{smic_mineur_17}} à 17 ans et {{smic_mineur_16}} à 16 ans ou moins, si l'ancienneté dans la branche est inférieure à 6 mois ({{smic_mineur_17.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-salaire-brut-net",
+        "guide": "/guides/donnees-finance-france"
+      },
+      "sections": [
+        {
+          "h2": "La minoration n'est pas le SMIC adulte",
+          "html": "<p>Service-public prévoit un horaire brut minoré de {{smic_mineur_17}} à 17 ans et {{smic_mineur_16}} à 16 ans ou moins, tant que le salarié n'a pas 6 mois de pratique dans sa branche. Le SMIC horaire adulte du même tableau est {{smic_horaire_brut}}.</p>"
+        },
+        {
+          "h2": "Job d'été",
+          "html": "<p>Ce barème sert à lire une fiche de paie de mineur. Ce n'est pas un conseil pour accepter ou refuser un contrat.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le SMIC horaire d'un salarié de 17 ans ?",
+          "a": "{{smic_mineur_17}} brut minoré, source {{smic_mineur_17.source}}, sous condition d'ancienneté."
+        },
+        {
+          "q": "Et à 16 ans ?",
+          "a": "{{smic_mineur_16}} d'horaire brut minoré, dans le même tableau."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "smic-annuel-brut",
+      "kicker": "Salaire",
+      "extractor": "smic",
+      "requireLive": ["smic_annuel_brut", "smic_annuel_net", "smic_brut_mensuel"],
+      "leadFact": "smic_annuel_brut",
+      "baremes": ["smic_annuel_brut", "smic_annuel_net", "smic_brut_mensuel"],
+      "title": "SMIC annuel : {{smic_annuel_brut}} brut",
+      "bluf": "Le SMIC annuel brut est {{smic_annuel_brut}}, soit {{smic_annuel_net}} net, d'après le tableau Service-public ({{smic_annuel_brut.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-impot-revenu",
+        "guide": "/guides/donnees-finance-france"
+      },
+      "sections": [
+        {
+          "h2": "L'année, pas le mois",
+          "html": "<p>{{smic_annuel_brut}} brut correspond au cumul indiqué à côté du mensuel {{smic_brut_mensuel}}. Le net annuel du même tableau est {{smic_annuel_net}}.</p>"
+        },
+        {
+          "h2": "À ne pas confondre avec l'impôt",
+          "html": "<p>Ce total n'est pas un revenu fiscal net. Pour une estimation pédagogique d'impôt, voir le calculateur, sans en faire une déclaration.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le SMIC annuel brut ?",
+          "a": "{{smic_annuel_brut}}, source {{smic_annuel_brut.source}}."
+        },
+        {
+          "q": "Quel net annuel est indiqué ?",
+          "a": "{{smic_annuel_net}} dans le même tableau officiel."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "taux-du-livret-a",
+      "kicker": "Épargne",
+      "extractor": "livret_a",
+      "requireLive": ["livret_a_taux", "livret_a_plafond"],
+      "leadFact": "livret_a_taux",
+      "baremes": ["livret_a_taux", "livret_a_plafond", "inflation_glissante"],
+      "title": "Taux du Livret A : {{livret_a_taux}}",
+      "bluf": "Le taux d'intérêt annuel du Livret A est {{livret_a_taux}} ({{livret_a_taux.source}}). Ce n'est pas l'amende prévue en cas de deuxième livret.",
+      "links": {
+        "tool": "/outils/calculateur-livret-a",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Le taux de rémunération",
+          "html": "<p>Service-public écrit que le taux d'intérêt annuel est {{livret_a_taux}}. Le plafond des personnes physiques dans la même page est {{livret_a_plafond}}. Une amende pour double détention est un autre pourcentage : elle ne rémunère pas l'épargne.</p>"
+        },
+        {
+          "h2": "Face à l'inflation recensée",
+          "html": "<p>L'inflation glissante recensée par Dodje est {{inflation_glissante}} ({{inflation_glissante.source}}). Comparer les deux éclaire le rendement réel, sans dire s'il faut retirer l'argent.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le taux du Livret A ?",
+          "a": "{{livret_a_taux}}, source {{livret_a_taux.source}}."
+        },
+        {
+          "q": "Le taux est-il le plafond ?",
+          "a": "Non. Le plafond indiqué est {{livret_a_plafond}}. Le taux est {{livret_a_taux}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "plafond-du-livret-a",
+      "kicker": "Épargne",
+      "extractor": "livret_a",
+      "requireLive": ["livret_a_plafond", "livret_a_taux"],
+      "leadFact": "livret_a_plafond",
+      "baremes": ["livret_a_plafond", "livret_a_taux", "ldds_plafond"],
+      "title": "Plafond du Livret A : {{livret_a_plafond}}",
+      "bluf": "Le plafond du Livret A pour une personne physique est {{livret_a_plafond}} ({{livret_a_plafond.source}}). Le taux, lui, est {{livret_a_taux}}.",
+      "links": {
+        "tool": "/outils/comparatif-livrets-reglementes",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Ce que le plafond bloque",
+          "html": "<p>Au-delà de {{livret_a_plafond}}, les nouveaux dépôts ne sont plus possibles une fois le solde au plafond, intérêts compris selon la page officielle. Le versement minimum n'est pas ce plafond.</p>"
+        },
+        {
+          "h2": "Le LDDS à côté",
+          "html": "<p>Le plafond LDDS recensé par Dodje est {{ldds_plafond}}. Ce sont deux livrets distincts. Le taux du Livret A reste {{livret_a_taux}}.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond du Livret A ?",
+          "a": "{{livret_a_plafond}} pour une personne physique, source {{livret_a_plafond.source}}."
+        },
+        {
+          "q": "Quel taux va avec ce plafond ?",
+          "a": "{{livret_a_taux}}, qui n'est pas le montant maximum."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "taux-du-lep",
+      "kicker": "Épargne",
+      "leadFact": "lep_taux",
+      "baremes": ["lep_taux", "lep_plafond", "livret_a_taux"],
+      "title": "Taux du LEP : {{lep_taux}}",
+      "bluf": "Le taux du LEP recensé par Dodje est {{lep_taux}} ({{lep_taux.source}}, {{lep_taux.asOf}}), sous condition de revenus.",
+      "links": {
+        "tool": "/outils/calculateur-lep",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Un livret sous condition",
+          "html": "<p>{{lep_taux}} est le taux recensé, pas une ouverture automatique. Le plafond recensé est {{lep_plafond}}. L'éligibilité se vérifie sur la source officielle, pas sur un comparateur.</p>"
+        },
+        {
+          "h2": "À côté du Livret A",
+          "html": "<p>Le Livret A recensé est à {{livret_a_taux}}. Les deux livrets n'ont ni le même taux ni les mêmes conditions.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le taux du LEP recensé ?",
+          "a": "{{lep_taux}}, source {{lep_taux.source}}."
+        },
+        {
+          "q": "Quel plafond va avec ?",
+          "a": "{{lep_plafond}}, dans le fichier de barèmes Dodje."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "plafond-du-lep",
+      "kicker": "Épargne",
+      "leadFact": "lep_plafond",
+      "baremes": ["lep_plafond", "lep_taux", "livret_a_plafond"],
+      "title": "Plafond du LEP : {{lep_plafond}}",
+      "bluf": "Le plafond du LEP recensé par Dodje est {{lep_plafond}} ({{lep_plafond.source}}). Le taux recensé est {{lep_taux}}.",
+      "links": {
+        "tool": "/outils/calculateur-lep",
+        "guide": "/guides/donnees-finance-france"
+      },
+      "sections": [
+        {
+          "h2": "Le montant maximum recensé",
+          "html": "<p>{{lep_plafond}} est le plafond recensé pour le LEP. Il est plus bas que le plafond du Livret A recensé à {{livret_a_plafond}}.</p>"
+        },
+        {
+          "h2": "Le taux n'est pas le plafond",
+          "html": "<p>Le taux recensé {{lep_taux}} décrit la rémunération, pas la somme que l'on peut déposer.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond du LEP ?",
+          "a": "{{lep_plafond}}, source {{lep_plafond.source}}."
+        },
+        {
+          "q": "Quel taux est recensé ?",
+          "a": "{{lep_taux}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "plafond-du-ldds",
+      "kicker": "Épargne",
+      "leadFact": "ldds_plafond",
+      "baremes": ["ldds_plafond", "livret_a_plafond", "livret_a_taux"],
+      "title": "Plafond du LDDS : {{ldds_plafond}}",
+      "bluf": "Le plafond du LDDS recensé par Dodje est {{ldds_plafond}} ({{ldds_plafond.source}}).",
+      "links": {
+        "tool": "/outils/comparatif-livrets-reglementes",
+        "guide": "/guides/epargne-de-precaution-france"
+      },
+      "sections": [
+        {
+          "h2": "Un deuxième livret réglementé",
+          "html": "<p>{{ldds_plafond}} est le plafond LDDS recensé. Le Livret A recensé plafonne à {{livret_a_plafond}}, au taux {{livret_a_taux}}. Les additionner dans sa tête ne crée pas un seul livret.</p>"
+        },
+        {
+          "h2": "Disponible, pas un placement risqué",
+          "html": "<p>Ces plafonds décrivent de l'épargne réglementée. Ils ne disent pas quelle part de ton salaire mettre de côté.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond du LDDS ?",
+          "a": "{{ldds_plafond}}, source {{ldds_plafond.source}}."
+        },
+        {
+          "q": "Est-ce le même plafond que le Livret A ?",
+          "a": "Non. Le plafond Livret A recensé est {{livret_a_plafond}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "inflation-ipc-france",
+      "kicker": "Pouvoir d'achat",
+      "leadFact": "inflation_glissante",
+      "baremes": ["inflation_glissante", "livret_a_taux", "smic_net_estime"],
+      "title": "Inflation en France : {{inflation_glissante}}",
+      "bluf": "L'inflation glissante recensée par Dodje est {{inflation_glissante}} ({{inflation_glissante.source}}, {{inflation_glissante.asOf}}).",
+      "links": {
+        "tool": "/outils/calculateur-inflation",
+        "guide": "/guides/donnees-finance-france"
+      },
+      "sections": [
+        {
+          "h2": "Ce que mesure ce chiffre",
+          "html": "<p>{{inflation_glissante}} est l'IPC glissant recensé, pas le prix d'un produit en rayon. Il sert à lire si un taux d'épargne, comme le Livret A recensé à {{livret_a_taux}}, couvre la hausse des prix.</p>"
+        },
+        {
+          "h2": "Sur un salaire",
+          "html": "<p>Un ordre de grandeur de SMIC net recensé est {{smic_net_estime}}. L'inflation ne change pas ce net à elle seule : elle change ce qu'il permet d'acheter.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quelle inflation est recensée ?",
+          "a": "{{inflation_glissante}}, source {{inflation_glissante.source}}."
+        },
+        {
+          "q": "L'inflation est-elle un taux de livret ?",
+          "a": "Non. Le taux du Livret A recensé est {{livret_a_taux}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Contenu éducatif uniquement."
+        }
+      ]
+    },
+    {
+      "slug": "taux-effort-credit-immobilier-hcsf",
+      "kicker": "Crédit",
+      "leadFact": "hcsf_effort",
+      "baremes": ["hcsf_effort", "credit_immo_20ans", "smic_net_estime"],
+      "title": "Crédit immobilier : effort max {{hcsf_effort}}",
+      "bluf": "Le taux d'effort maximum recensé pour un crédit immobilier est {{hcsf_effort}} ({{hcsf_effort.source}}).",
+      "links": {
+        "tool": "/outils/calculateur-capacite-emprunt",
+        "guide": "/guides/donnees-finance-france"
+      },
+      "sections": [
+        {
+          "h2": "35 % de quoi",
+          "html": "<p>{{hcsf_effort}} est le plafond d'effort recensé par le HCSF, pas un droit automatique à emprunter. La banque retient ses propres revenus et charges.</p>"
+        },
+        {
+          "h2": "Le taux du crédit est autre chose",
+          "html": "<p>Le taux moyen recensé sur 20 ans est {{credit_immo_20ans}}. Il décrit le prix de l'emprunt, pas la part du revenu. Un net autour du SMIC recensé {{smic_net_estime}} rend cet écart visible.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le taux d'effort HCSF recensé ?",
+          "a": "{{hcsf_effort}}, source {{hcsf_effort.source}}."
+        },
+        {
+          "q": "Est-ce le taux d'intérêt du prêt ?",
+          "a": "Non. Le taux moyen 20 ans recensé est {{credit_immo_20ans}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Dodje n'accorde pas de prêt."
+        }
+      ]
+    },
+    {
+      "slug": "taux-credit-immobilier-20-ans",
+      "kicker": "Crédit",
+      "leadFact": "credit_immo_20ans",
+      "baremes": ["credit_immo_20ans", "hcsf_effort", "livret_a_taux"],
+      "title": "Taux crédit immobilier 20 ans : {{credit_immo_20ans}}",
+      "bluf": "Le taux moyen de crédit immobilier sur 20 ans recensé par Dodje est {{credit_immo_20ans}} ({{credit_immo_20ans.source}}, {{credit_immo_20ans.asOf}}).",
+      "links": {
+        "tool": "/outils/calculateur-pret-immobilier",
+        "guide": "/guides/donnees-finance-france"
+      },
+      "sections": [
+        {
+          "h2": "Une moyenne, pas ton offre",
+          "html": "<p>{{credit_immo_20ans}} est une moyenne recensée. Une banque peut proposer autre chose. Le plafond d'effort recensé reste {{hcsf_effort}}.</p>"
+        },
+        {
+          "h2": "Ce n'est pas le Livret A",
+          "html": "<p>Le Livret A recensé rémunère {{livret_a_taux}}. Le crédit coûte {{credit_immo_20ans}}. Les deux chiffres ne se soustraient pas pour décider d'un achat.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel taux de crédit sur 20 ans est recensé ?",
+          "a": "{{credit_immo_20ans}}, source {{credit_immo_20ans.source}}."
+        },
+        {
+          "q": "Ce taux garantit-il un accord de prêt ?",
+          "a": "Non. C'est une moyenne pédagogique, à côté d'un effort max recensé de {{hcsf_effort}}."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Dodje n'est pas une banque."
+        }
+      ]
+    },
+    {
+      "slug": "plafond-versement-pea",
+      "kicker": "Bourse",
+      "leadFact": "pea_plafond",
+      "baremes": ["pea_plafond", "livret_a_plafond", "livret_a_taux"],
+      "title": "Plafond du PEA : {{pea_plafond}}",
+      "bluf": "Le plafond de versement du PEA recensé par Dodje est {{pea_plafond}} ({{pea_plafond.source}}). C'est un plafond de versements, pas un gain garanti.",
+      "links": {
+        "tool": "/outils/comparatif-pea-cto",
+        "guide": "/guides/apprendre-a-investir"
+      },
+      "sections": [
+        {
+          "h2": "Versements, pas plus-values",
+          "html": "<p>{{pea_plafond}} limite ce que l'on peut verser sur un PEA. La valeur du portefeuille peut baisser. Ce n'est pas un livret.</p>"
+        },
+        {
+          "h2": "L'échelle du Livret A",
+          "html": "<p>Le plafond du Livret A recensé est {{livret_a_plafond}}, au taux {{livret_a_taux}}. Le PEA vient après une épargne disponible, dans une logique pédagogique et non comme une consigne.</p>"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Quel est le plafond de versement du PEA ?",
+          "a": "{{pea_plafond}}, source {{pea_plafond.source}}."
+        },
+        {
+          "q": "Ce plafond protège-t-il du risque de perte ?",
+          "a": "Non. {{pea_plafond}} borne les versements. Le capital n'est pas garanti."
+        },
+        {
+          "q": "Dodje donne-t-il un conseil personnalisé ?",
+          "a": "Non. Dodje n'est pas un courtier."
+        }
+      ]
+    }
+  ]
+}

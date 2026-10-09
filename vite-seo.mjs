@@ -15,7 +15,7 @@ export const STATIC_PAGES = [
   'politique-confidentialite.html'
 ]
 
-const CONTENT_DIRS = ['outils', 'actualites', 'guides', 'glossaire']
+const CONTENT_DIRS = ['outils', 'actualites', 'guides', 'glossaire', 'blog']
 
 const ENTITY_BLUF =
   "Dodje est un jeu mobile gratuit pour apprendre la finance : tu suis des leçons courtes, tu gagnes des Dodjis, tu les investis pour développer ton île et grimper au classement mondial. Pas un jeu d'argent, pas un courtier."
@@ -121,6 +121,10 @@ export function sitemapMetaForUrl(url) {
 
   if (url.includes('/actualites/') && !url.endsWith('/actualites')) {
     return { priority: '0.85', changefreq: 'weekly' }
+  }
+
+  if (url.includes('/blog/') && !url.endsWith('/blog')) {
+    return { priority: '0.9', changefreq: 'monthly' }
   }
 
   if (
@@ -372,7 +376,7 @@ export function buildSummaryJson(rootDir) {
 export function buildFeedXml(rootDir) {
   const allPaths = collectHtmlPaths(rootDir)
   const feedPaths = allPaths
-    .filter((p) => p.startsWith('guides/') || p.startsWith('actualites/'))
+    .filter((p) => p.startsWith('guides/') || p.startsWith('actualites/') || p.startsWith('blog/'))
     .filter((p) => !p.endsWith('index.html'))
     .sort((a, b) => getLastMod(rootDir, b).localeCompare(getLastMod(rootDir, a)))
     .slice(0, 40)
@@ -423,10 +427,10 @@ function buildCrumbs(filePath, html) {
   const crumbs = [{ name: 'Accueil', url: SITE + '/' }]
   const parts = filePath.replace(/\.html$/, '').split('/')
 
-  if (parts[0] === 'guides' || parts[0] === 'outils' || parts[0] === 'actualites' || parts[0] === 'glossaire') {
+  if (parts[0] === 'guides' || parts[0] === 'outils' || parts[0] === 'actualites' || parts[0] === 'glossaire' || parts[0] === 'blog') {
     const hub = parts[0]
     const hubLabel =
-      hub === 'guides' ? 'Guides' : hub === 'outils' ? 'Outils' : hub === 'actualites' ? 'Actualités' : 'Glossaire'
+      hub === 'guides' ? 'Guides' : hub === 'outils' ? 'Outils' : hub === 'actualites' ? 'Actualités' : hub === 'blog' ? 'Blog' : 'Glossaire'
     const hubUrl = hub === 'glossaire' ? `${SITE}/guides/glossaire-finance-investissement-2026` : `${SITE}/${hub}`
     crumbs.push({ name: hubLabel, url: hubUrl })
     if (parts[1] && parts[1] !== 'index') {
@@ -737,6 +741,7 @@ function injectGlobalFooter(html) {
 function injectNewsArticleReview(html, filePath, rootDir) {
   if (!filePath.startsWith('actualites/') || filePath.endsWith('index.html')) return html
   if (!html.includes('NewsArticle')) return html
+  if (html.includes('data-editorial="auto"')) return html
   if (html.includes('dateReviewed')) return html
 
   const reviewedDate = getLastMod(rootDir, filePath)
@@ -805,7 +810,8 @@ function injectGameCta(html, filePath) {
   if (
     !filePath.startsWith('guides/') &&
     !filePath.startsWith('actualites/') &&
-    !filePath.startsWith('glossaire/')
+    !filePath.startsWith('glossaire/') &&
+    !filePath.startsWith('blog/')
   ) {
     return html
   }
@@ -868,7 +874,8 @@ function writeMarkdownRoutes(rootDir, distDir) {
     (file) =>
       file.startsWith('guides/') ||
       file.startsWith('actualites/') ||
-      file.startsWith('glossaire/')
+      file.startsWith('glossaire/') ||
+      file.startsWith('blog/')
   )
   for (const file of paths) {
     if (file.endsWith('index.html')) continue
