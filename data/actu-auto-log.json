@@ -18,6 +18,11 @@
       "slug": "smic-mensuel-brut-et-net",
       "date": "2026-10-09",
       "title": "SMIC mensuel : 1 867,02 € brut (octobre 2026)"
+    },
+    {
+      "slug": "smic-net-mensuel",
+      "date": "2026-10-10",
+      "title": "SMIC net : 1 477,93 € par mois (octobre 2026)"
     }
   ],
   "fingerprints": [
