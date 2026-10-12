@@ -28,6 +28,11 @@
       "slug": "smic-horaire-brut",
       "date": "2026-10-11",
       "title": "SMIC horaire : 12,31 € brut (octobre 2026)"
+    },
+    {
+      "slug": "smic-mineur-16-et-17-ans",
+      "date": "2026-10-12",
+      "title": "SMIC mineur : 11,08 € à 17 ans (octobre 2026)"
     }
   ],
   "fingerprints": [
