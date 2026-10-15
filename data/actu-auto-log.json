@@ -43,6 +43,11 @@
       "slug": "taux-du-livret-a",
       "date": "2026-10-14",
       "title": "Taux du Livret A : 1,7 % (octobre 2026)"
+    },
+    {
+      "slug": "plafond-du-livret-a",
+      "date": "2026-10-15",
+      "title": "Plafond du Livret A : 22 950 € (octobre 2026)"
     }
   ],
   "fingerprints": [
