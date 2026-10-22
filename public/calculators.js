@@ -2,14 +2,14 @@
   'use strict';
 
   var BAREME = {
-    smicMensuel: 1823.03,
-    pmss: 3925,
+    smicMensuel: 1867.02,
+    pmss: 4005,
     cotNonCadre: 0.22,
     cotCadre: 0.252,
     csgDeductible: 0.029,
     csgNonDeductible: 0.042,
     crds: 0.005,
-    tauxPretImmo: 3.31,
+    tauxPretImmo: 3.66,
     tauxHCSF: 0.35,
     dureePretMax: 25,
     peaPs: 0.186,
@@ -24,10 +24,10 @@
     perPlafondMax: 35194,
     perPlafondMin: 4399,
     irTranches: [
-      [11294, 0],
-      [28797, 0.11],
-      [82341, 0.3],
-      [177106, 0.41],
+      [11600, 0],
+      [29579, 0.11],
+      [84577, 0.3],
+      [181917, 0.41],
       [Infinity, 0.45]
     ]
   };

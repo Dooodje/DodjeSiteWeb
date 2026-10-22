@@ -35,12 +35,12 @@
     {
       "id": "lep_taux",
       "label": "Taux du LEP",
-      "value": 3.5,
+      "value": 2.5,
       "unit": "%",
-      "display": "~3,50 %",
-      "asOf": "2026-09-03",
-      "source": "Banque de France",
-      "sourceUrl": "https://www.banque-france.fr"
+      "display": "2,5 %",
+      "asOf": "2026-08-01",
+      "source": "Service-public.fr",
+      "sourceUrl": "https://www.service-public.gouv.fr/particuliers/actualites/A15818"
     },
     {
       "id": "lep_plafond",
@@ -55,32 +55,32 @@
     {
       "id": "smic_brut_mensuel",
       "label": "SMIC brut mensuel (35 h)",
-      "value": 1823,
+      "value": 1867.02,
       "unit": "EUR",
-      "display": "1 823 €",
-      "asOf": "2026-07-01",
+      "display": "1 867,02 €",
+      "asOf": "2026-06-01",
       "source": "URSSAF",
-      "sourceUrl": "https://www.urssaf.fr"
+      "sourceUrl": "https://www.info.gouv.fr/actualite/le-smic-revalorise-le-1er-juin-2026"
     },
     {
       "id": "smic_net_estime",
       "label": "SMIC net estimé",
-      "value": 1430,
+      "value": 1477.93,
       "unit": "EUR",
-      "display": "~1 430 €",
-      "asOf": "2026-07-01",
+      "display": "~1 478 €",
+      "asOf": "2026-06-01",
       "source": "URSSAF",
-      "sourceUrl": "https://www.urssaf.fr"
+      "sourceUrl": "https://www.info.gouv.fr/actualite/le-smic-revalorise-le-1er-juin-2026"
     },
     {
       "id": "pmss",
       "label": "PMSS (plafond Sécurité sociale mensuel)",
-      "value": 3925,
+      "value": 4005,
       "unit": "EUR",
-      "display": "3 925 €",
+      "display": "4 005 €",
       "asOf": "2026-01-01",
       "source": "URSSAF",
-      "sourceUrl": "https://www.urssaf.fr"
+      "sourceUrl": "https://www.legisocial.fr/reperes-sociaux/plafond-securite-sociale-2026.html"
     },
     {
       "id": "hcsf_effort",
@@ -95,12 +95,12 @@
     {
       "id": "credit_immo_20ans",
       "label": "Taux crédit immobilier moyen (20 ans)",
-      "value": 3.3,
+      "value": 3.66,
       "unit": "%",
-      "display": "~3,3 %",
-      "asOf": "2026-07-01",
-      "source": "Banque de France",
-      "sourceUrl": "https://www.banque-france.fr"
+      "display": "~3,7 %",
+      "asOf": "2026-10-01",
+      "source": "Pretto, baromètre octobre 2026",
+      "sourceUrl": "https://www.pretto.fr/taux-immobilier/historique-taux-immobilier/2026/analyse-taux-immobilier-octobre-2026/"
     },
     {
       "id": "pea_plafond",
