@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
 const SITE = 'https://dodje.fr'
-const OG = `${SITE}/assets/og-default-1200x630.png`
+const OG = `${SITE}/assets/og-dodje-1200x630.png`
 const DATE = '2026-09-09'
 const DATE_FR = '9 septembre 2026'
 
@@ -130,7 +130,7 @@ pages.push({
     description:
       'Comment on joue à Dodje : leçons de 3 min, Dodjis, 6 bâtiments, île et classement mondial. Jeu gratuit pour apprendre la finance. Pas un jeu d\'argent.',
     canonical: `${SITE}/jeu`,
-    eyebrow: 'Le jeu · iOS & Android',
+    eyebrow: 'Le jeu sur iPhone et Android',
     h1: 'Comment on joue à Dodje',
     bluf:
       "Dodje est l'application d'éducation financière gratuite qui transforme la finance en jeu. Imagine si Duolingo, Clash of Clans et Mario s'étaient réunis pour t'aider à comprendre l'argent : tu apprends, tu gagnes des Dodjis, tu les investis sur ton île, tu grimpes au classement.",

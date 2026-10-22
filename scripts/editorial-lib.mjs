@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export const rootDir = path.resolve(__dirname, '..')
 const SITE = 'https://dodje.fr'
-const OG = `${SITE}/assets/og-default-1200x630.png`
+const OG = `${SITE}/assets/og-dodje-1200x630.png`
 const UA = 'Mozilla/5.0 (compatible; DodjeEditorialBot/1.0; +https://dodje.fr/)'
 const BAREMES_PATH = path.join(rootDir, 'data/baremes.json')
 
@@ -273,7 +273,7 @@ function factItems(topic, byId) {
     .filter(Boolean)
     .map(
       (item) =>
-        `<li><strong>${escapeHtml(item.display)}</strong> — ${escapeHtml(item.label)} (${escapeHtml(item.source)}, ${escapeHtml(item.asOf)})</li>`
+        `<li><strong>${escapeHtml(item.display)}</strong> : ${escapeHtml(item.label)} (${escapeHtml(item.source)}, ${escapeHtml(item.asOf)})</li>`
     )
     .join('\n                ')
 }
@@ -288,7 +288,7 @@ function sourceLinks(topic, byId) {
   return [...byUrl.values()]
     .map(
       (item) =>
-        `<li><a href="${escapeHtml(item.sourceUrl)}" rel="noopener noreferrer" target="_blank">${escapeHtml(item.source)} — ${escapeHtml(item.label)}</a></li>`
+        `<li><a href="${escapeHtml(item.sourceUrl)}" rel="noopener noreferrer" target="_blank">${escapeHtml(item.source)} : ${escapeHtml(item.label)}</a></li>`
     )
     .join('\n                    ')
 }
@@ -371,7 +371,7 @@ export function buildPageHtml({ kind, topic, byId, copy }) {
     </nav>
     <main class="content-page">
         <article class="content-layout" data-editorial="auto">
-            <p class="legal-eyebrow">${escapeHtml(topic.kicker)} · France</p>
+            <p class="legal-eyebrow">${escapeHtml(topic.kicker)}</p>
             <h1>${escapeHtml(copy.title)}</h1>
             <p class="content-lead"><strong>En bref :</strong> ${escapeHtml(copy.bluf)}</p>
             <div class="content-note content-ymyl"><p><strong>Avertissement :</strong> contenu pédagogique généré à partir de barèmes nommés (source officielle ou fichier Dodje). Pas de conseil personnalisé. Vérifie la source primaire avant une décision.</p></div>

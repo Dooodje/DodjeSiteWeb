@@ -14,7 +14,7 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const SITE = 'https://dodje.fr'
-const OG = `${SITE}/assets/og-default-1200x630.png`
+const OG = `${SITE}/assets/og-dodje-1200x630.png`
 const TOPICS_PATH = path.join(rootDir, 'data/editorial-topics.json')
 const BAREMES_PATH = path.join(rootDir, 'data/baremes.json')
 const LOG_PATH = path.join(rootDir, 'data/guide-auto-log.json')
@@ -99,7 +99,7 @@ function buildGuideHtml(topic, byId) {
     .filter(Boolean)
     .map(
       (item) =>
-        `<li><strong>${escapeHtml(item.display)}</strong> — ${escapeHtml(item.label)} (${escapeHtml(item.source)}, ${escapeHtml(item.asOf)})</li>`
+        `<li><strong>${escapeHtml(item.display)}</strong> : ${escapeHtml(item.label)} (${escapeHtml(item.source)}, ${escapeHtml(item.asOf)})</li>`
     )
     .join('\n                ')
 
@@ -113,7 +113,7 @@ function buildGuideHtml(topic, byId) {
   ]
     .map(
       (item) =>
-        `<li><a href="${escapeHtml(item.sourceUrl)}" rel="noopener noreferrer" target="_blank">${escapeHtml(item.source)} — ${escapeHtml(item.label)}</a></li>`
+        `<li><a href="${escapeHtml(item.sourceUrl)}" rel="noopener noreferrer" target="_blank">${escapeHtml(item.source)} : ${escapeHtml(item.label)}</a></li>`
     )
     .join('\n                    ')
 
@@ -173,10 +173,10 @@ function buildGuideHtml(topic, byId) {
     </nav>
     <main class="content-page">
         <article class="content-layout">
-            <p class="legal-eyebrow">${escapeHtml(topic.kicker)} · France</p>
+            <p class="legal-eyebrow">${escapeHtml(topic.kicker)}</p>
             <h1>${escapeHtml(title)}</h1>
             <p class="content-lead"><strong>En bref :</strong> ${fill(topic.bluf, byId)}</p>
-            <div class="content-note content-ymyl"><p><strong>Avertissement :</strong> guide pédagogique généré à partir des barèmes officiels recensés par Dodje. Pas de conseil en investissement personnalisé. Vérifie les sources primaires.</p></div>
+            <div class="content-note content-ymyl"><p><strong>Avertissement :</strong> guide pédagogique généré à partir des barèmes officiels. Pas de conseil en investissement personnalisé. Vérifie les sources primaires.</p></div>
             <h2>Chiffres utilisés (sources)</h2>
             <ul>
                 ${factItems}

@@ -1,6 +1,6 @@
 /* Landing Dodje : ciel fixe, sections plein écran, animations de l'app */
 @font-face{font-family:'Outfit';src:url('/fonts/Outfit-VariableFont_wght.woff2') format('woff2');font-weight:100 900;font-display:swap}
-html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
 body{margin:0;background:#4A72B5}
 a{color:inherit;text-decoration:none}
 :root{--nav:80px;--bar:92px}
@@ -14,7 +14,7 @@ ul{padding:0;list-style:none}
 @keyframes cloudDrift{from{transform:translateX(-40vw)}to{transform:translateX(130vw)}}
 
 /* Une section = un écran, entre la navbar et la barre du bas */
-.sec{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav) + 16px) clamp(16px,4vw,56px) calc(var(--bar) + 12px);scroll-snap-align:start;scroll-margin-top:0}
+.sec{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav) + 16px) clamp(16px,4vw,56px) calc(var(--bar) + 12px);scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0}
 .sec.nobar{padding-bottom:32px}
 .in{width:100%;max-width:1180px;margin:0 auto}
 .h2{font-size:clamp(28px,3.6vw,50px);font-weight:700;line-height:1.04;letter-spacing:-1.5px}
@@ -414,3 +414,8 @@ img{max-width:100%}
 .chestamount{position:absolute;left:0;right:0;top:63%;text-align:center;font-size:56px;font-weight:700;letter-spacing:-2px;color:#000000}
 .chesthint{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:22px;font-weight:700}
 .swglow{position:absolute}
+
+/* Arrêt propre à chaque section : la FAQ (plus haute qu'un écran) se lit librement, le pied de page a son propre point d'arrêt */
+.sec.auto{scroll-snap-stop:normal}
+.sitefoot{scroll-snap-align:end}
+@media (prefers-reduced-motion:reduce){html{scroll-snap-type:y proximity}}

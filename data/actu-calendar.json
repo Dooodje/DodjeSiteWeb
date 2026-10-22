@@ -211,7 +211,7 @@
         },
         {
           "h2": "Face à l'inflation recensée",
-          "html": "<p>L'inflation glissante recensée par Dodje est {{inflation_glissante}} ({{inflation_glissante.source}}). Comparer les deux éclaire le rendement réel, sans dire s'il faut retirer l'argent.</p>"
+          "html": "<p>L'inflation glissante est {{inflation_glissante}} ({{inflation_glissante.source}}). Comparer les deux éclaire le rendement réel, sans dire s'il faut retirer l'argent.</p>"
         }
       ],
       "faq": [
@@ -249,7 +249,7 @@
         },
         {
           "h2": "Le LDDS à côté",
-          "html": "<p>Le plafond LDDS recensé par Dodje est {{ldds_plafond}}. Ce sont deux livrets distincts. Le taux du Livret A reste {{livret_a_taux}}.</p>"
+          "html": "<p>Le plafond LDDS est {{ldds_plafond}}. Ce sont deux livrets distincts. Le taux du Livret A reste {{livret_a_taux}}.</p>"
         }
       ],
       "faq": [
@@ -273,7 +273,7 @@
       "leadFact": "lep_taux",
       "baremes": ["lep_taux", "lep_plafond", "livret_a_taux"],
       "title": "Taux du LEP : {{lep_taux}}",
-      "bluf": "Le taux du LEP recensé par Dodje est {{lep_taux}} ({{lep_taux.source}}, {{lep_taux.asOf}}), sous condition de revenus.",
+      "bluf": "Le taux du LEP est {{lep_taux}} ({{lep_taux.source}}, {{lep_taux.asOf}}), sous condition de revenus.",
       "links": {
         "tool": "/outils/calculateur-lep",
         "guide": "/guides/epargne-de-precaution-france"
@@ -281,16 +281,16 @@
       "sections": [
         {
           "h2": "Un livret sous condition",
-          "html": "<p>{{lep_taux}} est le taux recensé, pas une ouverture automatique. Le plafond recensé est {{lep_plafond}}. L'éligibilité se vérifie sur la source officielle, pas sur un comparateur.</p>"
+          "html": "<p>{{lep_taux}} est le taux, pas une ouverture automatique. Le plafond est {{lep_plafond}}. L'éligibilité se vérifie sur la source officielle, pas sur un comparateur.</p>"
         },
         {
           "h2": "À côté du Livret A",
-          "html": "<p>Le Livret A recensé est à {{livret_a_taux}}. Les deux livrets n'ont ni le même taux ni les mêmes conditions.</p>"
+          "html": "<p>Le Livret A est à {{livret_a_taux}}. Les deux livrets n'ont ni le même taux ni les mêmes conditions.</p>"
         }
       ],
       "faq": [
         {
-          "q": "Quel est le taux du LEP recensé ?",
+          "q": "Quel est le taux du LEP ?",
           "a": "{{lep_taux}}, source {{lep_taux.source}}."
         },
         {
@@ -309,7 +309,7 @@
       "leadFact": "lep_plafond",
       "baremes": ["lep_plafond", "lep_taux", "livret_a_plafond"],
       "title": "Plafond du LEP : {{lep_plafond}}",
-      "bluf": "Le plafond du LEP recensé par Dodje est {{lep_plafond}} ({{lep_plafond.source}}). Le taux recensé est {{lep_taux}}.",
+      "bluf": "Le plafond du LEP est {{lep_plafond}} ({{lep_plafond.source}}). Le taux est {{lep_taux}}.",
       "links": {
         "tool": "/outils/calculateur-lep",
         "guide": "/guides/donnees-finance-france"
@@ -317,11 +317,11 @@
       "sections": [
         {
           "h2": "Le montant maximum recensé",
-          "html": "<p>{{lep_plafond}} est le plafond recensé pour le LEP. Il est plus bas que le plafond du Livret A recensé à {{livret_a_plafond}}.</p>"
+          "html": "<p>{{lep_plafond}} est le plafond pour le LEP. Il est plus bas que le plafond du Livret A à {{livret_a_plafond}}.</p>"
         },
         {
           "h2": "Le taux n'est pas le plafond",
-          "html": "<p>Le taux recensé {{lep_taux}} décrit la rémunération, pas la somme que l'on peut déposer.</p>"
+          "html": "<p>Le taux {{lep_taux}} décrit la rémunération, pas la somme que l'on peut déposer.</p>"
         }
       ],
       "faq": [
@@ -330,7 +330,7 @@
           "a": "{{lep_plafond}}, source {{lep_plafond.source}}."
         },
         {
-          "q": "Quel taux est recensé ?",
+          "q": "Quel taux retenir ?",
           "a": "{{lep_taux}}."
         },
         {
@@ -345,7 +345,7 @@
       "leadFact": "ldds_plafond",
       "baremes": ["ldds_plafond", "livret_a_plafond", "livret_a_taux"],
       "title": "Plafond du LDDS : {{ldds_plafond}}",
-      "bluf": "Le plafond du LDDS recensé par Dodje est {{ldds_plafond}} ({{ldds_plafond.source}}).",
+      "bluf": "Le plafond du LDDS est {{ldds_plafond}} ({{ldds_plafond.source}}).",
       "links": {
         "tool": "/outils/comparatif-livrets-reglementes",
         "guide": "/guides/epargne-de-precaution-france"
@@ -353,7 +353,7 @@
       "sections": [
         {
           "h2": "Un deuxième livret réglementé",
-          "html": "<p>{{ldds_plafond}} est le plafond LDDS recensé. Le Livret A recensé plafonne à {{livret_a_plafond}}, au taux {{livret_a_taux}}. Les additionner dans sa tête ne crée pas un seul livret.</p>"
+          "html": "<p>{{ldds_plafond}} est le plafond LDDS. Le Livret A plafonne à {{livret_a_plafond}}, au taux {{livret_a_taux}}. Les additionner dans sa tête ne crée pas un seul livret.</p>"
         },
         {
           "h2": "Disponible, pas un placement risqué",
@@ -367,7 +367,7 @@
         },
         {
           "q": "Est-ce le même plafond que le Livret A ?",
-          "a": "Non. Le plafond Livret A recensé est {{livret_a_plafond}}."
+          "a": "Non. Le plafond Livret A est {{livret_a_plafond}}."
         },
         {
           "q": "Dodje donne-t-il un conseil personnalisé ?",
@@ -381,7 +381,7 @@
       "leadFact": "inflation_glissante",
       "baremes": ["inflation_glissante", "livret_a_taux", "smic_net_estime"],
       "title": "Inflation en France : {{inflation_glissante}}",
-      "bluf": "L'inflation glissante recensée par Dodje est {{inflation_glissante}} ({{inflation_glissante.source}}, {{inflation_glissante.asOf}}).",
+      "bluf": "L'inflation glissante est {{inflation_glissante}} ({{inflation_glissante.source}}, {{inflation_glissante.asOf}}).",
       "links": {
         "tool": "/outils/calculateur-inflation",
         "guide": "/guides/donnees-finance-france"
@@ -389,21 +389,21 @@
       "sections": [
         {
           "h2": "Ce que mesure ce chiffre",
-          "html": "<p>{{inflation_glissante}} est l'IPC glissant recensé, pas le prix d'un produit en rayon. Il sert à lire si un taux d'épargne, comme le Livret A recensé à {{livret_a_taux}}, couvre la hausse des prix.</p>"
+          "html": "<p>{{inflation_glissante}} est l'IPC glissant, pas le prix d'un produit en rayon. Il sert à lire si un taux d'épargne, comme le Livret A à {{livret_a_taux}}, couvre la hausse des prix.</p>"
         },
         {
           "h2": "Sur un salaire",
-          "html": "<p>Un ordre de grandeur de SMIC net recensé est {{smic_net_estime}}. L'inflation ne change pas ce net à elle seule : elle change ce qu'il permet d'acheter.</p>"
+          "html": "<p>Un ordre de grandeur de SMIC net est {{smic_net_estime}}. L'inflation ne change pas ce net à elle seule : elle change ce qu'il permet d'acheter.</p>"
         }
       ],
       "faq": [
         {
-          "q": "Quelle inflation est recensée ?",
+          "q": "Quelle inflation retenir ?",
           "a": "{{inflation_glissante}}, source {{inflation_glissante.source}}."
         },
         {
           "q": "L'inflation est-elle un taux de livret ?",
-          "a": "Non. Le taux du Livret A recensé est {{livret_a_taux}}."
+          "a": "Non. Le taux du Livret A est {{livret_a_taux}}."
         },
         {
           "q": "Dodje donne-t-il un conseil personnalisé ?",
@@ -417,7 +417,7 @@
       "leadFact": "hcsf_effort",
       "baremes": ["hcsf_effort", "credit_immo_20ans", "smic_net_estime"],
       "title": "Crédit immobilier : effort max {{hcsf_effort}}",
-      "bluf": "Le taux d'effort maximum recensé pour un crédit immobilier est {{hcsf_effort}} ({{hcsf_effort.source}}).",
+      "bluf": "Le taux d'effort maximum pour un crédit immobilier est {{hcsf_effort}} ({{hcsf_effort.source}}).",
       "links": {
         "tool": "/outils/calculateur-capacite-emprunt",
         "guide": "/guides/donnees-finance-france"
@@ -425,21 +425,21 @@
       "sections": [
         {
           "h2": "35 % de quoi",
-          "html": "<p>{{hcsf_effort}} est le plafond d'effort recensé par le HCSF, pas un droit automatique à emprunter. La banque retient ses propres revenus et charges.</p>"
+          "html": "<p>{{hcsf_effort}} est le plafond d'effort par le HCSF, pas un droit automatique à emprunter. La banque retient ses propres revenus et charges.</p>"
         },
         {
           "h2": "Le taux du crédit est autre chose",
-          "html": "<p>Le taux moyen recensé sur 20 ans est {{credit_immo_20ans}}. Il décrit le prix de l'emprunt, pas la part du revenu. Un net autour du SMIC recensé {{smic_net_estime}} rend cet écart visible.</p>"
+          "html": "<p>Le taux moyen sur 20 ans est {{credit_immo_20ans}}. Il décrit le prix de l'emprunt, pas la part du revenu. Un net autour du SMIC {{smic_net_estime}} rend cet écart visible.</p>"
         }
       ],
       "faq": [
         {
-          "q": "Quel est le taux d'effort HCSF recensé ?",
+          "q": "Quel est le taux d'effort HCSF ?",
           "a": "{{hcsf_effort}}, source {{hcsf_effort.source}}."
         },
         {
           "q": "Est-ce le taux d'intérêt du prêt ?",
-          "a": "Non. Le taux moyen 20 ans recensé est {{credit_immo_20ans}}."
+          "a": "Non. Le taux moyen 20 ans est {{credit_immo_20ans}}."
         },
         {
           "q": "Dodje donne-t-il un conseil personnalisé ?",
@@ -453,7 +453,7 @@
       "leadFact": "credit_immo_20ans",
       "baremes": ["credit_immo_20ans", "hcsf_effort", "livret_a_taux"],
       "title": "Taux crédit immobilier 20 ans : {{credit_immo_20ans}}",
-      "bluf": "Le taux moyen de crédit immobilier sur 20 ans recensé par Dodje est {{credit_immo_20ans}} ({{credit_immo_20ans.source}}, {{credit_immo_20ans.asOf}}).",
+      "bluf": "Le taux moyen de crédit immobilier sur 20 ans est {{credit_immo_20ans}} ({{credit_immo_20ans.source}}, {{credit_immo_20ans.asOf}}).",
       "links": {
         "tool": "/outils/calculateur-pret-immobilier",
         "guide": "/guides/donnees-finance-france"
@@ -461,21 +461,21 @@
       "sections": [
         {
           "h2": "Une moyenne, pas ton offre",
-          "html": "<p>{{credit_immo_20ans}} est une moyenne recensée. Une banque peut proposer autre chose. Le plafond d'effort recensé reste {{hcsf_effort}}.</p>"
+          "html": "<p>{{credit_immo_20ans}} est une moyenne. Une banque peut proposer autre chose. Le plafond d'effort reste {{hcsf_effort}}.</p>"
         },
         {
           "h2": "Ce n'est pas le Livret A",
-          "html": "<p>Le Livret A recensé rémunère {{livret_a_taux}}. Le crédit coûte {{credit_immo_20ans}}. Les deux chiffres ne se soustraient pas pour décider d'un achat.</p>"
+          "html": "<p>Le Livret A rémunère {{livret_a_taux}}. Le crédit coûte {{credit_immo_20ans}}. Les deux chiffres ne se soustraient pas pour décider d'un achat.</p>"
         }
       ],
       "faq": [
         {
-          "q": "Quel taux de crédit sur 20 ans est recensé ?",
+          "q": "Quel taux de crédit sur 20 ans retenir ?",
           "a": "{{credit_immo_20ans}}, source {{credit_immo_20ans.source}}."
         },
         {
           "q": "Ce taux garantit-il un accord de prêt ?",
-          "a": "Non. C'est une moyenne pédagogique, à côté d'un effort max recensé de {{hcsf_effort}}."
+          "a": "Non. C'est une moyenne pédagogique, à côté d'un effort max de {{hcsf_effort}}."
         },
         {
           "q": "Dodje donne-t-il un conseil personnalisé ?",
@@ -489,7 +489,7 @@
       "leadFact": "pea_plafond",
       "baremes": ["pea_plafond", "livret_a_plafond", "livret_a_taux"],
       "title": "Plafond du PEA : {{pea_plafond}}",
-      "bluf": "Le plafond de versement du PEA recensé par Dodje est {{pea_plafond}} ({{pea_plafond.source}}). C'est un plafond de versements, pas un gain garanti.",
+      "bluf": "Le plafond de versement du PEA est {{pea_plafond}} ({{pea_plafond.source}}). C'est un plafond de versements, pas un gain garanti.",
       "links": {
         "tool": "/outils/comparatif-pea-cto",
         "guide": "/guides/apprendre-a-investir"
@@ -501,7 +501,7 @@
         },
         {
           "h2": "L'échelle du Livret A",
-          "html": "<p>Le plafond du Livret A recensé est {{livret_a_plafond}}, au taux {{livret_a_taux}}. Le PEA vient après une épargne disponible, dans une logique pédagogique et non comme une consigne.</p>"
+          "html": "<p>Le plafond du Livret A est {{livret_a_plafond}}, au taux {{livret_a_taux}}. Le PEA vient après une épargne disponible, dans une logique pédagogique et non comme une consigne.</p>"
         }
       ],
       "faq": [

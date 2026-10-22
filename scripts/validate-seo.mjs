@@ -196,7 +196,7 @@ function validateHomepageGeo() {
     fail('Homepage still has post-community content blocks')
   }
   if (!html.includes('id="community"')) fail('Homepage missing community block')
-  if (!html.includes('og-default-1200x630.png')) fail('Homepage OG image is not 1200x630 default')
+  if (!html.includes('og-dodje-1200x630.png')) fail('Homepage OG image is not 1200x630 default')
   if (!/<title>[^<]*jeu[^<]*<\/title>/i.test(html)) fail('Homepage title must contain « jeu »')
   if (!/<h1[^>]*>[\s\S]*jeu[\s\S]*<\/h1>/i.test(html)) fail('Homepage H1 must contain « jeu »')
   if (!html.includes('"VideoGame"')) fail('Homepage JSON-LD missing VideoGame')
@@ -340,8 +340,8 @@ function validateContentPagesGeo() {
 }
 
 function validateOgDefaultAsset() {
-  const pub = path.join(rootDir, 'public/assets/og-default-1200x630.png')
-  if (!fs.existsSync(pub)) fail('Missing public/assets/og-default-1200x630.png')
+  const pub = path.join(rootDir, 'public/assets/og-dodje-1200x630.png')
+  if (!fs.existsSync(pub)) fail('Missing public/assets/og-dodje-1200x630.png')
 }
 
 // --- Run validations ---

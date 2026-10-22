@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const SITE = 'https://dodje.fr'
-const OG = `${SITE}/assets/og-default-1200x630.png`
+const OG = `${SITE}/assets/og-dodje-1200x630.png`
 const data = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/glossaire-termes.json'), 'utf8'))
 
 function escapeHtml(s) {
