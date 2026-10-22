@@ -22,7 +22,7 @@
     <meta name="ICBM" content="47.9029, 1.9093">
     <meta name="content-language" content="fr-FR">
     
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#4A72B5">
 
     <!-- Smart App Banner iOS (Safari) : Télécharger / Ouvrir / Mettre à jour -->
     <meta name="apple-itunes-app" content="app-id=6743447215, app-argument=https://dodje.fr/">
@@ -48,37 +48,8 @@
     <link rel="preload" as="image" href="assets/Logo_degrade_260.webp" fetchpriority="high" type="image/webp">
     <link rel="preload" as="image" href="assets/MascotteSalut.png" fetchpriority="high">
 
-    <!-- First-paint fallback before the Vite CSS bundle arrives. -->
-    <style>
-      html { background-color: #000; color: #fff; }
-      body { margin: 0; background: transparent; }
-      #hero-root { min-height: 640px; }
-      @media (min-width: 1024px) { #hero-root { min-height: 720px; } }
-      /* Store bar: hidden on desktop; painted immediately on mobile. */
-      .mobile-floating-bar { display: none; }
-      @media (max-width: 767px) {
-        .mobile-floating-bar {
-          display: block;
-          position: fixed;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 85;
-          padding: 0 0.75rem max(0.75rem, env(safe-area-inset-bottom, 0px));
-        }
-        .mobile-floating-bar__inner { display: flex; gap: 0.5rem; }
-        .mobile-floating-bar__store {
-          display: flex; flex: 1; align-items: center; justify-content: center;
-          gap: 0.55rem; min-height: 3rem; padding: 0.55rem 0.65rem;
-          border-radius: 0.85rem; text-decoration: none;
-        }
-        .mobile-floating-bar__store--apple { color: #0A0400; background: linear-gradient(180deg, #06D001 0%, #9BEC00 100%); }
-        .mobile-floating-bar__store--google { color: #0a0a0a; background: #fff; }
-        .mobile-floating-bar__text { display: flex; flex-direction: column; line-height: 1.05; }
-        .mobile-floating-bar__label { font-size: 0.58rem; font-weight: 600; text-transform: uppercase; opacity: 0.72; }
-        .mobile-floating-bar__name { font-size: 0.82rem; font-weight: 700; }
-      }
-    </style>
+    <!-- Premier rendu : le ciel de l'app avant le CSS -->
+    <style>html{background:#4A72B5;color:#fff}body{margin:0}</style>
 
     <!-- Preload critical Outfit variable font used above the fold (headings + UI). -->
     <link rel="preload" href="fonts/Outfit-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
@@ -331,10 +302,10 @@
         "inLanguage": "fr-FR",
         "isPartOf": { "@id": "https://dodje.fr/#website" },
         "about": { "@id": "https://dodje.fr/#app" },
-        "dateModified": "2026-09-09",
+        "dateModified": "2026-10-22",
         "speakable": {
           "@type": "SpeakableSpecification",
-          "cssSelector": ["h1", ".hero-shell__bluf"]
+          "cssSelector": ["h1", "#dodje .lead", "#faq-home summary"]
         },
         "mainEntity": { "@id": "https://dodje.fr/#app" }
       },
@@ -384,6 +355,7 @@
         "@type": "FAQPage",
         "@id": "https://dodje.fr/#faq-home",
         "mainEntity": [
+          {"@type": "Question", "name": "Pourquoi apprendre la finance en jouant ?", "acceptedAnswer": {"@type": "Answer", "text": "Parce que les Français agissent mieux qu'ils ne comprennent : leur score de culture financière est de 12,82/20 (Banque de France / CSA, enquête publiée en mai 2026), et 45 % des 18-25 ans demandent déjà des conseils financiers à une IA. Or l'apprentissage actif fait passer le taux d'échec de 34 % à 22 % par rapport à un cours magistral (Freeman et al., PNAS 2014, 225 études). Un jeu fait répéter, pratiquer et récompense : c'est le principe des quiz et des décisions de Dodje."}},
           {
             "@type": "Question",
             "name": "Qu'est-ce que Dodje ?",
@@ -477,387 +449,359 @@
     ]
     </script>
 </head>
-<body>
-    <!-- Vidéo d'arrière-plan avec lazy loading -->
-    <video id="background-video" autoplay muted loop playsinline preload="none" aria-hidden="true"
-        data-webm="assets/anime/FondAnime-optimized.webm"
-        data-mp4="assets/anime/FondAnime-optimized.mp4"></video>
+<body data-no-app-promo>
+<a class="skip" href="#main-content">Aller au contenu</a>
+<div class="page">
+  <div class="sky" aria-hidden="true">
+    <svg class="cloud" viewBox="0 0 300 92" style="top:8%;--w:min(36vw,460px);--o:.95;--t:95s;--dl:-20s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
+    <svg class="cloud" viewBox="0 0 300 92" style="top:33%;--w:min(22vw,280px);--o:.7;--t:125s;--dl:-80s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
+    <svg class="cloud" viewBox="0 0 300 92" style="top:56%;--w:min(42vw,540px);--o:.9;--t:110s;--dl:-55s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
+    <svg class="cloud" viewBox="0 0 300 92" style="top:79%;--w:min(28vw,340px);--o:.75;--t:140s;--dl:-110s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
+    <svg class="cloud" viewBox="0 0 300 92" style="top:20%;--w:min(18vw,230px);--o:.6;--t:160s;--dl:-135s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
+  </div>
 
-    <!-- Fluid background overlay above the video, beneath all section content -->
-    <div id="bg-overlay" aria-hidden="true"></div>
+  <header class="topnav">
+    <div class="topnav__bar">
+      <a class="navin" href="/" aria-label="Dodje, accueil" style="--i:0;display:flex;align-items:center;flex:0 0 auto"><img src="/assets/Logo_degrade_260.webp" alt="Dodje" width="73" height="28" style="height:28px;width:auto" fetchpriority="high"></a>
+      <nav class="navlinks" aria-label="Sections de la page">
+        <a class="navlink navin" href="#dodje" style="--i:1">Dodje</a>
+        <a class="navlink navin" href="#ile" style="--i:2">L'île</a>
+        <a class="navlink navin" href="#test" style="--i:3">Ton niveau</a>
+        <a class="navlink navin" href="#investir" style="--i:4">Investir</a>
+        <a class="navlink navin" href="#batiments" style="--i:5">Bâtiments</a>
+        <a class="navlink navin" href="/jeu" style="--i:6">Le jeu</a>
+      </nav>
+      <div class="navin" style="--i:7;display:flex;align-items:center;gap:8px">
+        <span class="dodjipill" hidden><img src="/landing/img/DodjiPiece.svg" alt="Dodjis" width="22" height="22"><span class="dodjicount">0</span></span>
+        <a class="cta navcta dlhref" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">Télécharger</a>
+      </div>
+    </div>
+  </header>
 
-    <nav class="navbar navbar-simple visible" id="navbar-scroll">
-        <div class="nav-container">
-            <a href="/" class="nav-logo" aria-label="Dodje, accueil">
-                <picture>
-                    <source srcset="assets/Logo_degrade_260.webp 260w, assets/Logo_degrade.webp 500w" sizes="130px" type="image/webp">
-                    <img src="assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img" width="130" height="50" fetchpriority="high" decoding="sync">
-                </picture>
-            </a>
-            <div class="nav-menu nav-menu--site">
-                <a href="/jeu" class="nav-link">Le jeu</a>
-                <a href="/guides" class="nav-link">Guides</a>
-                <a href="/outils" class="nav-link">Outils</a>
-                <a href="/actualites" class="nav-link">Actus</a>
-                <a href="/#hero" class="cta-button nav-cta">C'est parti</a>
-            </div>
+  <main id="main-content">
+  <!-- 1. Hero -->
+  <section id="top" class="sec nobar herosec" aria-labelledby="hero-title">
+    <div class="in two herogrid">
+      <div class="herotxt">
+        <h1 id="hero-title" class="j" style="--i:0">Le jeu gratuit pour enfin <span class="lime">comprendre l'argent</span> facilement !</h1>
+        <div class="stores j" style="--i:2">
+          <a class="store storew " href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z"/></svg><span><small>Télécharger dans</small>l'App Store</span></a>
+          <a class="store storew " href="https://play.google.com/store/apps/details?id=xyz.dodje.app&amp;hl=fr" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z"/></svg><span><small>Disponible sur</small>Google Play</span></a>
         </div>
-    </nav>
+      </div>
+      <div class="herovis j" style="--i:1">
+        <div class="lot herolot" data-lot="/landing/lottie/boky-salut.json" data-loop="1" data-eager="1" role="img" aria-label="Boky, la mascotte de Dodje, sort de sa pastille et te salue"><img class="lotposter" src="/assets/MascotteSalut.png" alt="" width="1080" height="1080" fetchpriority="high"></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Barre flottante mobile (App Store / Google Play) -->
-    <div
-        class="mobile-floating-bar visible"
-        id="mobile-floating-bar"
-        role="region"
-        aria-label="Télécharger Dodje"
-        aria-hidden="false"
-    >
-        <div class="mobile-floating-bar__shell">
-            <div class="mobile-floating-bar__inner">
-                <a
-                    href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215"
-                    class="mobile-floating-bar__store mobile-floating-bar__store--apple"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <svg class="mobile-floating-bar__icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-                        <path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z"/>
-                    </svg>
-                    <span class="mobile-floating-bar__text">
-                        <span class="mobile-floating-bar__label">Télécharger sur</span>
-                        <span class="mobile-floating-bar__name">App Store</span>
-                    </span>
-                </a>
-                <a
-                    href="https://play.google.com/store/apps/details?id=xyz.dodje.app&amp;hl=fr"
-                    class="mobile-floating-bar__store mobile-floating-bar__store--google"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <svg class="mobile-floating-bar__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-                        <path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z"/>
-                    </svg>
-                    <span class="mobile-floating-bar__text">
-                        <span class="mobile-floating-bar__label">Télécharger sur</span>
-                        <span class="mobile-floating-bar__name">Google Play</span>
-                    </span>
-                </a>
-            </div>
+  <!-- 2. La porte d'entrée -->
+  <section id="dodje" class="sec" aria-labelledby="dodje-title">
+    <div class="in" style="max-width:1080px">
+      <div class="center" style="max-width:820px;margin:0 auto 28px">
+        <h2 id="dodje-title" class="h2 j" style="--i:0">La porte d'entrée <span class="lime">pour commencer.</span></h2>
+        <p class="lead j" style="--i:1;margin-top:12px">Imagine si Duolingo, Clash of Clans et Mario s'étaient réunis. Bienvenue dans Dodje.</p>
+      </div>
+      <div class="pilrow">
+        <div class="j pilvis" style="--i:2">
+          <div class="lot pilin" data-pil="0" data-lot="/landing/lottie/parcours.json" data-loop="1" role="img" aria-label="Un parcours qui se débloque étape par étape" style="--s:1"></div>
+          <div class="lot pilin" data-pil="1" data-lot="/landing/lottie/pil-perso.json" data-loop="1" role="img" aria-label="Boky gagne des Dodjis" style="--s:2.4" hidden></div>
+          <div class="lot pilin" data-pil="2" data-lot="/landing/lottie/pil-gratuit.json" data-loop="1" role="img" aria-label="Une borne de jeu, gratuite" style="--s:2.4" hidden></div>
         </div>
-    </div>
-
-    <main id="main-content">
-    <!-- Hero Section (React).
-         Visible static shell paints immediately; React replaces it on mount
-         with the interactive hero (same layout, Lottie mascot). -->
-    <div id="hero-root">
-        <section class="hero-shell" aria-label="Dodje">
-            <div class="hero-shell__inner">
-                <div class="hero-shell__grid">
-                    <div class="hero-shell__copy">
-                        <div class="hero-shell__intro">
-                            <h1 class="hero-shell__title">
-                                Le jeu pour enfin
-                                <span class="hero-shell__title-accent">comprendre l'argent</span>
-                            </h1>
-                            <p class="hero-shell__bluf">Imagine si Duolingo, Clash of Clans et Mario s'étaient réunis. Bienvenue dans Dodje.</p>
-                        </div>
-                        <div class="hero-shell__stores hero-shell__stores--desktop">
-                            <a class="hero-shell__btn hero-shell__btn--apple" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">
-                                <span class="hero-shell__btn-text">
-                                    <span class="hero-shell__btn-kicker">Télécharger sur</span>
-                                    <span class="hero-shell__btn-name">App Store</span>
-                                </span>
-                            </a>
-                            <a class="hero-shell__btn hero-shell__btn--google" href="https://play.google.com/store/apps/details?id=xyz.dodje.app&amp;hl=fr" target="_blank" rel="noopener noreferrer">
-                                <span class="hero-shell__btn-text">
-                                    <span class="hero-shell__btn-kicker">Télécharger sur</span>
-                                    <span class="hero-shell__btn-name">Google Play</span>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="hero-shell__mascot">
-                        <img src="assets/MascotteSalut.png" alt="Mascotte Dodje qui salue" width="1080" height="1080" decoding="async" fetchpriority="high">
-                    </div>
-                    <div class="hero-shell__stores hero-shell__stores--mobile">
-                        <a class="hero-shell__btn hero-shell__btn--apple" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">
-                            <span class="hero-shell__btn-text">
-                                <span class="hero-shell__btn-kicker">Télécharger sur</span>
-                                <span class="hero-shell__btn-name">App Store</span>
-                            </span>
-                        </a>
-                        <a class="hero-shell__btn hero-shell__btn--google" href="https://play.google.com/store/apps/details?id=xyz.dodje.app&amp;hl=fr" target="_blank" rel="noopener noreferrer">
-                            <span class="hero-shell__btn-text">
-                                <span class="hero-shell__btn-kicker">Télécharger sur</span>
-                                <span class="hero-shell__btn-name">Google Play</span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Stats Section (static shell for crawlers; React hydrates on mount) -->
-    <div id="stats-root">
-        <section id="stats" class="home-stats-shell" aria-label="Pourquoi commencer avec Dodje">
-            <h2 class="home-stats-shell__title">La porte d'entrée pour <span>débuter</span></h2>
-            <ul class="home-stats-shell__list">
-                <li>
-                    <p class="home-stats-shell__value">0&nbsp;€</p>
-                    <p class="home-stats-shell__label">pour jouer</p>
-                    <p class="home-stats-shell__caption">Gratuit sur iPhone et Android</p>
-                </li>
-                <li>
-                    <p class="home-stats-shell__value">3</p>
-                    <p class="home-stats-shell__label">min/jour</p>
-                    <p class="home-stats-shell__caption">Des sessions rapides pour une habitude simple</p>
-                </li>
-            </ul>
-        </section>
-    </div>
-
-    <!-- Three Pillars Section (static copy for crawlers; React hydrates on mount) -->
-    <div id="pillars-root">
-        <section class="home-copy-shell home-island-shell" aria-hidden="true" aria-label="Pourquoi Dodje">
-            <h2 class="home-copy-shell__title">Pourquoi un jeu plutôt qu'un cours ?</h2>
-            <h3>Un parcours progressif, comme les mondes d'un jeu</h3>
-            <p>Avec Dodje, tu avances à ton rythme. Tu commences par les bases, tu débloques de nouveaux mondes, et tu comprends enfin la finance sans te sentir perdu.</p>
-            <h3>Ton argent en clair</h3>
-            <p>On parle souvent d'argent, mais rarement de façon simple. Dodje traduit chaque notion en décision de jeu : investir tes Dodjis dans le phare, c'est comprendre les placements ; les laisser dormir dans la réserve, c'est subir l'inflation.</p>
-            <h3>Gratuit. Simple. Ludique.</h3>
-            <p>Apprendre avec Dodje, c'est gratuit, clair et motivant. Les leçons sont courtes, les quiz te font pratiquer, et chaque Dodji gagné te donne envie de continuer à construire ton île.</p>
-        </section>
-    </div>
-
-    <!-- Biome Carousel Section (React). Static shell so crawlers and LLMs
-         read the game mechanics even without JavaScript. -->
-    <div id="carousel-root">
-        <section id="batiments-shell" class="home-copy-shell home-island-shell" aria-hidden="true" aria-label="Les bâtiments de ton île">
-            <h2 class="home-copy-shell__title">De la théorie à la pratique</h2>
-            <p>Récupère des Dodjis, débloque des bâtiments et prends des décisions financières sur ton île. Apprendre à gérer son argent n'a jamais été aussi fun. Chaque bâtiment représente une brique de ta vie financière :</p>
-            <h3>L'atelier, ton job</h3>
-            <p>L'équivalent de ton job. Tape sur le bâtiment pour gagner un salaire en Dodjis à chaque session, une nouvelle est disponible toutes les deux heures.</p>
-            <h3>Le moulin, ton épargne</h3>
-            <p>Ton épargne de précaution : sûre, mais pas très généreuse. Idéale pour mettre de côté ce que tu ne veux pas risquer.</p>
-            <h3>La réserve, ta banque</h3>
-            <p>Ta banque protège ton argent, mais ne le fait pas grandir. Pire : il fond un peu chaque jour à cause de l'inflation.</p>
-            <h3>Le phare, tes placements</h3>
-            <p>Tes placements financiers. Investis en bourse, ETF ou immobilier coté pour faire grandir ton patrimoine sur le long terme.</p>
-            <h3>L'agence, ton immobilier</h3>
-            <p>Ton portefeuille immobilier. Achète, loue, valorise : l'immobilier prend du temps mais construit un patrimoine pierre après pierre.</p>
-            <h3>La foreuse, ton wallet crypto</h3>
-            <p>Ton wallet crypto. Explore Bitcoin, Ethereum et la blockchain. Plus volatil, plus risqué, mais Dodje t'apprend à comprendre avant d'agir.</p>
-        </section>
-    </div>
-
-    <!-- Features Section (static copy for crawlers; React hydrates on mount) -->
-    <div id="features-root">
-        <section class="home-copy-shell home-island-shell" aria-hidden="true" aria-label="Comment tu apprends">
-            <h2 class="home-copy-shell__title">Comment tu apprends</h2>
-            <h3>Une expérience personnalisée</h3>
-            <p>Tu choisis le chemin qui t'intéresse, Dodje te guide pour avancer dans le bon ordre. Tu explores les sujets à ton rythme, avec des étapes claires pour ne jamais te sentir perdu.</p>
-            <h3>Un progrès visible</h3>
-            <p>Chaque leçon te fait avancer. Tu gagnes de l'XP et des Dodjis, tu débloques de nouveaux bâtiments, tu montes de niveau et tu vois clairement ce que tu comprends mieux qu'avant.</p>
-            <h3>Un apprentissage ludique</h3>
-            <p>Avec des quiz, des défis quotidiens, une île à faire grandir et un classement mondial, apprendre devient un jeu. Tu pratiques souvent, tu retiens mieux, et tu prends plaisir à continuer. Ce n'est pas un jeu d'argent : pas de mises, pas de gains d'euros.</p>
-        </section>
-    </div>
-
-    <!-- Copy SEO/GEO hors parcours visuel : crawlers et JSON-LD, pas le landing.
-         Version lisible : /jeu, /faq, /guides/jeu-educatif-finance -->
-    <div id="home-seo-crawl" class="home-seo-crawl" aria-hidden="true">
-    <section id="comment-jouer" class="home-copy-shell" aria-labelledby="comment-jouer-title">
-        <h2 id="comment-jouer-title" class="home-copy-shell__title">Comment on joue à Dodje ?</h2>
-        <p><strong>En bref :</strong> tu apprends, tu gagnes des Dodjis, tu les investis sur ton île, tu grimpes au classement. Quatre étapes, répétées quelques minutes par jour.</p>
-        <ol class="home-steps">
-            <li><strong>Apprends.</strong> Une leçon d'environ 3 minutes, sans jargon, suivie d'un quiz pour vérifier que tu as compris. Comme sur Duolingo, une session courte par jour suffit.</li>
-            <li><strong>Gagne des Dodjis.</strong> Chaque leçon, quiz ou défi quotidien réussi te rapporte des Dodjis, la monnaie du jeu. Elle n'a aucune valeur réelle : impossible de la convertir en euros.</li>
-            <li><strong>Investis sur ton île.</strong> Tu places tes Dodjis dans 6 bâtiments (atelier, moulin, réserve, phare, agence, foreuse) qui reproduisent les vrais arbitrages : sécurité, rendement, risque, inflation, horizon de temps. Comme dans Clash of Clans, ton île s'améliore à mesure que tu investis.</li>
-            <li><strong>Monte de niveau.</strong> Ton île grandit, tu débloques de nouveaux mondes (bourse, crypto, immobilier, fiscalité) et tu grimpes au classement mondial des joueurs de Dodje.</li>
-        </ol>
-        <p class="home-copy-shell__note">Chiffres du jeu : <span data-fact="lecons">[À COMPLÉTER : nombre de leçons]</span> leçons, <span data-fact="niveaux">[À COMPLÉTER : nombre de niveaux]</span> niveaux, mode île lancé en <span data-fact="ile-date">[À COMPLÉTER : mois année]</span>. Site officiel : <a href="https://dodje.fr/">dodje.fr</a>.</p>
-        <p>Si tu cherches une <strong>app éducation financière</strong> ou une <strong>app éducation financiere</strong> (sans accent), Dodje est cette app : jeu gratuit iOS et Android. Fiche : <a href="/guides/application-education-financiere">app éducation financière</a>.</p>
-    </section>
-
-    <!-- Pourquoi jouer : faits chiffrés sourcés -->
-    <section id="pourquoi-un-jeu" class="home-geo-stats" aria-labelledby="pourquoi-un-jeu-title">
-        <h2 id="pourquoi-un-jeu-title">La finance, mal apprise en France</h2>
-        <p class="home-copy-shell__note">Les Français agissent mieux qu'ils ne comprennent : les comportements progressent, les connaissances reculent. Un jeu répète, fait pratiquer et récompense, là où un cours de deux heures s'oublie.</p>
-        <ul class="home-geo-stats__grid">
-            <li>
-                <p class="home-geo-stats__value">12,82/20</p>
-                <p class="home-geo-stats__label">Score de culture financière des Français en 2025</p>
-                <p class="home-geo-stats__source">Banque de France / CSA, enquête EDUCFI publiée le 6 mai 2026 (2 217 adultes). Objectif OCDE : 14/20.</p>
-            </li>
-            <li>
-                <p class="home-geo-stats__value">4,52/7</p>
-                <p class="home-geo-stats__label">Connaissances financières, en recul (4,61 en 2023)</p>
-                <p class="home-geo-stats__source">Même enquête : taux d'intérêt composés et fondamentaux de l'investissement restent mal maîtrisés.</p>
-            </li>
-            <li>
-                <p class="home-geo-stats__value">45 %</p>
-                <p class="home-geo-stats__label">des 18-25 ans demandent des conseils financiers à une IA</p>
-                <p class="home-geo-stats__source">Banque de France, 2026 (17 % pour l'ensemble des adultes). Comprendre avant de demander devient vital.</p>
-            </li>
-            <li>
-                <p class="home-geo-stats__value">34 % → 22 %</p>
-                <p class="home-geo-stats__label">Taux d'échec avec un apprentissage actif plutôt qu'un cours magistral</p>
-                <p class="home-geo-stats__source">Freeman et al., PNAS 2014, méta-analyse de 225 études : c'est le principe des quiz et décisions de jeu de Dodje.</p>
-            </li>
-        </ul>
-    </section>
-
-    <!-- Comparatif Dodje / Capito / simulateurs -->
-    <section id="dodje-vs-capito" class="home-copy-shell home-copy-shell--wide" aria-labelledby="dodje-vs-capito-title">
-        <h2 id="dodje-vs-capito-title" class="home-copy-shell__title">Dodje, Capito ou un simulateur de trading ?</h2>
-        <p><strong>En bref :</strong> Capito gamifie des micro-leçons (streaks, ligues), les simulateurs de trading font parier de l'argent virtuel sur de vrais cours, Scènes d'argent est un jeu narratif public. Dodje est le seul à faire investir ce que tu apprends dans une île qui grandit. Comparatif détaillé : <a href="/guides/dodje-vs-capito">Dodje vs Capito</a> et <a href="/guides/meilleurs-jeux-pour-apprendre-la-finance-2026">meilleurs jeux pour apprendre la finance</a>.</p>
-        <div class="compare-table-wrap">
-            <table class="compare-table">
-                <thead>
-                    <tr><th scope="col">Critère</th><th scope="col"><a href="https://dodje.fr/">Dodje</a></th><th scope="col">Capito</th><th scope="col">Simulateurs de trading</th><th scope="col">Scènes d'argent</th></tr>
-                </thead>
-                <tbody>
-                    <tr><th scope="row">Format</th><td>Jeu mobile : leçons + île à développer</td><td>Micro-leçons à swiper + quiz</td><td>Portefeuille virtuel sur cours réels</td><td>Jeu narratif à choix</td></tr>
-                    <tr><th scope="row">Mécanique de jeu</th><td>Dodjis, 6 bâtiments, niveaux, classement mondial</td><td>XP, streaks, badges, ligues</td><td>Gains/pertes virtuels, classements</td><td>Scénarios de vie, conséquences</td></tr>
-                    <tr><th scope="row">Ce que tu apprends</th><td>Budget, épargne, bourse, crypto, immobilier, fiscalité</td><td>Bourse, épargne, immo, fiscalité, retraite</td><td>Trading court terme, lecture de graphiques</td><td>Budget du quotidien, crédit, arnaques</td></tr>
-                    <tr><th scope="row">Prix</th><td>Gratuit, achats in-app optionnels</td><td>Gratuit limité (3 leçons/jour), Premium 6,99 €/mois</td><td>Gratuit avec version Pro payante</td><td>Gratuit (Banque de France)</td></tr>
-                    <tr><th scope="row">Public</th><td>Débutants dès 16 ans, France</td><td>Débutants à confirmés, francophones</td><td>Apprentis traders</td><td>18-30 ans</td></tr>
-                    <tr><th scope="row">Argent réel en jeu</th><td>Non</td><td>Non</td><td>Non, mais incite au trading réel</td><td>Non</td></tr>
-                </tbody>
-            </table>
+        <div class="j piltxt" style="--i:3">
+          <div class="pilpane swapin" data-pil="0"><h3 class="lime">Un parcours progressif</h3><p class="lead">Avec Dodje, tu avances à ton rythme. Tu commences par les bases, tu débloques de nouveaux mondes, et tu comprends enfin la finance sans te sentir perdu.</p></div>
+          <div class="pilpane" data-pil="1" hidden><h3 class="lime">Ton argent en clair</h3><p class="lead">On parle souvent d'argent, mais rarement de façon simple. Dodje traduit chaque notion en décision de jeu : gagne des Dodjis et investis-les dans ton île pour la faire grandir !</p></div>
+          <div class="pilpane" data-pil="2" hidden><h3 class="lime">Gratuit. Simple. Ludique.</h3><p class="lead">Apprendre avec Dodje, c'est gratuit, clair et motivant. Les leçons sont courtes, les quiz te font pratiquer, et chaque Dodji gagné te donne envie de continuer à construire ton île.</p></div>
+          <div class="pbars" role="tablist" aria-label="Pourquoi Dodje">
+            <button class="pbar on" type="button" role="tab" aria-selected="true" data-pil="0" aria-label="Un parcours progressif"><span></span></button>
+            <button class="pbar" type="button" role="tab" aria-selected="false" data-pil="1" aria-label="Ton argent en clair"><span></span></button>
+            <button class="pbar" type="button" role="tab" aria-selected="false" data-pil="2" aria-label="Gratuit, simple, ludique"><span></span></button>
+          </div>
         </div>
-        <p class="home-copy-shell__note">Sources : sites officiels de Capito, Trading Game et Banque de France, consultés le 9 septembre 2026. Aucun classement officiel n'existe ; ce tableau décrit des formats, pas une note.</p>
-    </section>
-
-    <!-- Ce que Dodje n'est pas -->
-    <section id="ce-que-dodje-nest-pas" class="home-copy-shell" aria-labelledby="pas-title">
-        <h2 id="pas-title" class="home-copy-shell__title">Ce que Dodje n'est pas</h2>
-        <ul class="home-steps home-steps--plain">
-            <li><strong>Pas un jeu d'argent.</strong> Aucune mise, aucun pari, aucun gain en euros. Les Dodjis sont une monnaie virtuelle sans valeur.</li>
-            <li><strong>Pas un courtier ni une banque.</strong> Dodje ne détient pas ton argent et ne vend aucun produit financier.</li>
-            <li><strong>Pas un conseiller.</strong> Dodje est un service d'éducation : aucune recommandation personnalisée, aucune promesse de rendement. Tu apprends pour décider ensuite, seul ou avec un professionnel agréé.</li>
-        </ul>
-    </section>
-
-    <!-- FAQ visible, synchronisée avec le JSON-LD FAQPage du head -->
-    <section id="faq-home" class="home-copy-shell" aria-labelledby="faq-home-title">
-        <h2 id="faq-home-title" class="home-copy-shell__title">Questions fréquentes</h2>
-        <div class="faq-list">
-            <details class="faq-item" open><summary>Qu'est-ce que Dodje ?</summary><p>Dodje est un jeu mobile gratuit pour apprendre la finance (iOS et Android). Tu suis des leçons d'environ 3 minutes, tu réponds à des quiz, tu gagnes des Dodjis, tu les investis pour développer ton île et tu grimpes au classement mondial. Lancé en 2024 par Dodje Solutions (Orléans), 0&nbsp;€ pour commencer, dès 16&nbsp;ans. Ce n'est ni un jeu d'argent, ni un courtier.</p></details>
-            <details class="faq-item"><summary>Dodje est-il un jeu ou une application d'éducation financière ?</summary><p>Les deux. Dodje est une application d'éducation financière construite comme un jeu. L'apprentissage (budget, épargne, bourse, crypto, immobilier, fiscalité) passe par des leçons courtes et des quiz façon Duolingo ; la pratique passe par ton île, où tu investis tes Dodjis dans 6 bâtiments façon Clash of Clans ; et tu progresses de niveau en niveau façon Mario. Fiche : <a href="/guides/application-education-financiere">app éducation financière</a> (aussi app éducation financiere, sans accent).</p></details>
-            <details class="faq-item"><summary>Comment on joue à Dodje ?</summary><p>En 4 étapes : 1) tu suis une leçon d'environ 3 minutes et tu valides un quiz ; 2) tu gagnes des Dodjis, la monnaie du jeu ; 3) tu les investis sur ton île dans 6 bâtiments qui représentent ton job (l'atelier), ton épargne (le moulin), ta banque (la réserve), tes placements (le phare), ton immobilier (l'agence) et ton wallet crypto (la foreuse) ; 4) ton île grandit, tu montes de niveau et tu grimpes au classement mondial des joueurs.</p></details>
-            <details class="faq-item"><summary>C'est quoi les Dodjis ?</summary><p>Les Dodjis sont la monnaie virtuelle du jeu Dodje. Tu en gagnes en terminant des leçons, des quiz et des défis quotidiens, puis tu les investis dans les bâtiments de ton île pour la faire grandir. Ils n'ont aucune valeur monétaire réelle et ne peuvent pas être convertis en euros.</p></details>
-            <details class="faq-item"><summary>Dodje est-il un jeu d'argent ?</summary><p>Non. Dodje est un jeu éducatif : il n'y a ni mises, ni paris, ni argent réel à gagner. Les Dodjis sont une monnaie virtuelle sans valeur. Ce n'est pas un casino, pas un site de paris et pas une plateforme de trading.</p></details>
-            <details class="faq-item"><summary>Quelle est la différence entre Dodje et Capito ?</summary><p>Les deux sont des apps françaises d'éducation financière gamifiée. Capito mise sur des micro-leçons à swiper, des streaks, des XP et des ligues, avec une version gratuite limitée à 3 leçons par jour et un Premium à 6,99&nbsp;€/mois. Dodje est un jeu à part entière : les Dodjis gagnés en leçon s'investissent dans une île à développer, avec 6 bâtiments qui représentent ton job, ton épargne, ta banque, tes placements, ton immobilier et ton wallet crypto. Les parcours Dodje sont gratuits ; des achats in-app optionnels permettent d'accélérer. Voir <a href="/guides/dodje-vs-capito">Dodje vs Capito</a>.</p></details>
-            <details class="faq-item"><summary>Dodje est-il vraiment gratuit ?</summary><p>Oui. Le jeu, les leçons et l'île sont accessibles gratuitement, sans abonnement ni carte bancaire à l'inscription. Des achats in-app optionnels (Dodjis) permettent d'accélérer la progression, sans rendre le reste du contenu payant.</p></details>
-            <details class="faq-item"><summary>Quels sujets de finance sont couverts par Dodje ?</summary><p>Dodje couvre 6 thématiques : budget personnel, épargne de précaution, bourse (actions, ETF, PEA), cryptomonnaies (blockchain, wallets, risques), immobilier locatif et fiscalité française. Chaque thème correspond à un bâtiment de l'île et à un parcours de leçons progressif, sans promesse de rendement.</p></details>
-            <details class="faq-item"><summary>À qui s'adresse Dodje ?</summary><p>Aux débutants en finance personnelle, en particulier les 18-45 ans qui veulent comprendre leur argent sans jargon et sans cours ennuyeux. Le jeu part du niveau zéro et progresse étape par étape. Âge minimum : 16 ans.</p></details>
-            <details class="faq-item"><summary>Dodje donne-t-il des conseils en investissement personnalisés ?</summary><p>Non. Dodje est un service d'éducation et d'information financière. Le jeu n'est pas un conseiller financier réglementé et ne fournit aucune recommandation personnalisée, aucune promesse de rendement, ni d'incitation à investir dans un produit spécifique.</p></details>
-            <details class="faq-item"><summary>Dodje propose-t-il des calculateurs financiers gratuits ?</summary><p>Oui. En complément du jeu, <a href="/outils">dodje.fr/outils</a> propose plus de 20 simulateurs gratuits et sans inscription pour la France : salaire brut net, Livret A, capacité d'emprunt, PEA vs CTO, budget mensuel, PER, intérêts composés.</p></details>
-        </div>
-        <p class="home-copy-shell__note">Pour aller plus loin : <a href="https://dodje.fr/">Dodje</a>, <a href="/guides/jeu-educatif-finance">jeu pour apprendre la finance</a>, <a href="/guides/apprendre-a-investir">apprendre à investir</a>, <a href="/guides/comprendre-la-bourse">comprendre la bourse</a>, <a href="/guides/comprendre-la-crypto">comprendre la crypto</a>, <a href="/guides/faire-son-budget">faire son budget</a>, <a href="/faq">FAQ complète</a>.</p>
-    </section>
+      </div>
     </div>
+  </section>
 
-    <!-- Community Section -->
-    <section class="community" id="community">
-        <div class="container">
-            <div class="community-content community-content--solo">
-                <div class="community-text">
-                    <h2 class="community-title">
-                        <span class="animate-revolution">Rejoins la communauté Dodje</span>
-                    </h2>
-                    <p class="community-description">
-                        Une communauté de personnes qui veulent enfin comprendre leur argent au lieu de faire semblant, sans jargon, sans pression et sans bullshit.
-                    </p>
-                    <a href="https://discord.gg/qn7cp4nVFh" target="_blank" rel="noopener noreferrer" class="community-cta">
-                        <span class="svg-wrapper" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
-                                <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
-                            </svg>
-                        </span>
-                        <span>Rejoindre la communauté</span>
-                    </a>
-                </div>
-            </div>
+  <!-- 3. L'île -->
+  <section id="ile" class="sec" aria-labelledby="ile-title">
+    <div class="in">
+      <div class="center" style="max-width:1140px;margin:0 auto 12px">
+        <h2 id="ile-title" class="h2 j" style="--i:0">Explore le DodjeWorld et <span class="lime">fais grandir ton île</span></h2>
+        <p class="lead j" style="--i:1;margin-top:10px">Un monde conçu pour t'accompagner tout au long de ton aventure !</p>
+        <p class="hint j maphintxt" style="--i:2">Touche un biome pour jeter un œil</p>
+      </div>
+      <div class="two ilegrid">
+        <div class="j ilemap" style="--i:3">
+          <div class="mapbox">
+            <img src="/landing/img/ile.webp" alt="L'île de Dodje et ses 16 biomes" width="1469" height="1355" loading="lazy" decoding="async" class="mapbase">
+            <button class="biome" type="button" data-n="1" aria-label="Chapitre Mindset" aria-pressed="false" style="left:22.96%;top:37.77%;width:17.7%;z-index:11"><img src="/landing/biomes/1.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="2" aria-label="Chapitre Budget" aria-pressed="false" style="left:34.87%;top:28.11%;width:20.76%;z-index:12"><img src="/landing/biomes/2.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="3" aria-label="Chapitre Sécurité" aria-pressed="false" style="left:26.71%;top:53.06%;width:20.05%;z-index:13"><img src="/landing/biomes/3.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="4" aria-label="Chapitre Fiscalité" aria-pressed="false" style="left:38.17%;top:47.19%;width:22.97%;z-index:14"><img src="/landing/biomes/4.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="5" aria-label="Chapitre Bourse" aria-pressed="true" style="left:10.12%;top:17.65%;width:20.84%;z-index:30"><img src="/landing/biomes/5.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="6" aria-label="Chapitre Immobilier" aria-pressed="false" style="left:50.59%;top:62.5%;width:18.89%;z-index:16"><img src="/landing/biomes/13.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="7" aria-label="Chapitre Crypto" aria-pressed="false" style="left:52.96%;top:35.74%;width:20.04%;z-index:17"><img src="/landing/biomes/7.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="8" aria-label="Chapitre Or et divers" aria-pressed="false" style="left:54.5%;top:11.93%;width:14.12%;z-index:18"><img src="/landing/biomes/8.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="9" aria-label="Chapitre Allocation" aria-pressed="false" style="left:8.54%;top:55.22%;width:23.71%;z-index:19"><img src="/landing/biomes/9.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="10" aria-label="Chapitre Défiscalisation" aria-pressed="false" style="left:26.3%;top:64.3%;width:27.21%;z-index:20"><img src="/landing/biomes/10.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="11" aria-label="Chapitre Private Equity" aria-pressed="false" style="left:27.74%;top:18.79%;width:18.63%;z-index:21"><img src="/landing/biomes/11.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="12" aria-label="Chapitre Trading" aria-pressed="false" style="left:41.28%;top:9.74%;width:15.39%;z-index:22"><img src="/landing/biomes/12.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="13" aria-label="Chapitre Structuration pro" aria-pressed="false" style="left:5.25%;top:37.46%;width:21.6%;z-index:23"><img src="/landing/biomes/6.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="14" aria-label="Chapitre International" aria-pressed="false" style="left:58.2%;top:52.21%;width:20.78%;z-index:24"><img src="/landing/biomes/14.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="15" aria-label="Chapitre Héritage" aria-pressed="false" style="left:69.38%;top:30.59%;width:18.83%;z-index:25"><img src="/landing/biomes/15.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="16" aria-label="Chapitre L'Arène" aria-pressed="false" style="left:68.01%;top:8.53%;width:25.61%;z-index:26"><img src="/landing/biomes/16.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <span class="mapchip" data-n="1" style="left:31.56%;top:49.02%"><span class="mapname">Mindset</span></span>
+            <span class="mapchip" data-n="2" style="left:45.57%;top:42.24%"><span class="mapname">Budget</span></span>
+            <span class="mapchip" data-n="3" style="left:36.74%;top:64.96%"><span class="mapname">Sécurité</span></span>
+            <span class="mapchip" data-n="4" style="left:49.7%;top:59.13%"><span class="mapname">Fiscalité</span></span>
+            <span class="mapchip sel" data-n="5" style="left:20.37%;top:31.44%"><span class="mapname">Bourse</span></span>
+            <span class="mapchip" data-n="6" style="left:60.03%;top:79.69%"><span class="mapname">Immobilier</span></span>
+            <span class="mapchip" data-n="7" style="left:62.89%;top:46.65%"><span class="mapname">Crypto</span></span>
+            <span class="mapchip" data-n="8" style="left:61.57%;top:26.28%"><span class="mapname">Or et divers</span></span>
+            <span class="mapchip" data-n="9" style="left:20.14%;top:69.23%"><span class="mapname">Allocation</span></span>
+            <span class="mapchip" data-n="10" style="left:40.45%;top:82.62%"><span class="mapname">Défiscalisation</span></span>
+            <span class="mapchip" data-n="11" style="left:37.04%;top:26.28%"><span class="mapname">Private Equity</span></span>
+            <span class="mapchip" data-n="12" style="left:48.97%;top:24.44%"><span class="mapname">Trading</span></span>
+            <span class="mapchip" data-n="13" style="left:16.33%;top:52.42%"><span class="mapname">Structuration pro</span></span>
+            <span class="mapchip" data-n="14" style="left:68.61%;top:65.27%"><span class="mapname">International</span></span>
+            <span class="mapchip" data-n="15" style="left:78.61%;top:45.76%"><span class="mapname">Héritage</span></span>
+            <span class="mapchip" data-n="16" style="left:80.06%;top:21.87%"><span class="mapname">L'Arène</span></span>
+          </div>
         </div>
-    </section>
-    </main>
+        <article class="chcard j" style="--i:4" aria-live="polite">
+          <img class="chbg" src="/landing/chapitres/5.webp" alt="" width="600" height="536" loading="lazy" decoding="async">
+          <div class="chshade" aria-hidden="true"></div>
+          <div style="position:relative">
+            <h3 class="chsub">Bourse & ETF</h3>
+            <span class="chtitle">Les Marchés</span>
+            <p class="chdesc">Apprenez à naviguer sur les courants de l'économie mondiale et des marchés financiers.</p>
+            <button class="cta gotest" type="button">Découvrir ce chapitre</button>
+          </div>
+        </article>
+      </div>
+      <details class="chlist">
+        <summary>Les 16 mondes de l'île</summary>
+        <ul><li>Mindset : Le rapport à l'argent</li><li>Budget : Organiser son budget</li><li>Sécurité : Matelas d'épargne</li><li>Fiscalité : Impôts & Optimisation</li><li>Bourse : Bourse & ETF</li><li>Immobilier : Immobilier</li><li>Crypto : Crypto</li><li>Or et divers : Métaux</li><li>Allocation : Allocation d'actifs</li><li>Défiscalisation : Défiscalisation & SCPI</li><li>Private Equity : Private Equity</li><li>Trading : Trading</li><li>Structuration pro : Holding & Sociétés</li><li>International : Expatriation & Devises</li><li>Héritage : Transmission</li><li>L'Arène : Tournoi entre joueurs</li></ul>
+      </details>
+    </div>
+  </section>
 
-    <footer class="footer site-footer">
-        <div class="container">
-            <nav class="footer-content" aria-label="Pied de page">
-                <div class="footer-section footer-section--brand">
-                    <a href="/" class="footer-brand" aria-label="Dodje, accueil">
-                        <img src="/assets/Logo_degrade_PNG.png" alt="Dodje" class="footer-logo" width="130" height="50">
-                    </a>
-                    <div class="social-links">
-                        <a href="https://www.tiktok.com/@dodje.app" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur TikTok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.16 8.16 0 0 0 4.77 1.52V7.12a4.85 4.85 0 0 1-1-.43z"/></svg></a>
-                        <a href="https://www.instagram.com/dodje.app/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
-                        <a href="https://discord.gg/qn7cp4nVFh" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Communauté Discord Dodje"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
-                        <a href="https://x.com/DodjeApp" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur X"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <p class="footer-title">À propos</p>
-                    <ul>
-                        <li><a href="/">Accueil</a></li>
-                        <li><a href="/faq">FAQ</a></li>
-                        <li><a href="/guides/equipe-editoriale">Équipe éditoriale</a></li>
-                        <li><a href="/contact">Nous contacter</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <p class="footer-title">Outils</p>
-                    <ul>
-                        <li><a href="/outils">Tous les calculateurs</a></li>
-                        <li><a href="/outils/salaire-et-travail">Salaire et travail</a></li>
-                        <li><a href="/outils/epargne">Épargne</a></li>
-                        <li><a href="/outils/credit-immobilier">Crédit immobilier</a></li>
-                        <li><a href="/outils/investissement">Investissement</a></li>
-                        <li><a href="/outils/crypto">Crypto</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <p class="footer-title">Guides</p>
-                    <ul>
-                        <li><a href="/guides">Tous les guides</a></li>
-                        <li><a href="/blog">Blog</a></li>
-                        <li><a href="/guides/jeu-educatif-finance">Jeu pour apprendre la finance</a></li>
-                        <li><a href="/guides/apprendre-a-investir">Apprendre à investir</a></li>
-                        <li><a href="/guides/comprendre-la-bourse">Comprendre la bourse</a></li>
-                        <li><a href="/guides/glossaire-finance-investissement-2026">Glossaire</a></li>
-                        <li><a href="/actualites">Actualités</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <p class="footer-title">Le jeu</p>
-                    <ul>
-                        <li><a href="/jeu">Comment on joue</a></li>
-                        <li><a href="/guides/dodje-vs-capito">Dodje vs Capito</a></li>
-                        <li><a href="/guides/application-education-financiere">App éducation financière</a></li>
-                        <li><a href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">App Store</a></li>
-                        <li><a href="https://play.google.com/store/apps/details?id=xyz.dodje.app&amp;hl=fr" target="_blank" rel="noopener noreferrer">Google Play</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <p class="footer-title">Légal</p>
-                    <ul>
-                        <li><a href="/mentions-legales">Mentions légales</a></li>
-                        <li><a href="/conditions-utilisation">Conditions d'utilisation</a></li>
-                        <li><a href="/politique-confidentialite">Confidentialité</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Dodje Solutions. Tous droits réservés.</p>
-            </div>
+  <!-- 4. Teste ton niveau, sur le biome choisi -->
+  <section id="test" class="sec" style="overflow:hidden" aria-labelledby="test-title">
+    <img class="secbg testbg" src="/landing/chapitres/1.webp" alt="" width="1600" height="1429" loading="lazy" decoding="async">
+    <div class="in two testgrid">
+      <div class="panel testhead j" style="--i:0">
+        <h2 id="test-title" class="h2">Teste ton niveau en <span class="lime testname">Mindset</span></h2>
+        <p class="lead" style="margin-top:10px">C'est maintenant que ton aventure commence !</p>
+      </div>
+      <div class="screen j" style="--i:1" id="quiz">
+        <noscript><p style="padding:24px">Active JavaScript pour jouer au quiz, ou télécharge Dodje pour jouer dans l'app.</p></noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Investir -->
+  <section id="investir" class="sec" aria-labelledby="invest-title">
+    <div class="in" style="max-width:760px">
+      <div class="titlewide center" style="margin:0 0 14px">
+        <h2 id="invest-title" class="h2 j" style="--i:0">Dans quoi tu investirais <span class="lime">tes premiers Dodjis ?</span></h2>
+      </div>
+      <div class="panel j investcard" style="--i:1">
+        <div class="tabs" role="tablist" aria-label="Marché">
+          <span class="tabpill" aria-hidden="true"></span>
+          <button class="tab press" role="tab" type="button" aria-selected="true" data-mk="0">Bourse</button>
+          <button class="tab press" role="tab" type="button" aria-selected="false" data-mk="1">Crypto</button>
         </div>
-    </footer>
+        <div class="ihead">
+          <b class="iname">S.E.V.E 5</b>
+          <span class="itype">ETF</span>
+          <span style="flex:1"></span>
+          <span class="ilive"><span id="lvDot" class="livedot"></span>En direct</span>
+        </div>
+        <div class="iprice">
+          <img src="/landing/img/DodjiPiece.svg" alt="" width="34" height="34">
+          <b id="lvPrice">120,00</b>
+          <span id="lvChg">▲ 0,00 %</span>
+        </div>
+        <div class="ichart">
+          <svg role="img" aria-label="Cours simulé en direct" viewBox="0 0 300 120" preserveAspectRatio="none">
+            <defs><linearGradient id="ivfill" x1="0" y1="0" x2="0" y2="1"><stop id="lvS1" offset="0" stop-color="#06D001" stop-opacity=".28"/><stop id="lvS2" offset="1" stop-color="#06D001" stop-opacity="0"/></linearGradient></defs>
+            <path id="lvBase" d="M0 60 L300 60" fill="none" stroke="#FFFFFF" stroke-opacity=".28" stroke-width="1" stroke-dasharray="2 4" vector-effect="non-scaling-stroke"/>
+            <path id="lvArea" d="M0 60 L292 60 L292 120 L0 120 Z" fill="url(#ivfill)"/>
+            <path id="lvLine" d="M0 60 L292 60" fill="none" stroke="#06D001" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+          </svg>
+          <span id="lvHead" class="livehead"></span>
+        </div>
+        <p class="iexpl"><b class="lime itype2">ETF</b> : <span class="iexpltxt">un panier d'entreprises en un seul achat, le risque est réparti.</span></p>
+        <div class="ilocked">
+          <span class="ilockedtitle">À débloquer dans ton île</span>
+          <ul class="ilockedlist"><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2" fill="none" stroke="#777" stroke-width="2.4" stroke-linecap="round"/><rect x="5" y="10" width="14" height="10" rx="3" fill="#777"/></svg><span><b>Actions</b> : une part d'une seule entreprise, plus de potentiel et plus de risque.</span></li></ul>
+        </div>
+        <a class="cta dlhref investcta" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">Investis tes premiers Dodjis</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- React hero entry -->
-    <script type="module" src="/src/main.tsx"></script>
+  <!-- 6. Les bâtiments -->
+  <section id="batiments" class="sec" aria-labelledby="bat-title">
+    <div class="in" style="max-width:900px">
+      <div class="center" style="margin:0 auto 10px">
+        <h2 id="bat-title" class="h2 j" style="--i:0">Construis ton île, <span class="lime">fais grandir ton argent</span></h2>
+        <p class="lead j" style="--i:1;margin-top:10px">Chaque bâtiment est une vraie notion d'argent.</p>
+      </div>
+      <div class="j batwrap" style="--i:2">
+        <div id="batTrack" class="track" aria-roledescription="carrousel" aria-label="Les 6 bâtiments de l'île">
+            <article class="slide" aria-roledescription="diapositive" aria-label="1 sur 6 : L'atelier">
+              <button class="battap" type="button" data-i="0" aria-label="Toucher L'atelier pour récolter des Dodjis"><div class="lot lotbox" data-lot="/landing/lottie/bat-atelier.json" data-loop="1" aria-hidden="true"></div></button>
+              <span class="battag">Ton job</span>
+              <h3>L'atelier</h3>
+              <p class="lead">Tape dessus pour toucher ton salaire à chaque session.</p>
+            </article>
+            <article class="slide" aria-roledescription="diapositive" aria-label="2 sur 6 : Le moulin">
+              <button class="battap" type="button" data-i="1" aria-label="Toucher Le moulin pour récolter des Dodjis"><div class="lot lotbox" data-lot="/landing/lottie/bat-moulin.json" data-loop="1" aria-hidden="true"></div></button>
+              <span class="battag">Ton épargne</span>
+              <h3>Le moulin</h3>
+              <p class="lead">Ton épargne de précaution : sûre, mais pas très généreuse.</p>
+            </article>
+            <article class="slide" aria-roledescription="diapositive" aria-label="3 sur 6 : La réserve">
+              <button class="battap" type="button" data-i="2" aria-label="Toucher La réserve pour récolter des Dodjis"><div class="lot lotbox" data-lot="/landing/lottie/bat-reserve.json" data-loop="1" aria-hidden="true"></div></button>
+              <span class="battag">Ta banque</span>
+              <h3>La réserve</h3>
+              <p class="lead">Elle protège ton argent, mais l'inflation le grignote.</p>
+            </article>
+            <article class="slide" aria-roledescription="diapositive" aria-label="4 sur 6 : Le phare">
+              <button class="battap" type="button" data-i="3" aria-label="Toucher Le phare pour récolter des Dodjis"><div class="lot lotbox" data-lot="/landing/lottie/bat-phare.json" data-loop="1" aria-hidden="true"></div></button>
+              <span class="battag">Tes placements</span>
+              <h3>Le phare</h3>
+              <p class="lead">Actions et ETF pour faire grandir ton patrimoine.</p>
+            </article>
+            <article class="slide" aria-roledescription="diapositive" aria-label="5 sur 6 : L'agence">
+              <button class="battap" type="button" data-i="4" aria-label="Toucher L'agence pour récolter des Dodjis"><div class="lot lotbox" data-lot="/landing/lottie/bat-agence.json" data-loop="1" aria-hidden="true"></div></button>
+              <span class="battag">Ton immobilier</span>
+              <h3>L'agence</h3>
+              <p class="lead">Achète, loue, valorise, pierre après pierre.</p>
+            </article>
+            <article class="slide" aria-roledescription="diapositive" aria-label="6 sur 6 : La foreuse">
+              <button class="battap" type="button" data-i="5" aria-label="Toucher La foreuse pour récolter des Dodjis"><div class="lot lotbox" data-lot="/landing/lottie/bat-foreuse.json" data-loop="1" aria-hidden="true"></div></button>
+              <span class="battag">Ton wallet</span>
+              <h3>La foreuse</h3>
+              <p class="lead">Bitcoin, Ethereum : comprends avant de te lancer.</p>
+            </article>
+        </div>
+        <span class="batfx" aria-hidden="true"></span>
+        <button class="arrow batprev" type="button" aria-label="Bâtiment précédent"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="arrow batnext" type="button" aria-label="Bâtiment suivant"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="j batdots" style="--i:3">
+        <button class="cdot on" type="button" data-i="0" aria-label="Voir L'atelier"></button><button class="cdot" type="button" data-i="1" aria-label="Voir Le moulin"></button><button class="cdot" type="button" data-i="2" aria-label="Voir La réserve"></button><button class="cdot" type="button" data-i="3" aria-label="Voir Le phare"></button><button class="cdot" type="button" data-i="4" aria-label="Voir L'agence"></button><button class="cdot" type="button" data-i="5" aria-label="Voir La foreuse"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Commence ton aventure + communauté -->
+  <section id="community" class="sec" aria-labelledby="aventure-title">
+    <div class="in" style="max-width:900px">
+      <div class="center" style="margin:0 auto 22px">
+        <h2 id="aventure-title" class="h2 j" style="--i:0">Commence ton aventure <span class="lime">dès maintenant !</span></h2>
+      </div>
+      <div class="two keyfacts">
+        <div class="panel j fact" style="--i:1"><img src="/landing/img/DodjiPiece.svg" alt="" width="58" height="58"><div><b class="lime">0 €</b><span>pour commencer</span></div></div>
+        <div class="panel j fact" style="--i:2"><img src="/landing/img/XP.svg" alt="" width="58" height="58" style="border-radius:12px"><div><b class="lime">3 min</b><span>par jour suffisent</span></div></div>
+      </div>
+      <div class="panel two j b2b" style="--i:3">
+        <div>
+          <h3>Écoles, entreprises, associations</h3>
+          <p>Fais jouer Dodje à tes élèves, tes salariés ou ta communauté.</p>
+        </div>
+        <a class="cta" href="/contact">Nous contacter</a>
+      </div>
+      <p class="j communityline" style="--i:4">Rejoins aussi la communauté sur <a href="https://discord.gg/qn7cp4nVFh" target="_blank" rel="noopener noreferrer">Discord</a>.</p>
+    </div>
+  </section>
+
+  <!-- FAQ visible, synchronisée avec le JSON-LD FAQPage du head -->
+  <div id="home-seo-crawl">
+  <section id="faq-home" class="sec auto" aria-labelledby="faq-home-title">
+    <div class="in" style="max-width:820px">
+      <div class="center" style="margin:0 auto 20px">
+        <h2 id="faq-home-title" class="h2 j" style="--i:0">Questions <span class="lime">fréquentes</span></h2>
+        <p class="lead j" style="--i:1;margin-top:10px">Tout ce qu'il faut savoir sur Dodje, le jeu mobile gratuit pour apprendre la finance.</p>
+      </div>
+      <div class="faq">
+        <details class="faq-item j" style="--i:1"><summary>Qu'est-ce que Dodje ?</summary><p>Dodje est un jeu mobile gratuit pour apprendre la finance (iOS et Android). Tu suis des leçons d'environ 3 minutes, tu réponds à des quiz, tu gagnes des Dodjis, tu les investis pour développer ton île et tu grimpes au classement mondial. Lancé en 2024 par Dodje Solutions (Orléans), 0&nbsp;€ pour commencer, dès 16&nbsp;ans. Ce n'est ni un jeu d'argent, ni un courtier.</p></details>
+        <details class="faq-item j" style="--i:2"><summary>Pourquoi apprendre la finance en jouant ?</summary><p>Parce que les Français agissent mieux qu'ils ne comprennent : leur score de culture financière est de 12,82/20 (Banque de France / CSA, enquête publiée en mai 2026), et 45 % des 18-25 ans demandent déjà des conseils financiers à une IA. Or l'apprentissage actif fait passer le taux d'échec de 34 % à 22 % par rapport à un cours magistral (Freeman et al., PNAS 2014, 225 études). Un jeu fait répéter, pratiquer et récompense : c'est le principe des quiz et des décisions de Dodje.</p></details>
+        <details class="faq-item j" style="--i:3"><summary>Dodje est-il un jeu ou une application d'éducation financière ?</summary><p>Les deux. Dodje est une application d'éducation financière construite comme un jeu. L'apprentissage (budget, épargne, bourse, crypto, immobilier, fiscalité) passe par des leçons courtes et des quiz façon Duolingo ; la pratique passe par ton île, où tu investis tes Dodjis dans 6 bâtiments façon Clash of Clans ; et tu progresses de niveau en niveau façon Mario. Fiche : <a href="/guides/application-education-financiere">app éducation financière</a> (aussi app éducation financiere, sans accent).</p></details>
+        <details class="faq-item j" style="--i:4"><summary>Comment on joue à Dodje ?</summary><p>En 4 étapes : 1) tu suis une leçon d'environ 3 minutes et tu valides un quiz ; 2) tu gagnes des Dodjis, la monnaie du jeu ; 3) tu les investis sur ton île dans 6 bâtiments qui représentent ton job (l'atelier), ton épargne (le moulin), ta banque (la réserve), tes placements (le phare), ton immobilier (l'agence) et ton wallet crypto (la foreuse) ; 4) ton île grandit, tu montes de niveau et tu grimpes au classement mondial des joueurs.</p></details>
+        <details class="faq-item j" style="--i:5"><summary>C'est quoi les Dodjis ?</summary><p>Les Dodjis sont la monnaie virtuelle du jeu Dodje. Tu en gagnes en terminant des leçons, des quiz et des défis quotidiens, puis tu les investis dans les bâtiments de ton île pour la faire grandir. Ils n'ont aucune valeur monétaire réelle et ne peuvent pas être convertis en euros.</p></details>
+        <details class="faq-item j" style="--i:6"><summary>Dodje est-il un jeu d'argent ?</summary><p>Non. Dodje est un jeu éducatif : il n'y a ni mises, ni paris, ni argent réel à gagner. Les Dodjis sont une monnaie virtuelle sans valeur. Ce n'est pas un casino, pas un site de paris et pas une plateforme de trading.</p></details>
+        <details class="faq-item j" style="--i:6"><summary>Quelle est la différence entre Dodje et Capito ?</summary><p>Les deux sont des apps françaises d'éducation financière gamifiée. Capito mise sur des micro-leçons à swiper, des streaks, des XP et des ligues, avec une version gratuite limitée à 3 leçons par jour et un Premium à 6,99&nbsp;€/mois. Dodje est un jeu à part entière : les Dodjis gagnés en leçon s'investissent dans une île à développer, avec 6 bâtiments qui représentent ton job, ton épargne, ta banque, tes placements, ton immobilier et ton wallet crypto. Les parcours Dodje sont gratuits ; des achats in-app optionnels permettent d'accélérer. Voir <a href="/guides/dodje-vs-capito">Dodje vs Capito</a>.</p></details>
+        <details class="faq-item j" style="--i:6"><summary>Dodje est-il vraiment gratuit ?</summary><p>Oui. Le jeu, les leçons et l'île sont accessibles gratuitement, sans abonnement ni carte bancaire à l'inscription. Des achats in-app optionnels (Dodjis) permettent d'accélérer la progression, sans rendre le reste du contenu payant.</p></details>
+        <details class="faq-item j" style="--i:6"><summary>Quels sujets de finance sont couverts par Dodje ?</summary><p>Dodje couvre 6 thématiques : budget personnel, épargne de précaution, bourse (actions, ETF, PEA), cryptomonnaies (blockchain, wallets, risques), immobilier locatif et fiscalité française. Chaque thème correspond à un bâtiment de l'île et à un parcours de leçons progressif, sans promesse de rendement.</p></details>
+        <details class="faq-item j" style="--i:6"><summary>À qui s'adresse Dodje ?</summary><p>Aux débutants en finance personnelle, en particulier les 18-45 ans qui veulent comprendre leur argent sans jargon et sans cours ennuyeux. Le jeu part du niveau zéro et progresse étape par étape. Âge minimum : 16 ans.</p></details>
+        <details class="faq-item j" style="--i:6"><summary>Dodje donne-t-il des conseils en investissement personnalisés ?</summary><p>Non. Dodje est un service d'éducation et d'information financière. Le jeu n'est pas un conseiller financier réglementé et ne fournit aucune recommandation personnalisée, aucune promesse de rendement, ni d'incitation à investir dans un produit spécifique.</p></details>
+        <details class="faq-item j" style="--i:6"><summary>Dodje propose-t-il des calculateurs financiers gratuits ?</summary><p>Oui. En complément du jeu, <a href="/outils">dodje.fr/outils</a> propose plus de 20 simulateurs gratuits et sans inscription pour la France : salaire brut net, Livret A, capacité d'emprunt, PEA vs CTO, budget mensuel, PER, intérêts composés.</p></details>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- 8. Appel final -->
+  <section id="telecharger" class="sec nobar center" aria-labelledby="final-title">
+    <div class="in finalin">
+      <div class="lot j premiumlot" data-lot="/landing/lottie/premium-loop.json" data-loop="1" role="img" aria-label="Boky premium décolle sur sa fusée arc-en-ciel" style="--i:0"></div>
+      <h2 id="final-title" class="j finaltitle" style="--i:1">Plante ton gland. <span class="lime">Deviens un chêne.</span></h2>
+      <div class="stores j" style="--i:2;justify-content:center">
+        <a class="store storew store-lg" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z"/></svg><span><small>Télécharger dans</small>l'App Store</span></a>
+          <a class="store storew store-lg" href="https://play.google.com/store/apps/details?id=xyz.dodje.app&amp;hl=fr" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z"/></svg><span><small>Disponible sur</small>Google Play</span></a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="sitefoot">
+    <div class="j footcard" style="--i:0">
+      <div class="foottop">
+        <div class="footbrand">
+          <img src="/landing/img/MascotteHappy.svg" alt="" width="52" height="52">
+          <div><img src="/assets/Logo_degrade_260.webp" alt="Dodje" width="68" height="26" style="height:26px;width:auto;display:block"><p>Le jeu gratuit pour comprendre l'argent.</p></div>
+        </div>
+        <div class="socials">
+          <a class="soc press" href="https://www.tiktok.com/@dodje.app" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur TikTok"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.16 8.16 0 0 0 4.77 1.52V7.12a4.85 4.85 0 0 1-1-.43z"/></svg></a>
+          <a class="soc press" href="https://www.instagram.com/dodje.app/" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a class="soc press" href="https://discord.gg/qn7cp4nVFh" target="_blank" rel="noopener noreferrer" aria-label="Communauté Discord Dodje"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 2.9l-.6 1.2a18.3 18.3 0 0 0-5.5 0l-.6-1.2a19.7 19.7 0 0 0-4.9 1.5C.7 9 -.2 13.6.1 18.1a19.9 19.9 0 0 0 6 3l1.3-2a13 13 0 0 1-1.9-.9l.4-.3a14.2 14.2 0 0 0 12.1 0l.4.3c-.6.4-1.2.7-1.9.9l1.3 2a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.5-13.7zM8.5 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm7 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg></a>
+          <a class="soc press" href="https://x.com/DodjeApp" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur X"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <nav class="ftiles" aria-label="Liens utiles">
+        <a class="ftile" href="/jeu"><b>Le jeu</b><span>Comment on joue</span></a>
+        <a class="ftile" href="/outils"><b>Calculateurs</b><span>Épargne, crédit, salaire</span></a>
+        <a class="ftile" href="/guides"><b>Guides</b><span>Apprendre à investir</span></a>
+        <a class="ftile" href="/faq"><b>Aide</b><span>FAQ et contact</span></a>
+      </nav>
+      <div class="footbottom">
+        <div class="footlegal">
+          <a class="flegal" href="/blog">Blog</a>
+          <a class="flegal" href="/actualites">Actualités</a>
+          <a class="flegal" href="/mentions-legales">Mentions légales</a>
+          <a class="flegal" href="/conditions-utilisation">Conditions d'utilisation</a>
+          <a class="flegal" href="/politique-confidentialite">Confidentialité</a>
+          <a class="flegal" href="/contact">Nous contacter</a>
+        </div>
+        <span class="footcopy">© 2026 Dodje Solutions. Service d'éducation financière, pas de conseil en investissement.</span>
+      </div>
+    </div>
+  </footer>
+
+  <aside class="dlwrap" aria-label="Télécharger Dodje">
+    <div class="dlbar off">
+      <img src="/landing/img/MascotteHappy.svg" alt="" width="44" height="44" style="flex:0 0 auto;margin-left:6px">
+      <span class="dltxt"><b class="dltitle">Joue à Dodje</b><span>C'est gratuit</span></span>
+      <a class="store storew hide-sm dlstore" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z"/></svg>App Store</a>
+      <a class="store storew hide-sm dlstore" href="https://play.google.com/store/apps/details?id=xyz.dodje.app&amp;hl=fr" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z"/></svg>Google Play</a>
+      <a class="cta show-sm dlhref dlcta" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">Télécharger</a>
+    </div>
+  </aside>
+</div>
+<script type="module" src="/src/landing/main.js"></script>
 </body>
-</html> 
+</html>

@@ -55,6 +55,8 @@ const injectAppPromoPlugin = () => ({
     handler(html, ctx) {
       if (!ctx.filename.endsWith('.html')) return html
       if (html.includes('app-promo.js')) return html
+      // La landing a sa propre barre de téléchargement : pas de barre app-promo en double.
+      if (html.includes('data-no-app-promo')) return html
       const src = appPromoScriptPath(ctx.filename)
       return html.replace('</body>', `    <script src="${src}"></script>\n</body>`)
     }
