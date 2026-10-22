@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://dodje.fr/outils/calculateur-salaire-brut-net">
     <meta property="og:title" content="Calculateur salaire brut en net 2026">
-    <meta property="og:description" content="Brut → net ou net → brut, mensuel ou annuel. Cotisations Agirc-Arrco et CSG 2026.">
+    <meta property="og:description" content="Brut en net ou net en brut, mensuel ou annuel. Cotisations Agirc-Arrco et CSG 2026, SMIC à 1 867,02 €.">
     <meta property="og:image" content="https://dodje.fr/assets/IconeApp.png">
     <meta property="og:url" content="https://dodje.fr/outils/calculateur-salaire-brut-net">
     <meta property="og:type" content="website">
@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/dodje-apple-touch.png">
     <link rel="stylesheet" href="../styles.css">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur salaire brut net Dodje","url":"https://dodje.fr/outils/calculateur-salaire-brut-net","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":"fr-FR","areaServed":{"@type":"Country","name":"France"},"publisher":{"@id":"https://dodje.fr/#organization"}}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment convertir un salaire brut mensuel en net en 2026 ?","acceptedAnswer":{"@type":"Answer","text":"Saisis ton brut mensuel, choisis cadre ou non-cadre. Le simulateur applique les cotisations salariales 2026 (vieillesse, Agirc-Arrco, CSG/CRDS) et affiche le net avant impôt, le net imposable et le net annuel."}},{"@type":"Question","name":"Quelle est la différence entre net mensuel et net annuel ?","acceptedAnswer":{"@type":"Answer","text":"Le net mensuel est ce que tu perçois chaque mois sur ta fiche de paie (avant prélèvement à la source). Le net annuel = net mensuel × 12, utile pour comparer une offre d'embauche exprimée en brut annuel."}},{"@type":"Question","name":"Peut-on calculer le brut à partir du net ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Sélectionne Net → Brut, saisis le net mensuel ou annuel souhaité : le simulateur calcule le brut contractuel nécessaire via les barèmes officiels 2026."}}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Comment convertir un salaire brut mensuel en net en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": "Saisis ton brut mensuel, choisis cadre ou non-cadre. Le simulateur applique les cotisations salariales 2026 (vieillesse, Agirc-Arrco, CSG/CRDS) et affiche le net avant impôt, le net imposable et le net annuel."}}, {"@type": "Question", "name": "Quelle est la différence entre net mensuel et net annuel ?", "acceptedAnswer": {"@type": "Answer", "text": "Le net mensuel est ce que tu perçois chaque mois sur ta fiche de paie (avant prélèvement à la source). Le net annuel = net mensuel × 12, utile pour comparer une offre d'embauche exprimée en brut annuel."}}, {"@type": "Question", "name": "Peut-on calculer le brut à partir du net ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Sélectionne Net → Brut, saisis le net mensuel ou annuel souhaité : le simulateur calcule le brut contractuel nécessaire via les barèmes officiels 2026."}}, {"@type": "Question", "name": "Comment passer du brut annuel au net mensuel ?", "acceptedAnswer": {"@type": "Answer", "text": "Divise le brut annuel par 12 (ou par 13 si tu as un treizième mois), puis multiplie par 0,79 pour un non-cadre. Exemple : 36 000 € brut par an font 3 000 € brut par mois, soit environ 2 375 € net."}}, {"@type": "Question", "name": "Pourquoi mon net sur la fiche de paie est différent ?", "acceptedAnswer": {"@type": "Answer", "text": "La mutuelle d'entreprise, les tickets restaurant, les heures supplémentaires ou les absences modifient le net. Le simulateur donne le calcul de base, pour un mois complet sans éléments variables."}}]}</script>
 </head>
 <body>
     <video id="background-video" autoplay muted loop playsinline preload="metadata"><source src="../assets/anime/FondAnime.mp4" type="video/mp4"></video>
@@ -28,8 +28,8 @@
     <main class="content-page">
         <article class="content-layout">
             <p class="legal-eyebrow">Salaire France 2026</p>
-            <h1>Salaire brut ↔ <span class="legal-title-accent">net</span></h1>
-            <p class="content-lead"><strong>En bref :</strong> convertis brut en net (ou l'inverse), en mensuel ou annuel. Cotisations salariales 2026 appliquées ligne par ligne — PMSS 3 925 €, cadre ou non-cadre.</p>
+            <h1>Salaire brut en <span class="legal-title-accent">net</span></h1>
+            <p class="content-lead"><strong>En bref :</strong> pour un salarié du privé, le net avant impôt vaut environ 79 % du brut, un peu moins pour un cadre qui gagne plus de 4 005 € brut. Ce simulateur fait le calcul exact, ligne par ligne, avec les taux 2026 : plafond de la Sécurité sociale à 4 005 € par mois, SMIC à 1 867,02 € brut. Il donne aussi ton net imposable et ton net après prélèvement à la source.</p>
 
             <form id="calc-salaire" class="calc-widget" data-auto-calc="true">
                 <div class="calc-segments" role="group" aria-label="Sens du calcul">
@@ -94,22 +94,51 @@
             </form>
 
             <h2>Raccourcis 2026</h2>
-            <p>SMIC brut ≈ 1 823 €/mois → environ <strong>1 430 € net</strong>. Pour une estimation rapide : brut × 0,78 (non-cadre) ou × 0,75 (cadre au-dessus du PMSS).</p>
+            <p>SMIC brut : 1 867,02 € par mois depuis le 1er juin 2026, soit environ <strong>1 478 € net</strong>. Pour une estimation rapide : brut × 0,79. Exemples pour un non-cadre : 2 000 € brut font environ 1 580 € net, 2 500 € brut environ 1 980 € net, 3 000 € brut environ 2 375 € net.</p>
+
+            <section class="content-defs" aria-labelledby="defs-title">
+                <h2 id="defs-title">Les mots à connaître</h2>
+                <dl>
+                    <dt>Salaire brut</dt><dd>Le salaire inscrit sur ton contrat de travail, avant toute retenue.</dd>
+                    <dt>Salaire net avant impôt</dt><dd>Ce qui reste après les cotisations salariales. C'est le montant « net à payer avant impôt » de ta fiche de paie.</dd>
+                    <dt>Net imposable</dt><dd>Le montant qui sert à calculer ton impôt sur le revenu. Il est un peu plus élevé que ton net, car une partie de la CSG et la CRDS sont imposables même si tu ne les touches pas.</dd>
+                    <dt>Cotisations salariales</dt><dd>La part de ton brut qui finance ta protection sociale : retraite de base, retraite complémentaire, et, via la CSG et la CRDS, la Sécurité sociale et la dette sociale.</dd>
+                    <dt>CSG et CRDS</dt><dd>Contribution sociale généralisée (9,2 % au total sur les salaires) et contribution au remboursement de la dette sociale (0,5 %). Elles sont calculées sur 98,25 % de ton brut.</dd>
+                    <dt>Agirc-Arrco</dt><dd>La caisse de retraite complémentaire des salariés du privé. Tes cotisations te donnent des points qui feront ta future retraite complémentaire.</dd>
+                    <dt>PMSS</dt><dd>Plafond mensuel de la Sécurité sociale : 4 005 € en 2026. Certains taux changent au-dessus de ce seuil, d'où la différence entre la tranche 1 (jusqu'au plafond) et la tranche 2 (au-dessus).</dd>
+                    <dt>Prélèvement à la source</dt><dd>Ton impôt sur le revenu, retenu directement chaque mois sur ton salaire par ton employeur, selon un taux que t'envoie l'administration fiscale.</dd>
+                </dl>
+            </section>
+
+            <h2>Pourquoi un cadre touche un peu moins de net, à brut égal</h2>
+            <p>Un cadre cotise davantage pour sa retraite complémentaire au-dessus du plafond de la Sécurité sociale et paie une petite cotisation à l'APEC, l'association pour l'emploi des cadres. En échange, il accumule plus de points de retraite. Au-delà du plafond, son coefficient descend donc sous 0,79.</p>
+
+            <h2>Ce que paie ton employeur en plus</h2>
+            <p>Ton brut n'est pas ce que tu coûtes à ton entreprise : elle paie aussi des cotisations patronales, d'environ 25 à 45 % du brut selon le niveau de salaire. Près du SMIC, elles sont fortement réduites par des allègements de charges. C'est pour cela que certaines propositions politiques jouent sur les cotisations plutôt que sur le brut : compare-les avec notre <a href="/outils/simulateur-salaire-presidentielle-2027">simulateur salaire présidentielle 2027</a>.</p>
+
+            <h2>Questions fréquentes</h2>
+            <h3>Comment passer du brut annuel au net mensuel ?</h3>
+            <p>Divise le brut annuel par 12 (ou par 13 si tu as un treizième mois), puis multiplie par 0,79 pour un non-cadre. Exemple : 36 000 € brut par an font 3 000 € brut par mois, soit environ 2 375 € net.</p>
+            <h3>Pourquoi mon net sur la fiche de paie est différent ?</h3>
+            <p>La mutuelle d'entreprise, les tickets restaurant, les heures supplémentaires ou les absences modifient le net. Le simulateur donne le calcul de base, pour un mois complet sans éléments variables.</p>
 
             <div class="content-links">
                 <a href="/guides/lire-fiche-de-paie-2026">Lire sa fiche de paie</a>
                 <a href="/outils/calculateur-impot-revenu">Impôt sur le revenu</a>
                 <a href="/outils/calculateur-budget-mensuel">Budget mensuel</a>
                 <a href="/outils/calculateur-allocation-chomage">Allocation chômage</a>
+                <a href="/outils/simulateur-salaire-presidentielle-2027">Salaire et présidentielle 2027</a>
             </div>
             <aside class="content-sources">
                 <h2>Sources</h2>
                 <ul>
+                    <li><a href="https://www.info.gouv.fr/actualite/le-smic-revalorise-le-1er-juin-2026" rel="noopener noreferrer" target="_blank">Gouvernement, SMIC au 1er juin 2026</a></li>
+                    <li><a href="https://www.legisocial.fr/reperes-sociaux/plafond-securite-sociale-2026.html" rel="noopener noreferrer" target="_blank">Legisocial, plafond de la Sécurité sociale 2026</a></li>
                     <li><a href="https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net" rel="noopener noreferrer" target="_blank">Urssaf, simulateur brut/net officiel</a></li>
                     <li><a href="https://www.urssaf.fr/accueil/outils-documentation/simulateurs/cotisations-employeur.html" rel="noopener noreferrer" target="_blank">URSSAF, cotisations 2026</a></li>
                 </ul>
             </aside>
-            <p class="content-updated">Dernière mise à jour : 8 juillet 2026</p>
+            <p class="content-updated">Dernière mise à jour : 22 octobre 2026</p>
         </article>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 Dodje.</p></div></div></footer>

@@ -8150,3 +8150,29 @@ a:focus-visible {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
+
+/* Bloc pédagogique : les mots à connaître */
+.content-defs {
+    max-width: 700px;
+    margin: var(--space-8) auto;
+    padding: var(--space-5) var(--space-6);
+    border: none;
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.05);
+}
+.content-defs h2 { margin-top: 0; }
+.content-defs dl { margin: 0; }
+.content-defs dt { font-weight: 700; color: var(--accent-light-green); margin-top: var(--space-4); }
+.content-defs dt:first-child { margin-top: 0; }
+.content-defs dd { margin: var(--space-1) 0 0; color: var(--gray-200); line-height: 1.6; }
+.calc-widget select, .calc-widget input[type="range"] { width: 100%; }
+.calc-bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; margin-top: 6px; }
+.calc-bar > span { display: block; height: 100%; border-radius: 99px; background: var(--accent-light-green); transition: width .4s ease; }
+.calc-cards { display: grid; gap: var(--space-3); margin-top: var(--space-5); }
+.calc-card { padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg); background: rgba(255,255,255,0.05); }
+.calc-card h4 { margin: 0 0 var(--space-1); font-size: 1.05rem; }
+.calc-card p { margin: var(--space-1) 0 0; color: var(--gray-200); font-size: .95rem; }
+.calc-card .calc-delta { font-weight: 800; font-size: 1.15rem; }
+.calc-card .calc-delta.up { color: var(--accent-light-green); }
+.calc-card .calc-delta.flat { color: var(--gray-300, #bbb); }
+@media (min-width: 760px) { .calc-cards { grid-template-columns: 1fr 1fr; } }

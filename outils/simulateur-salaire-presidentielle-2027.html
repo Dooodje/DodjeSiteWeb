@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur : ton salaire selon les programmes de la présidentielle 2027 | Dodje</title>
+    <meta name="description" content="Simulateur neutre et sourcé : entre ton salaire net et vois l&#x27;effet des propositions chiffrées des candidats à la présidentielle 2027 (SMIC, hausses de salaire, cotisations, temps de travail).">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="Dodje">
+    <meta name="language" content="fr-FR">
+    <link rel="canonical" href="https://dodje.fr/outils/simulateur-salaire-presidentielle-2027">
+    <meta property="og:title" content="Présidentielle 2027 : ce que les programmes changeraient sur ton salaire">
+    <meta property="og:description" content="Simulateur neutre et sourcé : entre ton salaire net et vois l&#x27;effet des propositions chiffrées des candidats à la présidentielle 2027 (SMIC, hausses de salaire, cotisations, temps de travail).">
+    <meta property="og:image" content="https://dodje.fr/assets/og-default-1200x630.png">
+    <meta property="og:url" content="https://dodje.fr/outils/simulateur-salaire-presidentielle-2027">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="article:published_time" content="2026-10-22">
+    <meta property="article:modified_time" content="2026-10-22">
+    <link rel="icon" type="image/svg+xml" href="../assets/dodje-favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/dodje-favicon-48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/dodje-favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/dodje-apple-touch.png">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Présidentielle 2027 : ce que les programmes changeraient sur ton salaire", "url": "https://dodje.fr/outils/simulateur-salaire-presidentielle-2027", "description": "Simulateur neutre et sourcé : entre ton salaire net et vois l'effet des propositions chiffrées des candidats à la présidentielle 2027 (SMIC, hausses de salaire, cotisations, temps de travail).", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "inLanguage": "fr-FR", "areaServed": {"@type": "Country", "name": "France"}, "publisher": {"@id": "https://dodje.fr/#organization"}, "dateModified": "2026-10-22", "citation": ["https://votons-2027.fr/themes/economie", "https://www.ifrap.org/comparateurs/presidentielles-2027", "https://quiproposequoi2027.fr/", "https://www.info.gouv.fr/actualite/le-smic-revalorise-le-1er-juin-2026", "https://www.conseil-constitutionnel.fr/la-constitution/l-election-presidentielle"]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel candidat augmenterait le plus le SMIC en 2027 ?", "acceptedAnswer": {"@type": "Answer", "text": "Parmi les propositions chiffrées consultées en octobre 2026, Nathalie Arthaud (Lutte ouvrière) propose un SMIC à 2 200 € net, Anasse Kazib (Révolution permanente) 2 000 € net, Jean-Luc Mélenchon (LFI) et Raphaël Glucksmann (Place publique) 1 600 € net, et Marine Tondelier (Les Écologistes) 2 000 € brut."}}, {"@type": "Question", "name": "Les programmes de 2027 sont-ils définitifs ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. En octobre 2026, plusieurs candidats n'ont publié que des mesures phares, et certains programmes datent encore de 2022. La liste officielle des candidats n'est connue qu'après la validation des parrainages par le Conseil constitutionnel, au printemps 2027."}}, {"@type": "Question", "name": "Ce simulateur est-il neutre ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Il applique les mesures telles qu'elles sont annoncées, présente les candidats par ordre alphabétique par défaut et cite chaque source avec sa date. Dodje ne soutient aucun candidat."}}, {"@type": "Question", "name": "Pourquoi mon salaire ne change pas avec certains candidats ?", "acceptedAnswer": {"@type": "Answer", "text": "Parce que leurs propositions portent sur les impôts, les prix, la retraite ou les entreprises, sans chiffrer une hausse des salaires au-dessus du SMIC."}}]}</script>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
+    </video>
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar visible" id="navbar-scroll">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="/outils" class="nav-link">Outils</a>
+                <a href="/#top" class="cta-button nav-cta">Télécharger l'app</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <article class="content-layout">
+            <p class="legal-eyebrow">Simulateur présidentielle 2027</p>
+            <h1>Présidentielle 2027 : ce que les programmes changeraient sur ton salaire</h1>
+            <p class="content-lead"><strong>En bref :</strong> Entre ton salaire net mensuel : le simulateur applique les propositions chiffrées que les candidats déclarés ou pressentis ont publiées sur les salaires, et affiche la différence en euros par mois. La plupart des mesures visent le SMIC : si tu gagnes plus de 1 600 € net, beaucoup de programmes ne changent rien directement à ta fiche de paie. Chaque carte indique la source et sa date.</p>
+            <p class="content-updated">Publié le 22 octobre 2026 par l'<a href="/guides/equipe-editoriale">équipe éditoriale Dodje</a></p>
+
+            <div class="content-note content-ymyl">
+                <p><strong>Rappel :</strong> outil éducatif et neutre. Dodje ne soutient aucun candidat. Le simulateur applique chaque mesure telle qu'elle est annoncée, sans juger si elle est finançable ni ses effets sur l'emploi ou les prix. Les programmes évoluent : la liste officielle des candidats ne sera connue qu'au printemps 2027.</p>
+            </div>
+
+            <form id="calc-pres" class="calc-widget" onsubmit="return false">
+ <div class="calc-row">
+  <div class="calc-field"><label for="pr-net">Ton salaire net mensuel avant impôt (€)</label><input type="number" id="pr-net" value="1478" min="0" step="10"></div>
+  <div class="calc-field"><label for="pr-tri">Trier par</label><select id="pr-tri"><option value="nom">Nom du candidat</option><option value="gain">Effet sur ton salaire</option></select></div>
+ </div>
+ <div class="calc-field calc-field-check"><label class="calc-check-label"><input type="checkbox" id="pr-chiffre"> Afficher seulement les mesures qui changent mon salaire</label></div>
+ <p class="calc-result-hint">Repère : le SMIC net est de 1 477,93 € par mois depuis le 1er juin 2026 (1 867,02 € brut).</p>
+ <div class="calc-cards" id="pr-cards"></div>
+</form>
+
+            <section class="content-defs" aria-labelledby="defs-title">
+                <h2 id="defs-title">Les mots à connaître</h2>
+                <dl>
+                    <dt>SMIC</dt><dd>Salaire minimum interprofessionnel de croissance : le salaire le plus bas autorisé en France. Depuis le 1er juin 2026, 12,31 € brut de l'heure, soit 1 867,02 € brut et environ 1 478 € net par mois pour 35 heures.</dd>
+                    <dt>Brut et net</dt><dd>Le brut est le salaire inscrit sur ton contrat. Le net est ce que tu touches après les cotisations salariales, environ 22 % de moins pour un salarié du privé non cadre.</dd>
+                    <dt>Cotisations salariales</dt><dd>La part de ton salaire brut prélevée pour financer ta retraite, l'assurance chômage et la Sécurité sociale. Les baisser augmente ton net, mais réduit les recettes de ces régimes.</dd>
+                    <dt>Indexation</dt><dd>Faire suivre un montant à l'inflation, pour qu'il garde le même pouvoir d'achat.</dd>
+                    <dt>Pouvoir d&#x27;achat</dt><dd>Ce que ton salaire te permet réellement d'acheter. Il augmente si ton salaire monte plus vite que les prix.</dd>
+                    <dt>Quinquennat</dt><dd>Le mandat de cinq ans du président de la République. Le prochain commence en mai 2027.</dd>
+                </dl>
+            </section>
+
+            <h2>Comment lire ce simulateur</h2>
+<p>Le simulateur ne fait qu'une chose : appliquer à ton salaire les mesures que chaque candidat a chiffrées. Il ne dit rien de la qualité d'un programme. Trois limites à garder en tête :</p>
+<ul>
+<li><strong>Une promesse n'est pas une loi.</strong> Un président a besoin d'une majorité à l'Assemblée nationale pour faire voter la plupart de ces mesures.</li>
+<li><strong>Les effets indirects ne sont pas calculés.</strong> Une hausse du SMIC peut tirer les salaires proches vers le haut, mais aussi peser sur l'embauche ou sur les prix. Les économistes ne sont pas d'accord entre eux sur l'ampleur de ces effets.</li>
+<li><strong>Les sources n'ont pas toutes la même date.</strong> Certains programmes datent de 2022 ou de 2024 et n'ont pas encore été mis à jour pour 2027. Chaque carte l'indique.</li>
+</ul>
+<h2>Pourquoi la plupart des mesures visent le SMIC</h2>
+<p>Le SMIC est le seul salaire que l'État fixe directement. Pour les autres salaires, ce sont les entreprises et les accords de branche qui décident. C'est pourquoi beaucoup de propositions portent sur le SMIC, et peu sur les salaires au-dessus. D'autres candidats passent par d'autres leviers : les cotisations (le net monte sans que le brut bouge), le temps de travail (plus d'heures payées ou moins d'heures pour le même salaire), ou les impôts et les prix (TVA, carburant), qui changent ton pouvoir d'achat sans toucher ta fiche de paie.</p>
+<h2>Le calendrier de l'élection</h2>
+<p>L'élection présidentielle aura lieu au printemps 2027. Pour être candidat, il faut réunir 500 parrainages d'élus ; le Conseil constitutionnel publie ensuite la liste officielle, quelques semaines avant le premier tour. D'ici là, les programmes vont se compléter : nous mettrons ce simulateur à jour avec les programmes définitifs. Pour comparer les candidats sur d'autres sujets que le salaire, lis notre <a href="/guides/presidentielle-2027-programmes-economiques">comparatif des programmes économiques</a>.</p>
+<h2>Ce que tu peux faire dès maintenant</h2>
+<p>Quel que soit le résultat de l'élection, ton salaire net dépend aussi de choses que tu maîtrises : négocier ton salaire, connaître la différence entre brut et net avec le <a href="/outils/calculateur-salaire-brut-net">simulateur brut net</a>, et vérifier tes droits à la prime d'activité si tu gagnes moins de 1,5 SMIC environ.</p>
+
+            <h2>Questions fréquentes</h2>
+            <h3>Quel candidat augmenterait le plus le SMIC en 2027 ?</h3>
+            <p>Parmi les propositions chiffrées consultées en octobre 2026, Nathalie Arthaud (Lutte ouvrière) propose un SMIC à 2 200 € net, Anasse Kazib (Révolution permanente) 2 000 € net, Jean-Luc Mélenchon (LFI) et Raphaël Glucksmann (Place publique) 1 600 € net, et Marine Tondelier (Les Écologistes) 2 000 € brut.</p>
+            <h3>Les programmes de 2027 sont-ils définitifs ?</h3>
+            <p>Non. En octobre 2026, plusieurs candidats n'ont publié que des mesures phares, et certains programmes datent encore de 2022. La liste officielle des candidats n'est connue qu'après la validation des parrainages par le Conseil constitutionnel, au printemps 2027.</p>
+            <h3>Ce simulateur est-il neutre ?</h3>
+            <p>Oui. Il applique les mesures telles qu'elles sont annoncées, présente les candidats par ordre alphabétique par défaut et cite chaque source avec sa date. Dodje ne soutient aucun candidat.</p>
+            <h3>Pourquoi mon salaire ne change pas avec certains candidats ?</h3>
+            <p>Parce que leurs propositions portent sur les impôts, les prix, la retraite ou les entreprises, sans chiffrer une hausse des salaires au-dessus du SMIC.</p>
+
+            <div class="content-links">
+                <a href="/guides/presidentielle-2027-programmes-economiques">Programmes économiques 2027</a>
+                <a href="/outils/calculateur-salaire-brut-net">Simulateur brut net</a>
+                <a href="/actualites/budget-2027-plf-mesures-particuliers">Budget 2027</a>
+                <a href="/outils/calculateur-impot-revenu">Impôt sur le revenu</a>
+                <a href="/#top">Apprendre avec Dodje</a>
+            </div>
+
+            <aside class="content-sources">
+                <h2>Sources</h2>
+                <ul>
+                    <li><a href="https://votons-2027.fr/themes/economie" rel="noopener noreferrer" target="_blank">Votons 2027, économie : que proposent les candidats ?</a></li>
+                    <li><a href="https://www.ifrap.org/comparateurs/presidentielles-2027" rel="noopener noreferrer" target="_blank">Fondation iFRAP, comparateur présidentielle 2027</a></li>
+                    <li><a href="https://quiproposequoi2027.fr/" rel="noopener noreferrer" target="_blank">Qui propose quoi 2027, les programmes</a></li>
+                    <li><a href="https://www.info.gouv.fr/actualite/le-smic-revalorise-le-1er-juin-2026" rel="noopener noreferrer" target="_blank">Gouvernement, le SMIC revalorisé le 1er juin 2026</a></li>
+                    <li><a href="https://www.conseil-constitutionnel.fr/la-constitution/l-election-presidentielle" rel="noopener noreferrer" target="_blank">Conseil constitutionnel, l&#x27;élection présidentielle</a></li>
+                </ul>
+            </aside>
+            <p class="content-updated">Dernière mise à jour : 22 octobre 2026</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dodje. Tous droits réservés. Service d'éducation financière, pas de conseil en investissement.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+(function(){
+var SMIC=1477.93,R=0.7916;
+var C=[
+{n:'Nathalie Arthaud',p:'Lutte ouvrière',m:'SMIC à 2 200 € net.',s:'Meeting du 26 septembre 2026',f:function(x){return Math.max(x,2200)}},
+{n:'François Asselineau',p:'UPR',m:'SMIC brut en hausse de 24 % sur le quinquennat, soit environ 4,4 % par an.',s:'Programme 2022, non actualisé',f:function(x){return x<=SMIC*1.001?x*1.24:x},note:'Effet affiché à la fin du quinquennat, pour un salarié au SMIC.'},
+{n:'Gabriel Attal',p:'Renaissance',m:'Suppression du plafond légal de 220 heures supplémentaires par an.',s:'« Mes chantiers capitaux », 2026',f:null,note:'Pas d\'effet direct sur le salaire de base : permet de faire plus d\'heures supplémentaires si l\'employeur le propose.'},
+{n:'Juan Branco',p:'Ruches',m:'SMIC relevé à 1 500 € net minimum.',s:'« La Voie », 2026',f:function(x){return Math.max(x,1500)}},
+{n:'Nicolas Dupont-Aignan',p:'Debout la France',m:'Hausse de 8 % des salaires jusqu\'à 3 SMIC, financée par une baisse des cotisations salariales.',s:'Page « Économie et travail », 2024',f:function(x){return x<=3*SMIC?x*1.08:x}},
+{n:'Raphaël Glucksmann',p:'Place publique',m:'SMIC à 1 600 € net dans les deux ans.',s:'« Acte I », 2026',f:function(x){return Math.max(x,1600)}},
+{n:'Anasse Kazib',p:'Révolution permanente',m:'SMIC à 2 000 € net et hausse de 500 € pour tous les salaires.',s:'« Nos propositions », 2026',f:function(x){return Math.max(x+500,2000)}},
+{n:'Selma Labib',p:'NPA',m:'Hausse de 400 € par mois des salaires, aucun revenu sous 2 000 € net.',s:'Fête de l\'Humanité, 2026',f:function(x){return Math.max(x+400,2000)}},
+{n:'Marine Le Pen',p:'Rassemblement national',m:'TVA de 20 % à 5,5 % sur les carburants, le fioul, le gaz et l\'électricité.',s:'« 22 mesures », 2022, non actualisé',f:null,note:'Pas d\'effet sur la fiche de paie : baisse des prix de l\'énergie, donc gain de pouvoir d\'achat selon ta consommation.'},
+{n:'Jean-Luc Mélenchon',p:'La France insoumise',m:'SMIC à 1 600 € net immédiatement.',s:'« L\'Avenir en commun », édition 2025',f:function(x){return Math.max(x,1600)}},
+{n:'Édouard Philippe',p:'Horizons',m:'Aucun nouvel impôt pendant le quinquennat ; baisses d\'impôts de production pour les entreprises.',s:'« Une France plus prospère », 2026',f:null,note:'Pas de mesure chiffrée sur les salaires.'},
+{n:'Bruno Retailleau',p:'Les Républicains',m:'Durée annuelle portée de 1 607 à 1 623 heures, soit deux jours de travail en plus, payés.',s:'« Le travail gagnant », 2026',f:function(x){return x*1623/1607},note:'Hausse de salaire liée à plus d\'heures travaillées.'},
+{n:'Fabien Roussel',p:'PCF',m:'Semaine de 32 heures sans baisse de salaire ; carburant bloqué à 1,60 € le litre.',s:'Programme 2022 et tract 2026',f:null,note:'Salaire mensuel inchangé, mais moins d\'heures travaillées : ton salaire horaire augmenterait de 9,4 %.'},
+{n:'François Ruffin',p:'Debout !',m:'Salaires indexés sur l\'inflation ; heures avant 8 h et après 18 h payées double.',s:'Cahier de campagne, 2026',f:function(x){return x*1.018},note:'Effet calculé avec l\'inflation actuelle (1,8 %) : la hausse protège ton pouvoir d\'achat, elle ne l\'augmente pas.'},
+{n:'Marine Tondelier',p:'Les Écologistes',m:'SMIC à 2 000 € brut par mois dès 2027.',s:'Programme, juillet 2026',f:function(x){return Math.max(x,2000*R)},note:'2 000 € brut font environ 1 583 € net.'}
+];
+var NONE='Candidats sans mesure chiffrée sur le salaire dans les sources consultées : Delphine Batho, Xavier Bertrand, Karim Bouamrane, Bernard Cazeneuve, David Lisnard, Florian Philippot, Dominique de Villepin, Éric Zemmour.';
+function $(i){return document.getElementById(i)}
+function eur(n){return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n)}
+function run(){var x=+$('pr-net').value||0,only=$('pr-chiffre').checked,tri=$('pr-tri').value;
+var L=C.map(function(c){var nv=c.f?c.f(x):x;return {c:c,nv:nv,d:nv-x}});
+if(only)L=L.filter(function(o){return o.d>0.5});
+if(tri==='gain')L.sort(function(a,b){return b.d-a.d});
+var h='';L.forEach(function(o){var c=o.c,up=o.d>0.5;h+='<div class="calc-card"><h4>'+c.n+' <span style="opacity:.7;font-weight:500">('+c.p+')</span></h4><p class="calc-delta '+(up?'up':'flat')+'">'+(up?'+'+eur(o.d)+' par mois, soit '+eur(o.nv)+' net':'Pas de changement direct')+'</p><p>'+c.m+'</p>'+(c.note?'<p>'+c.note+'</p>':'')+'<p style="opacity:.7">Source : '+c.s+'</p></div>'});
+if(!only)h+='<div class="calc-card"><p>'+NONE+'</p></div>';
+$('pr-cards').innerHTML=h||'<div class="calc-card"><p>Aucune mesure chiffrée ne change directement ce salaire.</p></div>';}
+['pr-net','pr-chiffre','pr-tri'].forEach(function(i){$(i).addEventListener('input',run);$(i).addEventListener('change',run)});run();
+})();
+</script>
+</body>
+</html>
