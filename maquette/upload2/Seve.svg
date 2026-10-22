@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 537.96 814.84">
+  <defs>
+    
+    <linearGradient id="Dégradé_sans_nom_56" data-name="Dégradé sans nom 56" x1="268.98" y1="814.84" x2="268.98" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f164f9"/>
+      <stop offset="1" stop-color="#be1fe5"/>
+    </linearGradient>
+    <linearGradient id="Dégradé_sans_nom_56-2" data-name="Dégradé sans nom 56" x1="445.19" y1="230.09" x2="445.19" y2="18.09" xlink:href="#Dégradé_sans_nom_56"/>
+  </defs>
+  <g style="isolation: isolate;">
+    <g id="Calque_2" data-name="Calque 2">
+      <g id="Calque_1-2" data-name="Calque 1">
+        <g>
+          <path style="fill: url(#Dégradé_sans_nom_56);" d="M537.33,569.81c-8.77,151.61-169.93,270.77-317.28,240.23C90.71,783.24-1.27,681.2.01,546.66,2.1,325.88,177.79,97.67,372.89,6.82c2.2-1.02,16.1-7.54,16.91-6.75-7.88,32.91-18.76,65.72-22.01,99.64-10.21,106.7,39.34,162.68,95.58,242.41,51.02,72.33,79.24,136.29,73.96,227.69Z"/>
+          <path style="fill: #f2f7fa; mix-blend-mode: overlay; opacity: .5;" d="M481.44,602.7c-17.57,75.81-84.94,150.27-162.19,159.3-94.06,11-109.06-2-163.06-23,0,0,95,16,209-85,110.34-97.75,120.85-186.61,123-187,3.08,28.52-.25,107.6-6.75,135.7Z"/>
+          <ellipse style="fill: url(#Dégradé_sans_nom_56-2);" cx="445.19" cy="123" rx="48" ry="106"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
