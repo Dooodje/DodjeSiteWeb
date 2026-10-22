@@ -80,6 +80,11 @@ function initBackgroundVideo() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    const storeHref = /android/i.test(navigator.userAgent)
+        ? 'https://play.google.com/store/apps/details?id=xyz.dodje.app&hl=fr'
+        : 'https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215'
+    document.querySelectorAll('.dlhref').forEach((a) => { a.href = storeHref })
+
     try {
         localStorage.removeItem('dodje_user');
     } catch (e) {}

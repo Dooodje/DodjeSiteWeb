@@ -823,7 +823,7 @@ function injectGameCta(html, filePath) {
   const cta = `<aside class="content-cta-game">
             <h2>Apprends ça en jouant dans Dodje</h2>
             <p>Leçons d'environ 3 minutes, Dodjis, île à développer, classement mondial. Gratuit, dès 16 ans. Ce n'est pas un jeu d'argent.</p>
-            <p class="content-cta-game__actions"><a href="/jeu">Découvrir le jeu</a><a href="/#hero">Télécharger</a></p>
+            <p class="content-cta-game__actions"><a href="/jeu">Découvrir le jeu</a><a class="dlhref" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">Télécharger</a></p>
         </aside>`
 
   if (html.includes('class="content-links"')) {
@@ -927,7 +927,6 @@ export function injectSeoHeadPlugin(rootDir) {
         out = injectBreadcrumbsJsonLd(out, filePath)
         out = injectWebPageSchema(out, filePath, pageUrl)
         out = injectSpeakable(out, pageUrl)
-        out = injectVisibleBreadcrumbs(out, filePath)
         out = optimizeBackgroundVideo(out)
 
         if (!out.includes('og:site_name')) {

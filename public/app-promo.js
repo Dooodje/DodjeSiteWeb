@@ -128,6 +128,8 @@
   }
 
   function init() {
+    var storeHref = /android/i.test(navigator.userAgent) ? PLAY_STORE : APP_STORE;
+    document.querySelectorAll('.dlhref').forEach(function (a) { a.href = storeHref; });
     initBackgroundVideo();
     enhanceMobileMenuCtas();
     if (!document.getElementById('mobile-floating-bar')) {
