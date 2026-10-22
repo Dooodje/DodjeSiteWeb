@@ -7,6 +7,7 @@ import { execFileSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { footerHtml, headerHtml, headChrome, skyHtml } from './site-chrome.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export const rootDir = path.resolve(__dirname, '..')
@@ -336,6 +337,7 @@ export function buildPageHtml({ kind, topic, byId, copy }) {
     <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-48.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon-192.png">
     <link rel="stylesheet" href="../styles.css">
+${headChrome()}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -356,19 +358,8 @@ export function buildPageHtml({ kind, topic, byId, copy }) {
     <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqJson })}</script>
 </head>
 <body>
-    <video id="background-video" autoplay muted loop playsinline preload="metadata">
-        <source src="../assets/anime/FondAnime.mp4" type="video/mp4">
-    </video>
-    <div id="bg-overlay" aria-hidden="true"></div>
-    <nav class="navbar visible">
-        <div class="nav-container">
-            <div class="nav-logo"><a href="/"><img src="../assets/Logo_degrade_PNG.png" alt="Dodje" class="logo-img"></a></div>
-            <div class="nav-menu">
-                <a href="/${dir}" class="nav-link">${kind === 'blog' ? 'Blog' : 'Actualités'}</a>
-                <a href="/#hero" class="cta-button nav-cta">Télécharger l'app</a>
-            </div>
-        </div>
-    </nav>
+${skyHtml()}
+${headerHtml(kind === 'blog' ? 'blog' : 'actus')}
     <main class="content-page">
         <article class="content-layout" data-editorial="auto">
             <p class="legal-eyebrow">${escapeHtml(topic.kicker)}</p>
@@ -394,7 +385,7 @@ export function buildPageHtml({ kind, topic, byId, copy }) {
             <p class="content-updated">Publié le ${escapeHtml(todayFr())}.</p>
         </article>
     </main>
-    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; ${new Date().getFullYear()} Dodje. Tous droits réservés.</p></div></div></footer>
+${footerHtml()}
 </body>
 </html>
 `

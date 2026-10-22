@@ -32,7 +32,7 @@ export const CHAPTERS = [null,
 ]
 
 export const BUILDINGS = [
-  { id: 'atelier', tag: 'Ton job', title: "L'atelier", desc: 'Tape dessus pour toucher ton salaire à chaque session.' },
+  { id: 'atelier', tag: 'Ton job', title: "L'atelier", desc: "C'est ton job, un mini-jeu quotidien pour récupérer tes Dodji !" },
   { id: 'moulin', tag: 'Ton épargne', title: 'Le moulin', desc: 'Ton épargne de précaution : sûre, mais pas très généreuse.' },
   { id: 'reserve', tag: 'Ta banque', title: 'La réserve', desc: "Elle protège ton argent, mais l'inflation le grignote." },
   { id: 'phare', tag: 'Tes placements', title: 'Le phare', desc: 'Actions et ETF pour faire grandir ton patrimoine.' },

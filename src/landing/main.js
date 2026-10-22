@@ -12,7 +12,7 @@ const L = (name) => `/landing/lottie/${name}.json`
 const state = {
   tab: 'top', dodji: 0, sel: 5, pil: 0, mk: 0, batIdx: 0, batN: 0,
   tb: 1, step: 0, q1: null, checked: false, fbOpen: false, swAns: null, slide: 0, slideN: 0,
-  score: 0, lives: 10, lost: 0, phase: 'q', chest: 'load', claimed: false
+  score: 0, phase: 'q'
 }
 
 /* ---------- Lien de téléchargement selon le téléphone ---------- */
@@ -27,6 +27,14 @@ const lotJson = (src) => {
   if (!jsonCache.has(src)) jsonCache.set(src, fetch(src).then((r) => r.text()))
   return jsonCache.get(src)
 }
+function hideLargeBlack(el) {
+  el.querySelectorAll('path,rect,ellipse').forEach((n) => {
+    const fill = (n.getAttribute('fill') || '').replace(/\s/g, '').toLowerCase()
+    if (fill !== 'rgb(0,0,0)' && fill !== '#000' && fill !== '#000000') return
+    const b = n.getBoundingClientRect()
+    if (b.width > 70 && b.height > 28) n.setAttribute('fill', 'none')
+  })
+}
 function syncLots() {
   const vh = window.innerHeight, vw = window.innerWidth
   $$('[data-lot]').forEach((el) => {
@@ -35,21 +43,28 @@ function syncLots() {
     const r = el.getBoundingClientRect()
     const near = r.width > 0 && r.bottom > -vh * 0.4 && r.top < vh * 1.4 && r.right > -vw * 0.2 && r.left < vw * 1.2
     const loop = el.dataset.loop === '1'
-    const key = src + '|' + loop
+    const from = Number(el.dataset.from || 0)
+    const nofond = el.dataset.nofond === '1'
+    const key = src + '|' + loop + (from ? '|f' + from : '') + (nofond ? '|nf2' : '')
     if (el.__lk !== key) {
       if (!near && !el.dataset.eager) return
       if (el.__anim) { el.__anim.destroy(); el.__anim = null }
       el.__lk = key; el.__paused = false
       Promise.all([lottieLib(), lotJson(src)]).then(([lottie, txt]) => {
         if (el.__lk !== key) return
+        const data = JSON.parse(txt)
+        if (nofond) data.layers = data.layers.filter((l) => l.nm !== 'Fond noir' && l.nm !== 'Calque de forme 1')
         const anim = lottie.loadAnimation({
-          container: el, renderer: 'svg', loop, autoplay: !reduced, animationData: JSON.parse(txt),
+          container: el, renderer: 'svg', loop, autoplay: !reduced && !from, animationData: data,
           rendererSettings: { preserveAspectRatio: el.dataset.cover === '1' ? 'xMidYMid slice' : 'xMidYMid meet' }
         })
         el.__anim = anim
-        anim.addEventListener('DOMLoaded', () => el.classList.add('ready'))
-        if (reduced) anim.goToAndStop(Math.floor(anim.totalFrames * 0.5), true)
-        anim.addEventListener('complete', () => { const d = el.dataset.done; if (d) onLotDone(d) })
+        anim.addEventListener('DOMLoaded', () => {
+          el.classList.add('ready')
+          if (nofond) hideLargeBlack(el)
+          if (!reduced && from) anim.goToAndPlay(from, true)
+        })
+        if (reduced) anim.goToAndStop(Math.floor(anim.totalFrames * (from ? 0.62 : 0.5)), true)
       })
     } else if (el.__anim && loop && !reduced) {
       if (near && el.__paused) { el.__anim.play(); el.__paused = false }
@@ -66,7 +81,7 @@ if ('IntersectionObserver' in window) {
   $$('.sec, .sitefoot').forEach((s) => io.observe(s))
 } else document.body.classList.add('noio')
 
-/* ---------- Navbar, barre de téléchargement, Dodjis ---------- */
+/* ---------- Navbar, barre de téléchargement, Dodji ---------- */
 const SECTIONS = ['top', 'dodje', 'ile', 'test', 'investir', 'batiments', 'community', 'faq-home', 'telecharger']
 let raf = 0
 function onScroll() {
@@ -76,6 +91,7 @@ function onScroll() {
     let current = 'top'
     for (const id of SECTIONS) { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top < window.innerHeight * 0.5) current = id }
     state.tab = current
+    syncBatAuto()
     $$('.navlink').forEach((a) => { const on = a.getAttribute('href') === '#' + current; a.classList.toggle('cur', on); if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current') })
     const end = document.getElementById('telecharger')
     const endNear = !!end && end.getBoundingClientRect().top < window.innerHeight * 0.6
@@ -92,7 +108,7 @@ function gain(n) {
   pill.hidden = false
   $('.dodjicount').textContent = state.dodji.toLocaleString('fr-FR')
   pill.classList.remove('bump'); void pill.offsetWidth; pill.classList.add('bump')
-  $('.dltitle').textContent = `Tes ${state.dodji} Dodjis t'attendent`
+  $('.dltitle').textContent = `Tes ${state.dodji} Dodji t'attendent`
 }
 
 /* ---------- 2. La porte d'entrée : trois textes, trois animations ---------- */
@@ -117,34 +133,68 @@ $$('.pbar').forEach((b) => b.addEventListener('click', () => { showPil(+b.datase
 startPil()
 
 /* ---------- 3. L'île ---------- */
+// Le zoom de l'Arène est sur l'image. On ne la retire qu'une fois la suivante
+// décodée, sinon l'image encore affichée se dézoome avant le changement.
+const layerToken = { card: 0, test: 0 }
+function swapLayer(img, n, bucket, onReady) {
+  if (!img) return
+  const arena = n === 16
+  const token = ++layerToken[bucket]
+  const commitCard = (el) => { if (bucket === 'card') el.parentElement.classList.toggle('arena', arena) }
+  if (img.dataset.n === String(n)) {
+    img.classList.toggle('arena', arena)
+    commitCard(img)
+    if (onReady) onReady()
+    return
+  }
+  const next = document.createElement('img')
+  next.className = img.className
+  next.classList.toggle('arena', arena)
+  next.alt = ''
+  const w = img.getAttribute('width'), h = img.getAttribute('height')
+  if (w) next.setAttribute('width', w)
+  if (h) next.setAttribute('height', h)
+  next.decoding = 'sync'
+  next.dataset.n = String(n)
+  next.src = `/landing/chapitres/${n}.webp`
+  const commit = () => {
+    if (layerToken[bucket] !== token || !img.isConnected) return
+    img.replaceWith(next)
+    commitCard(next)
+    if (onReady) onReady()
+  }
+  if (typeof next.decode === 'function') next.decode().then(commit, commit)
+  else if (next.complete) commit()
+  else {
+    next.addEventListener('load', commit, { once: true })
+    next.addEventListener('error', commit, { once: true })
+  }
+}
 function selectBiome(n) {
   state.sel = n
   $$('.biome').forEach((b) => { const on = +b.dataset.n === n; b.setAttribute('aria-pressed', String(on)); b.style.zIndex = on ? 30 : 10 + +b.dataset.n })
   $$('.mapchip').forEach((c) => c.classList.toggle('sel', +c.dataset.n === n))
   const c = CHAPTERS[n], card = $('.chcard')
-  card.classList.toggle('arena', n === 16)
-  $('.chbg', card).src = `/landing/chapitres/${n}.webp`
-  $('.chsub', card).textContent = c.sub
-  $('.chtitle', card).textContent = c.title
-  $('.chdesc', card).textContent = c.desc
+  swapLayer($('.chbg', card), n, 'card', () => {
+    $('.chsub', card).textContent = c.sub
+    $('.chtitle', card).textContent = c.title
+    $('.chdesc', card).textContent = c.desc
+  })
+  setTestBiome(n)
 }
 $$('.biome').forEach((b) => b.addEventListener('click', () => {
   selectBiome(+b.dataset.n)
   if (window.innerWidth < 980) setTimeout(() => $('.chcard').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60)
 }))
 $('.gotest').addEventListener('click', () => {
-  setTestBiome(state.sel)
   document.getElementById('test').scrollIntoView({ behavior: 'smooth' })
 })
 
 /* ---------- 4. Teste ton niveau : le lecteur de module de l'app ---------- */
 const DODJI = '/landing/img/DodjiPiece.svg'
-const HEART = '/landing/img/Coeur.svg'
 function setTestBiome(n) {
-  Object.assign(state, { tb: n, step: 0, q1: null, checked: false, fbOpen: false, swAns: null, slide: 0, score: 0, lives: 10, lost: 0, phase: 'q', chest: 'load', claimed: false })
-  const bg = $('.testbg')
-  bg.src = `/landing/chapitres/${n}.webp`
-  bg.classList.toggle('arena', n === 16)
+  Object.assign(state, { tb: n, step: 0, q1: null, checked: false, fbOpen: false, swAns: null, slide: 0, score: 0, phase: 'q' })
+  swapLayer($('.testbg'), n, 'test')
   $('.testname').textContent = CHAPTERS[n].name
   renderQuiz()
 }
@@ -156,9 +206,6 @@ function quizHtml() {
     const bg = done || cur ? '#F3FF90' : '#2B2B2B', col = done || cur ? '#0A0400' : 'rgba(255,255,255,.6)'
     return `<span class="dot" style="background:${bg};color:${col}">${done ? '✓' : i + 1}</span>${i < 2 ? '<span class="dash"></span>' : ''}`
   }).join('')
-  const lostCls = s.lost ? (s.lost % 2 ? ' lnA' : ' lnB') : ''
-  const heartCls = s.lost ? (s.lost % 2 ? 'shA' : 'shB') : ''
-  const fly = s.lost ? `<img class="heartfly ${s.lost % 2 ? 'hfA' : 'hfB'}" src="${HEART}" alt="" aria-hidden="true">` : ''
   const body = s.step === 0 ? Q1[0] : s.step === 2 ? Q3[0] : ''
   let mid = ''
   if (s.step === 0) {
@@ -186,30 +233,28 @@ function quizHtml() {
     const txt = s.step === 0 ? Q1[3] : s.step === 1 ? Q2[2] : Q3[3]
     const col = ok ? '#06D001' : '#EA2F4A'
     const title = ok ? ['Bien vu !', 'Bien joué !', 'Exactement !'][s.step] : ['Presque !', 'Pas tout à fait.', 'Oups !'][s.step]
+    const fbLot = ok
+      ? `<div class="lot fblot" data-lot="${L('fb-bonne')}" data-loop="1" aria-hidden="true"></div>`
+      : `<div class="lot fblot" data-lot="${L('fb-mauvaise')}" data-loop="0" data-from="44" aria-hidden="true"></div>`
     over = `<div class="fbwrap" role="dialog" aria-live="assertive"><div class="fbback"></div><div class="fbcard" style="background:${ok ? '#DCFFD9' : '#FFD9E1'}">
-      <div class="lot fblot" data-lot="${L(ok ? 'fb-bonne' : 'fb-mauvaise')}" data-loop="1" aria-hidden="true"></div>
+      ${fbLot}
       <b class="fbtitle" style="color:${col}">${title}</b><p class="fbtext" style="color:${col}">${txt}</p>
       <button class="press next" type="button" style="background:${col}">Continuer</button></div></div>`
   }
   if (s.phase === 'result') {
     const passed = s.score >= 2, label = passed ? 'Validé' : 'Échec'
+    const vis = passed
+      ? `<div class="resgain popin"><img src="${DODJI}" alt="" width="72" height="72"><b>+300</b><span>Dodji</span></div>`
+      : `<div class="lot reslot" data-lot="${L('fb-mauvaise')}" data-loop="0" data-from="48" aria-hidden="true"></div>`
     over = `<div class="over enter resultov"><div class="resultin">
       <div class="reslabel" aria-label="${label}" style="color:${passed ? '#06D001' : '#EA2F4A'}">${[...label].map((c, i) => `<span class="letter" style="--i:${i}">${c}</span>`).join('')}</div>
-      <span id="scorePct" class="respct">${s.claimed ? Math.round(s.score / 3 * 100) : 0}%</span>
+      <span id="scorePct" class="respct">0%</span>
       <span class="resdet">${s.score}/3 bonnes réponses</span>
-      <div class="resvis">${passed ? '<img src="/landing/img/fun.webp" alt="Boky fait la fête" width="360" height="360">' : `<div class="lot" data-lot="${L('fb-mauvaise')}" data-loop="1" aria-hidden="true" style="width:100%;height:100%"></div>`}</div></div>
-      <div class="resfoot">${!passed ? '<button class="cta restart" type="button">Recommencer</button>' : s.claimed ? '<a class="cta" href="#investir">Continuer</a>' : '<button class="cta claim" type="button">Récupérer ma récompense</button>'}</div></div>`
-  }
-  if (s.phase === 'chest') {
-    const C = { load: ['coffre-charge', 1, '', 'Tap pour ouvrir', 'rgba(255,255,255,.9)'], open: ['coffre-ouvre', 0, 'open', '', '#fff'], dodji: ['gain-dodji', 1, '', 'Tap pour récupérer', '#000'] }[s.chest]
-    over = `<button class="chest" type="button" aria-label="${s.chest === 'load' ? 'Ouvrir le coffre' : 'Récupérer les Dodjis'}">
-      <div class="lot" data-lot="${L(C[0])}" data-loop="${C[1]}" data-cover="1" data-done="${C[2]}" aria-hidden="true" style="position:absolute;inset:0"></div>
-      ${s.chest === 'dodji' ? '<span class="popin chestamount">+300</span>' : ''}
-      <span class="hint chesthint" style="color:${C[4]}">${C[3]}</span></button>`
+      <div class="resvis">${vis}</div></div>
+      <div class="resfoot">${!passed ? '<button class="cta restart" type="button">Recommencer</button>' : '<a class="cta" href="#investir">Investir mes Dodjis</a>'}</div></div>`
   }
   return `<div class="topband"><div class="tbrow">
-      <span class="lives"><img class="${heartCls}" src="${HEART}" alt="Vies" width="24" height="22"><span class="livesn${lostCls}">${s.lives}</span>${fly}</span>
-      <div class="dots" aria-label="Question ${Math.min(3, s.step + 1)} sur 3">${dots}</div><span style="width:44px"></span></div>
+      <div class="dots" aria-label="Question ${Math.min(3, s.step + 1)} sur 3">${dots}</div></div>
       <span class="qtitle">Question ${s.step + 1}</span>${body ? `<p class="qbody">${body}</p>` : ''}</div>
     <div class="qmid">${mid}</div>
     <div id="swL" class="swglow swl"></div><div id="swR" class="swglow swr"></div>
@@ -222,7 +267,6 @@ function renderQuiz() {
 function answer(good) {
   state.checked = true; state.fbOpen = true
   if (good) state.score++
-  else { state.lives--; state.lost++ }
   renderQuiz()
 }
 function rollScore(target) {
@@ -231,9 +275,6 @@ function rollScore(target) {
   const tick = (t) => { const k = Math.min(1, (t - t0) / 900), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(target * e) + '%'; if (k < 1) requestAnimationFrame(tick) }
   requestAnimationFrame(tick)
   setTimeout(() => { el.textContent = target + '%' }, 950)
-}
-function onLotDone(d) {
-  if (d === 'open' && state.phase === 'chest' && state.chest === 'open') { state.chest = 'dodji'; renderQuiz() }
 }
 const quiz = $('#quiz')
 quiz.addEventListener('click', (e) => {
@@ -247,14 +288,12 @@ quiz.addEventListener('click', (e) => {
     if (state.step === 0 && state.q1 !== null) answer(state.q1 === Q1[2])
     else if (state.step === 2) answer(state.slide === Q3[2])
   } else if (t.classList.contains('next')) {
-    if (state.step >= 2) { state.phase = 'result'; state.fbOpen = false; renderQuiz(); rollScore(Math.round(state.score / 3 * 100)) }
-    else { state.step++; state.checked = false; state.fbOpen = false; renderQuiz() }
-  } else if (t.classList.contains('claim')) { state.phase = 'chest'; state.chest = 'load'; renderQuiz() }
-  else if (t.classList.contains('restart')) setTestBiome(state.tb)
-  else if (t.classList.contains('chest')) {
-    if (state.chest === 'load') { state.chest = 'open'; renderQuiz() }
-    else if (state.chest === 'dodji') { state.phase = 'result'; state.claimed = true; if (state.dodji === 0) gain(300); renderQuiz() }
-  }
+    if (state.step >= 2) {
+      state.phase = 'result'; state.fbOpen = false
+      if (state.score >= 2 && state.dodji === 0) gain(300)
+      renderQuiz(); rollScore(Math.round(state.score / 3 * 100))
+    } else { state.step++; state.checked = false; state.fbOpen = false; renderQuiz() }
+  } else if (t.classList.contains('restart')) setTestBiome(state.tb)
 })
 /* Curseur fluide : le pouce glisse et se cale sur la graduation la plus proche */
 let glideRaf = 0, glideTo = 0
@@ -368,10 +407,33 @@ setInterval(() => {
 
 /* ---------- 6. Bâtiments : carrousel + récolte gamifiée ---------- */
 const track = $('#batTrack')
-function goBat(i) {
-  const k = Math.max(0, Math.min(BUILDINGS.length - 1, i))
-  track.scrollTo({ left: k * track.clientWidth, behavior: reduced ? 'auto' : 'smooth' })
+let batTimer = 0
+let batHold = false
+let batLive = false
+function goBat(i, { wrap = false, instant = false } = {}) {
+  const n = BUILDINGS.length
+  const k = wrap ? ((i % n) + n) % n : Math.max(0, Math.min(n - 1, i))
+  const jump = instant || reduced
+  if (jump) track.style.scrollBehavior = 'auto'
+  track.scrollTo({ left: k * track.clientWidth, behavior: jump ? 'auto' : 'smooth' })
+  if (jump) track.style.scrollBehavior = ''
   setBatIdx(k)
+}
+function startBat() {
+  clearInterval(batTimer)
+  batTimer = setInterval(() => {
+    if (batHold || state.tab !== 'batiments' || document.hidden) return
+    const next = (state.batIdx + 1) % BUILDINGS.length
+    goBat(next, { wrap: true, instant: next === 0 })
+  }, 4000)
+}
+function syncBatAuto() {
+  if (state.tab === 'batiments') {
+    if (!batLive) { batLive = true; startBat() }
+  } else if (batLive) {
+    batLive = false
+    clearInterval(batTimer)
+  }
 }
 function setBatIdx(k) {
   state.batIdx = k
@@ -384,9 +446,12 @@ track.addEventListener('scroll', () => {
   if (k !== state.batIdx) setBatIdx(k)
   syncLots()
 }, { passive: true })
-$('.batprev').addEventListener('click', () => goBat(state.batIdx - 1))
-$('.batnext').addEventListener('click', () => goBat(state.batIdx + 1))
-$$('.cdot').forEach((d) => d.addEventListener('click', () => goBat(+d.dataset.i)))
+$('.batprev').addEventListener('click', () => { goBat(state.batIdx - 1); startBat() })
+$('.batnext').addEventListener('click', () => { goBat(state.batIdx + 1); startBat() })
+$$('.cdot').forEach((d) => d.addEventListener('click', () => { goBat(+d.dataset.i); startBat() }))
+track.addEventListener('pointerdown', () => { batHold = true })
+window.addEventListener('pointerup', () => { if (!batHold) return; batHold = false; startBat() })
+window.addEventListener('pointercancel', () => { if (!batHold) return; batHold = false; startBat() })
 const COINS = [[-90, -70], [-50, -120], [0, -140], [55, -115], [95, -65], [-110, -10], [110, -15]]
 $$('.battap').forEach((b) => b.addEventListener('click', () => {
   state.batN++

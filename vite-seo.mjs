@@ -1,4 +1,5 @@
 import { cleanWording, cleanText } from './scripts/clean-wording.mjs'
+import { applyChrome } from './scripts/site-chrome.mjs'
 import fs from 'fs'
 import path from 'path'
 
@@ -649,107 +650,10 @@ function injectOutilsPrivacyNote(html, filePath) {
   )
 }
 
-const SITE_SKY = `<div class="sk-sky" aria-hidden="true">
-    <svg class="sk-cloud" viewBox="0 0 300 92" style="top:8%;--w:min(36vw,460px);--o:.95;--t:95s;--dl:-20s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
-    <svg class="sk-cloud" viewBox="0 0 300 92" style="top:33%;--w:min(22vw,280px);--o:.7;--t:125s;--dl:-80s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
-    <svg class="sk-cloud" viewBox="0 0 300 92" style="top:56%;--w:min(42vw,540px);--o:.9;--t:110s;--dl:-55s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
-    <svg class="sk-cloud" viewBox="0 0 300 92" style="top:79%;--w:min(28vw,340px);--o:.75;--t:140s;--dl:-110s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
-    <svg class="sk-cloud" viewBox="0 0 300 92" style="top:20%;--w:min(18vw,230px);--o:.6;--t:160s;--dl:-135s"><g fill="#F7F9FD"><circle cx="58" cy="66" r="26"/><circle cx="108" cy="50" r="36"/><circle cx="166" cy="40" r="40"/><circle cx="224" cy="56" r="31"/><circle cx="262" cy="70" r="21"/><rect x="30" y="64" width="252" height="28" rx="14"/></g><g fill="#DCE3F4"><circle cx="122" cy="80" r="16"/><circle cx="164" cy="68" r="27"/><circle cx="208" cy="80" r="18"/><rect x="104" y="78" width="124" height="14" rx="7"/></g></svg>
-  </div>`
-
-const SITE_HEADER = `<header class="sk-topnav">
-    <div class="sk-topnav__bar">
-      <a class="sk-logo" href="/" aria-label="Dodje, accueil"><img src="/assets/Logo_degrade_260.webp" alt="Dodje" width="73" height="28"></a>
-      <nav class="sk-navlinks" aria-label="Navigation principale">
-        <a class="sk-navlink" href="/jeu">Le jeu</a>
-        <a class="sk-navlink" href="/guides">Guides</a>
-        <a class="sk-navlink" href="/outils">Calculateurs</a>
-        <a class="sk-navlink" href="/actualites">Actualités</a>
-        <a class="sk-navlink" href="/blog">Blog</a>
-      </nav>
-      <a class="sk-cta sk-dlhref" href="/#telecharger">Jouer gratuitement</a>
-    </div>
-  </header>`
-
-const SITE_FOOTER = `<footer class="sk-foot">
-    <div class="sk-footcard">
-      <div class="sk-foottop">
-        <div class="sk-footbrand">
-          <img src="/landing/img/MascotteHappy.svg" alt="" width="52" height="52">
-          <div><img src="/assets/Logo_degrade_260.webp" alt="Dodje" width="68" height="26" style="height:26px;width:auto;display:block"><p>Le jeu gratuit pour comprendre l'argent.</p></div>
-        </div>
-        <div class="sk-socials">
-          <a class="sk-soc sk-press" href="https://www.tiktok.com/@dodje.app" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur TikTok"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.16 8.16 0 0 0 4.77 1.52V7.12a4.85 4.85 0 0 1-1-.43z"/></svg></a>
-          <a class="sk-soc sk-press" href="https://www.instagram.com/dodje.app/" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-          <a class="sk-soc sk-press" href="https://discord.gg/qn7cp4nVFh" target="_blank" rel="noopener noreferrer" aria-label="Communauté Discord Dodje"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 2.9l-.6 1.2a18.3 18.3 0 0 0-5.5 0l-.6-1.2a19.7 19.7 0 0 0-4.9 1.5C.7 9 -.2 13.6.1 18.1a19.9 19.9 0 0 0 6 3l1.3-2a13 13 0 0 1-1.9-.9l.4-.3a14.2 14.2 0 0 0 12.1 0l.4.3c-.6.4-1.2.7-1.9.9l1.3 2a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.5-13.7zM8.5 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm7 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg></a>
-          <a class="sk-soc sk-press" href="https://x.com/DodjeApp" target="_blank" rel="noopener noreferrer" aria-label="Dodje sur X"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        </div>
-      </div>
-      <nav class="sk-ftiles" aria-label="Liens utiles">
-        <a class="sk-ftile" href="/jeu"><b>Le jeu</b><span>Comment on joue</span></a>
-        <a class="sk-ftile" href="/outils"><b>Calculateurs</b><span>Épargne, crédit, salaire</span></a>
-        <a class="sk-ftile" href="/guides"><b>Guides</b><span>Apprendre à investir</span></a>
-        <a class="sk-ftile" href="/faq"><b>Aide</b><span>FAQ et contact</span></a>
-      </nav>
-      <div class="sk-footbottom">
-        <div class="sk-footlegal">
-          <a class="sk-flegal" href="/blog">Blog</a>
-          <a class="sk-flegal" href="/actualites">Actualités</a>
-          <a class="sk-flegal" href="/mentions-legales">Mentions légales</a>
-          <a class="sk-flegal" href="/conditions-utilisation">Conditions d'utilisation</a>
-          <a class="sk-flegal" href="/politique-confidentialite">Confidentialité</a>
-          <a class="sk-flegal" href="/guides/equipe-editoriale">Équipe éditoriale</a>
-          <a class="sk-flegal" href="/contact">Nous contacter</a>
-        </div>
-        <span class="sk-footcopy">© 2026 Dodje Solutions. Service d'éducation financière, pas de conseil en investissement.</span>
-      </div>
-    </div>
-  </footer>
-
-  <aside class="sk-dlwrap" aria-label="Télécharger Dodje">
-    <div class="sk-dlbar off">
-      <img src="/landing/img/MascotteHappy.svg" alt="" width="44" height="44" style="flex:0 0 auto;margin-left:6px">
-      <span class="sk-dltxt"><b class="sk-dltitle">Joue à Dodje</b><span>C'est gratuit</span></span>
-      <a class="sk-store sk-hide-sm" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z"/></svg>App Store</a>
-      <a class="sk-store sk-hide-sm" href="https://play.google.com/store/apps/details?id=xyz.dodje.app&amp;hl=fr" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z"/></svg>Google Play</a>
-      <a class="sk-cta sk-show-sm sk-dlhref" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">Télécharger</a>
-    </div>
-  </aside>
-  <script src="/site-skin.js" defer></script>`
-
-function injectGlobalHeader(html, filePath = '') {
-  const navPattern = /<nav class="navbar(?:-minimal)?[^"]*"[^>]*>[\s\S]*?<\/nav>/g
-  const section = (filePath.split('/')[0] || '').replace(/\.html$/, '')
-  const header = SITE_HEADER.replace(`class="sk-navlink" href="/${section}"`, `class="sk-navlink cur" aria-current="page" href="/${section}"`)
-  let out = html
-  if (navPattern.test(out)) {
-    navPattern.lastIndex = 0
-    let first = true
-    out = out.replace(navPattern, () => {
-      if (first) {
-        first = false
-        return header
-      }
-      return ''
-    })
-  } else {
-    out = out.replace(/<body([^>]*)>/i, (m) => `${m}\n  ${header}`)
-  }
-  // Fond ciel de la landing à la place de la vidéo, et pas de barre app-promo en double
-  out = out.replace(/<video[^>]*id="background-video"[\s\S]*?<\/video>\s*/i, '')
-  out = out.replace(/<div id="bg-overlay"[^>]*><\/div>\s*/i, '')
-  out = out.replace(/<body([^>]*)>/i, (m, attrs) => {
-    const cls = /class="/.test(attrs) ? attrs.replace(/class="/, 'class="sk-body ') : `${attrs} class="sk-body"`
-    return `<body${cls} data-no-app-promo>\n  ${SITE_SKY}`
-  })
-  return out
-}
-
-function injectGlobalFooter(html) {
-  if (/<footer\s+class="footer[^"]*"[^>]*>[\s\S]*?<\/footer>/.test(html)) {
-    return html.replace(/<footer\s+class="footer[^"]*"[^>]*>[\s\S]*?<\/footer>/, SITE_FOOTER)
-  }
-  return html.replace('</body>', `  ${SITE_FOOTER}\n</body>`)
+// Ciel, header et footer de la landing : même rendu que scripts/apply-site-chrome.mjs,
+// appliqué aussi au build pour les pages publiées automatiquement.
+function injectSiteChrome(html, filePath) {
+  return applyChrome(html, filePath)
 }
 
 function injectNewsArticleReview(html, filePath, rootDir) {
@@ -834,7 +738,7 @@ function injectGameCta(html, filePath) {
   const cta = `<aside class="content-cta-game">
             <h2>Apprends ça en jouant dans Dodje</h2>
             <p>Leçons d'environ 3 minutes, Dodjis, île à développer, classement mondial. Gratuit, dès 16 ans. Ce n'est pas un jeu d'argent.</p>
-            <p class="content-cta-game__actions"><a href="/jeu">Découvrir le jeu</a><a href="/#telecharger">Télécharger</a></p>
+            <p class="content-cta-game__actions"><a href="/jeu">Découvrir le jeu</a><a class="dlhref" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">Télécharger</a></p>
         </aside>`
 
   if (html.includes('class="content-links"')) {
@@ -956,12 +860,10 @@ export function injectSeoHeadPlugin(rootDir) {
         out = injectOutilsPrivacyNote(out, filePath)
         out = injectNewsArticleReview(out, filePath, rootDir)
         out = injectGameCta(out, filePath)
-        out = injectGlobalHeader(out, filePath)
-        out = injectGlobalFooter(out)
+        out = injectSiteChrome(out, filePath)
         out = injectBreadcrumbsJsonLd(out, filePath)
         out = injectWebPageSchema(out, filePath, pageUrl)
         out = injectSpeakable(out, pageUrl)
-        out = injectVisibleBreadcrumbs(out, filePath)
         out = injectMarkdownAlternate(out, filePath)
         out = optimizeBackgroundVideo(out)
 

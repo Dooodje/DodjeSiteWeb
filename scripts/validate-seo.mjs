@@ -110,8 +110,8 @@ function validateBreadcrumbs() {
   const sample = path.join(distDir, 'guides/top-5-courtiers-bourse-2026.html')
   if (!fs.existsSync(sample)) return
   const html = fs.readFileSync(sample, 'utf8')
-  if (!html.includes('seo-breadcrumbs')) {
-    fail('Breadcrumbs not injected in sample guide page')
+  if (html.includes('seo-breadcrumbs')) {
+    fail('Visible breadcrumbs should not be injected')
   }
   if (!html.includes('BreadcrumbList')) {
     fail('BreadcrumbList JSON-LD not injected in sample guide page')
@@ -241,7 +241,8 @@ function validateHomepageFaqSync() {
     return
   }
   const summaries = [...faqSection[0].matchAll(/<summary>([^<]+)<\/summary>/g)].map((m) => m[1].trim())
-  if (summaries.length < 8) fail(`Homepage FAQ visible has only ${summaries.length} questions`)
+  if (summaries.length !== 4) fail(`Homepage FAQ should show exactly 4 questions, found ${summaries.length}`)
+  if (!faqSection[0].includes('href="/faq"')) fail('Homepage FAQ must link to /faq')
   for (const q of summaries) {
     if (!html.includes(`"name": "${q}"`) && !html.includes(`"name":"${q}"`)) {
       fail(`Homepage FAQ JSON-LD missing question: ${q}`)
