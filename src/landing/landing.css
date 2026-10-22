@@ -271,7 +271,6 @@ img{max-width:100%}
 .pbars{display:flex;gap:8px;margin-top:22px;max-width:360px}
 
 .maphintxt{margin-top:8px;font-size:14px;font-weight:600;color:#F3FF90}
-#ile-title .lime{color:#F3FF90}
 .ilegrid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:center;max-width:1080px;margin:0 auto}
 .ilemap{position:relative;width:100%;max-width:calc((100svh - var(--nav) - var(--bar) - 200px) * 1.084);min-width:280px;margin:0 auto}
 .mapbox{position:relative;width:100%;aspect-ratio:1469 / 1355;container-type:inline-size}
