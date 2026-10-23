@@ -338,7 +338,7 @@ img{max-width:100%}
 .b2b h3{font-size:22px;font-weight:700}
 .b2b p{margin-top:6px;font-size:15px;line-height:1.5;color:#CCCCCC}
 .communityline{margin-top:14px;text-align:center;font-size:15px;color:rgba(255,255,255,.9)}
-.communityline a{color:#06D001;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.communityline a{color:#F3FF90;font-weight:700;text-decoration:underline;text-underline-offset:2px}
 
 .finalin{max-width:760px;display:flex;flex-direction:column;align-items:center;gap:22px}
 .premiumlot{width:min(380px,46svh);aspect-ratio:6/7;overflow:hidden}
