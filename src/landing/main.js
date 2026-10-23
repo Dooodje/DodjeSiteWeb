@@ -74,6 +74,48 @@ function syncLots() {
   })
 }
 
+/* ---------- Défilement vers une section : on coupe l'aimantation pendant le trajet ---------- */
+// Avec scroll-snap mandatory, un scroll « smooth » programmé est annulé ou ramené à la
+// section de départ. On anime nous-mêmes, sans aimantation, puis on la remet à l'arrivée.
+let goRaf = 0, goEnd = 0
+function goTo(target) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target
+  if (!el) return
+  const html = document.documentElement
+  const start = window.scrollY
+  const end = Math.round(el.getBoundingClientRect().top + start)
+  const dist = end - start
+  const dur = reduced || Math.abs(dist) < 2 ? 0 : Math.min(900, 380 + Math.abs(dist) * 0.25)
+  cancelAnimationFrame(goRaf); clearTimeout(goEnd)
+  html.style.scrollSnapType = 'none'
+  html.style.scrollBehavior = 'auto'
+  const finish = () => {
+    cancelAnimationFrame(goRaf)
+    window.scrollTo(0, end)
+    requestAnimationFrame(() => { html.style.scrollSnapType = ''; html.style.scrollBehavior = '' })
+    setTimeout(() => { html.style.scrollSnapType = ''; html.style.scrollBehavior = '' }, 60)
+  }
+  if (!dur) { finish(); return }
+  const t0 = performance.now()
+  const step = (t) => {
+    const k = Math.min(1, (t - t0) / dur), e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2
+    window.scrollTo(0, start + dist * e)
+    if (k < 1) goRaf = requestAnimationFrame(step); else finish()
+  }
+  goRaf = requestAnimationFrame(step)
+  goEnd = setTimeout(finish, dur + 120)
+}
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="#"]')
+  if (!a || e.defaultPrevented) return
+  const id = a.getAttribute('href').slice(1)
+  const el = id && document.getElementById(id)
+  if (!el || id === 'main-content') return
+  e.preventDefault()
+  goTo(el)
+  history.replaceState(null, '', '#' + id)
+})
+
 /* ---------- Le saut des sections (0,9 → 1,06 → 0,978 → 1, cascade de 40 ms) ---------- */
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver((entries) => {
@@ -211,7 +253,7 @@ $$('.biome').forEach((b) => b.addEventListener('click', () => {
   if (window.innerWidth < 980) setTimeout(() => $('.chcard').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60)
 }))
 $('.gotest').addEventListener('click', () => {
-  document.getElementById('test').scrollIntoView({ behavior: 'smooth' })
+  goTo('test')
 })
 
 /* ---------- 4. Teste ton niveau : le lecteur de module de l'app ---------- */
