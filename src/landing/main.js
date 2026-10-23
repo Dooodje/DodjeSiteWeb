@@ -103,11 +103,29 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true })
 window.addEventListener('resize', onScroll)
 
+// Compteur de Dodji : le chiffre défile jusqu'au nouveau total et un « +X » vert s'envole
+let countRaf = 0, shown = 0
+function rollCount(to) {
+  const el = $('.dodjicount'), from = shown, t0 = performance.now(), dur = reduced ? 0 : Math.min(900, 380 + (to - from) * 4)
+  cancelAnimationFrame(countRaf)
+  const tick = (t) => {
+    const k = dur ? Math.min(1, (t - t0) / dur) : 1, e = 1 - Math.pow(1 - k, 3)
+    shown = Math.round(from + (to - from) * e)
+    el.textContent = shown.toLocaleString('fr-FR')
+    if (k < 1) countRaf = requestAnimationFrame(tick)
+  }
+  countRaf = requestAnimationFrame(tick)
+}
 function gain(n) {
   state.dodji += n
   const pill = $('.dodjipill')
   pill.hidden = false
-  $('.dodjicount').textContent = state.dodji.toLocaleString('fr-FR')
+  rollCount(state.dodji)
+  const plus = document.createElement('span')
+  plus.className = 'dodjiplus'
+  plus.textContent = '+' + n.toLocaleString('fr-FR')
+  pill.appendChild(plus)
+  plus.addEventListener('animationend', () => plus.remove())
   pill.classList.remove('bump'); void pill.offsetWidth; pill.classList.add('bump')
   $('.dltitle').textContent = `Tes ${state.dodji} Dodji t'attendent`
 }
