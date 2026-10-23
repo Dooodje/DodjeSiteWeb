@@ -18,6 +18,7 @@
     </symbol>
   </defs>
   <g id="Calque_1-2" data-name="Calque 1">
+    <circle cx="384.5" cy="384.5" r="350" fill="#0A0400"/>
     <use width="769" height="769" xlink:href="#Pièce_trouée"/>
   </g>
 </svg>

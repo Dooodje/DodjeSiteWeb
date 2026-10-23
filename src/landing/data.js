@@ -37,7 +37,8 @@ export const BUILDINGS = [
   { id: 'reserve', tag: 'Ta banque', title: 'La réserve', desc: "Elle protège ton argent, mais l'inflation le grignote." },
   { id: 'phare', tag: 'Tes placements', title: 'Le phare', desc: 'Actions et ETF pour faire grandir ton patrimoine.' },
   { id: 'agence', tag: 'Ton immobilier', title: "L'agence", desc: 'Achète, loue, valorise, pierre après pierre.' },
-  { id: 'foreuse', tag: 'Ton wallet', title: 'La foreuse', desc: 'Bitcoin, Ethereum : comprends avant de te lancer.' }
+  { id: 'foreuse', tag: 'Ton wallet', title: 'La foreuse', desc: 'Bitcoin, Ethereum : comprends avant de te lancer.' },
+  { id: 'arene', tag: 'Le tournoi', title: "L'Arène", desc: 'Dès le niveau 5, affronte les autres joueurs chaque semaine avec ce que tu as appris.' }
 ]
 
 // 3 questions simples par biome : [quiz], [vrai ou faux], [curseur]

@@ -225,6 +225,7 @@ export function buildLlmsTxt(rootDir) {
     '- Leçons d\'environ 3 minutes + quiz, dès 16 ans, 0 € pour commencer, iOS et Android.',
     '- Dodjis : monnaie virtuelle sans valeur réelle, gagnée en apprenant, investie dans 6 bâtiments.',
     '- Bâtiments : atelier (job), moulin (épargne), réserve (banque), phare (placements), agence (immobilier), foreuse (crypto).',
+    '- L\'Arène : 7e bâtiment, débloqué au niveau 5, tournoi hebdomadaire entre joueurs.',
     '- Objectif : développer son île et grimper au classement mondial des joueurs.',
     '- Île en 16 mondes (biomes) à débloquer : Mindset, Budget, Sécurité, Fiscalité, Bourse, Immobilier, Crypto, Or et divers, Allocation, Défiscalisation, Private Equity, Trading, Structuration pro, International, Héritage et l\'Arène (tournoi entre joueurs).',
     '- Exercices : quiz à choix, vrai ou faux à swiper, curseur à placer ; chaque bonne série ouvre un coffre de Dodjis.',

@@ -39,7 +39,8 @@ function syncLots() {
   const vh = window.innerHeight, vw = window.innerWidth
   $$('[data-lot]').forEach((el) => {
     const src = el.dataset.lot
-    if (!src || el.hidden) { if (el.__anim && !el.__paused) { el.__anim.pause(); el.__paused = true } return }
+    const pilOff = el.dataset.pil !== undefined && !el.classList.contains('pilon')
+    if (!src || el.hidden || (pilOff && el.__anim)) { if (el.__anim && !el.__paused) { el.__anim.pause(); el.__paused = true } return }
     const r = el.getBoundingClientRect()
     const near = r.width > 0 && r.bottom > -vh * 0.4 && r.top < vh * 1.4 && r.right > -vw * 0.2 && r.left < vw * 1.2
     const loop = el.dataset.loop === '1'
@@ -115,8 +116,13 @@ function gain(n) {
 let pilTimer = 0
 function showPil(i) {
   state.pil = i
-  $$('.pilpane').forEach((p) => { const on = +p.dataset.pil === i; p.hidden = !on; if (on) { p.classList.remove('swapin'); void p.offsetWidth; p.classList.add('swapin') } })
-  $$('.pilvis .lot').forEach((l) => { const on = +l.dataset.pil === i; l.hidden = !on; if (on) { l.classList.remove('pilin'); void l.offsetWidth; l.classList.add('pilin') } })
+  // Fondu enchaîné : les trois textes et les trois animations sont superposés, seul l'actif est visible
+  $$('.pilpane').forEach((p) => { const on = +p.dataset.pil === i; p.classList.toggle('pilon', on); p.setAttribute('aria-hidden', String(!on)) })
+  $$('.pilvis .lot').forEach((l) => {
+    const on = +l.dataset.pil === i
+    l.classList.toggle('pilon', on)
+    if (on && l.__anim && l.__paused) { l.__anim.play(); l.__paused = false }
+  })
   $$('.pbar').forEach((b) => {
     const k = +b.dataset.pil
     b.classList.remove('on', 'done'); void b.offsetWidth
@@ -211,7 +217,7 @@ function quizHtml() {
   if (s.step === 0) {
     mid = `<div class="enter qanswers">${Q1[1].map((a, i) => {
       const on = s.q1 === i
-      return `<button class="ans" type="button" data-a="${i}" aria-pressed="${on}" style="background:${on ? '#F3FF90' : 'rgba(0,0,0,.85)'};color:${on ? '#000' : '#fff'};font-weight:${on ? 700 : 400}">${a}</button>`
+      return `<button class="ans${on ? ' on' : ''}" type="button" data-a="${i}" aria-pressed="${on}">${a}</button>`
     }).join('')}</div>`
   } else if (s.step === 1) {
     mid = `<div class="enter swzone"><div id="swcard" class="swcard"><p>${Q2[0]}</p></div>
@@ -235,11 +241,11 @@ function quizHtml() {
     const title = ok ? ['Bien vu !', 'Bien joué !', 'Exactement !'][s.step] : ['Presque !', 'Pas tout à fait.', 'Oups !'][s.step]
     const fbLot = ok
       ? `<div class="lot fblot" data-lot="${L('fb-bonne')}" data-loop="1" aria-hidden="true"></div>`
-      : `<div class="lot fblot" data-lot="${L('fb-mauvaise')}" data-loop="0" data-from="44" aria-hidden="true"></div>`
+      : `<div class="lot fblot" data-lot="${L('fb-mauvaise')}" data-loop="1" aria-hidden="true"></div>`
     over = `<div class="fbwrap" role="dialog" aria-live="assertive"><div class="fbback"></div><div class="fbcard" style="background:${ok ? '#DCFFD9' : '#FFD9E1'}">
       ${fbLot}
       <b class="fbtitle" style="color:${col}">${title}</b><p class="fbtext" style="color:${col}">${txt}</p>
-      <button class="press next" type="button" style="background:${col}">Continuer</button></div></div>`
+      <button class="press next" type="button" style="background:${col}">Suivant</button></div></div>`
   }
   if (s.phase === 'result') {
     const passed = s.score >= 2, label = passed ? 'Validé' : 'Échec'
@@ -281,7 +287,13 @@ quiz.addEventListener('click', (e) => {
   const t = e.target.closest('button, a')
   if (!t) return
   const [Q1, Q2, Q3] = QUIZ[state.tb] || QUIZ[1]
-  if (t.dataset.a !== undefined && !state.checked) { state.q1 = +t.dataset.a; renderQuiz() }
+  if (t.dataset.a !== undefined && !state.checked) {
+    // Comme dans l'app : seule la réponse touchée change, rien n'est redessiné
+    state.q1 = +t.dataset.a
+    $$('.ans', quiz).forEach((b) => { const on = b === t; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)) })
+    const bot = $('.botband', quiz)
+    if (bot && !$('.submit', bot)) bot.innerHTML = '<button class="cta submit" type="button" style="width:100%">Réponse</button>'
+  }
   else if (t.dataset.sw !== undefined && !state.checked) { state.swAns = t.dataset.sw === '1'; answer(state.swAns === Q2[1]) }
   else if (t.dataset.pm) setSlide(state.slide + +t.dataset.pm, true)
   else if (t.classList.contains('submit')) {

@@ -220,7 +220,7 @@
           "minValue": 1,
           "maxValue": 1
         },
-        "description": "Dodje est l'application d'éducation financière gratuite qui transforme la finance en jeu. Imagine si Duolingo, Clash of Clans et Mario s'étaient réunis pour t'aider à comprendre l'argent : leçons d'environ 3 minutes et quiz, Dodji à gagner, île à développer avec 6 bâtiments (atelier, moulin, réserve, phare, agence, foreuse) et classement mondial des joueurs. Sujets : budget, épargne, bourse, crypto, immobilier, fiscalité. Lancé en 2024, gratuit (0 €), dès 16 ans, en français. Ce n'est pas un jeu d'argent, pas un courtier, pas un conseil personnalisé.",
+        "description": "Dodje est l'application d'éducation financière gratuite qui transforme la finance en jeu. Imagine si Duolingo, Clash of Clans et Mario s'étaient réunis pour t'aider à comprendre l'argent : leçons d'environ 3 minutes et quiz, Dodji à gagner, île à développer avec 6 bâtiments (atelier, moulin, réserve, phare, agence, foreuse), l'Arène pour affronter les autres joueurs chaque semaine et un classement mondial. Sujets : budget, épargne, bourse, crypto, immobilier, fiscalité. Lancé en 2024, gratuit (0 €), dès 16 ans, en français. Ce n'est pas un jeu d'argent, pas un courtier, pas un conseil personnalisé.",
         "gameItem": [
           { "@type": "Thing", "name": "Dodji", "description": "Monnaie virtuelle du jeu, gagnée en terminant des leçons et des quiz, à investir dans les bâtiments de l'île. Sans valeur monétaire réelle." },
           { "@type": "Thing", "name": "Île", "description": "Territoire du joueur à développer en investissant ses Dodji." },
@@ -265,7 +265,7 @@
           "Leçons d'environ 3 minutes façon Duolingo",
           "Quiz et défis quotidiens",
           "Dodji : monnaie du jeu gagnée en apprenant",
-          "Île à développer avec 6 bâtiments (job, épargne, banque, placements, immobilier, crypto)",
+          "Île à développer avec 6 bâtiments (job, épargne, banque, placements, immobilier, crypto) et l'Arène, le tournoi hebdomadaire entre joueurs",
           "Progression par niveaux",
           "Classement mondial des joueurs",
           "Sujets : budget, épargne, bourse, crypto, immobilier, fiscalité",
@@ -368,7 +368,7 @@
             "name": "Comment on joue à Dodje ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "En 4 étapes : 1) tu suis une leçon d'environ 3 minutes et tu valides un quiz ; 2) tu gagnes des Dodji, la monnaie du jeu ; 3) tu les investis sur ton île dans 6 bâtiments qui représentent ton job (l'atelier), ton épargne (le moulin), ta banque (la réserve), tes placements (le phare), ton immobilier (l'agence) et ton wallet crypto (la foreuse) ; 4) ton île grandit, tu montes de niveau et tu grimpes au classement mondial des joueurs."
+              "text": "En 4 étapes : 1) tu suis une leçon d'environ 3 minutes et tu valides un quiz ; 2) tu gagnes des Dodji, la monnaie du jeu ; 3) tu les investis sur ton île dans 6 bâtiments qui représentent ton job (l'atelier), ton épargne (le moulin), ta banque (la réserve), tes placements (le phare), ton immobilier (l'agence) et ton wallet crypto (la foreuse) ; 4) ton île grandit, tu montes de niveau, tu débloques l'Arène pour affronter les autres joueurs chaque semaine et tu grimpes au classement mondial."
             }
           },
           {
@@ -446,14 +446,16 @@
       </div>
       <div class="pilrow">
         <div class="j pilvis" style="--i:2">
-          <div class="lot pilin" data-pil="0" data-lot="/landing/lottie/mouvement-necessaire.json" data-loop="1" role="img" aria-label="Un parcours qui se débloque étape par étape" style="--s:1"></div>
-          <div class="lot pilin" data-pil="1" data-lot="/landing/lottie/pil-perso.json" data-loop="1" role="img" aria-label="Boky gagne des Dodji" style="--s:2.4" hidden></div>
-          <div class="lot pilin" data-pil="2" data-lot="/landing/lottie/pil-gratuit.json" data-loop="1" role="img" aria-label="Une borne de jeu, gratuite" style="--s:2.4" hidden></div>
+          <div class="lot pilin pilon" data-pil="0" data-lot="/landing/lottie/mouvement-necessaire.json" data-loop="1" role="img" aria-label="Un parcours qui se débloque étape par étape" style="--s:1"></div>
+          <div class="lot pilin" data-pil="1" data-lot="/landing/lottie/pil-perso.json" data-loop="1" role="img" aria-label="Boky gagne des Dodji" style="--s:2.4"></div>
+          <div class="lot pilin" data-pil="2" data-lot="/landing/lottie/pil-gratuit.json" data-loop="1" role="img" aria-label="Une borne de jeu, gratuite" style="--s:2.4"></div>
         </div>
         <div class="j piltxt" style="--i:3">
-          <div class="pilpane swapin" data-pil="0"><h3 class="lime">Un parcours progressif</h3><p class="lead">Avec Dodje, tu avances à ton rythme. Tu commences par les bases, tu débloques de nouveaux mondes, et tu comprends enfin la finance sans te sentir perdu.</p></div>
-          <div class="pilpane" data-pil="1" hidden><h3 class="lime">Ton argent en clair</h3><p class="lead">On parle souvent d'argent, mais rarement de façon simple. Dodje traduit chaque notion en décision de jeu : gagne des Dodji et investis-les dans ton île pour la faire grandir !</p></div>
-          <div class="pilpane" data-pil="2" hidden><h3 class="lime">Gratuit. Simple. Ludique.</h3><p class="lead">Apprendre avec Dodje, c'est gratuit, clair et motivant. Les leçons sont courtes, les quiz te font pratiquer, et chaque Dodji gagné te donne envie de continuer à construire ton île.</p></div>
+          <div class="pilpanes">
+          <div class="pilpane pilon" data-pil="0"><h3 class="lime">Un parcours progressif</h3><p class="lead">Avec Dodje, tu avances à ton rythme. Tu commences par les bases, tu débloques de nouveaux mondes, et tu comprends enfin la finance sans te sentir perdu.</p></div>
+          <div class="pilpane" data-pil="1" aria-hidden="true"><h3 class="lime">Ton argent en clair</h3><p class="lead">On parle souvent d'argent, mais rarement de façon simple. Dodje traduit chaque notion en décision de jeu : gagne des Dodji et investis-les dans ton île pour la faire grandir !</p></div>
+          <div class="pilpane" data-pil="2" aria-hidden="true"><h3 class="lime">Gratuit. Simple. Ludique.</h3><p class="lead">Apprendre avec Dodje, c'est gratuit, clair et motivant. Les leçons sont courtes, les quiz te font pratiquer, et chaque Dodji gagné te donne envie de continuer à construire ton île.</p></div>
+          </div>
           <div class="pbars" role="tablist" aria-label="Pourquoi Dodje">
             <button class="pbar on" type="button" role="tab" aria-selected="true" data-pil="0" aria-label="Un parcours progressif"><span></span></button>
             <button class="pbar" type="button" role="tab" aria-selected="false" data-pil="1" aria-label="Ton argent en clair"><span></span></button>
@@ -476,22 +478,22 @@
         <div class="j ilemap" style="--i:3">
           <div class="mapbox">
             <img src="/landing/img/ile.webp" alt="L'île de Dodje et ses 16 biomes" width="1469" height="1355" loading="lazy" decoding="async" class="mapbase">
-            <button class="biome" type="button" data-n="1" aria-label="Chapitre Mindset" aria-pressed="false" style="left:22.96%;top:37.77%;width:17.7%;z-index:11"><img src="/landing/biomes/1.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="2" aria-label="Chapitre Budget" aria-pressed="false" style="left:34.87%;top:28.11%;width:20.76%;z-index:12"><img src="/landing/biomes/2.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="3" aria-label="Chapitre Sécurité" aria-pressed="false" style="left:26.71%;top:53.06%;width:20.05%;z-index:13"><img src="/landing/biomes/3.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="4" aria-label="Chapitre Fiscalité" aria-pressed="false" style="left:38.17%;top:47.19%;width:22.97%;z-index:14"><img src="/landing/biomes/4.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="5" aria-label="Chapitre Bourse" aria-pressed="true" style="left:10.12%;top:17.65%;width:20.84%;z-index:30"><img src="/landing/biomes/5.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="6" aria-label="Chapitre Immobilier" aria-pressed="false" style="left:50.59%;top:62.5%;width:18.89%;z-index:16"><img src="/landing/biomes/13.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="7" aria-label="Chapitre Crypto" aria-pressed="false" style="left:52.96%;top:35.74%;width:20.04%;z-index:17"><img src="/landing/biomes/7.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="8" aria-label="Chapitre Or et divers" aria-pressed="false" style="left:54.5%;top:11.93%;width:14.12%;z-index:18"><img src="/landing/biomes/8.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="9" aria-label="Chapitre Allocation" aria-pressed="false" style="left:8.54%;top:55.22%;width:23.71%;z-index:19"><img src="/landing/biomes/9.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="10" aria-label="Chapitre Défiscalisation" aria-pressed="false" style="left:26.3%;top:64.3%;width:27.21%;z-index:20"><img src="/landing/biomes/10.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="11" aria-label="Chapitre Private Equity" aria-pressed="false" style="left:27.74%;top:18.79%;width:18.63%;z-index:21"><img src="/landing/biomes/11.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="12" aria-label="Chapitre Trading" aria-pressed="false" style="left:41.28%;top:9.74%;width:15.39%;z-index:22"><img src="/landing/biomes/12.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="13" aria-label="Chapitre Structuration pro" aria-pressed="false" style="left:5.25%;top:37.46%;width:21.6%;z-index:23"><img src="/landing/biomes/6.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="14" aria-label="Chapitre International" aria-pressed="false" style="left:58.2%;top:52.21%;width:20.78%;z-index:24"><img src="/landing/biomes/14.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="15" aria-label="Chapitre Héritage" aria-pressed="false" style="left:69.38%;top:30.59%;width:18.83%;z-index:25"><img src="/landing/biomes/15.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
-            <button class="biome" type="button" data-n="16" aria-label="Chapitre L'Arène" aria-pressed="false" style="left:68.01%;top:8.53%;width:25.61%;z-index:26"><img src="/landing/biomes/16.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></button>
+            <button class="biome" type="button" data-n="1" aria-label="Chapitre Mindset" aria-pressed="false" style="left:22.96%;top:37.77%;width:17.7%;z-index:11"><img src="/landing/biomes/1.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="2" aria-label="Chapitre Budget" aria-pressed="false" style="left:34.87%;top:28.11%;width:20.76%;z-index:12"><img src="/landing/biomes/2.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="3" aria-label="Chapitre Sécurité" aria-pressed="false" style="left:26.71%;top:53.06%;width:20.05%;z-index:13"><img src="/landing/biomes/3.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="4" aria-label="Chapitre Fiscalité" aria-pressed="false" style="left:38.17%;top:47.19%;width:22.97%;z-index:14"><img src="/landing/biomes/4.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="5" aria-label="Chapitre Bourse" aria-pressed="true" style="left:10.12%;top:17.65%;width:20.84%;z-index:30"><img src="/landing/biomes/5.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="6" aria-label="Chapitre Immobilier" aria-pressed="false" style="left:50.59%;top:62.5%;width:18.89%;z-index:16"><img src="/landing/biomes/13.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="7" aria-label="Chapitre Crypto" aria-pressed="false" style="left:52.96%;top:35.74%;width:20.04%;z-index:17"><img src="/landing/biomes/7.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="8" aria-label="Chapitre Or et divers" aria-pressed="false" style="left:54.5%;top:11.93%;width:14.12%;z-index:18"><img src="/landing/biomes/8.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="9" aria-label="Chapitre Allocation" aria-pressed="false" style="left:8.54%;top:55.22%;width:23.71%;z-index:19"><img src="/landing/biomes/9.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="10" aria-label="Chapitre Défiscalisation" aria-pressed="false" style="left:26.3%;top:64.3%;width:27.21%;z-index:20"><img src="/landing/biomes/10.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="11" aria-label="Chapitre Private Equity" aria-pressed="false" style="left:27.74%;top:18.79%;width:18.63%;z-index:21"><img src="/landing/biomes/11.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="12" aria-label="Chapitre Trading" aria-pressed="false" style="left:41.28%;top:9.74%;width:15.39%;z-index:22"><img src="/landing/biomes/12.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="13" aria-label="Chapitre Structuration pro" aria-pressed="false" style="left:5.25%;top:37.46%;width:21.6%;z-index:23"><img src="/landing/biomes/6.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="14" aria-label="Chapitre International" aria-pressed="false" style="left:58.2%;top:52.21%;width:20.78%;z-index:24"><img src="/landing/biomes/14.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="15" aria-label="Chapitre Héritage" aria-pressed="false" style="left:69.38%;top:30.59%;width:18.83%;z-index:25"><img src="/landing/biomes/15.webp" alt="" width="300" height="300" decoding="async"></button>
+            <button class="biome" type="button" data-n="16" aria-label="Chapitre L'Arène" aria-pressed="false" style="left:68.01%;top:8.53%;width:25.61%;z-index:26"><img src="/landing/biomes/16.webp" alt="" width="300" height="300" decoding="async"></button>
             <span class="mapchip" data-n="1" style="left:31.56%;top:49.02%"><span class="mapname">Mindset</span></span>
             <span class="mapchip" data-n="2" style="left:45.57%;top:42.24%"><span class="mapname">Budget</span></span>
             <span class="mapchip" data-n="3" style="left:36.74%;top:64.96%"><span class="mapname">Sécurité</span></span>
@@ -588,42 +590,48 @@
         <p class="lead j" style="--i:1;margin-top:10px">Chaque bâtiment est une vraie notion d'argent.</p>
       </div>
       <div class="j batwrap" style="--i:2">
-        <div id="batTrack" class="track" aria-roledescription="carrousel" aria-label="Les 6 bâtiments de l'île">
-            <article class="slide" aria-roledescription="diapositive" aria-label="1 sur 6 : L'atelier">
+        <div id="batTrack" class="track" aria-roledescription="carrousel" aria-label="Les 7 bâtiments de l'île">
+            <article class="slide" aria-roledescription="diapositive" aria-label="1 sur 7 : L'atelier">
               <button class="battap" type="button" data-i="0" aria-label="Toucher L'atelier pour récolter des Dodji"><div class="lot lotbox" data-lot="/landing/lottie/bat-atelier.json" data-loop="1" aria-hidden="true"></div></button>
               <span class="battag">Ton job</span>
               <h3>L'atelier</h3>
               <p class="lead">C'est ton job, un mini-jeu quotidien pour récupérer tes Dodji !</p>
             </article>
-            <article class="slide" aria-roledescription="diapositive" aria-label="2 sur 6 : Le moulin">
+            <article class="slide" aria-roledescription="diapositive" aria-label="2 sur 7 : Le moulin">
               <button class="battap" type="button" data-i="1" aria-label="Toucher Le moulin pour récolter des Dodji"><div class="lot lotbox" data-lot="/landing/lottie/bat-moulin.json" data-loop="1" aria-hidden="true"></div></button>
               <span class="battag">Ton épargne</span>
               <h3>Le moulin</h3>
               <p class="lead">Ton épargne de précaution : sûre, mais pas très généreuse.</p>
             </article>
-            <article class="slide" aria-roledescription="diapositive" aria-label="3 sur 6 : La réserve">
+            <article class="slide" aria-roledescription="diapositive" aria-label="3 sur 7 : La réserve">
               <button class="battap" type="button" data-i="2" aria-label="Toucher La réserve pour récolter des Dodji"><div class="lot lotbox" data-lot="/landing/lottie/bat-reserve.json" data-loop="1" aria-hidden="true"></div></button>
               <span class="battag">Ta banque</span>
               <h3>La réserve</h3>
               <p class="lead">Elle protège ton argent, mais l'inflation le grignote.</p>
             </article>
-            <article class="slide" aria-roledescription="diapositive" aria-label="4 sur 6 : Le phare">
+            <article class="slide" aria-roledescription="diapositive" aria-label="4 sur 7 : Le phare">
               <button class="battap" type="button" data-i="3" aria-label="Toucher Le phare pour récolter des Dodji"><div class="lot lotbox" data-lot="/landing/lottie/bat-phare.json" data-loop="1" aria-hidden="true"></div></button>
               <span class="battag">Tes placements</span>
               <h3>Le phare</h3>
               <p class="lead">Actions et ETF pour faire grandir ton patrimoine.</p>
             </article>
-            <article class="slide" aria-roledescription="diapositive" aria-label="5 sur 6 : L'agence">
+            <article class="slide" aria-roledescription="diapositive" aria-label="5 sur 7 : L'agence">
               <button class="battap" type="button" data-i="4" aria-label="Toucher L'agence pour récolter des Dodji"><div class="lot lotbox" data-lot="/landing/lottie/bat-agence.json" data-loop="1" aria-hidden="true"></div></button>
               <span class="battag">Ton immobilier</span>
               <h3>L'agence</h3>
               <p class="lead">Achète, loue, valorise, pierre après pierre.</p>
             </article>
-            <article class="slide" aria-roledescription="diapositive" aria-label="6 sur 6 : La foreuse">
+            <article class="slide" aria-roledescription="diapositive" aria-label="6 sur 7 : La foreuse">
               <button class="battap" type="button" data-i="5" aria-label="Toucher La foreuse pour récolter des Dodji"><div class="lot lotbox" data-lot="/landing/lottie/bat-foreuse.json" data-loop="1" aria-hidden="true"></div></button>
               <span class="battag">Ton wallet</span>
               <h3>La foreuse</h3>
               <p class="lead">Bitcoin, Ethereum : comprends avant de te lancer.</p>
+            </article>
+            <article class="slide" aria-roledescription="diapositive" aria-label="7 sur 7 : L'Arène">
+              <button class="battap" type="button" data-i="6" aria-label="Toucher L'Arène pour récolter des Dodji"><div class="lot lotbox lotimg" aria-hidden="true"><img src="/landing/img/arene.svg" alt="" width="660" height="519" loading="lazy" decoding="async"></div></button>
+              <span class="battag">Le tournoi</span>
+              <h3>L'Arène</h3>
+              <p class="lead">Dès le niveau 5, affronte les autres joueurs chaque semaine avec ce que tu as appris.</p>
             </article>
         </div>
         <span class="batfx" aria-hidden="true"></span>
@@ -631,7 +639,7 @@
         <button class="arrow batnext" type="button" aria-label="Bâtiment suivant"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <div class="j batdots" style="--i:3">
-        <button class="cdot on" type="button" data-i="0" aria-label="Voir L'atelier"></button><button class="cdot" type="button" data-i="1" aria-label="Voir Le moulin"></button><button class="cdot" type="button" data-i="2" aria-label="Voir La réserve"></button><button class="cdot" type="button" data-i="3" aria-label="Voir Le phare"></button><button class="cdot" type="button" data-i="4" aria-label="Voir L'agence"></button><button class="cdot" type="button" data-i="5" aria-label="Voir La foreuse"></button>
+        <button class="cdot on" type="button" data-i="0" aria-label="Voir L'atelier"></button><button class="cdot" type="button" data-i="1" aria-label="Voir Le moulin"></button><button class="cdot" type="button" data-i="2" aria-label="Voir La réserve"></button><button class="cdot" type="button" data-i="3" aria-label="Voir Le phare"></button><button class="cdot" type="button" data-i="4" aria-label="Voir L'agence"></button><button class="cdot" type="button" data-i="5" aria-label="Voir La foreuse"></button><button class="cdot" type="button" data-i="6" aria-label="Voir L'Arène"></button>
       </div>
     </div>
   </section>
@@ -667,7 +675,7 @@
       </div>
       <div class="faq">
         <details class="faq-item j" style="--i:1"><summary>Qu'est-ce que Dodje ?</summary><p>Dodje est un jeu mobile gratuit pour apprendre la finance (iOS et Android). Tu suis des leçons d'environ 3 minutes, tu réponds à des quiz, tu gagnes des Dodji, tu les investis pour développer ton île et tu grimpes au classement mondial. Lancé en 2024 par Dodje Solutions (Orléans), 0&nbsp;€ pour commencer, dès 16&nbsp;ans. Ce n'est ni un jeu d'argent, ni un courtier.</p></details>
-        <details class="faq-item j" style="--i:2"><summary>Comment on joue à Dodje ?</summary><p>En 4 étapes : 1) tu suis une leçon d'environ 3 minutes et tu valides un quiz ; 2) tu gagnes des Dodji, la monnaie du jeu ; 3) tu les investis sur ton île dans 6 bâtiments qui représentent ton job (l'atelier), ton épargne (le moulin), ta banque (la réserve), tes placements (le phare), ton immobilier (l'agence) et ton wallet crypto (la foreuse) ; 4) ton île grandit, tu montes de niveau et tu grimpes au classement mondial des joueurs.</p></details>
+        <details class="faq-item j" style="--i:2"><summary>Comment on joue à Dodje ?</summary><p>En 4 étapes : 1) tu suis une leçon d'environ 3 minutes et tu valides un quiz ; 2) tu gagnes des Dodji, la monnaie du jeu ; 3) tu les investis sur ton île dans 6 bâtiments qui représentent ton job (l'atelier), ton épargne (le moulin), ta banque (la réserve), tes placements (le phare), ton immobilier (l'agence) et ton wallet crypto (la foreuse) ; 4) ton île grandit, tu montes de niveau, tu débloques l'Arène pour affronter les autres joueurs chaque semaine et tu grimpes au classement mondial.</p></details>
         <details class="faq-item j" style="--i:3"><summary>Dodje est-il vraiment gratuit ?</summary><p>Oui. Le jeu, les leçons et l'île sont accessibles gratuitement, sans abonnement ni carte bancaire à l'inscription. Des achats in-app optionnels (Dodji) permettent d'accélérer la progression, sans rendre le reste du contenu payant.</p></details>
         <details class="faq-item j" style="--i:4"><summary>Dodje est-il un jeu d'argent ?</summary><p>Non. Dodje est un jeu éducatif : il n'y a ni mises, ni paris, ni argent réel à gagner. Les Dodji sont une monnaie virtuelle sans valeur. Ce n'est pas un casino, pas un site de paris et pas une plateforme de trading.</p></details>
       </div>
