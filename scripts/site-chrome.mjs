@@ -99,6 +99,20 @@ export function footerHtml() {
   </footer>`
 }
 
+/** Barre de téléchargement fixe en bas, identique à celle de la landing. */
+export function dlbarHtml() {
+  return `  <aside class="dlwrap" aria-label="Télécharger Dodje">
+    <div class="dlbar off">
+      <img src="/landing/img/MascotteHappy.svg" alt="" width="44" height="44" class="dlboky">
+      <span class="dltxt"><b class="dltitle">Joue à Dodje</b><span>C'est gratuit</span></span>
+      <a class="store storew hide-sm dlstore" href="${APP_STORE}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z"/></svg>App Store</a>
+      <a class="store storew hide-sm dlstore" href="${PLAY_STORE}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z"/></svg>Google Play</a>
+      <a class="cta show-sm dlhref dlcta" href="${APP_STORE}" target="_blank" rel="noopener noreferrer">Télécharger</a>
+    </div>
+  </aside>
+  <script src="/site-dlbar.js" defer></script>`
+}
+
 function classTokens(openTag) {
   const m = openTag.match(/class\s*=\s*["']([^"']*)["']/i)
   return m ? m[1].split(/\s+/).filter(Boolean) : []
@@ -175,11 +189,13 @@ export function applyChrome(html, rel) {
     const classes = classTokens(tag)
     return classes.includes('footer') || classes.includes('sitefoot')
   })
+  next = removeElements(next, 'aside', (tag) => classTokens(tag).includes('dlwrap'))
+  next = next.replace(/[ \t]*<script src="\/(?:site-dlbar|app-promo)\.js"[^>]*><\/script>\n?/g, '')
 
   const chrome = `${skyHtml()}\n${headerHtml(sectionFromRel(rel))}\n`
   next = next.replace(/<body([^>]*)>/i, `<body$1>\n${chrome}`)
 
-  const footer = `\n${footerHtml()}\n`
+  const footer = `\n${footerHtml()}\n${dlbarHtml()}\n`
   const mainEnd = next.lastIndexOf('</main>')
   if (mainEnd !== -1) {
     next = next.slice(0, mainEnd + 7) + footer + next.slice(mainEnd + 7)

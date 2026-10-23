@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Dodje : Écrire à l'équipe</title>
-    <meta name="description" content="Contacte l'équipe Dodje : question sur l'app, un calculateur, un guide, ou une demande presse. Formulaire d'envoi direct, réponse à contact@dodje.fr.">
+    <title>Contact Dodje : écoles, entreprises, associations</title>
+    <meta name="description" content="Écoles, entreprises, associations : contacte l'équipe Dodje pour faire jouer ton public au jeu gratuit qui apprend la finance. Formulaire direct, réponse par email.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://dodje.fr/contact">
     <meta property="og:title" content="Contact Dodje">
-    <meta property="og:description" content="Écris à l'équipe Dodje depuis le site : question, correction, presse.">
+    <meta property="og:description" content="Fais jouer ton école, ton entreprise ou ton association à Dodje. Écris à l'équipe.">
     <meta property="og:image" content="https://dodje.fr/assets/og-dodje-1200x630.png">
     <meta property="og:url" content="https://dodje.fr/contact">
     <meta property="og:type" content="website">
@@ -60,45 +60,67 @@
   </header>
 
     
-    <main class="content-page">
-        <article class="content-layout">
-            <p class="legal-eyebrow">Contact</p>
-            <h1>Écrire à <span class="legal-title-accent">Dodje</span></h1>
-            <p class="content-lead"><strong>En bref :</strong> une question sur l'app, un barème à corriger, une demande presse : envoie le message ici. On lit tout et on répond par email.</p>
+    <main class="content-page contact-page">
+        <section class="ct-hero">
+            <div class="ct-intro">
+                <p class="ct-eyebrow">Contact</p>
+                <h1>Faisons jouer ton équipe à <span class="lime">Dodje</span></h1>
+                <p class="content-lead"><strong>En bref :</strong> école, entreprise, association ou simple joueur, écris-nous ici. Le message arrive directement à l'équipe, qui te répond par email.</p>
+                <ul class="ct-cards">
+                    <li class="ct-card"><img src="/landing/img/XP.svg" alt="" width="40" height="40"><div><b>Écoles et universités</b><span>Des leçons de 3 minutes et des quiz pour apprendre l'argent en classe, en jouant.</span></div></li>
+                    <li class="ct-card"><img src="/landing/img/DodjiPiece.svg" alt="" width="40" height="40"><div><b>Entreprises</b><span>Un jeu gratuit pour aider tes salariés à mieux gérer leur budget et leur épargne.</span></div></li>
+                    <li class="ct-card"><img src="/landing/img/Coeur.svg" alt="" width="40" height="40"><div><b>Associations et collectivités</b><span>Un outil simple pour accompagner ta communauté sur l'éducation financière.</span></div></li>
+                </ul>
+                <p class="ct-direct">Tu préfères l'email ? <a href="mailto:contact@dodje.fr">contact@dodje.fr</a>. Pour discuter avec les joueurs, rejoins le <a href="https://discord.gg/qn7cp4nVFh" target="_blank" rel="noopener noreferrer">Discord</a>.</p>
+            </div>
 
-            <form id="contact-form" class="contact-form" novalidate>
-                <p class="contact-hp" aria-hidden="true">
-                    <label>Site web
-                        <input type="text" name="website" tabindex="-1" autocomplete="off">
-                    </label>
-                </p>
-                <div class="calc-field">
-                    <label for="contact-name">Nom</label>
-                    <input id="contact-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Ton prénom ou nom">
+            <div class="ct-formcard">
+                <form id="contact-form" class="contact-form" novalidate>
+                    <p class="contact-hp" aria-hidden="true">
+                        <label>Site web
+                            <input type="text" name="website" tabindex="-1" autocomplete="off">
+                        </label>
+                    </p>
+                    <fieldset class="ct-profile">
+                        <legend>Tu es</legend>
+                        <div class="ct-chips">
+                            <label class="ct-chip"><input type="radio" name="profile" value="École ou université" checked><span>Une école</span></label>
+                            <label class="ct-chip"><input type="radio" name="profile" value="Entreprise"><span>Une entreprise</span></label>
+                            <label class="ct-chip"><input type="radio" name="profile" value="Association ou collectivité"><span>Une association</span></label>
+                            <label class="ct-chip"><input type="radio" name="profile" value="Presse"><span>La presse</span></label>
+                            <label class="ct-chip"><input type="radio" name="profile" value="Joueur"><span>Un joueur</span></label>
+                        </div>
+                    </fieldset>
+                    <div class="ct-row">
+                        <div class="ct-field">
+                            <label for="contact-name">Nom</label>
+                            <input id="contact-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Prénom et nom">
+                        </div>
+                        <div class="ct-field">
+                            <label for="contact-email">Email</label>
+                            <input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="120" placeholder="toi@organisation.fr">
+                        </div>
+                    </div>
+                    <div class="ct-field" id="ct-org">
+                        <label for="contact-org">Organisation</label>
+                        <input id="contact-org" name="organisation" type="text" autocomplete="organization" maxlength="120" placeholder="École, entreprise ou association">
+                    </div>
+                    <div class="ct-field">
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" required minlength="10" maxlength="4000" rows="6" placeholder="Parle-nous de ton projet : combien de personnes, quel public, à quel moment."></textarea>
+                    </div>
+                    <button type="submit" class="ct-submit">Envoyer le message</button>
+                    <p class="contact-legal">Tes infos servent uniquement à traiter ta demande. Détails dans la <a href="/politique-confidentialite">politique de confidentialité</a>.</p>
+                    <div id="contact-status" class="contact-status" role="status" aria-live="polite" hidden></div>
+                </form>
+                <div id="ct-done" class="ct-done" hidden>
+                    <img src="/landing/img/MascotteHappy.svg" alt="" width="96" height="96">
+                    <b>Message envoyé !</b>
+                    <p id="ct-done-text">On le lit et on te répond par email.</p>
+                    <button type="button" class="ct-again">Écrire un autre message</button>
                 </div>
-                <div class="calc-field">
-                    <label for="contact-email">Email</label>
-                    <input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="120" placeholder="toi@email.fr">
-                </div>
-                <div class="calc-field">
-                    <label for="contact-subject">Sujet</label>
-                    <select id="contact-subject" name="subject">
-                        <option value="Question sur l'app">Question sur l'app</option>
-                        <option value="Calculateur ou guide">Calculateur ou guide</option>
-                        <option value="Compte et données">Compte et données personnelles</option>
-                        <option value="Presse et partenariats">Presse et partenariats</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-                </div>
-                <div class="calc-field">
-                    <label for="contact-message">Message</label>
-                    <textarea id="contact-message" name="message" required minlength="10" maxlength="4000" rows="7" placeholder="Dis-nous concrètement ce dont tu as besoin."></textarea>
-                </div>
-                <p class="contact-legal">Tes infos servent uniquement à traiter ta demande. Détails dans la <a href="/politique-confidentialite">politique de confidentialité</a>.</p>
-                <button type="submit" class="cta-button contact-submit">Envoyer le message</button>
-                <div id="contact-status" class="contact-status" hidden></div>
-            </form>
-        </article>
+            </div>
+        </section>
     </main>
   <footer class="sitefoot">
     <div class="footcard">
@@ -133,6 +155,16 @@
       </div>
     </div>
   </footer>
+  <aside class="dlwrap" aria-label="Télécharger Dodje">
+    <div class="dlbar off">
+      <img src="/landing/img/MascotteHappy.svg" alt="" width="44" height="44" class="dlboky">
+      <span class="dltxt"><b class="dltitle">Joue à Dodje</b><span>C'est gratuit</span></span>
+      <a class="store storew hide-sm dlstore" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-3.08 2.52-4.56 2.64-4.63-1.44-2.1-3.67-2.39-4.45-2.42-1.9-.19-3.7 1.11-4.66 1.11-.97 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.16 3.75-.55 9.3 1.55 12.34 1.03 1.49 2.26 3.16 3.87 3.1 1.55-.06 2.14-1 4.02-1 1.87 0 2.41 1 4.04.97 1.67-.03 2.73-1.52 3.75-3.02 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.38-4.96zM14 3.49c.85-1.03 1.43-2.46 1.27-3.89-1.23.05-2.72.82-3.6 1.85-.79.91-1.48 2.37-1.29 3.76 1.37.11 2.77-.69 3.62-1.72z"/></svg>App Store</a>
+      <a class="store storew hide-sm dlstore" href="https://play.google.com/store/apps/details?id=xyz.dodje.app&hl=fr" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3.55 2.18c-.35.2-.55.57-.55 1.02v17.6c0 .45.2.82.55 1.02L13.7 12 3.55 2.18zm11.22 8.78 2.92-2.82L6.08 1.57c-.47-.27-.9-.28-1.23-.09l9.92 9.48zm0 2.08-9.92 9.48c.33.19.76.18 1.23-.09l11.61-6.57-2.92-2.82zm1.08-1.04 3.35 3.2 1.57-.89c1.64-.93 1.64-3.69 0-4.62l-1.57-.89-3.35 3.2z"/></svg>Google Play</a>
+      <a class="cta show-sm dlhref dlcta" href="https://apps.apple.com/fr/app/dodje-finance-jeux-le%C3%A7ons/id6743447215" target="_blank" rel="noopener noreferrer">Télécharger</a>
+    </div>
+  </aside>
+  <script src="/site-dlbar.js" defer></script>
 
     
     <script type="module" src="script.js"></script>
