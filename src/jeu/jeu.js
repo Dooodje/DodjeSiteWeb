@@ -33,7 +33,7 @@ function init() {
     el.style.left = `${x}px`
     el.style.top = `${y}px`
     document.body.appendChild(el)
-    setTimeout(() => el.remove(), 1050)
+    setTimeout(() => el.remove(), 950)
   }
   function toast(text) {
     const el = document.createElement('div')
@@ -42,12 +42,6 @@ function init() {
     el.innerHTML = `<img src="/landing/img/MascotteHappy.svg" alt="">${text}`
     document.body.appendChild(el)
     setTimeout(() => el.remove(), 2500)
-  }
-  function bump(el) {
-    if (!el || reduced) return
-    el.classList.remove('bump')
-    void el.offsetWidth
-    el.classList.add('bump')
   }
   function originOf(el) {
     const r = el.getBoundingClientRect()
@@ -59,7 +53,6 @@ function init() {
     if (dodji) {
       state.dodji += dodji
       countEl.textContent = state.dodji.toLocaleString('fr-FR')
-      bump($('.jq-dodji'))
       pop(`+${dodji}`, '/landing/img/DodjiPiece.svg', x - 30, y)
     }
     if (xp) {
@@ -69,7 +62,6 @@ function init() {
       if (lvl > state.level) {
         state.level = lvl
         lvlEl.textContent = `Niv. ${lvl}`
-        bump($('.jq-lvl'))
         toast(lvl >= 5 ? `Niveau ${lvl} ! L'Arène est ouverte` : `Niveau ${lvl} !`)
         refreshArena()
       }
@@ -165,7 +157,6 @@ function init() {
           btn.disabled = true
           lives = Math.max(0, lives - 1)
           livesEl.textContent = String(lives)
-          bump($('.jquiz-lives', quiz))
           fb.hidden = false
           fb.innerHTML = '<b>Raté, une vie en moins.</b> Indice : la règle 50/30/20 met 20 % de côté. Elle reviendra dans une heure, dans l\'app.'
         }
@@ -220,7 +211,7 @@ function init() {
       const isArena = cur === ARENA
       img.src = isArena ? '/jeu/bat/7_lvl1.webp' : src(cur, l)
       const locked = isArena && state.level < 5
-      img.style.filter = locked ? 'grayscale(1) brightness(.7) drop-shadow(0 14px 16px rgba(10,4,0,.3))' : ''
+      img.style.filter = locked ? 'grayscale(1) brightness(.7)' : ''
       img.alt = isArena ? `${NAMES[cur]}${locked ? ', verrouillée' : ''}` : `${NAMES[cur]}, ${l === 0 ? 'en ruine' : `niveau ${l}`}`
       if (isArena) {
         lvlB.innerHTML = locked ? 'Ouvre au <b>niveau 5</b>' : '<b>Ouverte</b>, rendez-vous lundi'

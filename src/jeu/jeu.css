@@ -27,30 +27,28 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jnote-c{text-align:center}
 
 /* Une section = une carte noire posée sur le ciel */
-.jsec{position:relative;padding:clamp(22px,3.4vw,40px);border-radius:32px;background:rgba(10,10,10,.92);box-shadow:0 18px 50px rgba(10,4,0,.22);scroll-margin-top:150px}
+.jsec{position:relative;padding:clamp(22px,3.4vw,40px);border-radius:32px;background:#0A0A0A;scroll-margin-top:150px}
 
 /* Boutons : ceux de la landing */
-.jeu .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:12px;padding:14px 22px;min-height:52px;font-family:inherit;font-weight:700;font-size:17px;line-height:1.1;color:#FFFFFF;background:linear-gradient(180deg,#9BEC00 0%,#06D001 100%);cursor:pointer;transition:transform 220ms cubic-bezier(.3,1.25,.5,1),filter 160ms,opacity 160ms}
+.jeu .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:12px;padding:14px 22px;min-height:52px;font-family:inherit;font-weight:700;font-size:17px;line-height:1.1;color:#FFFFFF;background:linear-gradient(180deg,#9BEC00 0%,#06D001 100%);cursor:pointer;transition:background 160ms,filter 160ms}
 .jeu .cta:hover{filter:brightness(1.06)}
-.jeu .cta:active{transform:scale(.94);transition-duration:80ms}
 .jeu .cta[disabled]{background:#2A2A2A;color:#8A8A8A;cursor:default;filter:none}
 .jeu .stores{display:flex;flex-wrap:wrap;gap:12px}
-.jeu .store{display:inline-flex;align-items:center;gap:12px;min-height:58px;padding:10px 22px 10px 18px;border-radius:16px;background:#FFFFFF;color:#0A0400;font-weight:700;font-size:19px;line-height:1.05;text-decoration:none;transition:transform 220ms cubic-bezier(.3,1.25,.5,1),background 160ms}
+.jeu .store{display:inline-flex;align-items:center;gap:12px;min-height:58px;padding:10px 22px 10px 18px;border-radius:16px;background:#FFFFFF;color:#0A0400;font-weight:700;font-size:19px;line-height:1.05;text-decoration:none;transition:background 160ms}
 .jeu .store:hover{background:#F2F2F2}
-.jeu .store:active{transform:scale(.94);transition-duration:80ms}
 .jeu .store small{display:block;font-size:11px;font-weight:500;color:rgba(10,4,0,.6);margin-bottom:2px}
 .jeu .store svg{flex:0 0 auto}
 .jeu .store-lg{min-height:66px;padding:12px 28px 12px 22px;font-size:21px;border-radius:18px}
 
 /* Barre de quête */
-.jq{position:sticky;top:78px;z-index:50;display:flex;align-items:center;gap:12px;width:min(100%,640px);margin:0 auto -6px;padding:7px 14px 7px 8px;border-radius:999px;background:rgba(10,10,10,.94);box-shadow:0 12px 30px rgba(10,4,0,.25)}
+.jq{position:sticky;top:78px;z-index:50;display:flex;align-items:center;gap:12px;width:min(100%,640px);margin:0 auto -6px;padding:7px 14px 7px 8px;border-radius:999px;background:#0A0A0A}
 .jq[hidden]{display:none}
 .jq-boky{flex:0 0 auto}
 .jq-mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
 .jq-label{font-size:13px;color:#B0B0B0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .jq-name{color:#FFFFFF}
 .jq-bar{position:relative;display:block;height:8px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden}
-.jq-fill{position:absolute;inset:0;border-radius:999px;background:linear-gradient(90deg,#9BEC00,#06D001);transform-origin:left;transform:scaleX(0);transition:transform 520ms cubic-bezier(.22,1,.36,1)}
+.jq-fill{position:absolute;inset:0;border-radius:999px;background:linear-gradient(90deg,#9BEC00,#06D001);transform-origin:left;transform:scaleX(0);transition:transform 400ms ease-out}
 .jq-lvl,.jq-dodji{display:inline-flex;align-items:center;gap:6px;font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
 .jq-lvl img{border-radius:6px}
 .jq.done .jq-name{color:#F3FF90}
@@ -63,20 +61,19 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jeu-page .jhero .content-lead{max-width:600px;margin:0;text-align:left;font-size:clamp(17px,1.4vw,20px) !important;line-height:1.5;color:rgba(255,255,255,.94) !important}
 .jhero .content-lead strong{color:#F3FF90}
 .jchips{display:flex;flex-wrap:wrap;gap:8px}
-.jchips li{display:flex;align-items:baseline;gap:6px;padding:8px 14px;border-radius:999px;background:rgba(10,10,10,.85)}
+.jchips li{display:flex;align-items:baseline;gap:6px;padding:8px 14px;border-radius:999px;background:#0A0A0A}
 .jchips b{font-size:18px;font-weight:800;color:#F3FF90}
 .jchips span{font-size:14px;color:rgba(255,255,255,.85)}
 .jhero-vis{position:relative;width:100%;max-width:500px;margin:0 auto;aspect-ratio:1469/1355}
-.jhero-ile{position:absolute;inset:0;filter:drop-shadow(0 22px 30px rgba(10,4,0,.28));animation:jfloat 6s ease-in-out infinite}
+.jhero-ile{position:absolute;inset:0}
 .jhero-ile img{position:absolute;display:block;height:auto}
 .jhero-ile .jile-base{inset:0;width:100%;height:100%;object-fit:contain}
-.jhero-boky{position:absolute;right:-8%;bottom:-10%;width:42%;height:auto;z-index:40;animation:jfloat 6s ease-in-out -3s infinite}
-@keyframes jfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.jhero-boky{position:absolute;right:-8%;bottom:-10%;width:42%;height:auto;z-index:40}
 
 /* Sommaire */
 .jtoc{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 4px;scroll-snap-type:x proximity}
 .jtoc::-webkit-scrollbar{display:none}
-.jtoc a{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 9px;border-radius:999px;background:rgba(10,10,10,.85);font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;scroll-snap-align:start;transition:background 180ms,color 180ms}
+.jtoc a{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 9px;border-radius:999px;background:#0A0A0A;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;scroll-snap-align:start;transition:background 180ms,color 180ms}
 .jtoc a span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#2A2A2A;font-size:12px;font-weight:800;transition:background 180ms,color 180ms}
 .jtoc a:hover{background:#1F1F1F}
 .jtoc a.done span{background:#06D001;color:#0A0400}
@@ -100,26 +97,24 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jsteps li::before{content:counter(st);position:absolute;left:14px;top:50%;translate:0 -50%;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#F3FF90;color:#0A0400;font-weight:800;font-size:15px}
 .jsteps b{font-size:17px}
 .jsteps span{font-size:14px;line-height:1.45;color:#B8B8B8}
-.jquiz{position:relative;display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:28px;background:linear-gradient(160deg,#2F4E86 0%,#1C2F52 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.jquiz{position:relative;display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:28px;background:#24406F}
 .jquiz-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .jquiz-tag{padding:5px 12px;border-radius:999px;background:rgba(0,0,0,.45);font-size:13px;font-weight:700;color:#F3FF90}
 .jquiz-lives{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:18px;font-variant-numeric:tabular-nums}
 .jquiz-q{font-size:21px;font-weight:700;line-height:1.3;letter-spacing:-.3px}
 .jquiz-answers{display:flex;flex-direction:column;gap:10px}
-.jans{display:flex;align-items:center;justify-content:center;min-height:56px;padding:10px 14px;border:0;border-radius:20px;background:rgba(0,0,0,.85);color:#FFFFFF;font-family:inherit;font-size:17px;font-weight:600;cursor:pointer;transition:background 200ms,color 200ms,transform 260ms cubic-bezier(.34,1.56,.64,1)}
+.jans{display:flex;align-items:center;justify-content:center;min-height:56px;padding:10px 14px;border:0;border-radius:20px;background:rgba(0,0,0,.85);color:#FFFFFF;font-family:inherit;font-size:17px;font-weight:600;cursor:pointer;transition:background 200ms,color 200ms}
 .jans:hover{background:#000000}
-.jans:active{transform:scale(.97);transition-duration:80ms}
-.jans.ok{background:#06D001;color:#0A0400;font-weight:800;transform:scale(1.02)}
-.jans.ko{background:#FF3B30;color:#FFFFFF;animation:jshake 360ms}
+.jans.ok{background:#06D001;color:#0A0400;font-weight:800}
+.jans.ko{background:#FF3B30;color:#FFFFFF}
 .jans[disabled]{cursor:default}
 .jquiz-fb{padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.6);font-size:15px;line-height:1.45}
 .jquiz-fb b{color:#F3FF90}
-@keyframes jshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
 /* Les ressources */
 .jres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
-.jrescard{padding:18px;border-radius:24px;background:#1A1A1A;transition:transform 260ms cubic-bezier(.34,1.56,.64,1),background 200ms}
-.jrescard:hover{transform:translateY(-3px);background:#202020}
+.jrescard{padding:18px;border-radius:24px;background:#1A1A1A;transition:background 200ms}
+.jrescard:hover{background:#202020}
 .jrescard img{display:block;height:52px;width:auto;object-fit:contain}
 .jrescard h3{margin-top:12px;font-size:20px;font-weight:700}
 .jrescard p{margin-top:6px;font-size:15px;line-height:1.5;color:#CCCCCC}
@@ -145,9 +140,9 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jbat-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:14px;align-items:stretch}
 .jbat-stage{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;border-radius:28px;background:radial-gradient(120% 90% at 50% 70%,#6E95D6 0%,#4A72B5 55%,#36579A 100%)}
 .jbat-vis{position:relative;width:min(100%,340px);aspect-ratio:1}
-.jbat-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;scale:1.18;transform-origin:50% 62%;filter:drop-shadow(0 14px 16px rgba(10,4,0,.3))}
-.jbat-img.up{animation:jbatup 620ms cubic-bezier(.34,1.4,.64,1)}
-@keyframes jbatup{0%{transform:scale(1)}18%{transform:scale(1.08,.88)}45%{transform:scale(.94,1.1)}70%{transform:scale(1.03,.98)}100%{transform:scale(1)}}
+.jbat-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;scale:1.18;transform-origin:50% 62%}
+.jbat-img.up{animation:jfade 300ms ease-out}
+@keyframes jfade{from{opacity:.4}to{opacity:1}}
 .jbat-ctrl{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:340px}
 .jbat-lvl{font-size:15px;font-weight:600;color:rgba(255,255,255,.9)}
 .jbat-lvl b{font-size:20px;color:#F3FF90}
@@ -160,9 +155,9 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jbat-card p{margin-top:10px;font-size:16px;line-height:1.55;color:#D6D6D6}
 .jbat:not(.js) .jbat-body{display:block}
 .jbat.js .jbat-card{display:none}
-.jbat.js .jbat-card.on{display:block;animation:jin 360ms cubic-bezier(.22,1,.36,1) both}
+.jbat.js .jbat-card.on{display:block;animation:jin 240ms ease-out both}
 .jbat:not(.js) .jbat-card + .jbat-card{margin-top:18px}
-@keyframes jin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes jin{from{opacity:0}to{opacity:1}}
 
 /* Les rendez-vous */
 .jrdv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
@@ -177,7 +172,7 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jarena-steps{display:flex;flex-direction:column;gap:8px;margin-top:14px;counter-reset:ar}
 .jarena-steps li{position:relative;padding:10px 12px 10px 46px;border-radius:16px;background:rgba(255,255,255,.55);font-size:15px;line-height:1.45;counter-increment:ar}
 .jarena-steps li::before{content:counter(ar);position:absolute;left:12px;top:10px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#2A1A08;color:#E9D3A6;font-size:13px;font-weight:800}
-.jarena-boky{width:220px;height:auto;justify-self:center;filter:drop-shadow(0 12px 14px rgba(42,26,8,.3))}
+.jarena-boky{width:220px;height:auto;justify-self:center}
 .jrank{display:flex;align-items:center;gap:14px;margin-top:12px;padding:14px 18px;border-radius:20px;background:#1A1A1A}
 .jrank img{flex:0 0 auto}
 .jrank p{font-size:15px;line-height:1.5;color:#D6D6D6}
@@ -191,7 +186,7 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jplan ul{display:flex;flex-direction:column;gap:8px;margin-top:14px}
 .jplan li{position:relative;padding-left:28px;font-size:16px;line-height:1.4;color:#E0E0E0}
 .jplan li::before{content:"";position:absolute;left:2px;top:3px;width:7px;height:12px;border-right:3px solid #06D001;border-bottom:3px solid #06D001;transform:rotate(45deg)}
-.jplan-one{background:linear-gradient(160deg,#1F2A12 0%,#0F1509 100%);box-shadow:inset 0 0 0 2px #F3FF90}
+.jplan-one{background:#1E2A0F}
 .jplan-one .jplan-price{font-size:20px;color:#F3FF90}
 .jplan-one li b{color:#F3FF90}
 .jplan-note{margin-top:auto;padding-top:14px;font-size:13px;color:#9A9A9A}
@@ -224,14 +219,14 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jeu .faqmore a::after{content:"";width:8px;height:8px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg)}
 
 /* Appel final */
-.jfinal{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:linear-gradient(180deg,rgba(10,10,10,.92) 0%,rgba(18,30,10,.95) 100%)}
-.jfinal-boky{width:120px;height:auto;animation:jfloat 4s ease-in-out infinite}
+.jfinal{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:#0A0A0A}
+.jfinal-boky{width:120px;height:auto}
 .jfinal .jh2{margin-top:6px;font-style:italic;font-size:clamp(34px,4.6vw,60px);letter-spacing:-2px}
 .jfinal .jlead{margin:4px auto 14px}
 .jfinal .stores{justify-content:center}
 
 /* Pour aller plus loin */
-.jsources{padding:20px;border-radius:28px;background:rgba(10,10,10,.85)}
+.jsources{padding:20px;border-radius:28px;background:#0A0A0A}
 .jsources h2{font-size:18px;font-weight:700;text-align:center}
 .jeu-page .jsources .content-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:none;margin-top:14px}
 .jeu-page .jsources .content-links a{padding:10px 14px;border-radius:999px;background:#1A1A1A;color:#06D001;font-size:14px;font-weight:600;text-decoration:none}
@@ -240,20 +235,21 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
 .jsrc a{color:#B0B0B0;text-decoration:underline;text-underline-offset:2px}
 .jeu-page .content-updated{margin-top:8px;font-size:13px;color:#777777}
 
-/* Récompenses qui s'envolent (+Dodji, +EXP) */
-.jpop{position:fixed;z-index:80;pointer-events:none;display:flex;align-items:center;gap:6px;translate:-50% -50%;font-size:24px;font-weight:800;color:#FFFFFF;text-shadow:0 2px 8px rgba(10,4,0,.5);animation:jpop 1000ms cubic-bezier(.22,1,.36,1) both}
-.jpop img{width:28px;height:28px}
-@keyframes jpop{0%{opacity:0;transform:translateY(10px) scale(.5)}20%{opacity:1;transform:translateY(-24px) scale(1.15)}70%{opacity:1;transform:translateY(-50px) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(.95)}}
-.jtoast{position:fixed;left:50%;top:150px;z-index:90;display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:999px;background:#F3FF90;color:#0A0400;font-weight:800;font-size:17px;box-shadow:0 14px 36px rgba(10,4,0,.35);translate:-50% 0;animation:jtoast 2400ms cubic-bezier(.22,1,.36,1) both;pointer-events:none}
+/* Récompenses (+Dodji, +EXP) : simple fondu vers le haut */
+.jpop{position:fixed;z-index:80;pointer-events:none;display:flex;align-items:center;gap:6px;translate:-50% -50%;padding:6px 12px;border-radius:999px;background:#0A0A0A;font-size:18px;font-weight:800;color:#FFFFFF;animation:jpop 900ms ease-out both}
+.jpop img{width:22px;height:22px}
+@keyframes jpop{0%{opacity:0;transform:translateY(0)}15%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translateY(-36px)}}
+.jtoast{position:fixed;left:50%;top:150px;z-index:90;display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:999px;background:#F3FF90;color:#0A0400;font-weight:800;font-size:17px;translate:-50% 0;animation:jtoast 2400ms ease-out both;pointer-events:none}
 .jtoast img{width:36px;height:36px}
-@keyframes jtoast{0%{opacity:0;transform:translateY(-16px) scale(.9)}12%{opacity:1;transform:translateY(0) scale(1.04)}20%{transform:scale(1)}85%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
-.bump{animation:jbump 360ms cubic-bezier(.34,1.56,.64,1)}
-@keyframes jbump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes jtoast{0%{opacity:0}10%{opacity:1}85%{opacity:1}100%{opacity:0}}
 
-/* Apparition des sections : le saut des cartes de l'app */
+/* Apparition des sections : fondu court, sans rebond */
 .jeu.js .jsec{opacity:0}
-.jeu.js .jsec.seen{animation:jjump 460ms both}
-@keyframes jjump{0%{opacity:0;transform:scale(.96) translateY(14px);animation-timing-function:cubic-bezier(.33,1,.68,1)}40%{opacity:1;transform:scale(1.012)}70%{transform:scale(.996)}100%{opacity:1;transform:none}}
+.jeu.js .jsec.seen{animation:jreveal 420ms ease-out both}
+@keyframes jreveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Le menu, la barre de téléchargement et le pied de page sans ombre floue */
+.jeu-page .topnav__bar,.jeu-page .dlbar,.jeu-page .footcard{box-shadow:none}
 
 :focus-visible{outline:3px solid #F3FF90;outline-offset:3px}
 
@@ -300,7 +296,6 @@ body.jeu-page{overflow-x:clip;overflow-y:visible}
   .jfaq summary{font-size:16px;padding:16px}
 }
 @media (prefers-reduced-motion:reduce){
-  .jhero-ile,.jhero-boky,.jfinal-boky{animation:none}
-  .jeu.js .jsec{opacity:1}
-  .jeu.js .jsec.seen{animation:none}
+    .jeu.js .jsec{opacity:1}
+  .jeu.js .jsec.seen,.jpop,.jtoast,.jbat-img.up,.jbat.js .jbat-card.on{animation:none}
 }
