@@ -1,8 +1,14 @@
 name: Contenu auto (actu + blog)
 
+# 1 à 2 articles par jour, rédigés par Claude à partir de sources vérifiées.
+# Premier passage à 4h30 UTC (5h30 en hiver, 6h30 en été à Paris), second passage une heure plus tard
+# au cas où le premier aurait échoué ou n'aurait publié qu'un article. Le script s'arrête tout seul
+# quand le quota du jour est atteint. Le déploiement suit automatiquement (workflow Deploy).
+
 on:
   schedule:
-    - cron: '0 7 * * *'
+    - cron: '30 4 * * *'
+    - cron: '30 5 * * *'
   workflow_dispatch:
 
 permissions:
@@ -15,6 +21,7 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,27 +32,38 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Vérifier les extracteurs de barèmes
-        run: node scripts/editorial-extractors.test.mjs
-
-      - name: Publier l'actualité du jour
-        id: actu
+      - name: Rédiger les articles du jour
+        id: write
         env:
-          AUTO_COMMIT: '1'
-        run: node scripts/publish-actu-daily.mjs
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAX_ARTICLES: '2'
+        run: node scripts/publish-ai-daily.mjs
         continue-on-error: true
 
-      - name: Publier l'article de blog du jour
-        id: blog
-        if: always()
-        env:
-          AUTO_COMMIT: '1'
-        run: node scripts/publish-blog-daily.mjs
+      - name: Vérifier que le site se construit avec les nouveaux articles
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "Aucun nouvel article."; exit 0; fi
+          npm run build
+          npm run validate:seo
 
-      - name: Échouer si une publication a échoué
-        if: always() && (steps.actu.outcome == 'failure' || steps.blog.outcome == 'failure')
-        run: exit 1
+      - name: Publier
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "Rien à publier."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add actualites blog blog.html data/actu-auto-log.json data/blog-auto-log.json
+          titles=$(git diff --cached --name-only --diff-filter=A | sed -E 's#.*/##; s#\.html$##' | paste -sd ',' -)
+          git commit -m "contenu(auto): ${titles}"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Alerter si aucun article n'est en ligne aujourd'hui
+        if: steps.write.outcome == 'failure'
+        run: |
+          echo "::error::Aucun article publié aujourd'hui. Lis les logs de l'étape « Rédiger les articles du jour »."
+          exit 1

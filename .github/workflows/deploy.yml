@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  # Les commits du bot (GITHUB_TOKEN) ne déclenchent pas "push" : on redéploie après chaque passage du contenu auto.
+  workflow_run:
+    workflows: ['Contenu auto (actu + blog)']
+    types: [completed]
   workflow_dispatch:
 
 permissions:

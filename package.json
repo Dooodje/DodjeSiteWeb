@@ -16,7 +16,8 @@
     "publish:actu": "node scripts/publish-actu-daily.mjs",
     "publish:blog": "node scripts/publish-blog-daily.mjs",
     "publish:guide": "node scripts/publish-guide-daily.mjs",
-    "test:editorial": "node scripts/editorial-extractors.test.mjs"
+    "test:editorial": "node scripts/editorial-extractors.test.mjs",
+    "publish:ai": "node scripts/publish-ai-daily.mjs"
   },
   "devDependencies": {
     "@types/react": "^18.3.29",
@@ -37,9 +38,11 @@
   "author": "Dodje Team",
   "license": "MIT",
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.10.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^1.17.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "zod": "^4.6.7"
   }
 }
