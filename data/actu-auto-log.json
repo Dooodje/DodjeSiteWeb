@@ -83,6 +83,12 @@
       "slug": "plafond-versement-pea",
       "date": "2026-10-22",
       "title": "Plafond du PEA : 150 000 € (octobre 2026)"
+    },
+    {
+      "slug": "smic-decembre-2026-hausse-1-6-montant-net",
+      "date": "2026-11-19",
+      "title": "SMIC décembre 2026 : environ 1 502 € net après +1,6 %",
+      "engine": "claude"
     }
   ],
   "fingerprints": [

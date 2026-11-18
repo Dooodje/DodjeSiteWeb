@@ -69,6 +69,12 @@
       "slug": "le-matelas-avant-la-bourse",
       "date": "2026-10-22",
       "title": "Avant la bourse : un Livret A à 1,7 % (octobre 2026)"
+    },
+    {
+      "slug": "methode-des-enveloppes-budget-noel",
+      "date": "2026-11-19",
+      "title": "Méthode des enveloppes : un budget qui tient jusqu'à Noël",
+      "engine": "claude"
     }
   ]
 }
