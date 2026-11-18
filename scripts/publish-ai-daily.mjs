@@ -26,7 +26,25 @@ import { footerHtml, headChrome, headerHtml, skyHtml } from './site-chrome.mjs'
 
 const SITE = 'https://dodje.fr'
 const OG = `${SITE}/assets/og-dodje-1200x630.png`
-const MODEL = 'claude-opus-5-5'
+// Sonnet 5.5 : 2 fois moins cher qu'Opus, largement suffisant pour une veille et un article de 1 000 mots.
+const MODEL = 'claude-sonnet-5-5'
+// Tarifs indicatifs (dollars par million de tokens, recherche web à l'unité) pour estimer le coût de chaque passage.
+const PRICE = { input: 2, output: 10, cacheRead: 0.1, cacheWrite: 2.5, search: 0.01 }
+const spend = { usd: 0, lines: [] }
+function track(label, usage) {
+  if (!usage) return
+  const searches = usage.server_tool_use?.web_search_requests || 0
+  const usd =
+    ((usage.input_tokens || 0) * PRICE.input +
+      (usage.output_tokens || 0) * PRICE.output +
+      (usage.cache_read_input_tokens || 0) * PRICE.cacheRead +
+      (usage.cache_creation_input_tokens || 0) * PRICE.cacheWrite) / 1e6 +
+    searches * PRICE.search
+  spend.usd += usd
+  console.log(
+    `[coût] ${label} : ${usage.input_tokens} entrée, ${usage.cache_read_input_tokens || 0} cache, ${usage.output_tokens} sortie, ${searches} recherche(s), environ ${usd.toFixed(3)} $`
+  )
+}
 const UA = 'Mozilla/5.0 (compatible; DodjeEditorialBot/1.0; +https://dodje.fr/)'
 const MAX_ARTICLES = Math.min(2, Math.max(1, Number(process.env.MAX_ARTICLES || 2)))
 const DRY = process.env.DRY_RUN === '1'
@@ -184,20 +202,22 @@ Requêtes visées : (3 à 5 recherches que les gens tapent sur ce sujet)
 
   const messages = [{ role: 'user', content: prompt }]
   let response
-  for (let turn = 0; turn < 6; turn++) {
+  for (let turn = 0; turn < 4; turn++) {
     response = await client.beta.messages.create({
       model: MODEL,
       max_tokens: 16000,
       betas: ['server-side-fallback-2026-07-01'],
       fallbacks: 'default',
       system: CHARTER,
-      output_config: { effort: 'high' },
+      output_config: { effort: 'medium' },
+      // Veille volontairement courte : c'est l'étape la plus chère (chaque page lue est renvoyée à chaque tour).
       tools: [
-        { type: 'web_search_20260209', name: 'web_search', max_uses: 8, user_location: { type: 'approximate', country: 'FR', timezone: 'Europe/Paris' } },
-        { type: 'web_fetch_20260209', name: 'web_fetch', max_uses: 10, max_content_tokens: 8000 }
+        { type: 'web_search_20260209', name: 'web_search', max_uses: 4, user_location: { type: 'approximate', country: 'FR', timezone: 'Europe/Paris' } },
+        { type: 'web_fetch_20260209', name: 'web_fetch', max_uses: 4, max_content_tokens: 5000 }
       ],
       messages
     })
+    track(`veille (tour ${turn + 1})`, response.usage)
     if (response.stop_reason !== 'pause_turn') break
     messages.push({ role: 'assistant', content: response.content })
   }
@@ -226,10 +246,10 @@ const ArticleSchema = z.object({
   sources: z.array(z.object({ label: z.string(), url: z.string() })).describe('2 à 6 sources réellement utilisées, URL https exactes, au moins une source officielle')
 })
 
-async function writeArticle(client, kind, dossier, inventory) {
-  const label = kind === 'actu' ? 'SUJET ACTU' : 'SUJET BLOG'
-  const prompt = `Nous sommes le ${todayFr()}. Rédige l'article "${kind}" de l'édition du ${edFr()} à partir de la section "## ${label}" du dossier ci-dessous.
-Si cette section dit AUCUN ou n'existe pas, renvoie skip = true.
+function writerRules(inventory) {
+  return `${CHARTER}
+
+Tu rédiges un article à partir d'un dossier de veille déjà vérifié.
 
 Règles de rédaction :
 - Français clair, tutoiement, phrases courtes, aucun jargon sans explication. Ton direct et bienveillant, jamais racoleur.
@@ -240,9 +260,15 @@ Règles de rédaction :
 - 800 à 1 300 mots au total. Pas de remplissage. Au moins 3 chiffres précis et sourcés (montants, taux, dates, durées).
 - N'invente rien : utilise seulement les faits du dossier. Si une mesure n'est pas encore votée ou en vigueur, écris-le clairement.
 - Pas de conseil personnalisé ni de promesse de rendement. Pas de tiret cadratin, pas de point médian, pas de tilde.
-- Liens internes : 2 à 5, choisis uniquement dans cette liste (href exact), et place-les aussi dans le texte des sections quand c'est naturel :
-${inventory.map((p) => `  ${p.href} : ${p.title}`).join('\n')}
 - Sources : les URL exactes du dossier, au moins une officielle.
+- Liens internes : 2 à 5, choisis uniquement dans cette liste (href exact), et place-les aussi dans le texte des sections quand c'est naturel :
+${inventory.map((p) => `  ${p.href} : ${p.title}`).join('\n')}`
+}
+
+async function writeArticle(client, kind, dossier, inventory) {
+  const label = kind === 'actu' ? 'SUJET ACTU' : 'SUJET BLOG'
+  const prompt = `Nous sommes le ${todayFr()}. Rédige l'article "${kind}" de l'édition du ${edFr()} à partir de la section "## ${label}" du dossier ci-dessous.
+Si cette section dit AUCUN ou n'existe pas, renvoie skip = true.
 
 Dossier :
 ${dossier}`
@@ -252,10 +278,12 @@ ${dossier}`
     max_tokens: 16000,
     betas: ['server-side-fallback-2026-07-01'],
     fallbacks: 'default',
-    system: CHARTER,
-    output_config: { effort: 'high', format: betaZodOutputFormat(ArticleSchema) },
+    // Les règles et la liste des pages ne changent pas d'un article à l'autre : elles sont mises en cache.
+    system: [{ type: 'text', text: writerRules(inventory), cache_control: { type: 'ephemeral' } }],
+    output_config: { effort: 'medium', format: betaZodOutputFormat(ArticleSchema) },
     messages: [{ role: 'user', content: prompt }]
   })
+  track(`rédaction ${kind}`, response.usage)
   if (response.stop_reason === 'refusal') throw new Error(`Rédaction refusée (${response.stop_details?.category ?? 'sans catégorie'})`)
   if (response.stop_reason === 'max_tokens') throw new Error('Rédaction coupée (max_tokens)')
   if (!response.parsed_output) throw new Error('Sortie JSON invalide')
@@ -605,6 +633,7 @@ async function main() {
     gitCommit([...new Set(files)], `contenu(auto): ${titles.join(' + ').slice(0, 90)}`)
   }
   console.log(`${published} article(s) pour l'édition du ${edFr()}.`)
+  console.log(`[coût] total du passage : environ ${spend.usd.toFixed(2)} $`)
   return published > 0 ? 0 : 1
 }
 
