@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - main
-  # Les commits du bot (GITHUB_TOKEN) ne déclenchent pas "push" : on redéploie après chaque passage du contenu auto.
-  workflow_run:
-    workflows: ['Contenu auto (actu + blog)']
-    types: [completed]
+  # Les commits du bot (GITHUB_TOKEN) ne déclenchent pas "push" : le contenu auto appelle ce workflow lui-même.
+  workflow_call:
   workflow_dispatch:
 
 permissions:
@@ -26,6 +24,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Node
         uses: actions/setup-node@v4
