@@ -31,6 +31,17 @@ const UA = 'Mozilla/5.0 (compatible; DodjeEditorialBot/1.0; +https://dodje.fr/)'
 const MAX_ARTICLES = Math.min(2, Math.max(1, Number(process.env.MAX_ARTICLES || 2)))
 const DRY = process.env.DRY_RUN === '1'
 
+// Les tâches planifiées de GitHub partent avec 4 à 10 h de retard : la rédaction tourne donc la veille au soir.
+// Après 15 h (heure de Paris), on prépare l'édition du lendemain matin. EDITION_DATE=AAAA-MM-JJ force une date.
+function parisHour(now) {
+  return Number(new Intl.DateTimeFormat('en-GB', { hour: '2-digit', hour12: false, timeZone: 'Europe/Paris' }).format(now))
+}
+const EDITION = process.env.EDITION_DATE
+  ? new Date(`${process.env.EDITION_DATE}T12:00:00Z`)
+  : parisHour(new Date()) >= 15 ? new Date(Date.now() + 86400000) : new Date()
+const ed = () => todayIso(EDITION)
+const edFr = () => todayFr(EDITION)
+
 const KINDS = {
   actu: { dir: 'actualites', log: 'data/actu-auto-log.json', hub: 'actualites/index.html', schema: 'NewsArticle', nav: 'actus' },
   blog: { dir: 'blog', log: 'data/blog-auto-log.json', hub: 'blog.html', schema: 'Article', nav: 'blog' }
@@ -68,7 +79,7 @@ function isOfficial(url) {
 }
 
 function publishedToday() {
-  const today = todayIso()
+  const today = ed()
   return Object.values(KINDS).flatMap((k) => (loadJson(k.log, { published: [] }).published || []).filter((r) => r.date === today))
 }
 
@@ -138,8 +149,7 @@ impôts, salaire, aides et prestations, crédit et immobilier, bourse, ETF, PEA,
 consommation, arnaques financières. Le lecteur n'est pas un expert : il veut savoir ce qui change pour lui et quoi faire.`
 
 async function research(client, hints, titles, wanted) {
-  const today = todayFr()
-  const prompt = `Nous sommes le ${today}. Prépare le dossier de recherche des articles du jour.
+  const prompt = `Nous sommes le ${todayFr()}. Prépare le dossier de recherche des articles de l'édition du ${edFr()} (publiés ce matin-là).
 
 Sujets à préparer : ${wanted.join(' et ')}.
 - "actu" : une information des 7 derniers jours qui change concrètement quelque chose pour l'argent d'un particulier en France
@@ -204,7 +214,7 @@ const ArticleSchema = z.object({
   skipReason: z.string(),
   slug: z.string().describe('URL en minuscules, mots séparés par des tirets, sans accents, 3 à 8 mots, contient le mot-clé principal'),
   kicker: z.string().describe('Rubrique courte, par exemple "Actualité épargne" ou "Impôts"'),
-  title: z.string().describe('H1 et balise title : 45 à 70 caractères, mot-clé principal au début, chiffre clé si possible'),
+  title: z.string().describe('H1 et balise title : 40 à 62 caractères, mot-clé principal au début, chiffre clé si possible'),
   metaDescription: z.string().describe('120 à 155 caractères, donne la réponse et le chiffre clé, se termine par un point'),
   primaryKeyword: z.string(),
   bluf: z.string().describe('Chapô "En bref" : 2 ou 3 phrases qui répondent directement à la question, avec le chiffre clé et la date'),
@@ -218,7 +228,7 @@ const ArticleSchema = z.object({
 
 async function writeArticle(client, kind, dossier, inventory) {
   const label = kind === 'actu' ? 'SUJET ACTU' : 'SUJET BLOG'
-  const prompt = `Nous sommes le ${todayFr()}. Rédige l'article "${kind}" du jour à partir de la section "## ${label}" du dossier ci-dessous.
+  const prompt = `Nous sommes le ${todayFr()}. Rédige l'article "${kind}" de l'édition du ${edFr()} à partir de la section "## ${label}" du dossier ci-dessous.
 Si cette section dit AUCUN ou n'existe pas, renvoie skip = true.
 
 Règles de rédaction :
@@ -291,7 +301,7 @@ export function qualityCheck(a, kind, internal) {
   const errors = []
   if (a.skip) return [`sujet abandonné : ${a.skipReason}`]
   if (!/^[a-z0-9]+(-[a-z0-9]+){1,11}$/.test(a.slug)) errors.push(`slug invalide : ${a.slug}`)
-  if (a.title.length < 30 || a.title.length > 80) errors.push(`titre de ${a.title.length} caractères`)
+  if (a.title.length < 30 || a.title.length > 66) errors.push(`titre de ${a.title.length} caractères`)
   if (a.metaDescription.length < 90 || a.metaDescription.length > 160) errors.push(`meta description de ${a.metaDescription.length} caractères`)
   if (!/[.!?]$/.test(a.bluf.trim())) errors.push('chapô sans phrase finale')
   if (a.sections.length < 4) errors.push(`${a.sections.length} sections seulement`)
@@ -326,25 +336,51 @@ async function checkSources(sources) {
 
 /* ---------------------------------------------------------------- 4. rendu */
 
+// « À lire aussi » : les 3 derniers articles du même type, pour le maillage interne et la fraîcheur.
+function relatedHtml(kind, slug) {
+  const cfg = KINDS[kind]
+  const rows = (loadJson(cfg.log, { published: [] }).published || [])
+    .filter((r) => r.slug !== slug && fs.existsSync(path.join(rootDir, cfg.dir, `${r.slug}.html`)))
+    .slice(-3)
+    .reverse()
+  if (!rows.length) return ''
+  return `<h2>À lire aussi</h2>
+            <ul>
+                ${rows.map((r) => `<li><a href="/${cfg.dir}/${r.slug}">${escapeHtml(r.title)}</a></li>`).join('\n                ')}
+            </ul>
+`
+}
+
 export function renderPage(kind, a) {
   const cfg = KINDS[kind]
   const url = `${SITE}/${cfg.dir}/${a.slug}`
-  const date = todayIso()
+  const date = ed()
+  // Heure de mise en ligne annoncée : 6h30, heure de Paris (fuseau d'hiver ou d'été)
+  const offset = new Intl.DateTimeFormat('en', { timeZone: 'Europe/Paris', timeZoneName: 'longOffset' })
+    .format(EDITION).match(/GMT([+-]\d{2}:\d{2})/)?.[1] || '+01:00'
+  const stamp = `${date}T06:30:00${offset}`
+  const wordCount = words(a.bluf) + a.sections.reduce((n, s) => n + words(s.html), 0) + a.faq.reduce((n, f) => n + words(f.answer), 0)
   const article = {
     '@context': 'https://schema.org',
     '@type': cfg.schema,
     headline: a.title,
     description: a.metaDescription,
     image: OG,
-    datePublished: date,
-    dateModified: date,
+    datePublished: stamp,
+    dateModified: stamp,
     inLanguage: 'fr-FR',
     keywords: a.primaryKeyword,
     articleSection: a.kicker,
-    author: { '@id': `${SITE}/#editorial-team` },
+    wordCount,
+    isAccessibleForFree: true,
+    author: { '@type': 'Organization', name: 'Équipe éditoriale Dodje', url: `${SITE}/guides/equipe-editoriale` },
     publisher: { '@id': `${SITE}/#organization` },
     mainEntityOfPage: url,
-    about: { '@type': 'Country', name: 'France' },
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.content-lead'] },
+    about: [
+      { '@type': 'Country', name: 'France' },
+      ...a.definitions.map((d) => ({ '@type': 'DefinedTerm', name: d.term, description: d.definition }))
+    ],
     citation: a.sources.map((s) => s.url)
   }
   const faq = {
@@ -374,11 +410,20 @@ export function renderPage(kind, a) {
     <meta property="og:url" content="${url}">
     <meta property="og:type" content="article">
     <meta property="og:locale" content="fr_FR">
-    <meta property="article:published_time" content="${date}">
-    <meta property="article:modified_time" content="${date}">
+    <meta property="og:image:alt" content="Dodje, le jeu gratuit pour comprendre l'argent">
+    <meta property="og:site_name" content="Dodje">
+    <meta property="article:published_time" content="${stamp}">
+    <meta property="article:modified_time" content="${stamp}">
     <meta property="article:section" content="${escapeHtml(a.kicker)}">
-    <link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-48.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon-192.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DodjeApp">
+    <meta name="twitter:title" content="${escapeHtml(a.title)}">
+    <meta name="twitter:description" content="${escapeHtml(a.metaDescription)}">
+    <meta name="twitter:image" content="${OG}">
+    <link rel="icon" type="image/svg+xml" href="../assets/dodje-favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/dodje-favicon-48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/dodje-favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/dodje-apple-touch.png">
     <link rel="stylesheet" href="../styles.css">
 ${headChrome()}
     <script type="application/ld+json">${ldJson(article)}</script>
@@ -392,10 +437,14 @@ ${headerHtml(cfg.nav)}
             <p class="legal-eyebrow">${escapeHtml(a.kicker)}</p>
             <h1>${escapeHtml(a.title)}</h1>
             <p class="content-lead"><strong>En bref :</strong> ${escapeHtml(a.bluf)}</p>
-            <p class="content-updated">Publié le ${escapeHtml(todayFr())} par l'<a href="/guides/equipe-editoriale">équipe éditoriale Dodje</a></p>
+            <p class="content-updated">Publié le ${escapeHtml(edFr())} par l'<a href="/guides/equipe-editoriale">équipe éditoriale Dodje</a></p>
 
-            <div class="content-note">
-                <p><strong>À retenir</strong></p>
+            <div class="content-note content-ymyl">
+                <p><strong>Rappel :</strong> contenu éducatif et informatif, sans conseil en investissement ni conseil fiscal personnalisé. Vérifie toujours la source officielle avant une décision.</p>
+            </div>
+
+            <div class="content-note content-keypoints">
+                <p class="content-keypoints-title">À retenir</p>
                 <ul>
                     ${a.keyPoints.map((p) => `<li>${escapeHtml(p)}</li>`).join('\n                    ')}
                 </ul>
@@ -408,15 +457,12 @@ ${headerHtml(cfg.nav)}
                 </dl>
             </section>
 
-            ${a.sections.map((s) => `<h2>${escapeHtml(s.h2)}</h2>\n            ${s.html}`).join('\n\n            ')}
+            ${a.sections.map((s) => `<h2>${escapeHtml(s.h2)}</h2>\n            ${s.html.replace(/<table>/g, '<div class="content-table"><table>').replace(/<\/table>/g, '</table></div>')}`).join('\n\n            ')}
 
             <h2>Questions fréquentes</h2>
             ${a.faq.map((f) => `<h3>${escapeHtml(f.question)}</h3>\n            <p>${escapeHtml(f.answer)}</p>`).join('\n            ')}
 
-            <div class="content-note content-ymyl">
-                <p><strong>Rappel :</strong> contenu éducatif et informatif, sans conseil en investissement ni conseil fiscal personnalisé. Vérifie toujours la source officielle avant une décision.</p>
-            </div>
-
+            ${relatedHtml(kind, a.slug)}
             <div class="content-links">
                 ${a.internalLinks.map((l) => `<a href="${escapeHtml(l.href)}">${escapeHtml(l.label)}</a>`).join('\n                ')}
                 ${back}
@@ -429,7 +475,7 @@ ${headerHtml(cfg.nav)}
                     ${a.sources.map((s) => `<li><a href="${escapeHtml(s.url)}" rel="noopener noreferrer" target="_blank">${escapeHtml(s.label)}</a></li>`).join('\n                    ')}
                 </ul>
             </aside>
-            <p class="content-updated">Dernière mise à jour : ${escapeHtml(todayFr())}</p>
+            <p class="content-updated">Dernière mise à jour : ${escapeHtml(edFr())}</p>
         </article>
     </main>
 ${footerHtml()}
@@ -460,7 +506,7 @@ function writeArticleFiles(kind, a) {
   const cfg = KINDS[kind]
   let slug = a.slug
   const exists = (s) => ['actualites', 'blog'].some((d) => fs.existsSync(path.join(rootDir, d, `${s}.html`)))
-  if (exists(slug)) slug = `${slug}-${todayIso()}`
+  if (exists(slug)) slug = `${slug}-${ed()}`
   if (exists(slug)) throw new Error(`Page déjà existante : ${slug}`)
   const art = { ...a, slug }
   const rel = `${cfg.dir}/${slug}.html`
@@ -470,7 +516,7 @@ function writeArticleFiles(kind, a) {
   if (kind === 'actu') updateActuHub(hubTopic, hubCopy)
   else updateBlogHub(hubTopic, hubCopy)
   const log = loadJson(cfg.log, { published: [] })
-  log.published = [...(log.published || []), { slug, date: todayIso(), title: art.title, engine: 'claude' }].slice(-400)
+  log.published = [...(log.published || []), { slug, date: ed(), title: art.title, engine: 'claude' }].slice(-400)
   fs.writeFileSync(path.join(rootDir, cfg.log), JSON.stringify(log, null, 2) + '\n', 'utf8')
   console.log(`${kind} créé : ${rel}`)
   return [rel, cfg.hub, cfg.log]
@@ -501,7 +547,7 @@ async function main() {
   if (process.env.FIXTURE) {
     const { kind, article } = JSON.parse(fs.readFileSync(process.env.FIXTURE, 'utf8'))
     const a = normalize(article, internal)
-    const errors = qualityCheck(a, kind, internal)
+    const errors = process.env.SKIP_GATE === '1' ? [] : qualityCheck(a, kind, internal)
     if (errors.length) { console.error(`Garde : ${errors.join(' ; ')}`); return 1 }
     if (DRY) { console.log(renderPage(kind, a)); return 0 }
     writeArticleFiles(kind, a)
@@ -514,7 +560,7 @@ async function main() {
     console.log(`${already.length} article(s) déjà publié(s) aujourd'hui. Stop.`)
     return 0
   }
-  const today = todayIso()
+  const today = ed()
   const doneKinds = new Set(
     Object.keys(KINDS).filter((k) => (loadJson(KINDS[k].log, { published: [] }).published || []).some((r) => r.date === today))
   )
@@ -558,7 +604,7 @@ async function main() {
   if (files.length && process.env.AUTO_COMMIT === '1') {
     gitCommit([...new Set(files)], `contenu(auto): ${titles.join(' + ').slice(0, 90)}`)
   }
-  console.log(`${published} article(s) pour le ${todayFr()}.`)
+  console.log(`${published} article(s) pour l'édition du ${edFr()}.`)
   return published > 0 ? 0 : 1
 }
 

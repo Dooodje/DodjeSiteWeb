@@ -1,14 +1,17 @@
 name: Contenu auto (actu + blog)
 
-# 1 à 2 articles par jour, rédigés par Claude à partir de sources vérifiées.
-# Premier passage à 4h30 UTC (5h30 en hiver, 6h30 en été à Paris), second passage une heure plus tard
-# au cas où le premier aurait échoué ou n'aurait publié qu'un article. Le script s'arrête tout seul
-# quand le quota du jour est atteint. Le déploiement suit automatiquement (workflow Deploy).
+# 1 à 2 articles par jour, rédigés par Claude à partir de sources vérifiées, en ligne avant 7h.
+# Les tâches planifiées de GitHub partent ici avec 4 à 10 h de retard (mesuré en octobre et novembre 2026) :
+# on lance donc plusieurs tentatives la veille au soir et dans la nuit. Après 15h à Paris, le script prépare
+# l'édition du lendemain ; il s'arrête tout seul quand le quota de l'édition est atteint.
+# Le déploiement suit automatiquement (workflow Deploy).
 
 on:
   schedule:
-    - cron: '30 4 * * *'
-    - cron: '30 5 * * *'
+    - cron: '17 15 * * *'
+    - cron: '17 18 * * *'
+    - cron: '17 21 * * *'
+    - cron: '17 0 * * *'
   workflow_dispatch:
 
 permissions:
