@@ -69,7 +69,9 @@ const KINDS = {
 const OFFICIAL = [
   'gouv.fr', 'service-public.fr', 'banque-france.fr', 'insee.fr', 'amf-france.org', 'legifrance.gouv.fr',
   'assemblee-nationale.fr', 'senat.fr', 'urssaf.fr', 'ecb.europa.eu', 'europa.eu', 'acpr.banque-france.fr',
-  'caf.fr', 'info-retraite.fr', 'lassuranceretraite.fr', 'francetravail.fr', 'lafinancepourtous.com', 'inc-conso.fr'
+  'caf.fr', 'info-retraite.fr', 'lassuranceretraite.fr', 'francetravail.fr', 'lafinancepourtous.com', 'inc-conso.fr',
+  // Sources primaires : régulateur de l'énergie, gestionnaire du réseau, dépôts officiels des sociétés cotées
+  'cre.fr', 'enedis.fr', 'sec.gov'
 ]
 
 // Flux lus chaque matin : de simples pistes, Claude vérifie et complète par sa propre recherche.

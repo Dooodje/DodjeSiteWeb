@@ -16,6 +16,7 @@ Disallow: /src/
 
 # Sitemap et fichiers IA
 Sitemap: https://dodje.fr/sitemap.xml
+Sitemap: https://dodje.fr/sitemap-news.xml
 # LLM context: https://dodje.fr/llms.txt
 # AI discovery: https://dodje.fr/.well-known/ai.txt
 # Structured summary: https://dodje.fr/ai/summary.json

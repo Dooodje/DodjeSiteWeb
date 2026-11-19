@@ -2,6 +2,7 @@ import { cleanWording, cleanText } from './scripts/clean-wording.mjs'
 import { applyChrome } from './scripts/site-chrome.mjs'
 import fs from 'fs'
 import path from 'path'
+import { execFileSync } from 'child_process'
 
 const SITE = 'https://dodje.fr'
 const OG_IMAGE = `${SITE}/assets/og-dodje-1200x630.png`
@@ -106,7 +107,40 @@ const CURATED_LLMS = [
   { label: 'Taux crédit immobilier', url: '/actualites/taux-credit-immobilier-juillet-2026' },
   { label: 'Taux Livret A août 2026', url: '/actualites/taux-livret-a-hausse-aout-2026' },
   { label: 'Barèmes finance septembre 2026', url: '/actualites/baremes-finance-france-septembre-2026' },
-  { label: 'Combien épargner par mois', url: '/guides/combien-epargner-par-mois-france-2026' }
+  { label: 'Combien épargner par mois', url: '/guides/combien-epargner-par-mois-france-2026' },
+  { label: 'Black Friday 2026 : dates et calendrier complet des promos', url: '/blog/black-friday-2026-date-calendrier' },
+  { label: 'Cyber Monday 2026 : date et différence avec le Black Friday', url: '/blog/cyber-monday-2026-date-difference-black-friday' },
+  { label: 'Vraie ou fausse promo : la règle des 30 jours', url: '/blog/black-friday-vraie-promo-regle-30-jours' },
+  { label: 'Arnaques Black Friday : 10 réflexes', url: '/blog/arnaques-black-friday-reflexes' },
+  { label: 'Black Friday : où acheter, sites fiables comparés', url: '/blog/ou-acheter-black-friday-sites-fiables' },
+  { label: 'Paiement en 3 ou 4 fois : règles au 20 novembre 2026', url: '/blog/paiement-plusieurs-fois-black-friday-nouvelles-regles' },
+  { label: 'Budget Black Friday 2026 : combien dépenser', url: '/blog/budget-black-friday-combien-depenser' },
+  { label: 'Retour et remboursement après le Black Friday', url: '/blog/retour-remboursement-black-friday-droits' },
+  { label: 'Black Friday ou soldes de janvier 2027', url: '/blog/black-friday-ou-soldes-janvier-quand-acheter' },
+  { label: 'Carte bancaire piratée : que faire', url: '/blog/carte-bancaire-piratee-achat-en-ligne-que-faire' },
+  { label: 'Investir dans l\'IA en 2026 : actions, ETF, risques (guide pilier)', url: '/blog/investir-intelligence-artificielle-2026-guide' },
+  { label: 'OpenAI contre Anthropic : valorisation, revenus, bourse', url: '/actualites/openai-vs-anthropic-chiffres-valorisation-2026' },
+  { label: 'Bulle de l\'IA en 2026 : investissements et valorisations', url: '/actualites/bulle-ia-2026-valorisations-investissements-risques' },
+  { label: 'Mistral AI : valorisation et investissement', url: '/actualites/mistral-ai-valorisation-champion-francais-2026' },
+  { label: 'ChatGPT, Claude : utiliser l\'IA pour gérer son argent', url: '/blog/utiliser-chatgpt-claude-ia-gerer-son-argent' },
+  { label: 'Arnaques à l\'IA : deepfakes et faux robots de trading', url: '/blog/arnaques-ia-deepfake-investissement' },
+  { label: 'Glossaire : IPO', url: '/glossaire/ipo' },
+  { label: 'Glossaire : intelligence artificielle', url: '/glossaire/intelligence-artificielle' },
+  { label: 'Glossaire : semi-conducteur', url: '/glossaire/semi-conducteur' },
+  { label: 'IPO Anthropic : action ANT à 83 dollars', url: '/actualites/anthropic-introduction-bourse-ipo-ant' },
+  { label: 'Acheter des actions Anthropic depuis la France', url: '/blog/acheter-action-anthropic-depuis-la-france' },
+  { label: 'Nvidia : résultats de novembre 2026 et PDG par intérim', url: '/actualites/nvidia-resultats-novembre-2026-pdg-interim' },
+  { label: 'TSMC et Samsung : résultats des semi-conducteurs 2026', url: '/actualites/tsmc-samsung-resultats-semi-conducteurs-ia-2026' },
+  { label: 'Bitcoin : la chute de novembre 2026', url: '/actualites/bitcoin-chute-novembre-2026' },
+  { label: 'Ce qui change au 1er décembre 2026', url: '/actualites/ce-qui-change-1er-decembre-2026-argent' },
+  { label: 'Ce qui change au 1er janvier 2027', url: '/actualites/ce-qui-change-1er-janvier-2027-argent' },
+  { label: 'Paiement CAF décembre 2026 et janvier 2027', url: '/actualites/calendrier-caf-decembre-2026-janvier-2027' },
+  { label: 'Mutuelle : hausse 2027 et résiliation', url: '/actualites/mutuelle-hausse-2027-resilier' },
+  { label: 'Frais bancaires 2027 : hausses et refus', url: '/actualites/frais-bancaires-2027-hausse-changer-de-banque' },
+  { label: 'Heures creuses : réforme du 1er décembre 2026', url: '/actualites/heures-creuses-1er-decembre-2026-nouveaux-horaires' },
+  { label: 'PER : verser avant le 31 décembre 2026', url: '/blog/per-versement-avant-31-decembre-2026' },
+  { label: 'Dons 2026 : réduction d\'impôt de 75 %', url: '/blog/dons-associations-reduction-impot-2026' },
+  { label: 'Impôts : 6 choses à faire avant le 31 décembre 2026', url: '/blog/impots-avant-31-decembre-2026-checklist' }
 ]
 
 function collectHtmlPaths(rootDir) {
@@ -177,10 +211,67 @@ function toPublicUrl(filePath) {
   return SITE + '/' + slug
 }
 
+const FR_MONTHS = {
+  janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6,
+  juillet: 7, aout: 8, septembre: 9, octobre: 10, novembre: 11, decembre: 12
+}
+const lastModCache = new Map()
+
+// Date de dernière modification éditoriale d'une page. En CI, la date des fichiers est celle du
+// checkout (identique pour toutes les pages) : on lit d'abord les dates déclarées dans la page
+// (article:modified_time, dateModified, « Dernière mise à jour »), puis l'historique git.
 function getLastMod(rootDir, filePath) {
+  const key = `${rootDir}|${filePath}`
+  if (lastModCache.has(key)) return lastModCache.get(key)
+  const today = new Date().toISOString().slice(0, 10)
   const full = path.join(rootDir, filePath)
-  if (!fs.existsSync(full)) return new Date().toISOString().slice(0, 10)
-  return fs.statSync(full).mtime.toISOString().slice(0, 10)
+  let result = today
+  if (fs.existsSync(full)) {
+    const html = fs.readFileSync(full, 'utf8')
+    const dates = []
+    for (const m of html.matchAll(/(?:article:modified_time" content="|"dateModified"\s*:\s*")(\d{4}-\d{2}-\d{2})/g)) dates.push(m[1])
+    const fr = html.match(/Derni[eè]re mise [aà] jour\s*:\s*(\d{1,2})(?:er)?\s+([a-zéûè]+)\s+(\d{4})/i)
+    if (fr) {
+      const month = FR_MONTHS[fr[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')]
+      if (month) dates.push(`${fr[3]}-${String(month).padStart(2, '0')}-${fr[1].padStart(2, '0')}`)
+    }
+    const valid = dates.filter((d) => d <= today).sort()
+    if (valid.length) {
+      result = valid[valid.length - 1]
+    } else {
+      try {
+        const out = execFileSync('git', ['log', '-1', '--format=%cs', '--', filePath], { cwd: rootDir, stdio: ['ignore', 'pipe', 'ignore'] })
+          .toString()
+          .trim()
+        result = /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : fs.statSync(full).mtime.toISOString().slice(0, 10)
+      } catch {
+        result = fs.statSync(full).mtime.toISOString().slice(0, 10)
+      }
+    }
+  }
+  lastModCache.set(key, result)
+  return result
+}
+
+// Sitemap Google News : articles publiés dans les 2 derniers jours (règle de Google News).
+export function buildNewsSitemapXml(rootDir, now = new Date()) {
+  const limit = now.getTime() - 2 * 24 * 3600 * 1000
+  const entries = collectHtmlPaths(rootDir)
+    .filter((p) => (p.startsWith('actualites/') || p.startsWith('blog/')) && !p.endsWith('index.html'))
+    .map((file) => {
+      const html = fs.readFileSync(path.join(rootDir, file), 'utf8')
+      const published = html.match(/article:published_time" content="([^"]+)"/)?.[1] || html.match(/"datePublished"\s*:\s*"([^"]+)"/)?.[1]
+      const title = (html.match(/<title>([^<]*)<\/title>/)?.[1] || '').replace(/\s*\|\s*Dodje.*$/, '').trim()
+      return { file, published, title }
+    })
+    .filter((e) => e.published && e.title && Date.parse(e.published) >= limit && Date.parse(e.published) <= now.getTime() + 3600 * 1000)
+    .sort((a, b) => Date.parse(b.published) - Date.parse(a.published))
+    .slice(0, 1000)
+  const urls = entries.map(
+    (e) =>
+      `  <url><loc>${toPublicUrl(e.file)}</loc><news:news><news:publication><news:name>Dodje</news:name><news:language>fr</news:language></news:publication><news:publication_date>${e.published}</news:publication_date><news:title>${escapeXml(e.title)}</news:title></news:news></url>`
+  )
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n${urls.join('\n')}${urls.length ? '\n' : ''}</urlset>\n`
 }
 
 function toRssDate(isoDate) {
@@ -840,6 +931,25 @@ function relativePathFromRoot(filename, rootDir) {
   return path.basename(norm)
 }
 
+
+// Liste structurée des articles sur les pages hub : aide moteurs et IA à comprendre la collection.
+const HUB_PAGES = ['blog.html', 'actualites/index.html', 'guides/index.html', 'outils/index.html']
+function injectHubItemList(html, filePath) {
+  if (!HUB_PAGES.includes(filePath) || html.includes('"@type":"ItemList"')) return html
+  const items = []
+  const seen = new Set()
+  for (const m of html.matchAll(/<a class="seo-hub-card" href="([^"]+)">[\s\S]*?<h3>([\s\S]*?)<\/h3>/g)) {
+    const href = m[1]
+    if (!href.startsWith('/') || seen.has(href)) continue
+    seen.add(href)
+    items.push({ '@type': 'ListItem', position: items.length + 1, url: `${SITE}${href}`, name: cleanText(m[2].replace(/<[^>]+>/g, '').trim()) })
+    if (items.length >= 50) break
+  }
+  if (!items.length) return html
+  const schema = { '@context': 'https://schema.org', '@type': 'ItemList', itemListOrder: 'https://schema.org/ItemListOrderDescending', numberOfItems: items.length, itemListElement: items }
+  return html.replace('</head>', `    <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>\n</head>`)
+}
+
 export function injectSeoHeadPlugin(rootDir) {
   return {
     name: 'inject-seo-head',
@@ -864,6 +974,7 @@ export function injectSeoHeadPlugin(rootDir) {
         out = injectSiteChrome(out, filePath)
         out = injectBreadcrumbsJsonLd(out, filePath)
         out = injectWebPageSchema(out, filePath, pageUrl)
+        out = injectHubItemList(out, filePath)
         out = injectSpeakable(out, pageUrl)
         out = injectMarkdownAlternate(out, filePath)
         out = optimizeBackgroundVideo(out)
@@ -963,6 +1074,7 @@ export function writeSeoArtifacts(rootDir) {
   injectGeoFacts(rootDir, distDir)
 
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8')
+  fs.writeFileSync(path.join(distDir, 'sitemap-news.xml'), buildNewsSitemapXml(rootDir), 'utf8')
   fs.writeFileSync(path.join(distDir, 'llms-full.txt'), llmsFull, 'utf8')
   fs.writeFileSync(path.join(distDir, 'llms.txt'), llms, 'utf8')
   fs.writeFileSync(path.join(distDir, 'feed.xml'), feed, 'utf8')
