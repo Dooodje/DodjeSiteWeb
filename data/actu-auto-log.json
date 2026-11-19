@@ -89,6 +89,84 @@
       "date": "2026-11-19",
       "title": "SMIC décembre 2026 : environ 1 502 € net après +1,6 %",
       "engine": "claude"
+    },
+    {
+      "slug": "anthropic-introduction-bourse-ipo-ant",
+      "date": "2026-11-19",
+      "title": "IPO Anthropic : l'action ANT entre en bourse à 83 dollars",
+      "engine": "manual"
+    },
+    {
+      "slug": "nvidia-resultats-novembre-2026-pdg-interim",
+      "date": "2026-11-19",
+      "title": "Nvidia : 115,8 milliards de ventes et un PDG par intérim",
+      "engine": "manual"
+    },
+    {
+      "slug": "tsmc-samsung-resultats-semi-conducteurs-ia-2026",
+      "date": "2026-11-19",
+      "title": "TSMC et Samsung : records de profits grâce aux puces de l'IA",
+      "engine": "manual"
+    },
+    {
+      "slug": "ce-qui-change-1er-decembre-2026-argent",
+      "date": "2026-11-19",
+      "title": "Ce qui change au 1er décembre 2026 : SMIC, heures creuses, CAF",
+      "engine": "manual"
+    },
+    {
+      "slug": "ce-qui-change-1er-janvier-2027-argent",
+      "date": "2026-11-19",
+      "title": "Ce qui change au 1er janvier 2027 : timbre, assurance, banque",
+      "engine": "manual"
+    },
+    {
+      "slug": "calendrier-caf-decembre-2026-janvier-2027",
+      "date": "2026-11-19",
+      "title": "Paiement CAF décembre 2026 : versement le vendredi 4 décembre",
+      "engine": "manual"
+    },
+    {
+      "slug": "mutuelle-hausse-2027-resilier",
+      "date": "2026-11-19",
+      "title": "Mutuelle 2027 : hausse de 5 à 10,8 % attendue, comment réagir",
+      "engine": "manual"
+    },
+    {
+      "slug": "frais-bancaires-2027-hausse-changer-de-banque",
+      "date": "2026-11-19",
+      "title": "Frais bancaires 2027 : les hausses et comment les refuser",
+      "engine": "manual"
+    },
+    {
+      "slug": "heures-creuses-1er-decembre-2026-nouveaux-horaires",
+      "date": "2026-11-19",
+      "title": "Heures creuses : ce qui change le 1er décembre 2026",
+      "engine": "manual"
+    },
+    {
+      "slug": "bitcoin-chute-novembre-2026",
+      "date": "2026-11-19",
+      "title": "Bitcoin sous 65 000 $ en novembre 2026 : que se passe-t-il ?",
+      "engine": "manual"
+    },
+    {
+      "slug": "openai-vs-anthropic-chiffres-valorisation-2026",
+      "date": "2026-11-19",
+      "title": "OpenAI contre Anthropic : valorisation, revenus, bourse",
+      "engine": "manual"
+    },
+    {
+      "slug": "bulle-ia-2026-valorisations-investissements-risques",
+      "date": "2026-11-19",
+      "title": "Bulle de l'IA en 2026 ? Ce que disent les chiffres",
+      "engine": "manual"
+    },
+    {
+      "slug": "mistral-ai-valorisation-champion-francais-2026",
+      "date": "2026-11-19",
+      "title": "Mistral AI : 21 milliards d'euros, le pari français de l'IA",
+      "engine": "manual"
     }
   ],
   "fingerprints": [

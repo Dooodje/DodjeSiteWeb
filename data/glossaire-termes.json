@@ -1,6 +1,6 @@
 {
   "hub": "/guides/glossaire-finance-investissement-2026",
-  "updated": "2026-09-09",
+  "updated": "2026-11-19",
   "terms": [
     {
       "slug": "pea",
@@ -221,6 +221,39 @@
       "sourceTitle": "AMF, glossaire épargne",
       "sourceUrl": "https://www.amf-france.org/fr/epargne-info-service/glossaire",
       "related": ["/guides/comprendre-la-bourse", "/guides/investissement-debutant"]
+    },
+    {
+      "slug": "ipo",
+      "term": "IPO",
+      "title": "IPO : introduction en bourse",
+      "category": "Bourse",
+      "definition": "Une IPO (initial public offering), ou introduction en bourse, est le moment où une entreprise vend pour la première fois ses actions au public sur un marché coté. Le prix est fixé à partir d'une fourchette annoncée à l'avance, puis l'action s'échange librement. Exemple : Anthropic est entrée au Nasdaq le 19 novembre 2026 à 83 dollars par action. Les premiers jours de cotation sont souvent très volatils.",
+      "faqQ": "C'est quoi une IPO en bourse ?",
+      "sourceTitle": "La finance pour tous, l'introduction en bourse",
+      "sourceUrl": "https://www.lafinancepourtous.com/decryptages/entreprise/bourse-et-actionnaires/introduction-en-bourse/",
+      "related": ["/actualites/anthropic-introduction-bourse-ipo-ant", "/blog/acheter-action-anthropic-depuis-la-france", "/guides/comprendre-la-bourse"]
+    },
+    {
+      "slug": "intelligence-artificielle",
+      "term": "Intelligence artificielle",
+      "title": "Intelligence artificielle (IA) en finance",
+      "category": "Technologie",
+      "definition": "L'intelligence artificielle désigne des programmes capables d'accomplir des tâches qui demandaient jusqu'ici l'intelligence humaine : comprendre un texte, répondre à une question, reconnaître une image. Les IA génératives comme ChatGPT (OpenAI), Claude (Anthropic) ou Le Chat (Mistral AI) produisent du texte. En finance, elles aident à comprendre et à comparer, mais peuvent se tromper. Selon l'AMF, 11 % des Français utilisent l'IA avant d'investir.",
+      "faqQ": "C'est quoi l'intelligence artificielle en finance ?",
+      "sourceTitle": "AMF, listes noires et mises en garde",
+      "sourceUrl": "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/listes-noires-et-mises-en-garde",
+      "related": ["/blog/investir-intelligence-artificielle-2026-guide", "/blog/utiliser-chatgpt-claude-ia-gerer-son-argent", "/blog/arnaques-ia-deepfake-investissement"]
+    },
+    {
+      "slug": "semi-conducteur",
+      "term": "Semi-conducteur",
+      "title": "Semi-conducteur : la puce derrière l'IA",
+      "category": "Technologie",
+      "definition": "Un semi-conducteur est un matériau, le plus souvent du silicium, utilisé pour fabriquer les puces électroniques. Les puces d'IA sont dessinées par des entreprises comme Nvidia, fabriquées par des fonderies comme TSMC, et associées à de la mémoire produite notamment par Samsung. Le secteur est cyclique : il alterne pénuries et surproduction, ce qui rend les actions très volatiles.",
+      "faqQ": "C'est quoi un semi-conducteur ?",
+      "sourceTitle": "SEC, résultats de TSMC du 3e trimestre 2026",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000726/a3q26e_withguidancexfinal.htm",
+      "related": ["/actualites/tsmc-samsung-resultats-semi-conducteurs-ia-2026", "/actualites/nvidia-resultats-novembre-2026-pdg-interim", "/blog/investir-intelligence-artificielle-2026-guide"]
     }
   ]
 }
