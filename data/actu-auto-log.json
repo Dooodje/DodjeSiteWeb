@@ -191,6 +191,12 @@
       "date": "2026-11-19",
       "title": "IA : États-Unis, Chine, Europe, qui investit le plus ?",
       "engine": "manual"
+    },
+    {
+      "slug": "dispense-acompte-pfu-30-novembre-2026",
+      "date": "2026-11-20",
+      "title": "Dispense d'acompte PFU : 12,8 % à éviter avant le 30 novembre",
+      "engine": "claude"
     }
   ],
   "fingerprints": [
