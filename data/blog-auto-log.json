@@ -177,6 +177,12 @@
       "date": "2026-11-19",
       "title": "Arnaques à l'IA : deepfakes et faux robots de trading",
       "engine": "manual"
+    },
+    {
+      "slug": "faux-tracfin-arnaque-recuperation-de-fonds",
+      "date": "2026-11-20",
+      "title": "Faux Tracfin : l'arnaque à la récupération de fonds",
+      "engine": "claude"
     }
   ]
 }
