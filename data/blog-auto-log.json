@@ -189,6 +189,12 @@
       "date": "2026-11-21",
       "title": "Épargne de précaution : combien mettre de côté en 2026",
       "engine": "claude"
+    },
+    {
+      "slug": "facture-gaz-decembre-2026-prix-repere",
+      "date": "2026-11-22",
+      "title": "Facture de gaz décembre 2026 : +5,8 % et 6 gestes",
+      "engine": "claude"
     }
   ]
 }
