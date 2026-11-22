@@ -195,6 +195,12 @@
       "date": "2026-11-22",
       "title": "Facture de gaz décembre 2026 : +5,8 % et 6 gestes",
       "engine": "claude"
+    },
+    {
+      "slug": "livret-a-inflation-3-4-que-faire-epargne",
+      "date": "2026-11-23",
+      "title": "Livret A à 1,7 % et inflation à 3,4 % : que faire ?",
+      "engine": "claude"
     }
   ]
 }
