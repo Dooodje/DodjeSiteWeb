@@ -30,7 +30,8 @@ const OG = `${SITE}/assets/og-dodje-1200x630.png`
 const MODEL = 'claude-sonnet-5-5'
 // Tarifs indicatifs (dollars par million de tokens, recherche web à l'unité) pour estimer le coût de chaque passage.
 const PRICE = { input: 2, output: 10, cacheRead: 0.1, cacheWrite: 2.5, search: 0.01 }
-const spend = { usd: 0, lines: [] }
+const spend = { usd: 0 }
+const RUNS_LOG = 'data/ai-runs.json'
 function track(label, usage) {
   if (!usage) return
   const searches = usage.server_tool_use?.web_search_requests || 0
@@ -267,13 +268,21 @@ Règles de rédaction :
 ${inventory.map((p) => `  ${p.href} : ${p.title}`).join('\n')}`
 }
 
-async function writeArticle(client, kind, dossier, inventory) {
+async function writeArticle(client, kind, dossier, inventory, fix = null) {
   const label = kind === 'actu' ? 'SUJET ACTU' : 'SUJET BLOG'
-  const prompt = `Nous sommes le ${todayFr()}. Rédige l'article "${kind}" de l'édition du ${edFr()} à partir de la section "## ${label}" du dossier ci-dessous.
+  let prompt = `Nous sommes le ${todayFr()}. Rédige l'article "${kind}" de l'édition du ${edFr()} à partir de la section "## ${label}" du dossier ci-dessous.
 Si cette section dit AUCUN ou n'existe pas, renvoie skip = true.
 
 Dossier :
 ${dossier}`
+  if (fix) {
+    prompt += `
+
+Ta première version a été refusée par la garde qualité pour ces raisons :
+${fix.errors.map((e) => `- ${e}`).join('\n')}
+Corrige uniquement ces points et garde tout le reste. Ta première version :
+${JSON.stringify(fix.article)}`
+  }
 
   const response = await client.beta.messages.parse({
     model: MODEL,
@@ -285,7 +294,7 @@ ${dossier}`
     output_config: { effort: 'medium', format: betaZodOutputFormat(ArticleSchema) },
     messages: [{ role: 'user', content: prompt }]
   })
-  track(`rédaction ${kind}`, response.usage)
+  track(`rédaction ${kind}${fix ? ' (correction)' : ''}`, response.usage)
   if (response.stop_reason === 'refusal') throw new Error(`Rédaction refusée (${response.stop_details?.category ?? 'sans catégorie'})`)
   if (response.stop_reason === 'max_tokens') throw new Error('Rédaction coupée (max_tokens)')
   if (!response.parsed_output) throw new Error('Sortie JSON invalide')
@@ -599,40 +608,83 @@ async function main() {
   const wanted = ['actu', 'blog'].filter((k) => !doneKinds.has(k))
   if (!wanted.length) return 0
 
+  // Plafond de tentatives : une veille coûte de l'argent. Avec au moins un article en ligne, on n'insiste pas
+  // au-delà de 2 veilles par édition ; sans article, on retente à chaque passage pour en garantir un.
+  const runs = loadJson(RUNS_LOG, { runs: [] })
+  const tries = (runs.runs || []).filter((r) => r.edition === today && r.researched).length
+  if (already.length > 0 && tries >= 2) {
+    console.log(`${tries} veilles déjà faites pour l'édition du ${edFr()} et ${already.length} article(s) en ligne. Stop.`)
+    return 0
+  }
+
   if (!process.env.ANTHROPIC_API_KEY) {
     console.error('ANTHROPIC_API_KEY manquante : ajoute-la dans les secrets du dépôt GitHub.')
     return already.length ? 0 : 1
   }
   const client = new Anthropic({ maxRetries: 4 })
-
-  const hints = await feedHints()
-  console.log(`${hints.length} piste(s) dans les flux officiels.`)
-  const dossier = await research(client, hints, recentTitles(), wanted)
-  console.log('Dossier de veille prêt.')
+  const record = { at: new Date().toISOString(), edition: today, wanted, researched: false, results: [], costUsd: 0 }
 
   const files = []
   const titles = []
   let published = already.length
-  for (const kind of wanted) {
-    if (published >= MAX_ARTICLES) break
-    try {
-      const raw = await writeArticle(client, kind, dossier, inventory)
-      const a = normalize(raw, internal)
-      a.sources = await checkSources(a.sources)
-      const errors = qualityCheck(a, kind, internal)
-      if (errors.length) { console.warn(`${kind} écarté par la garde : ${errors.join(' ; ')}`); continue }
-      if (DRY) { console.log(`DRY ${kind} : ${a.slug}\n${a.title}\n${a.bluf}`); published++; continue }
-      files.push(...writeArticleFiles(kind, a))
-      titles.push(a.title)
-      published++
-    } catch (err) {
-      if (err instanceof Anthropic.APIError) console.error(`${kind} : erreur API ${err.status} ${err.message}`)
-      else console.error(`${kind} : ${err.message}`)
+  try {
+    const hints = await feedHints()
+    console.log(`${hints.length} piste(s) dans les flux officiels.`)
+    const dossier = await research(client, hints, recentTitles(), wanted)
+    record.researched = true
+    console.log('Dossier de veille prêt.')
+
+    for (const kind of wanted) {
+      if (published >= MAX_ARTICLES) break
+      try {
+        let raw = await writeArticle(client, kind, dossier, inventory)
+        if (raw.skip) {
+          console.log(`${kind} abandonné : ${raw.skipReason}`)
+          record.results.push({ kind, outcome: 'skip', detail: raw.skipReason })
+          continue
+        }
+        let a = normalize(raw, internal)
+        a.sources = await checkSources(a.sources)
+        let errors = qualityCheck(a, kind, internal)
+        if (errors.length) {
+          // Une seule correction : souvent un titre trop long ou un chiffre manquant.
+          console.warn(`${kind} refusé par la garde, correction demandée : ${errors.join(' ; ')}`)
+          raw = await writeArticle(client, kind, dossier, inventory, { errors, article: raw })
+          a = normalize(raw, internal)
+          a.sources = await checkSources(a.sources)
+          errors = raw.skip ? [`abandonné : ${raw.skipReason}`] : qualityCheck(a, kind, internal)
+        }
+        if (errors.length) {
+          console.warn(`${kind} écarté par la garde : ${errors.join(' ; ')}`)
+          record.results.push({ kind, outcome: 'rejected', detail: errors.join(' ; '), title: a.title })
+          continue
+        }
+        if (DRY) { console.log(`DRY ${kind} : ${a.slug}\n${a.title}\n${a.bluf}`); published++; continue }
+        files.push(...writeArticleFiles(kind, a))
+        titles.push(a.title)
+        record.results.push({ kind, outcome: 'published', slug: a.slug, title: a.title })
+        published++
+      } catch (err) {
+        const detail = err instanceof Anthropic.APIError ? `erreur API ${err.status} ${err.message}` : err.message
+        console.error(`${kind} : ${detail}`)
+        record.results.push({ kind, outcome: 'error', detail })
+      }
     }
+  } catch (err) {
+    const detail = err instanceof Anthropic.APIError ? `erreur API ${err.status} ${err.message}` : err.message
+    console.error(`Veille : ${detail}`)
+    record.results.push({ kind: 'veille', outcome: 'error', detail })
+  }
+
+  // Journal des passages, versionné : il permet de suivre les refus et le coût sans accès aux logs GitHub.
+  record.costUsd = Number(spend.usd.toFixed(3))
+  if (!DRY) {
+    runs.runs = [...(runs.runs || []), record].slice(-300)
+    fs.writeFileSync(path.join(rootDir, RUNS_LOG), JSON.stringify(runs, null, 2) + '\n', 'utf8')
   }
 
   if (files.length && process.env.AUTO_COMMIT === '1') {
-    gitCommit([...new Set(files)], `contenu(auto): ${titles.join(' + ').slice(0, 90)}`)
+    gitCommit([...new Set([...files, RUNS_LOG])], `contenu(auto): ${titles.join(' + ').slice(0, 90)}`)
   }
   console.log(`${published} article(s) pour l'édition du ${edFr()}.`)
   console.log(`[coût] total du passage : environ ${spend.usd.toFixed(2)} $`)

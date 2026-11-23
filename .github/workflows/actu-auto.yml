@@ -62,12 +62,13 @@ jobs:
           if [ -z "$(git status --porcelain)" ]; then echo "Rien à publier."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add actualites blog blog.html data/actu-auto-log.json data/blog-auto-log.json
-          titles=$(git diff --cached --name-only --diff-filter=A | sed -E 's#.*/##; s#\.html$##' | paste -sd ',' -)
-          git commit -m "contenu(auto): ${titles}"
+          git add actualites blog blog.html data/actu-auto-log.json data/blog-auto-log.json data/ai-runs.json
+          titles=$(git diff --cached --name-only --diff-filter=A -- actualites blog | sed -E 's#.*/##; s#\.html$##' | paste -sd ',' -)
+          if [ -n "$titles" ]; then msg="contenu(auto): ${titles}"; else msg="contenu(auto): journal du passage, aucun nouvel article"; fi
+          git commit -m "$msg"
           git pull --rebase origin main
           git push origin HEAD:main
-          echo "published=true" >> "$GITHUB_OUTPUT"
+          if [ -n "$titles" ]; then echo "published=true" >> "$GITHUB_OUTPUT"; fi
 
       - name: Alerter si aucun article n'est en ligne aujourd'hui
         if: steps.write.outcome == 'failure'
