@@ -342,6 +342,23 @@ export function buildLlmsTxt(rootDir) {
     sections.push(`- [${item.label}](${SITE}${item.url === '/' ? '/' : item.url})`)
   }
 
+  // Derniers articles publiés (actu + blog) : les moteurs IA lisent llms.txt en priorité, la fraîcheur compte.
+  const latest = []
+  for (const [dir, log] of [['actualites', 'data/actu-auto-log.json'], ['blog', 'data/blog-auto-log.json']]) {
+    const file = path.join(rootDir, log)
+    if (!fs.existsSync(file)) continue
+    for (const row of JSON.parse(fs.readFileSync(file, 'utf8')).published || []) {
+      if (fs.existsSync(path.join(rootDir, dir, `${row.slug}.html`))) latest.push({ ...row, dir })
+    }
+  }
+  latest.sort((x, y) => String(y.date).localeCompare(String(x.date)))
+  if (latest.length) {
+    sections.push('', '## Derniers articles (actualité et blog)', '')
+    for (const row of latest.slice(0, 15)) {
+      sections.push(`- ${row.date} : [${row.title}](${SITE}/${row.dir}/${row.slug}) (markdown : ${SITE}/${row.dir}/${row.slug}.md)`)
+    }
+  }
+
   sections.push(
     '',
     '## Versions markdown (crawlers IA)',

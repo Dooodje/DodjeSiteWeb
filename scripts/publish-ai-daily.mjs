@@ -23,6 +23,7 @@ import path from 'path'
 import { z } from 'zod'
 import { escapeHtml, rootDir, stripHtml, todayFr, todayIso, updateActuHub, updateBlogHub } from './editorial-lib.mjs'
 import { footerHtml, headChrome, headerHtml, skyHtml } from './site-chrome.mjs'
+import { heroFigure, renderArticleImages } from './article-image.mjs'
 
 const SITE = 'https://dodje.fr'
 const OG = `${SITE}/assets/og-dodje-1200x630.png`
@@ -256,7 +257,8 @@ Tu rédiges un article à partir d'un dossier de veille déjà vérifié.
 
 Règles de rédaction :
 - Français clair, tutoiement, phrases courtes, aucun jargon sans explication. Ton direct et bienveillant, jamais racoleur.
-- Réponse d'abord : le chapô répond à la question en 2 ou 3 phrases, avec le chiffre clé et sa date. Chaque section commence par l'essentiel.
+- Réponse d'abord : le chapô répond à la question en 2 ou 3 phrases, avec le chiffre clé et sa date. Chaque section commence par une phrase
+  en <strong> qui répond seule à la question du H2 (citable telle quelle par une IA, avec le chiffre et la source), puis le détail.
 - Optimisation SEO et moteurs IA : mot-clé principal dans le titre, le slug, le chapô, un H2 et la meta description ; titres de sections
   formulés comme des questions ou des promesses concrètes ; dates explicites ("en novembre 2026") ; chiffres toujours attribués à leur source
   dans la phrase ("selon l'INSEE...") ; un exemple chiffré concret ; une section "Ce que ça change pour toi" ou "Ce que tu peux faire".
@@ -390,7 +392,9 @@ function relatedHtml(kind, slug) {
 `
 }
 
-export function renderPage(kind, a) {
+export function renderPage(kind, a, imgs = null) {
+  // Image propre à l'article (Discover, News, partages) ; sinon l'image générique du site.
+  const main = imgs?.[0] || { url: OG, w: 1200, h: 630 }
   const cfg = KINDS[kind]
   const url = `${SITE}/${cfg.dir}/${a.slug}`
   const date = ed()
@@ -404,7 +408,7 @@ export function renderPage(kind, a) {
     '@type': cfg.schema,
     headline: a.title,
     description: a.metaDescription,
-    image: OG,
+    image: imgs ? imgs.map((i) => ({ '@type': 'ImageObject', url: i.url, width: i.w, height: i.h })) : OG,
     datePublished: stamp,
     dateModified: stamp,
     inLanguage: 'fr-FR',
@@ -443,13 +447,13 @@ export function renderPage(kind, a) {
     <link rel="canonical" href="${url}">
     <meta property="og:title" content="${escapeHtml(a.title)}">
     <meta property="og:description" content="${escapeHtml(a.metaDescription)}">
-    <meta property="og:image" content="${OG}">
+    <meta property="og:image" content="${main.url}">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:height" content="${main.h}">
     <meta property="og:url" content="${url}">
     <meta property="og:type" content="article">
     <meta property="og:locale" content="fr_FR">
-    <meta property="og:image:alt" content="Dodje, le jeu gratuit pour comprendre l'argent">
+    <meta property="og:image:alt" content="${escapeHtml(a.title)}">
     <meta property="og:site_name" content="Dodje">
     <meta property="article:published_time" content="${stamp}">
     <meta property="article:modified_time" content="${stamp}">
@@ -458,7 +462,7 @@ export function renderPage(kind, a) {
     <meta name="twitter:site" content="@DodjeApp">
     <meta name="twitter:title" content="${escapeHtml(a.title)}">
     <meta name="twitter:description" content="${escapeHtml(a.metaDescription)}">
-    <meta name="twitter:image" content="${OG}">
+    <meta name="twitter:image" content="${main.url}">
     <link rel="icon" type="image/svg+xml" href="../assets/dodje-favicon.svg">
     <link rel="icon" type="image/png" sizes="48x48" href="../assets/dodje-favicon-48.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/dodje-favicon-192.png">
@@ -474,9 +478,10 @@ ${headerHtml(cfg.nav)}
     <main class="content-page">
         <article class="content-layout" data-editorial="ai">
             <p class="legal-eyebrow">${escapeHtml(a.kicker)}</p>
-            <h1>${escapeHtml(a.title)}</h1>
+            <h1>${escapeHtml(a.title).replace(/ ([%€:;?!])/g, ' $1')}</h1>
             <p class="content-lead"><strong>En bref :</strong> ${escapeHtml(a.bluf)}</p>
             <p class="content-updated">Publié le ${escapeHtml(edFr())} par l'<a href="/guides/equipe-editoriale">équipe éditoriale Dodje</a></p>
+            ${imgs ? heroFigure(imgs[0], a.title) : ''}
 
             <div class="content-note content-ymyl">
                 <p><strong>Rappel :</strong> contenu éducatif et informatif, sans conseil en investissement ni conseil fiscal personnalisé. Vérifie toujours la source officielle avant une décision.</p>
@@ -549,7 +554,8 @@ function writeArticleFiles(kind, a) {
   if (exists(slug)) throw new Error(`Page déjà existante : ${slug}`)
   const art = { ...a, slug }
   const rel = `${cfg.dir}/${slug}.html`
-  fs.writeFileSync(path.join(rootDir, rel), renderPage(kind, art), 'utf8')
+  const imgs = renderArticleImages({ slug, kicker: art.kicker, title: art.title })
+  fs.writeFileSync(path.join(rootDir, rel), renderPage(kind, art, imgs), 'utf8')
   const hubTopic = { slug, kicker: art.kicker }
   const hubCopy = { title: art.title, lead: { display: art.keyPoints[0] || art.metaDescription } }
   if (kind === 'actu') updateActuHub(hubTopic, hubCopy)
@@ -558,7 +564,7 @@ function writeArticleFiles(kind, a) {
   log.published = [...(log.published || []), { slug, date: ed(), title: art.title, engine: 'claude' }].slice(-400)
   fs.writeFileSync(path.join(rootDir, cfg.log), JSON.stringify(log, null, 2) + '\n', 'utf8')
   console.log(`${kind} créé : ${rel}`)
-  return [rel, cfg.hub, cfg.log]
+  return [rel, cfg.hub, cfg.log, ...imgs.map((i) => i.rel)]
 }
 
 function gitCommit(files, message) {
