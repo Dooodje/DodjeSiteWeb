@@ -203,6 +203,12 @@
       "date": "2026-11-21",
       "title": "Crédit à la consommation : nouvelles règles au 20 novembre 2026",
       "engine": "claude"
+    },
+    {
+      "slug": "prix-immobilier-ancien-baisse-3e-trimestre-2026",
+      "date": "2026-11-24",
+      "title": "Prix immobilier ancien : -0,3 % au 3e trimestre 2026",
+      "engine": "claude"
     }
   ],
   "fingerprints": [

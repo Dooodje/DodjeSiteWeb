@@ -61,6 +61,30 @@
         }
       ],
       "costUsd": 0.203
+    },
+    {
+      "at": "2026-11-24T09:59:42.877Z",
+      "edition": "2026-11-24",
+      "wanted": [
+        "actu",
+        "blog"
+      ],
+      "researched": true,
+      "results": [
+        {
+          "kind": "actu",
+          "outcome": "published",
+          "slug": "prix-immobilier-ancien-baisse-3e-trimestre-2026",
+          "title": "Prix immobilier ancien : -0,3 % au 3e trimestre 2026"
+        },
+        {
+          "kind": "blog",
+          "outcome": "published",
+          "slug": "acompte-sur-salaire-comment-faire",
+          "title": "Acompte sur salaire : comment faire avant Noël (+30 %)"
+        }
+      ],
+      "costUsd": 1.115
     }
   ]
 }
