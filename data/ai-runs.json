@@ -39,6 +39,28 @@
         }
       ],
       "costUsd": 0.432
+    },
+    {
+      "at": "2026-11-24T05:21:19.600Z",
+      "edition": "2026-11-24",
+      "wanted": [
+        "actu",
+        "blog"
+      ],
+      "researched": true,
+      "results": [
+        {
+          "kind": "actu",
+          "outcome": "skip",
+          "detail": "La section SUJET ACTU du dossier indique AUCUN : aucune actualité des 7 derniers jours n'a pu être vérifiée et aucune source primaire n'a été lue. Aucun chiffre ni date ne peut être cité sans les inventer. Le sujet de la solidarité fiscale en couple relève du blog, pas de l'actualité."
+        },
+        {
+          "kind": "blog",
+          "outcome": "skip",
+          "detail": "Le dossier précise qu'aucun fait n'a pu être vérifié : la page source economie.gouv.fr n'a pas été ouverte et aucune source primaire n'a été lue. Il n'y a ni chiffre, ni date, ni règle sur la durée de la solidarité ou la décharge que je puisse citer sans les inventer. Il vaut mieux ne pas publier tant que les pages du ministère et de service-public.fr n'ont pas été vérifiées."
+        }
+      ],
+      "costUsd": 0.203
     }
   ]
 }
