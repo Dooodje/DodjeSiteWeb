@@ -16,6 +16,29 @@
         }
       ],
       "costUsd": 0.149
+    },
+    {
+      "at": "2026-11-24T03:57:48.055Z",
+      "edition": "2026-11-24",
+      "wanted": [
+        "actu",
+        "blog"
+      ],
+      "researched": true,
+      "results": [
+        {
+          "kind": "actu",
+          "outcome": "skip",
+          "detail": "La section SUJET ACTU du dossier indique AUCUN : aucune actualité des 7 derniers jours n'a pu être vérifiée (PLF ou PLFSS 2027, taux du Livret A au 1er février 2027, alertes AMF). La solidarité fiscale dans le couple est traitée comme sujet de blog, pas comme actualité datée."
+        },
+        {
+          "kind": "blog",
+          "outcome": "rejected",
+          "detail": "1 chiffre(s) seulement",
+          "title": "Solidarité fiscale couple : paies-tu les impôts de l'autre ?"
+        }
+      ],
+      "costUsd": 0.432
     }
   ]
 }
