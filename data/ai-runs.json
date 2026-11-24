@@ -85,6 +85,28 @@
         }
       ],
       "costUsd": 1.115
+    },
+    {
+      "at": "2026-11-24T23:53:30.691Z",
+      "edition": "2026-11-25",
+      "wanted": [
+        "actu",
+        "blog"
+      ],
+      "researched": true,
+      "results": [
+        {
+          "kind": "actu",
+          "outcome": "skip",
+          "detail": "La section SUJET ACTU du dossier indique AUCUN. Le seul candidat, la décollecte record du Livret A, n'a pas été vérifié sur la source primaire (communiqué de la Caisse des Dépôts). Les chiffres des médias relais ne se recoupent pas et le sujet recoupe un article déjà publié."
+        },
+        {
+          "kind": "blog",
+          "outcome": "skip",
+          "detail": "Le dossier indique qu'aucun fait n'a pu être vérifié sur le sujet blog (solidarité fiscale dans le couple). La page du Ministère de l'Économie est restée inaccessible, et service-public.fr et impots.gouv.fr n'ont pas été consultés. Le dossier précise lui-même que rien ne doit être écrit sans relecture de ces sources. Aucune règle, durée ou seuil n'est confirmé, donc l'article ne peut pas être rédigé sans inventer."
+        }
+      ],
+      "costUsd": 0.743
     }
   ]
 }
