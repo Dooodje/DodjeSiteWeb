@@ -231,8 +231,6 @@ pages.push({
             <h2>Actualités sourcées</h2>
             <div class="seo-hub-grid">
                 <a class="seo-hub-card" href="/actualites"><span class="seo-kicker">Hub</span><h3>Toutes les actualités</h3><p>Barèmes, Livret A, crédit, MiCA.</p></a>
-                <a class="seo-hub-card" href="/actualites/taux-livret-a-hausse-aout-2026"><span class="seo-kicker">Épargne</span><h3>Taux Livret A</h3><p>Barème août 2026.</p></a>
-                <a class="seo-hub-card" href="/actualites/baremes-finance-france-septembre-2026"><span class="seo-kicker">Barèmes</span><h3>Barèmes septembre 2026</h3><p>SMIC, livrets, plafonds.</p></a>
             </div>
             <p>Le blog remplace l'ancienne URL de redirection. Les guides restent sur <a href="/guides">/guides</a> ; les calculateurs sur <a href="/outils">/outils</a>.</p>`,
     faq: [
@@ -435,7 +433,7 @@ const guides = [
             <h2>L'ordre pédagogique</h2>
             <ol>
                 <li>Budget et reste à vivre — <a href="/guides/faire-son-budget">faire son budget</a>.</li>
-                <li>Épargne de précaution — <a href="/guides/epargne-de-precaution-france">guide épargne</a>.</li>
+                <li>Épargne de précaution — <a href="/blog/epargne-de-precaution-combien-mettre-de-cote">guide épargne</a>.</li>
                 <li>Comprendre le risque — <a href="/guides/investissement-debutant">investissement débutant</a>.</li>
                 <li>Enveloppes France (PEA, CTO, assurance vie) — <a href="/guides/comprendre-la-bourse">comprendre la bourse</a>.</li>
             </ol>
@@ -465,7 +463,7 @@ const guides = [
       "La bourse, c'est un marché d'actions et d'ETF. En France, le PEA (plafond 150 000 € de versements, 5 ans pour la fiscalité) est l'enveloppe standard du particulier. Un ETF MSCI World à ~0,20 % de TER diversifie en une ligne. Le capital n'est pas garanti.",
     body: `
             <h2>Les mots utiles</h2>
-            <p><a href="/glossaire/action">Action</a>, <a href="/glossaire/etf">ETF</a>, <a href="/glossaire/pea">PEA</a>, <a href="/glossaire/cto">CTO</a>, <a href="/glossaire/dca">DCA</a>, <a href="/glossaire/volatilite">volatilité</a>. Chacun a une page DefinedTerm.</p>
+            <p><a href="/guides/glossaire-finance-investissement-2026#term-action">Action</a>, <a href="/guides/glossaire-finance-investissement-2026#term-etf">ETF</a>, <a href="/guides/glossaire-finance-investissement-2026#term-pea">PEA</a>, <a href="/guides/glossaire-finance-investissement-2026#term-cto">CTO</a>, <a href="/guides/glossaire-finance-investissement-2026#term-dca">DCA</a>, <a href="/guides/glossaire-finance-investissement-2026#term-volatilite">volatilité</a>. Toutes les définitions sont regroupées dans le glossaire.</p>
             <h2>PEA ou CTO ?</h2>
             <p>PEA : actions/ETF européens éligibles, fiscalité après 5 ans. CTO : monde entier, PFU 30 %. Comparatif : <a href="/guides/pea-vs-cto-complet-2026">PEA vs CTO</a> et <a href="/outils/comparatif-pea-cto">l'outil</a>.</p>
             <h2>Dans Dodje</h2>
@@ -491,7 +489,7 @@ const guides = [
       "En France, les crypto-actifs sont régulés par MiCA (pleinement applicable au 1er juillet 2026). Utilise une plateforme agréée CASP. Plus-values : PFU 30 %. Volatilité élevée, arnaques (rug pull). Dodje explique ça dans le bâtiment « foreuse », sans te vendre de jeton.",
     body: `
             <h2>Les mots utiles</h2>
-            <p><a href="/glossaire/bitcoin">Bitcoin</a>, <a href="/glossaire/ethereum">Ethereum</a>, <a href="/glossaire/mica">MiCA</a>, <a href="/glossaire/staking">staking</a>, <a href="/glossaire/rug-pull">rug pull</a>.</p>
+            <p><a href="/guides/glossaire-finance-investissement-2026#term-bitcoin">Bitcoin</a>, <a href="/guides/glossaire-finance-investissement-2026#term-ethereum">Ethereum</a>, <a href="/guides/glossaire-finance-investissement-2026#term-mica">MiCA</a>, <a href="/guides/glossaire-finance-investissement-2026#term-staking">staking</a>, <a href="/guides/glossaire-finance-investissement-2026#term-rug-pull">rug pull</a>.</p>
             <h2>Cadre France 2026</h2>
             <p>MiCA remplace progressivement le PSAN. KYC obligatoire sur les CEX agréés. Fiscalité : 30 % sur les plus-values (régime des biens incorporels). Voir <a href="/guides/premiers-pas-crypto-france">premiers pas crypto</a> et <a href="/guides/fiscalite-crypto-france-2026">fiscalité crypto</a>.</p>
             <h2>Dans Dodje</h2>
@@ -543,7 +541,7 @@ const guides = [
       "Un débutant commence par ne pas investir l'argent dont il aura besoin sous 3 à 6 mois. Livret A 1,50 %, plafond 22 950 €. Ensuite, si l'horizon dépasse ~8 ans, un PEA d'ETF diversifiés est le cadre le plus cité en pédagogie française. Perte en capital possible. Pas un conseil personnalisé.",
     body: `
             <h2>Les erreurs fréquentes</h2>
-            <p>Crypto d'abord, pas de livret. CFD à effet de levier (80 %+ de perdants, AMF). Formation miracle. Copier un influenceur. Voir <a href="/guides/erreurs-crypto-debutant">erreurs crypto</a> et <a href="/glossaire/cfd">CFD</a>.</p>
+            <p>Crypto d'abord, pas de livret. CFD à effet de levier (80 %+ de perdants, AMF). Formation miracle. Copier un influenceur. Voir <a href="/guides/erreurs-crypto-debutant">erreurs crypto</a> et <a href="/guides/glossaire-finance-investissement-2026#term-cfd">CFD</a>.</p>
             <h2>Un parcours possible</h2>
             <p>Budget → livret → vocabulaire (<a href="/guides/comprendre-la-bourse">bourse</a>) → PEA → éventuellement crypto (<a href="/guides/comprendre-la-crypto">crypto</a>). Dans Dodje, cet ordre correspond aux bâtiments débloqués. <a href="/guides/apprendre-a-investir">Apprendre à investir</a>.</p>
             <aside class="content-sources"><h2>Sources</h2><ul>

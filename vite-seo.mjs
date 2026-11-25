@@ -15,7 +15,9 @@ export const STATIC_PAGES = [
   'contact.html',
   'mentions-legales.html',
   'conditions-utilisation.html',
-  'politique-confidentialite.html'
+  'politique-confidentialite.html',
+  // Page d'erreur servie par GitHub Pages (noindex, hors sitemap)
+  '404.html'
 ]
 
 const CONTENT_DIRS = ['outils', 'actualites', 'guides', 'glossaire', 'blog']
@@ -89,7 +91,6 @@ const CURATED_LLMS = [
   { label: 'Assurance vie débutant', url: '/guides/assurance-vie-debutant-france-2026' },
   { label: 'Projection patrimoine 2026', url: '/outils/simulateur-projection-patrimoine-2026' },
   { label: 'Glossaire finance', url: '/guides/glossaire-finance-investissement-2026' },
-  { label: 'Index glossaire par terme', url: '/glossaire/etf' },
   { label: 'Quiz quel PEA choisir', url: '/guides/quiz-quel-pea-choisir-2026' },
   { label: '3 000 € brut en net', url: '/outils/salaire-3000-brut-en-net' },
   { label: 'Hub salaire et travail', url: '/outils/salaire-et-travail' },
@@ -104,9 +105,6 @@ const CURATED_LLMS = [
   { label: 'Premiers pas crypto France', url: '/guides/premiers-pas-crypto-france' },
   { label: 'Fiscalité crypto 2026', url: '/guides/fiscalite-crypto-france-2026' },
   { label: 'Premier achat immobilier', url: '/guides/premier-achat-immobilier-france-2026' },
-  { label: 'Taux crédit immobilier', url: '/actualites/taux-credit-immobilier-juillet-2026' },
-  { label: 'Taux Livret A août 2026', url: '/actualites/taux-livret-a-hausse-aout-2026' },
-  { label: 'Barèmes finance septembre 2026', url: '/actualites/baremes-finance-france-septembre-2026' },
   { label: 'Combien épargner par mois', url: '/guides/combien-epargner-par-mois-france-2026' },
   { label: 'Black Friday 2026 : dates et calendrier complet des promos', url: '/blog/black-friday-2026-date-calendrier' },
   { label: 'Cyber Monday 2026 : date et différence avec le Black Friday', url: '/blog/cyber-monday-2026-date-difference-black-friday' },
@@ -128,9 +126,6 @@ const CURATED_LLMS = [
   { label: 'Mistral AI : valorisation et investissement', url: '/actualites/mistral-ai-valorisation-champion-francais-2026' },
   { label: 'ChatGPT, Claude : utiliser l\'IA pour gérer son argent', url: '/blog/utiliser-chatgpt-claude-ia-gerer-son-argent' },
   { label: 'Arnaques à l\'IA : deepfakes et faux robots de trading', url: '/blog/arnaques-ia-deepfake-investissement' },
-  { label: 'Glossaire : IPO', url: '/glossaire/ipo' },
-  { label: 'Glossaire : intelligence artificielle', url: '/glossaire/intelligence-artificielle' },
-  { label: 'Glossaire : semi-conducteur', url: '/glossaire/semi-conducteur' },
   { label: 'IPO Anthropic : action ANT à 83 dollars', url: '/actualites/anthropic-introduction-bourse-ipo-ant' },
   { label: 'Acheter des actions Anthropic depuis la France', url: '/blog/acheter-action-anthropic-depuis-la-france' },
   { label: 'Nvidia : résultats de novembre 2026 et PDG par intérim', url: '/actualites/nvidia-resultats-novembre-2026-pdg-interim' },
@@ -208,6 +203,27 @@ export function sitemapMetaForUrl(url) {
   return { priority: '0.8', changefreq: 'monthly' }
 }
 
+// Une page est indexable si elle n'est ni une redirection, ni en noindex, ni la page 404.
+// Seules ces pages vont dans le sitemap, le flux, llms.txt et IndexNow.
+const indexableCache = new Map()
+export function isIndexableFile(rootDir, filePath) {
+  const key = `${rootDir}|${filePath}`
+  if (indexableCache.has(key)) return indexableCache.get(key)
+  let ok = filePath !== '404.html'
+  const full = path.join(rootDir, filePath)
+  if (ok && fs.existsSync(full)) {
+    const html = fs.readFileSync(full, 'utf8')
+    if (/http-equiv="refresh"/i.test(html)) ok = false
+    if (/<meta name="robots" content="[^"]*noindex/i.test(html)) ok = false
+  }
+  indexableCache.set(key, ok)
+  return ok
+}
+
+export function indexablePaths(rootDir) {
+  return collectHtmlPaths(rootDir).filter((file) => isIndexableFile(rootDir, file))
+}
+
 function toPublicUrl(filePath) {
   if (filePath === 'index.html') return SITE + '/'
   const slug = filePath.replace(/\.html$/, '').replace(/\\/g, '/')
@@ -260,8 +276,9 @@ function getLastMod(rootDir, filePath) {
 // Sitemap Google News : articles publiés dans les 2 derniers jours (règle de Google News).
 export function buildNewsSitemapXml(rootDir, now = new Date()) {
   const limit = now.getTime() - 2 * 24 * 3600 * 1000
-  const entries = collectHtmlPaths(rootDir)
-    .filter((p) => (p.startsWith('actualites/') || p.startsWith('blog/')) && !p.endsWith('index.html'))
+  // Google News : seulement les articles d'actualité (NewsArticle), pas le blog ni les guides.
+  const entries = indexablePaths(rootDir)
+    .filter((p) => p.startsWith('actualites/') && !p.endsWith('index.html'))
     .map((file) => {
       const html = fs.readFileSync(path.join(rootDir, file), 'utf8')
       const published = html.match(/article:published_time" content="([^"]+)"/)?.[1] || html.match(/"datePublished"\s*:\s*"([^"]+)"/)?.[1]
@@ -284,7 +301,7 @@ function toRssDate(isoDate) {
 }
 
 export function buildSitemapXml(rootDir) {
-  const paths = collectHtmlPaths(rootDir)
+  const paths = indexablePaths(rootDir)
   const urls = paths.map((file) => {
     const loc = toPublicUrl(file)
     const meta = sitemapMetaForUrl(loc)
@@ -295,12 +312,12 @@ export function buildSitemapXml(rootDir) {
 }
 
 export function buildLlmsFullTxt(rootDir) {
-  const paths = collectHtmlPaths(rootDir)
+  const paths = indexablePaths(rootDir)
   return paths.map((file) => toPublicUrl(file)).join('\n') + '\n'
 }
 
 export function buildLlmsTxt(rootDir) {
-  const paths = collectHtmlPaths(rootDir)
+  const paths = indexablePaths(rootDir)
   const sections = [
     '# Dodje : jeu pour apprendre la finance (France)',
     '',
@@ -365,7 +382,6 @@ export function buildLlmsTxt(rootDir) {
     '',
     '- Guides : https://dodje.fr/guides/[slug].md',
     '- Actualités : https://dodje.fr/actualites/[slug].md',
-    '- Glossaire : https://dodje.fr/glossaire/[slug].md',
     '- Calculateurs : https://dodje.fr/outils/[slug].md',
     '- Le jeu et la FAQ : https://dodje.fr/jeu.md, https://dodje.fr/faq.md',
     `- Exemple : ${SITE}/guides/jeu-educatif-finance.md`,
@@ -397,7 +413,7 @@ export function buildLlmsTxt(rootDir) {
 }
 
 export function buildAiTxt(rootDir) {
-  const paths = collectHtmlPaths(rootDir)
+  const paths = indexablePaths(rootDir)
   return [
     '# ai.txt : Dodje (dodje.fr)',
     '# Fichier de découverte pour agents IA : https://dodje.fr/.well-known/ai.txt',
@@ -435,7 +451,7 @@ export function buildAiTxt(rootDir) {
 }
 
 export function buildSummaryJson(rootDir) {
-  const paths = collectHtmlPaths(rootDir)
+  const paths = indexablePaths(rootDir)
   return JSON.stringify(
     {
       '@context': 'https://schema.org',
@@ -503,21 +519,28 @@ export function buildSummaryJson(rootDir) {
   ) + '\n'
 }
 
+// Date de publication déclarée dans la page (article:published_time), sinon dernière modification.
+function publishedDate(rootDir, file) {
+  const html = fs.readFileSync(path.join(rootDir, file), 'utf8')
+  const iso = html.match(/article:published_time" content="([^"]+)"/)?.[1] || html.match(/"datePublished"\s*:\s*"([^"]+)"/)?.[1]
+  const t = iso ? Date.parse(iso) : NaN
+  return Number.isFinite(t) && t <= Date.now() + 3600 * 1000 ? new Date(t) : new Date(getLastMod(rootDir, file) + 'T12:00:00+01:00')
+}
+
 export function buildFeedXml(rootDir) {
-  const allPaths = collectHtmlPaths(rootDir)
-  const feedPaths = allPaths
+  const feedPaths = indexablePaths(rootDir)
     .filter((p) => p.startsWith('guides/') || p.startsWith('actualites/') || p.startsWith('blog/'))
     .filter((p) => !p.endsWith('index.html'))
-    .sort((a, b) => getLastMod(rootDir, b).localeCompare(getLastMod(rootDir, a)))
+    .map((file) => ({ file, date: publishedDate(rootDir, file) }))
+    .sort((a, b) => b.date - a.date)
     .slice(0, 40)
 
-  const latestMod = feedPaths.length ? getLastMod(rootDir, feedPaths[0]) : new Date().toISOString().slice(0, 10)
-  const rssDate = toRssDate(latestMod)
+  const rssDate = (feedPaths[0]?.date || new Date()).toUTCString()
 
-  const items = feedPaths.map((file) => {
+  const items = feedPaths.map(({ file, date }) => {
     const url = toPublicUrl(file)
     const full = path.join(rootDir, file)
-    const pubDate = toRssDate(getLastMod(rootDir, file))
+    const pubDate = date.toUTCString()
     let title = file
     let description = ''
     if (fs.existsSync(full)) {
@@ -939,7 +962,7 @@ function injectMarkdownAlternate(html, filePath) {
 }
 
 function writeMarkdownRoutes(rootDir, distDir) {
-  const paths = collectHtmlPaths(rootDir).filter(
+  const paths = indexablePaths(rootDir).filter(
     (file) =>
       hasMarkdownMirror(file)
   )
@@ -991,7 +1014,7 @@ export function injectSeoHeadPlugin(rootDir) {
       handler(html, ctx) {
         const filePath = relativePathFromRoot(ctx.filename, rootDir)
         if (!filePath.endsWith('.html')) return html
-        if (filePath === 'index.html') return html
+        if (filePath === 'index.html' || filePath === '404.html') return html
 
         let out = html
         const pageUrl = toPublicUrl(filePath)
@@ -1122,51 +1145,94 @@ export function writeSeoArtifacts(rootDir) {
   fs.writeFileSync(path.join(aiDir, 'summary.json'), summaryJson, 'utf8')
 
   writeMarkdownRoutes(rootDir, distDir)
+  writeHubAliases(distDir)
   writeGhPagesRedirects(rootDir, distDir)
+}
+
+/**
+ * GitHub Pages répond /outils par une redirection 301 vers /outils/ (dossier), alors que la canonique,
+ * le sitemap et tous les liens du site utilisent /outils. Google signalait « Erreur liée à des redirections »
+ * (/outils) et « Autre page avec balise canonique » (/actualites/, /guides/). Comme pour blog.html,
+ * un fichier outils.html à la racine fait répondre /outils en 200 ; /outils/ reste servi avec la même canonique.
+ */
+export const HUB_DIRS = ['outils', 'guides', 'actualites']
+function writeHubAliases(distDir) {
+  for (const dir of HUB_DIRS) {
+    const src = path.join(distDir, dir, 'index.html')
+    if (fs.existsSync(src)) fs.copyFileSync(src, path.join(distDir, `${dir}.html`))
+  }
 }
 
 /**
  * GitHub Pages ignores Netlify-style `_redirects`. Emit HTML stubs so old
  * URLs return 200 with a canonical + meta/JS redirect (Google follows these).
  */
-function writeGhPagesRedirects(rootDir, distDir) {
-  const redirectsFile = path.join(rootDir, 'public/_redirects')
-  if (!fs.existsSync(redirectsFile)) return
+// Ancien chemin du site quand il était servi comme projet GitHub Pages (dodje.fr/DodjeSiteWeb/...).
+// Des URL de ce type restaient connues de Google (404 dans la Search Console).
+export const LEGACY_PREFIX = 'DodjeSiteWeb'
 
+export function readRedirectRules(rootDir) {
+  const redirectsFile = path.join(rootDir, 'public/_redirects')
+  if (!fs.existsSync(redirectsFile)) return []
+  const rules = []
   for (const line of fs.readFileSync(redirectsFile, 'utf8').split('\n')) {
     const trimmed = line.trim()
     if (!trimmed || trimmed.startsWith('#')) continue
-
     const parts = trimmed.split(/\s+/)
     if (parts.length < 3) continue
-
     const [from, to, status] = parts
     // Skip rewrites (200) and wildcards — GH Pages needs explicit HTML files.
     if (status === '200' || from.includes('*') || !from.startsWith('/')) continue
+    rules.push({ from, to })
+  }
+  return rules
+}
 
+function writeRedirectStub(distDir, from, absoluteTo) {
+  const outFile = from.endsWith('/')
+    ? path.join(distDir, from.slice(1), 'index.html')
+    : path.join(distDir, `${from.slice(1)}.html`)
+  if (fs.existsSync(outFile)) return
+  fs.mkdirSync(path.dirname(outFile), { recursive: true })
+  fs.writeFileSync(outFile, buildRedirectHtml(absoluteTo), 'utf8')
+}
+
+/**
+ * GitHub Pages n'a pas de vraie 301 : on écrit des pages de redirection immédiate (meta refresh 0 + canonique),
+ * que Google traite comme des redirections permanentes. Pas de noindex : il contredirait la canonique.
+ */
+function writeGhPagesRedirects(rootDir, distDir) {
+  const rules = readRedirectRules(rootDir).filter(({ from }) => {
     const sourceHtml = from.endsWith('/')
       ? path.join(rootDir, from.slice(1), 'index.html')
       : path.join(rootDir, `${from.slice(1)}.html`)
-    if (fs.existsSync(sourceHtml)) continue
+    return !fs.existsSync(sourceHtml)
+  })
+  for (const { from, to } of rules) {
+    writeRedirectStub(distDir, from, to.startsWith('http') ? to : `${SITE}${to}`)
+  }
 
-    const absoluteTo = to.startsWith('http') ? to : `${SITE}${to}`
-    const outFile = from.endsWith('/')
-      ? path.join(distDir, from.slice(1), 'index.html')
-      : path.join(distDir, `${from.slice(1)}.html`)
-
-    fs.mkdirSync(path.dirname(outFile), { recursive: true })
-    fs.writeFileSync(outFile, buildRedirectHtml(absoluteTo), 'utf8')
+  // /DodjeSiteWeb/<page> -> /<page>, pour toutes les pages publiques et toutes les anciennes adresses.
+  writeRedirectStub(distDir, `/${LEGACY_PREFIX}/`, `${SITE}/`)
+  for (const file of indexablePaths(rootDir)) {
+    if (file === 'index.html') continue
+    const url = toPublicUrl(file)
+    writeRedirectStub(distDir, `/${LEGACY_PREFIX}${url.slice(SITE.length)}`, url)
+    if (file.endsWith('/index.html')) writeRedirectStub(distDir, `/${LEGACY_PREFIX}${url.slice(SITE.length)}/`, url)
+  }
+  for (const { from, to } of rules) {
+    writeRedirectStub(distDir, `/${LEGACY_PREFIX}${from}`, to.startsWith('http') ? to : `${SITE}${to}`)
   }
 }
 
 function buildRedirectHtml(targetUrl) {
   const safe = targetUrl.replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+  const canonical = safe.replace(/#.*$/, '')
   return `<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="${safe}">
+  <link rel="canonical" href="${canonical}">
   <meta http-equiv="refresh" content="0;url=${safe}">
   <title>Redirection…</title>
   <script>location.replace(${JSON.stringify(targetUrl)})</script>

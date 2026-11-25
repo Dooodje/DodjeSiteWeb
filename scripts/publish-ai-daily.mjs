@@ -7,8 +7,10 @@
  * 2. Rédaction : Claude Sonnet 5.5 rédige à partir du texte des sources lues (sortie JSON validée par un schéma, environ 0,10 $).
  *    Une correction éventuelle est faite par Haiku (environ 0,01 $).
  *    Plafond dur : EDITION_BUDGET_USD (0,15 $ par défaut) pour toute l'édition, tous passages confondus.
- * 3. Garde     : longueur, meta, FAQ, sources https, liens internes existants, HTML nettoyé.
- * 4. Rendu     : page HTML dans la charte du site, cartes des hubs, journal, commit.
+ * 3. Garde     : longueur, meta, FAQ, sources https, liens internes existants, HTML nettoyé,
+ *               pas de doublon d'une page existante (cannibalisation : Google n'indexe qu'une des deux).
+ * 4. Rendu     : page HTML dans la charte du site, date de publication réelle (jamais dans le futur),
+ *               carte en tête du hub, « À lire aussi » choisi par sujet, journal, commit.
  *
  *   ANTHROPIC_API_KEY=... node scripts/publish-ai-daily.mjs
  *   DRY_RUN=1        : fait la veille et la rédaction, n'écrit aucun fichier
@@ -136,12 +138,56 @@ function siteInventory() {
       if (!f.endsWith('.html')) continue
       const href = f === 'index.html' ? `/${dir}` : `/${dir}/${f.replace(/\.html$/, '')}`
       const html = fs.readFileSync(path.join(full, f), 'utf8')
+      // Pas de lien vers une page en noindex ou une redirection : Google ne doit trouver que des pages indexables.
+      if (/http-equiv="refresh"|<meta name="robots" content="[^"]*noindex/i.test(html)) continue
       const title = html.match(/<title>([^<|]*)/)?.[1]?.trim() || href
       out.push({ href, title })
     }
   }
   return out
 }
+
+// Mots significatifs d'un titre, sans accents ni mots outils : sert à repérer un sujet déjà traité.
+const STOP = new Set(('le la les un une des de du d l et ou a au aux en dans sur pour par avec sans ce ces cet cette son sa ses ton ta tes ' +
+  'qui que quoi quel quelle quels quelles comment combien pourquoi est sont faut faire ca peut plus moins tout tous toute ' +
+  'ne pas se sa france francais dodje guide 2025 2026 2027 ans an mois euros euro ' +
+  'janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre date dates').split(' '))
+export function topicWords(text) {
+  return new Set(
+    String(text).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ').split(' ')
+      .filter((w) => w.length > 2 && !STOP.has(w) && !/^\d+$/.test(w))
+  )
+}
+export function overlap(a, b) {
+  const A = topicWords(a)
+  const B = topicWords(b)
+  if (!A.size || !B.size) return 0
+  let common = 0
+  for (const w of A) if (B.has(w)) common++
+  return common / Math.min(A.size, B.size)
+}
+// Page existante la plus proche d'un sujet (score de 0 à 1).
+export function closestPage(text, inventory) {
+  let best = { score: 0, page: null }
+  for (const page of inventory) {
+    const score = overlap(text, page.title)
+    if (score > best.score) best = { score, page }
+  }
+  return best
+}
+// Mot-clé principal déjà porté par le titre d'une page (tous ses mots significatifs, au moins 2) :
+// pour un article de blog intemporel, c'est de la cannibalisation.
+export function keywordOwner(keyword, inventory) {
+  const words = [...topicWords(keyword)]
+  if (words.length < 2) return null
+  return inventory.find((p) => {
+    const t = topicWords(p.title)
+    return words.every((w) => t.has(w))
+  }) || null
+}
+// Au-delà, le sujet double une page du site : Google n'indexerait qu'une des deux (« Explorée, non indexée »).
+const DUPLICATE_SCORE = 0.75
 
 /* ---------------------------------------------------------------- 1. veille */
 
@@ -192,7 +238,7 @@ export function referenceTopics() {
 }
 
 // Haiku lit les pistes et choisit un seul sujet avec ses sources. Coût : environ 0,003 $.
-async function pickTopic(client, hints, refs, titles, avoid) {
+async function pickTopic(client, hints, refs, titles, avoid, evergreen = []) {
   const prompt = `Nous sommes le ${todayFr()}. Choisis LE sujet de l'article de l'édition du ${edFr()} (publié ce matin-là).
 
 Priorité 1, "actu" : une piste des flux de moins de 7 jours qui change concrètement quelque chose pour l'argent d'un particulier en France
@@ -206,7 +252,7 @@ Pour une actu, ajoute la ou les fiches service-public qui expliquent la règle d
 
 Déjà publiés (ne refais aucun de ces sujets, ni sous un angle trop proche) :
 ${titles.map((t) => `- ${t}`).join('\n')}
-${avoid.length ? `\nSujets écartés lors des derniers essais (sources illisibles ou faits invérifiables, n'y reviens pas) :\n${avoid.map((t) => `- ${t}`).join('\n')}\n` : ''}
+${evergreen.length ? `\nGuides et calculateurs déjà en ligne (ne fais pas un article qui répète l'une de ces pages ; un sujet voisin doit apporter un fait nouveau et daté) :\n${evergreen.map((t) => `- ${t}`).join('\n')}\n` : ''}${avoid.length ? `\nSujets écartés lors des derniers essais (sources illisibles ou faits invérifiables, n'y reviens pas) :\n${avoid.map((t) => `- ${t}`).join('\n')}\n` : ''}
 Pistes des flux (moins de 10 jours) :
 ${hints.length ? hints.map((h) => `- [${h.source}, ${h.date.toISOString().slice(0, 10)}] ${h.title} : ${h.link}`).join('\n') : '- aucune'}
 
@@ -408,19 +454,44 @@ async function checkSources(sources) {
 
 /* ---------------------------------------------------------------- 4. rendu */
 
-// « À lire aussi » : les 3 derniers articles du même type, pour le maillage interne et la fraîcheur.
-function relatedHtml(kind, slug) {
+// « À lire aussi » : les 3 articles et guides les plus proches du sujet (maillage par thème),
+// complétés au besoin par les derniers articles du même type.
+function relatedHtml(kind, a) {
   const cfg = KINDS[kind]
-  const rows = (loadJson(cfg.log, { published: [] }).published || [])
-    .filter((r) => r.slug !== slug && fs.existsSync(path.join(rootDir, cfg.dir, `${r.slug}.html`)))
-    .slice(-3)
-    .reverse()
+  const self = `/${cfg.dir}/${a.slug}`
+  const taken = new Set([self, ...a.internalLinks.map((l) => l.href)])
+  const pool = siteInventory().filter((p) => /^\/(actualites|blog|guides)\/./.test(p.href) && !taken.has(p.href))
+  const subject = `${a.title} ${a.primaryKeyword} ${a.kicker}`
+  const rows = pool
+    .map((p) => ({ ...p, score: overlap(subject, p.title) }))
+    .filter((p) => p.score > 0)
+    .sort((x, y) => y.score - x.score)
+    .slice(0, 3)
+  for (const r of [...(loadJson(cfg.log, { published: [] }).published || [])].reverse()) {
+    if (rows.length >= 3) break
+    const href = `/${cfg.dir}/${r.slug}`
+    if (taken.has(href) || rows.some((x) => x.href === href) || !pool.some((p) => p.href === href)) continue
+    rows.push({ href, title: r.title })
+  }
   if (!rows.length) return ''
   return `<h2>À lire aussi</h2>
             <ul>
-                ${rows.map((r) => `<li><a href="/${cfg.dir}/${r.slug}">${escapeHtml(r.title)}</a></li>`).join('\n                ')}
+                ${rows.map((r) => `<li><a href="${r.href}">${escapeHtml(r.title.replace(/\s*\|\s*Dodje\s*$/, ''))}</a></li>`).join('\n                ')}
             </ul>
 `
+}
+
+// Date et heure réelles de mise en ligne, avec le fuseau de Paris (jamais une date future :
+// le passage du soir prépare l'édition du lendemain, mais la page est déployée tout de suite).
+function publicationStamp(now = new Date()) {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false })
+      .formatToParts(now).map((x) => [x.type, x.value])
+  )
+  const offset = new Intl.DateTimeFormat('en', { timeZone: 'Europe/Paris', timeZoneName: 'longOffset' })
+    .format(now).match(/GMT([+-]\d{2}:\d{2})/)?.[1] || '+01:00'
+  const hour = parts.hour === '24' ? '00' : parts.hour
+  return `${parts.year}-${parts.month}-${parts.day}T${hour}:${parts.minute}:00${offset}`
 }
 
 export function renderPage(kind, a, imgs = null) {
@@ -428,11 +499,9 @@ export function renderPage(kind, a, imgs = null) {
   const main = imgs?.[0] || { url: OG, w: 1200, h: 630 }
   const cfg = KINDS[kind]
   const url = `${SITE}/${cfg.dir}/${a.slug}`
-  const date = ed()
-  // Heure de mise en ligne annoncée : 6h30, heure de Paris (fuseau d'hiver ou d'été)
-  const offset = new Intl.DateTimeFormat('en', { timeZone: 'Europe/Paris', timeZoneName: 'longOffset' })
-    .format(EDITION).match(/GMT([+-]\d{2}:\d{2})/)?.[1] || '+01:00'
-  const stamp = `${date}T06:30:00${offset}`
+  const now = new Date()
+  const stamp = publicationStamp(now)
+  const dateFr = todayFr(now)
   const wordCount = words(a.bluf) + a.sections.reduce((n, s) => n + words(s.html), 0) + a.faq.reduce((n, f) => n + words(f.answer), 0)
   const article = {
     '@context': 'https://schema.org',
@@ -511,7 +580,7 @@ ${headerHtml(cfg.nav)}
             <p class="legal-eyebrow">${escapeHtml(a.kicker)}</p>
             <h1>${escapeHtml(a.title).replace(/ ([%€:;?!])/g, ' $1')}</h1>
             <p class="content-lead"><strong>En bref :</strong> ${escapeHtml(a.bluf)}</p>
-            <p class="content-updated">Publié le ${escapeHtml(edFr())} par l'<a href="/guides/equipe-editoriale">équipe éditoriale Dodje</a></p>
+            <p class="content-updated">Publié le ${escapeHtml(dateFr)} par l'<a href="/guides/equipe-editoriale">équipe éditoriale Dodje</a></p>
             ${imgs ? heroFigure(imgs[0], a.title) : ''}
 
             <div class="content-note content-ymyl">
@@ -537,7 +606,7 @@ ${headerHtml(cfg.nav)}
             <h2>Questions fréquentes</h2>
             ${a.faq.map((f) => `<h3>${escapeHtml(f.question)}</h3>\n            <p>${escapeHtml(f.answer)}</p>`).join('\n            ')}
 
-            ${relatedHtml(kind, a.slug)}
+            ${relatedHtml(kind, a)}
             <div class="content-links">
                 ${a.internalLinks.map((l) => `<a href="${escapeHtml(l.href)}">${escapeHtml(l.label)}</a>`).join('\n                ')}
                 ${back}
@@ -550,7 +619,7 @@ ${headerHtml(cfg.nav)}
                     ${a.sources.map((s) => `<li><a href="${escapeHtml(s.url)}" rel="noopener noreferrer" target="_blank">${escapeHtml(s.label)}</a></li>`).join('\n                    ')}
                 </ul>
             </aside>
-            <p class="content-updated">Dernière mise à jour : ${escapeHtml(edFr())}</p>
+            <p class="content-updated">Dernière mise à jour : ${escapeHtml(dateFr)}</p>
         </article>
     </main>
 ${footerHtml()}
@@ -678,12 +747,22 @@ async function main() {
     console.log(`${hints.length} piste(s) dans les flux, ${refs.length} fiches de référence.`)
     const avoid = abandonedTopics(runs.runs || [])
     const done = new Set(recentTitles())
+    const evergreen = inventory.filter((p) => /^\/(guides|outils)\/./.test(p.href)).map((p) => p.title)
 
     // Jusqu'à 3 choix de sujet (0,003 $ chacun) pour en trouver un dont les sources s'ouvrent.
     let topic = null
     let sources = []
     for (let attempt = 0; attempt < 3 && !topic; attempt++) {
-      const t = await pickTopic(client, hints, refs, [...done], avoid)
+      const t = await pickTopic(client, hints, refs, [...done], avoid, evergreen)
+      const near = closestPage(t.angle, inventory)
+      const owner = t.kind === 'blog' && t.queries[0] ? keywordOwner(t.queries[0], inventory) : null
+      if (owner) near.score = 1, near.page = owner
+      if (near.score >= DUPLICATE_SCORE) {
+        console.warn(`Sujet écarté, déjà traité par ${near.page.href} : ${t.angle}`)
+        record.results.push({ kind: t.kind, outcome: 'skip', detail: `doublon de ${near.page.href} : ${t.angle}` })
+        avoid.push(t.angle)
+        continue
+      }
       const read = await readSources(t.urls)
       if (read.length >= 2 && read.some((x) => isOfficial(x.url))) {
         topic = t
@@ -716,8 +795,16 @@ async function main() {
       } else {
         let a = normalize(raw, internal)
         a.sources = await checkSources(a.sources)
-        let errors = qualityCheck(a, kind, internal)
-        if (errors.length) {
+        const twin = closestPage(a.title, inventory)
+        const owner = kind === 'blog' ? keywordOwner(a.primaryKeyword, inventory) : null
+        if (owner) twin.score = 1, twin.page = owner
+        let errors = twin.score >= DUPLICATE_SCORE ? [] : qualityCheck(a, kind, internal)
+        if (twin.score >= DUPLICATE_SCORE) {
+          console.warn(`${kind} écarté : même sujet que ${twin.page.href}`)
+          record.results.push({ kind, outcome: 'rejected', detail: `doublon de ${twin.page.href}`, title: a.title })
+          errors = null
+        }
+        if (errors && errors.length) {
           // Une seule correction, par Haiku : souvent un titre trop long ou un chiffre manquant.
           console.warn(`${kind} refusé par la garde, correction demandée : ${errors.join(' ; ')}`)
           raw = await writeArticle(client, kind, dossier, inventory, { errors, article: raw })
@@ -725,7 +812,9 @@ async function main() {
           a.sources = await checkSources(a.sources)
           errors = raw.skip ? [`abandonné : ${raw.skipReason}`] : qualityCheck(a, kind, internal)
         }
-        if (errors.length) {
+        if (errors === null) {
+          // déjà journalisé : doublon d'une page existante
+        } else if (errors.length) {
           console.warn(`${kind} écarté par la garde : ${errors.join(' ; ')}`)
           record.results.push({ kind, outcome: 'rejected', detail: errors.join(' ; '), title: a.title })
         } else if (DRY) {

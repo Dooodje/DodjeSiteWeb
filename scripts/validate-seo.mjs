@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { buildSitemapXml, sitemapMetaForUrl } from '../vite-seo.mjs'
+import { sitemapMetaForUrl, readRedirectRules, HUB_DIRS, LEGACY_PREFIX } from '../vite-seo.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -68,6 +68,102 @@ function validateSitemapPriorities() {
 
   if (urls.length < 70) {
     warn(`Sitemap has only ${urls.length} URLs (expected ~78)`)
+  }
+}
+
+// Fichier servi par GitHub Pages pour une URL propre (/x -> x.html, sinon x/index.html).
+function distFileForUrl(url) {
+  const p = url.replace(SITE, '').replace(/^\//, '')
+  if (!p) return path.join(distDir, 'index.html')
+  const asFile = path.join(distDir, `${p}.html`)
+  if (fs.existsSync(asFile)) return asFile
+  return path.join(distDir, p, 'index.html')
+}
+
+// Chaque URL du sitemap doit répondre 200 (pas de redirection de dossier), être indexable et se déclarer canonique.
+function validateSitemapUrlsServable() {
+  const xml = fs.readFileSync(path.join(distDir, 'sitemap.xml'), 'utf8')
+  for (const url of extractSitemapUrls(xml)) {
+    const file = distFileForUrl(url)
+    if (!fs.existsSync(file)) {
+      fail(`Sitemap URL sans page servie en 200 : ${url}`)
+      continue
+    }
+    const html = fs.readFileSync(file, 'utf8')
+    if (isRedirectStub(html)) fail(`Sitemap URL qui redirige : ${url}`)
+    if (/<meta name="robots" content="[^"]*noindex/i.test(html)) fail(`Sitemap URL en noindex : ${url}`)
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1]
+    if (canonical !== url) fail(`Canonique différente de l'URL du sitemap : ${url} -> ${canonical}`)
+  }
+}
+
+// /outils, /guides, /actualites doivent répondre 200 (et non 301 vers /dossier/) : leur canonique est sans slash.
+function validateHubAliases() {
+  for (const dir of HUB_DIRS) {
+    if (!fs.existsSync(path.join(distDir, `${dir}.html`))) fail(`Alias de hub manquant : ${dir}.html (sinon /${dir} redirige vers /${dir}/)`)
+  }
+}
+
+// Anciennes URL /DodjeSiteWeb/... (404 dans la Search Console) : une page de redirection par page publique.
+function validateLegacyRedirects() {
+  for (const sample of ['index.html', 'guides/per-vs-pea-2026.html', 'outils.html', 'actualites/index.html']) {
+    const file = path.join(distDir, LEGACY_PREFIX, sample)
+    if (!fs.existsSync(file) || !isRedirectStub(fs.readFileSync(file, 'utf8'))) fail(`Redirection héritée manquante : /${LEGACY_PREFIX}/${sample}`)
+  }
+  const notFound = path.join(distDir, '404.html')
+  if (!fs.existsSync(notFound)) fail('dist/404.html manquant (page d\'erreur GitHub Pages)')
+  else if (!/noindex/.test(fs.readFileSync(notFound, 'utf8'))) fail('404.html doit être en noindex')
+}
+
+// Toute page indexable d'une rubrique doit être liée depuis son hub (sinon Google la découvre mal : « Détectée, non indexée »).
+function validateHubCoverage() {
+  const hubs = { actualites: 'actualites/index.html', blog: 'blog.html', guides: 'guides/index.html', outils: 'outils/index.html' }
+  const xml = fs.readFileSync(path.join(distDir, 'sitemap.xml'), 'utf8')
+  const urls = new Set(extractSitemapUrls(xml))
+  for (const [dir, hubFile] of Object.entries(hubs)) {
+    const hub = fs.readFileSync(path.join(distDir, hubFile), 'utf8')
+    for (const url of urls) {
+      const p = url.replace(SITE, '')
+      if (!p.startsWith(`/${dir}/`)) continue
+      if (!hub.includes(`href="${p}"`)) fail(`Page absente de son hub ${hubFile} : ${p}`)
+    }
+  }
+}
+
+// Aucun lien interne vers une adresse redirigée (chaîne inutile pour Google).
+function validateNoLinksToRedirects() {
+  const sources = new Set(readRedirectRules(rootDir).map((r) => r.from))
+  let count = 0
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        if (['assets', LEGACY_PREFIX].includes(entry.name)) continue
+        walk(full)
+      } else if (entry.name.endsWith('.html')) {
+        const html = fs.readFileSync(full, 'utf8')
+        if (isRedirectStub(html)) continue
+        for (const m of html.matchAll(/href="(\/[^"#?]*)/g)) {
+          if (sources.has(m[1])) {
+            count++
+            if (count <= 10) fail(`Lien interne vers une redirection : ${path.relative(distDir, full)} -> ${m[1]}`)
+          }
+        }
+      }
+    }
+  }
+  walk(distDir)
+}
+
+// Google News n'accepte que des articles d'actualité de moins de 2 jours.
+function validateNewsSitemap() {
+  const file = path.join(distDir, 'sitemap-news.xml')
+  if (!assertFileExists('sitemap-news.xml')) return
+  const xml = fs.readFileSync(file, 'utf8')
+  for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>[\s\S]*?<news:publication_date>([^<]+)</g)) {
+    if (!m[1].startsWith(`${SITE}/actualites/`)) fail(`sitemap-news : URL hors actualités ${m[1]}`)
+    const age = Date.now() - Date.parse(m[2])
+    if (age > 2 * 86400000 + 3600000 || age < -3600000) fail(`sitemap-news : date hors fenêtre de 2 jours ${m[1]} (${m[2]})`)
   }
 }
 
@@ -143,8 +239,11 @@ function validateGhPagesRedirects() {
       continue
     }
     const html = fs.readFileSync(full, 'utf8')
-    if (!html.includes('http-equiv="refresh"') || !html.includes('noindex')) {
+    if (!isRedirectStub(html)) {
       fail(`Invalid redirect stub content: ${relative}`)
+    }
+    if (/name="robots"[^>]*noindex/.test(html)) {
+      fail(`Redirect stub must not be noindex (contradicts the canonical): ${relative}`)
     }
   }
 
@@ -161,9 +260,11 @@ function countNumericFacts(html) {
 }
 
 function isRedirectStub(html) {
-  return html.includes('noindex') && html.includes('http-equiv="refresh"')
+  return html.includes('http-equiv="refresh"') && html.includes('rel="canonical"')
 }
 
+// Le noindex est permis (page 404, désinscription, actualités périmées) tant que la page n'est pas dans le sitemap :
+// validateSitemapUrlsServable() le vérifie. Ici on vérifie seulement qu'aucune page de redirection n'est en noindex.
 function validateNoindexOnlyOnStubs() {
   function walk(dir) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -175,11 +276,8 @@ function validateNoindexOnlyOnStubs() {
       }
       if (!entry.name.endsWith('.html')) continue
       const html = fs.readFileSync(full, 'utf8')
-      if (!/name="robots"[^>]*noindex/i.test(html) && !html.includes('content="noindex')) continue
-      // Page ouverte depuis les e-mails (lien personnel) : jamais indexée, et c'est voulu.
-      if (path.relative(distDir, full) === 'desinscription.html') continue
-      if (!isRedirectStub(html)) {
-        fail(`noindex hors stub de redirection: ${path.relative(distDir, full)}`)
+      if (isRedirectStub(html) && /name="robots"[^>]*noindex/i.test(html)) {
+        fail(`Page de redirection en noindex : ${path.relative(distDir, full)}`)
       }
     }
   }
@@ -371,6 +469,12 @@ validateXml('sitemap.xml')
 validateXml('feed.xml')
 validateJson('ai/summary.json')
 validateSitemapPriorities()
+validateSitemapUrlsServable()
+validateHubAliases()
+validateLegacyRedirects()
+validateHubCoverage()
+validateNoLinksToRedirects()
+validateNewsSitemap()
 validateHreflangPaths()
 validateBreadcrumbs()
 validateBlufInDist()
