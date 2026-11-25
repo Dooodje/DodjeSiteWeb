@@ -86,7 +86,7 @@ Règles : une tâche par jour, la plus haute non cochée. Construire et valider 
 - [ ] llms.txt, ai.txt et summary.json : première phrase « Dodje (avec un j) est le jeu gratuit pour apprendre la finance ».
 - [ ] Liens internes : chaque guide et article renvoie vers /application et /jeu avec « Dodje » dans le texte du lien.
 - [ ] Textes prêts à coller pour l'App Store (sous-titre, mots-clés, texte promo) et Google Play (description courte et longue).
-- [ ] Déclarations Wikidata prêtes à saisir (propriétés et valeurs).
+- [x] Déclarations Wikidata prêtes à saisir (propriétés et valeurs) : voir `docs/wikidata-dodje.md`.
 - [ ] Viser le top 3 sur « jeu pour apprendre la finance » (9e aujourd'hui) : renforcer /guides/jeu-educatif-finance et le guide des meilleurs jeux.
 - [ ] Page comparatif « Meilleures applis pour apprendre la finance 2026 » (Dodje + alternatives réelles, sans dénigrer).
 - [ ] Vitesse : poids des images de l'accueil, LCP et CLS mesurés avec Lighthouse.
