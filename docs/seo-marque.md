@@ -55,7 +55,7 @@ Par ordre d'impact. L'optimisation quotidienne prépare les textes prêts à col
 - [ ] Google Search Console : vérifier dodje.fr, envoyer sitemap.xml et sitemap-news.xml, suivre la requête « dodje ».
 - [x] Bing Webmaster Tools : site ajouté (45 clics, 1 900 impressions sur 5 semaines au 25 novembre 2026).
 - [ ] Bing Webmaster Tools : envoyer sitemap.xml et sitemap-news.xml, vérifier IndexNow (Paramètres > IndexNow), lancer Site Scan.
-- [ ] Wikidata : créer l'élément « Dodje » (application mobile, développeur Dodje Solutions, site, ID App Store, ID Google Play, Instagram).
+- [x] Wikidata : éléments créés le 25/11/2026, Dodje (Q142282262) et Dodje Solutions (Q142282261). Détail : `docs/wikidata-dodje.md`.
 - [ ] Fiche d'établissement Google « Dodje Solutions » à Orléans, catégorie éditeur de logiciels.
 - [ ] Page LinkedIn entreprise et chaîne YouTube au nom de Dodje, liées au site.
 - [ ] App Store Connect : sous-titre « Jeu pour apprendre la finance » et champ mots-clés (100 caractères).

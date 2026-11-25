@@ -174,3 +174,10 @@ QSOCIETE	P1056	QAPPLI	S854	"https://apps.apple.com/fr/app/dodje-finance-jeux-le%
 - Ajouter `https://www.wikidata.org/wiki/Qxxx` dans le `sameAs` des JSON-LD Organization (Q de la société) et MobileApplication (Q de l'appli) dans `index.html` (uniquement dans le `<head>`).
 - Ajouter un article de presse comme référence dès qu'il en paraît un.
 - Surveiller la page de l'élément pendant 2 à 3 semaines : une proposition de suppression apparaît sur [Wikidata:Requests for deletions](https://www.wikidata.org/wiki/Wikidata:Requests_for_deletions). Si c'est le cas, y répondre en citant le SIREN et le besoin structurel.
+
+## 9. Publication (25 novembre 2026)
+
+- Dodje Solutions : https://www.wikidata.org/wiki/Q142282261
+- Dodje (appli) : https://www.wikidata.org/wiki/Q142282262
+- Publié depuis le compte Dodjeee. Le filtre anti-spam (« too many external links ») bloque les comptes neufs qui ajoutent beaucoup d'URL d'un coup : les fiches ont donc été créées sans liens, puis les URL ajoutées une par une. Les comptes neufs sont aussi limités à quelques modifications par minute.
+- Relié au site : `sameAs` de l'Organization (Q142282261) et de l'application (Q142282262) dans le `<head>` de `index.html`.
