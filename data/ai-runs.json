@@ -173,6 +173,20 @@
         }
       ],
       "costUsd": 0.784
+    },
+    {
+      "at": "2026-11-25T23:36:44.582Z",
+      "edition": "2026-11-26",
+      "researched": true,
+      "results": [
+        {
+          "kind": "actu",
+          "outcome": "published",
+          "slug": "modifier-avance-credit-impot-10-decembre-2026",
+          "title": "Modifier l'avance de crédit d'impôt avant le 10 décembre"
+        }
+      ],
+      "costUsd": 0.074
     }
   ]
 }
