@@ -919,6 +919,18 @@ function hasMarkdownMirror(file) {
   )
 }
 
+// Site monolingue : chaque page indexable déclare fr-FR (et x-default) vers son canonical,
+// comme les pages générées. Bing s'en sert pour cibler la France.
+function injectHreflang(html) {
+  if (/hreflang=/i.test(html) || /<meta[^>]+name=["']robots["'][^>]*noindex/i.test(html)) return html
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1]
+  if (!canonical) return html
+  return html.replace(
+    '</head>',
+    `    <link rel="alternate" hreflang="fr-FR" href="${canonical}">\n    <link rel="alternate" hreflang="x-default" href="${canonical}">\n</head>`
+  )
+}
+
 function injectMarkdownAlternate(html, filePath) {
   if (!hasMarkdownMirror(filePath) || /http-equiv="refresh"/i.test(html)) return html
   if (html.includes('type="text/markdown"')) return html
@@ -998,6 +1010,7 @@ export function injectSeoHeadPlugin(rootDir) {
         out = injectHubItemList(out, filePath)
         out = injectSpeakable(out, pageUrl)
         out = injectMarkdownAlternate(out, filePath)
+        out = injectHreflang(out)
         out = optimizeBackgroundVideo(out)
 
         if (!out.includes('og:site_name')) {

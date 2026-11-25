@@ -53,7 +53,8 @@ TikTok, Discord, stores), bannière iOS `apple-itunes-app`, titres de page qui f
 Par ordre d'impact. L'optimisation quotidienne prépare les textes prêts à coller pour chacune.
 
 - [ ] Google Search Console : vérifier dodje.fr, envoyer sitemap.xml et sitemap-news.xml, suivre la requête « dodje ».
-- [ ] Bing Webmaster Tools : importer depuis Search Console (Bing alimente aussi ChatGPT et Copilot).
+- [x] Bing Webmaster Tools : site ajouté (45 clics, 1 900 impressions sur 5 semaines au 25 novembre 2026).
+- [ ] Bing Webmaster Tools : envoyer sitemap.xml et sitemap-news.xml, vérifier IndexNow (Paramètres > IndexNow), lancer Site Scan.
 - [ ] Wikidata : créer l'élément « Dodje » (application mobile, développeur Dodje Solutions, site, ID App Store, ID Google Play, Instagram).
 - [ ] Fiche d'établissement Google « Dodje Solutions » à Orléans, catégorie éditeur de logiciels.
 - [ ] Page LinkedIn entreprise et chaîne YouTube au nom de Dodje, liées au site.
@@ -62,6 +63,13 @@ Par ordre d'impact. L'optimisation quotidienne prépare les textes prêts à col
 - [ ] Avis Google Play : vérifier que la demande d'avis dans l'appli s'affiche bien sur Android.
 - [ ] Mentions externes : Product Hunt, AlternativeTo, annuaires French Tech, presse et podcasts finance, toujours « Dodje, l'appli… ».
 - [ ] Réseaux sociaux : renvoyer vers les liens directs des stores (pas « cherche Dodje sur le Play Store », qui tombe sur Dodge).
+- [ ] Backlinks (Bing : « pas assez de liens entrants de domaines de qualité »). Plan détaillé, textes prêts à coller et journal : `docs/backlinks.md`.
+  - [ ] Semaine 1 : Wikidata, LinkedIn, YouTube, Bing Places, AlternativeTo, Crunchbase, SaaSHub.
+  - [ ] Semaine 2 : French Tech Loire Valley, CCI Centre-Val de Loire, Dev'Up, Welcome to the Jungle.
+  - [ ] Semaine 3 : lancement Product Hunt ; 10 mails écoles et associations, 5 mails presse locale.
+  - [ ] Semaine 4 : La finance pour tous, Banque de France (EDUCFI), Crésus, Finances & Pédagogie.
+  - [ ] Semaine 5 : 10 podcasts finance, 10 créateurs de contenu.
+  - [ ] Baromètre à partir des réponses réelles aux quiz de l'appli (données anonymes, accord de l'équipe).
 
 ## 3. Optimisations quotidiennes (une par jour, faites automatiquement)
 
@@ -84,6 +92,10 @@ Règles : une tâche par jour, la plus haute non cochée. Construire et valider 
 - [ ] Vitesse : poids des images de l'accueil, LCP et CLS mesurés avec Lighthouse.
 - [ ] Ajouter LinkedIn, YouTube et Wikidata dans `sameAs` dès que les profils existent.
 - [ ] Contrôle des liens cassés et des redirections sur tout le site.
+- [ ] Calculateurs embarquables : version iframe de 5 calculateurs (Livret A, intérêts composés, brut-net, prêt immobilier, inflation) avec code à copier et lien « Calculateur par Dodje » (voir `docs/backlinks.md`, section 5).
+- [ ] Données citables : graphique téléchargeable sous licence CC BY « Source : Dodje (dodje.fr) » sur /guides/donnees-finance-france et /guides/classements-finance-france-2026.
+- [ ] Kit enseignant gratuit (PDF, quiz imprimable, séquence d'une heure avec Dodje) pour les profs de SES et les associations.
+- [ ] Contrôle Bing : `npm run build && node scripts/bing-audit.mjs` (titres, descriptions, h1, alt, hreflang, JSON-LD, liens), corriger ce qui sort.
 - [ ] Mise à jour des guides les plus anciens (dates, chiffres officiels, liens).
 - [ ] Contrôle hebdomadaire : la recherche « dodje » sur Google, Bing et Google Play, noté dans le journal.
 
@@ -92,3 +104,4 @@ Règles : une tâche par jour, la plus haute non cochée. Construire et valider 
 | Date | Tâche | Résultat |
 |---|---|---|
 | 2026-11-25 | Audit initial | Correction en « dodge » sur Google, Bing, DuckDuckGo et Google Play |
+| 2026-11-25 | Audit Bing Webmaster Tools | IndexNow refusé par Bing (403) : clé changée, soumission après chaque mise en ligne. 15 descriptions raccourcies, hreflang ajouté à 15 pages. Plan backlinks dans docs/backlinks.md |

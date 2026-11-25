@@ -286,6 +286,11 @@ function validateIndexNowKey() {
   }
   const config = JSON.parse(fs.readFileSync(keyPath, 'utf8'))
   assertFileExists(`${config.key}.txt`)
+  const keyFile = path.join(distDir, `${config.key}.txt`)
+  if (!/^[A-Za-z0-9-]{8,128}$/.test(config.key)) fail('IndexNow: clé hors format (8 à 128 caractères a-z, A-Z, 0-9, -)')
+  if (fs.existsSync(keyFile) && fs.readFileSync(keyFile, 'utf8').trim() !== config.key) {
+    fail(`IndexNow: ${config.key}.txt ne contient pas exactement la clé`)
+  }
 }
 
 function validateAppEducationFinanciereQuery() {
