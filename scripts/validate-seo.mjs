@@ -176,6 +176,8 @@ function validateNoindexOnlyOnStubs() {
       if (!entry.name.endsWith('.html')) continue
       const html = fs.readFileSync(full, 'utf8')
       if (!/name="robots"[^>]*noindex/i.test(html) && !html.includes('content="noindex')) continue
+      // Page ouverte depuis les e-mails (lien personnel) : jamais indexée, et c'est voulu.
+      if (path.relative(distDir, full) === 'desinscription.html') continue
       if (!isRedirectStub(html)) {
         fail(`noindex hors stub de redirection: ${path.relative(distDir, full)}`)
       }
