@@ -151,6 +151,28 @@
         }
       ],
       "costUsd": 0.599
+    },
+    {
+      "at": "2026-11-25T08:43:53.652Z",
+      "edition": "2026-11-25",
+      "wanted": [
+        "actu",
+        "blog"
+      ],
+      "researched": true,
+      "results": [
+        {
+          "kind": "actu",
+          "outcome": "skip",
+          "detail": "La section SUJET ACTU du dossier indique AUCUN. La décollecte du Livret A est trop proche d'articles déjà publiés et les chiffres des deux sources (3,56 Md€ contre 2,62 Md€ pour octobre 2026) ne se recoupent pas, faute d'accès au communiqué de la Caisse des dépôts. La confiance des ménages de l'INSEE ne change rien de concret pour un particulier."
+        },
+        {
+          "kind": "blog",
+          "outcome": "skip",
+          "detail": "Le sujet blog (solidarité fiscale dans le couple) repose sur une page du ministère de l'Économie publiée le 23/11/2026 dont le contenu n'a pas pu être lu. Le dossier ne confirme que son existence. Tous les points utiles (qui est solidaire, quelles dettes, ce que l'administration peut réclamer, fin de la solidarité et délais, démarches de changement de situation) sont marqués À VÉRIFIER, et aucun chiffre ni exemple chiffré n'est disponible. Rédiger l'article reviendrait à inventer des règles fiscales. À republier après lecture de la page du ministère et des fiches service-public.fr."
+        }
+      ],
+      "costUsd": 0.784
     }
   ]
 }
