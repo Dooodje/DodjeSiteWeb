@@ -129,6 +129,28 @@
         }
       ],
       "costUsd": 0.582
+    },
+    {
+      "at": "2026-11-25T04:15:29.234Z",
+      "edition": "2026-11-25",
+      "wanted": [
+        "actu",
+        "blog"
+      ],
+      "researched": true,
+      "results": [
+        {
+          "kind": "actu",
+          "outcome": "skip",
+          "detail": "La section SUJET ACTU du dossier indique AUCUN : les sources primaires n'ont pas pu être vérifiées (Caisse des dépôts, Banque de France, Insee), la piste Livret A recoupe des articles déjà publiés, et les chiffres d'inflation, de LEP et de PMSS sont contradictoires avec des contenus existants."
+        },
+        {
+          "kind": "blog",
+          "outcome": "skip",
+          "detail": "Le sujet blog (solidarité fiscale dans le couple) ne repose sur aucun fait vérifié : la page du ministère de l'Économie n'a pas pu être lue (erreur url_not_accessible), aucun chiffre ni date n'est confirmé et le contexte fourni est de mémoire. Sans lecture de la source officielle et de service-public.fr, l'article risquerait d'être inexact sur les cas où la solidarité cesse, donc je ne le rédige pas."
+        }
+      ],
+      "costUsd": 0.599
     }
   ]
 }
