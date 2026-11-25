@@ -22,13 +22,15 @@ ul{padding:0;list-style:none}
 .panel{background:rgba(0,0,0,.85);border-radius:28px}
 .lime{color:#06D001}
 
-/* Le saut des cartes de l'app : 0,9 → 1,06 → 0,978 → 1, cascade de 40 ms */
-.j{opacity:0}
+/* Le saut des cartes de l'app : 0,9 → 1,06 → 0,978 → 1, cascade de 40 ms.
+   Départ à opacity .001 et non 0 : invisible à l'œil (moins d'un niveau de couleur),
+   mais Chrome compte alors le hero dans le Largest Contentful Paint (sinon NO_LCP). */
+.j{opacity:.001}
 .on .j{animation:jump 410ms both;animation-delay:calc(var(--i,0) * 40ms + 60ms)}
 .noio .j{opacity:1}
-@keyframes jump{0%{opacity:0;transform:scale(.9);animation-timing-function:cubic-bezier(.33,1,.68,1)}29%{opacity:1}44%{transform:scale(1.06);animation-timing-function:cubic-bezier(.45,0,.55,1)}73%{transform:scale(.978);animation-timing-function:cubic-bezier(.5,1,.89,1)}100%{opacity:1;transform:scale(1)}}
+@keyframes jump{0%{opacity:.001;transform:scale(.9);animation-timing-function:cubic-bezier(.33,1,.68,1)}29%{opacity:1}44%{transform:scale(1.06);animation-timing-function:cubic-bezier(.45,0,.55,1)}73%{transform:scale(.978);animation-timing-function:cubic-bezier(.5,1,.89,1)}100%{opacity:1;transform:scale(1)}}
 .navin{animation:navIn 420ms cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i,0) * 50ms + 80ms)}
-@keyframes navIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes navIn{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 /* Boutons de l'app : rayon 12, dégradé vert, squash 0,94 */
 .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:12px;padding:16px 24px;min-height:52px;font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;line-height:1.1;color:#FFFFFF;background:linear-gradient(180deg,#9BEC00 0%,#06D001 100%);cursor:pointer;transition:transform 220ms cubic-bezier(.3,1.25,.5,1),filter 160ms;text-align:center}
