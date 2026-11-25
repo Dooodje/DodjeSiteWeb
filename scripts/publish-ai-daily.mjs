@@ -1,14 +1,18 @@
 #!/usr/bin/env node
 /**
- * Rédaction quotidienne avec Claude : 1 à 2 articles par jour (une actu + un article de blog).
+ * Rédaction quotidienne avec Claude : 1 article par jour, moins de 15 centimes de dollar par article.
  *
- * 1. Veille   : flux officiels (indices) + recherche web de Claude, chiffres vérifiés sur les sources primaires.
- * 2. Rédaction : un article structuré par sujet (sortie JSON validée par un schéma).
+ * 1. Veille   : gratuite. Flux officiels + 591 fiches service-public.gouv.fr, pages lues par ce script (pas de recherche web payante).
+ *    Claude Haiku 5.5 choisit le sujet et les sources (environ 0,003 $).
+ * 2. Rédaction : Claude Sonnet 5.5 rédige à partir du texte des sources lues (sortie JSON validée par un schéma, environ 0,10 $).
+ *    Une correction éventuelle est faite par Haiku (environ 0,01 $).
+ *    Plafond dur : EDITION_BUDGET_USD (0,15 $ par défaut) pour toute l'édition, tous passages confondus.
  * 3. Garde     : longueur, meta, FAQ, sources https, liens internes existants, HTML nettoyé.
  * 4. Rendu     : page HTML dans la charte du site, cartes des hubs, journal, commit.
  *
  *   ANTHROPIC_API_KEY=... node scripts/publish-ai-daily.mjs
  *   DRY_RUN=1        : fait la veille et la rédaction, n'écrit aucun fichier
+ *   PICK_ONLY=1      : s'arrête après le choix du sujet et la lecture des sources (aucun appel à Sonnet)
  *   FIXTURE=f.json   : rend un article JSON déjà rédigé, sans appeler l'API (tests)
  *   AUTO_COMMIT=1    : commit et push des fichiers créés
  *   MAX_ARTICLES=1   : nombre d'articles visés par jour (1 ou 2)
@@ -27,25 +31,28 @@ import { heroFigure, renderArticleImages } from './article-image.mjs'
 
 const SITE = 'https://dodje.fr'
 const OG = `${SITE}/assets/og-dodje-1200x630.png`
-// Sonnet 5.5 : 2 fois moins cher qu'Opus, largement suffisant pour une veille et un article de 1 000 mots.
+// Sonnet 5.5 rédige ; Haiku 5.5 (20 fois moins cher) choisit le sujet et corrige. Plus aucune recherche web payante.
 const MODEL = 'claude-sonnet-5-5'
-// Tarifs indicatifs (dollars par million de tokens, recherche web à l'unité) pour estimer le coût de chaque passage.
-const PRICE = { input: 2, output: 10, cacheRead: 0.1, cacheWrite: 2.5, search: 0.01 }
+const CHEAP_MODEL = 'claude-haiku-5-5'
+// Tarifs (dollars par million de tokens) pour suivre et plafonner le coût de chaque passage.
+const PRICES = {
+  [MODEL]: { input: 2, output: 10, cacheRead: 0.1, cacheWrite: 2.5 },
+  [CHEAP_MODEL]: { input: 0.1, output: 0.5, cacheRead: 0.01, cacheWrite: 0.125 }
+}
+// Plafond de l'édition, tous passages confondus (les passages ratés comptent aussi).
+const EDITION_BUDGET = Number(process.env.EDITION_BUDGET_USD || 0.15)
 const spend = { usd: 0 }
 const RUNS_LOG = 'data/ai-runs.json'
-function track(label, usage) {
+function track(label, usage, model = MODEL) {
   if (!usage) return
-  const searches = usage.server_tool_use?.web_search_requests || 0
+  const P = PRICES[model]
   const usd =
-    ((usage.input_tokens || 0) * PRICE.input +
-      (usage.output_tokens || 0) * PRICE.output +
-      (usage.cache_read_input_tokens || 0) * PRICE.cacheRead +
-      (usage.cache_creation_input_tokens || 0) * PRICE.cacheWrite) / 1e6 +
-    searches * PRICE.search
+    ((usage.input_tokens || 0) * P.input +
+      (usage.output_tokens || 0) * P.output +
+      (usage.cache_read_input_tokens || 0) * P.cacheRead +
+      (usage.cache_creation_input_tokens || 0) * P.cacheWrite) / 1e6
   spend.usd += usd
-  console.log(
-    `[coût] ${label} : ${usage.input_tokens} entrée, ${usage.cache_read_input_tokens || 0} cache, ${usage.output_tokens} sortie, ${searches} recherche(s), environ ${usd.toFixed(3)} $`
-  )
+  console.log(`[coût] ${label} : ${usage.input_tokens} entrée, ${usage.cache_read_input_tokens || 0} cache, ${usage.output_tokens} sortie, environ ${usd.toFixed(4)} $`)
 }
 const UA = 'Mozilla/5.0 (compatible; DodjeEditorialBot/1.0; +https://dodje.fr/)'
 const MAX_ARTICLES = Math.min(2, Math.max(1, Number(process.env.MAX_ARTICLES || 1)))
@@ -77,11 +84,13 @@ const OFFICIAL = [
 ]
 
 // Flux lus chaque matin : de simples pistes, Claude vérifie et complète par sa propre recherche.
+// economie.gouv.fr bloque les robots sur ses pages (403) : ses titres servent d'indice, la source lue sera une autre page.
 const FEEDS = [
   { name: 'INSEE', url: 'https://www.insee.fr/fr/flux/1', filter: /prix|inflation|emploi|ch[oô]mage|salaire|revenu|immobili|logement|consommation|[ée]pargne|pouvoir d.achat|PIB|cr[ée]dit|m[ée]nages/i },
   { name: 'La finance pour tous', url: 'https://www.lafinancepourtous.com/feed/' },
   { name: 'Ministère de l\'Économie', url: 'https://www.economie.gouv.fr/rss/toutesactualites', filter: /imp[oô]t|[ée]pargne|livret|cr[ée]dit|consommat|prix|budget|fiscal|retraite|aide|prime|bourse|banque|arnaque|loi de finances/i },
-  { name: 'INC (Institut national de la consommation)', url: 'https://www.inc-conso.fr/rss.xml' }
+  { name: 'INC (Institut national de la consommation)', url: 'https://www.inc-conso.fr/rss.xml' },
+  { name: 'Service-Public.fr', url: 'https://www.service-public.gouv.fr/abonnements/rss/actu-actualites-particuliers.rss' }
 ]
 
 /* ---------------------------------------------------------------- utilitaires */
@@ -170,71 +179,88 @@ Le site publie chaque matin des articles d'actualité et de blog sur les finance
 impôts, salaire, aides et prestations, crédit et immobilier, bourse, ETF, PEA, assurance-vie, retraite, crypto et régulation,
 consommation, arnaques financières. Le lecteur n'est pas un expert : il veut savoir ce qui change pour lui et quoi faire.`
 
-async function research(client, hints, titles, wanted, avoid = []) {
-  const prompt = `Nous sommes le ${todayFr()}. Prépare le dossier de recherche des articles de l'édition du ${edFr()} (publiés ce matin-là).
+const TopicSchema = z.object({
+  kind: z.enum(['actu', 'blog']).describe('actu : information datée des 7 derniers jours ; blog : sujet pratique intemporel'),
+  angle: z.string().describe("Titre de travail et question précise à laquelle l'article répond"),
+  why: z.string().describe('Qui est concerné et ce que ça change pour lui, en une phrase'),
+  queries: z.array(z.string()).describe('3 à 5 recherches que les gens tapent vraiment sur ce sujet'),
+  urls: z.array(z.string()).describe('2 à 4 URL copiées exactement des listes fournies, dont au moins une officielle')
+})
 
-Sujets à préparer : ${wanted.join(' et ')}.
-- "actu" : une information des 7 derniers jours qui change concrètement quelque chose pour l'argent d'un particulier en France
-  (nouveau taux, barème, loi votée ou en discussion, chiffre officiel publié, date limite, mesure annoncée, alerte AMF...).
-  Choisis la plus utile pour le lecteur, pas la plus spectaculaire.
-- "blog" : un sujet pratique et intemporel, rattaché si possible à l'actualité ou à la saison (fin d'année, impôts, soldes, rentrée...),
-  qui répond à une question que les jeunes adultes tapent vraiment sur Google ou posent à une IA.
+export function referenceTopics() {
+  return loadJson('data/sujets-reference.json', { fiches: [] }).fiches || []
+}
 
-Déjà publiés sur le site (ne refais aucun de ces sujets, ni sous un autre angle trop proche) :
+// Haiku lit les pistes et choisit un seul sujet avec ses sources. Coût : environ 0,003 $.
+async function pickTopic(client, hints, refs, titles, avoid) {
+  const prompt = `Nous sommes le ${todayFr()}. Choisis LE sujet de l'article de l'édition du ${edFr()} (publié ce matin-là).
+
+Priorité 1, "actu" : une piste des flux de moins de 7 jours qui change concrètement quelque chose pour l'argent d'un particulier en France
+(taux, barème, loi, date limite, aide, alerte arnaque...). La plus utile, pas la plus spectaculaire.
+Sinon, "blog" : une fiche de référence sur une question que les 18-35 ans tapent vraiment sur Google ou posent à une IA,
+rattachée si possible à la saison (fin d'année, Noël, impôts, soldes...).
+
+Sources : choisis 2 à 4 URL, copiées exactement des listes ci-dessous, qui traitent vraiment du sujet.
+Au moins une doit venir de service-public.gouv.fr, insee.fr, amf-france.org ou d'un site en gouv.fr (hors economie.gouv.fr, illisible).
+Pour une actu, ajoute la ou les fiches service-public qui expliquent la règle de fond.
+
+Déjà publiés (ne refais aucun de ces sujets, ni sous un angle trop proche) :
 ${titles.map((t) => `- ${t}`).join('\n')}
+${avoid.length ? `\nSujets écartés lors des derniers essais (sources illisibles ou faits invérifiables, n'y reviens pas) :\n${avoid.map((t) => `- ${t}`).join('\n')}\n` : ''}
+Pistes des flux (moins de 10 jours) :
+${hints.length ? hints.map((h) => `- [${h.source}, ${h.date.toISOString().slice(0, 10)}] ${h.title} : ${h.link}`).join('\n') : '- aucune'}
 
-${avoid.length ? `Sujets abandonnés lors des derniers passages faute de source lisible ou de chiffre vérifié (n'y reviens pas, choisis-en un autre) :
-${avoid.map((t) => `- ${t}`).join('\n')}
+Fiches de référence service-public.gouv.fr (rubrique Argent, impôts, consommation) :
+${refs.map((r) => `- ${r.titre} : ${r.url}`).join('\n')}`
 
-` : ''}Pistes des flux officiels de ces derniers jours (à vérifier, à ignorer si elles ne concernent pas l'argent des particuliers) :
-${hints.length ? hints.map((h) => `- [${h.source}] ${h.title} (${h.date.toISOString().slice(0, 10)}) ${h.link}`).join('\n') : '- aucune'}
+  const response = await client.beta.messages.parse({
+    model: CHEAP_MODEL,
+    max_tokens: 4000,
+    system: CHARTER,
+    output_config: { effort: 'low', format: betaZodOutputFormat(TopicSchema) },
+    messages: [{ role: 'user', content: prompt }]
+  })
+  track('choix du sujet (Haiku)', response.usage, CHEAP_MODEL)
+  if (response.stop_reason === 'refusal') throw new Error('Choix du sujet refusé')
+  if (!response.parsed_output) throw new Error('Choix du sujet : sortie JSON invalide')
+  return response.parsed_output
+}
 
-Méthode :
-1. Cherche sur le web les actualités du moment, puis ouvre les sources primaires (sites en gouv.fr, service-public.fr, Banque de France,
-   INSEE, AMF, Légifrance, Assemblée nationale, Sénat, Urssaf, BCE...) pour vérifier chaque chiffre et chaque date.
-2. Ne retiens un chiffre que si tu l'as lu sur une source que tu cites. Si une mesure n'est pas encore votée ou en vigueur, dis-le.
-3. Si aucune actu des 7 derniers jours n'est assez utile et vérifiable, écris AUCUN pour l'actu plutôt que d'en forcer une.
-4. Le sujet blog doit toujours aboutir : ne le choisis qu'après avoir lu au moins une source officielle qui s'ouvre
-   (service-public.fr, impots.gouv.fr, Banque de France, AMF, INSEE...). Si une page ne s'ouvre pas, change de sujet
-   au lieu de rendre un sujet invérifiable. Il y a toujours un sujet pratique utile et vérifiable.
+// Texte principal d'une page, sans menus ni pied de page.
+function pageText(html) {
+  const main = html.match(/<main[\s\S]*?<\/main>/i)?.[0] || html.match(/<article[\s\S]*?<\/article>/i)?.[0] || html
+  return stripHtml(main.replace(/<(nav|header|footer|aside|form|svg|button)[\s\S]*?<\/\1>/gi, ' '))
+    .replace(/&nbsp;/g, ' ').replace(/&#39;|&rsquo;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"')
+    .replace(/\s+/g, ' ').trim()
+}
 
-Rends le dossier en texte, exactement sous cette forme, une section par sujet demandé :
-
-## SUJET ACTU
-Angle : (le titre de travail et la question à laquelle l'article répond)
-Pourquoi c'est utile : (qui est concerné, ce que ça change)
-Faits vérifiés : (une ligne par fait : le fait, le chiffre, la date, l'URL exacte de la source)
-Contexte utile : (les notions à expliquer, les erreurs fréquentes, les cas concrets)
-Requêtes visées : (3 à 5 recherches que les gens tapent sur ce sujet)
-
-## SUJET BLOG
-(même forme)`
-
-  const messages = [{ role: 'user', content: prompt }]
-  let response
-  for (let turn = 0; turn < 4; turn++) {
-    response = await client.beta.messages.create({
-      model: MODEL,
-      max_tokens: 16000,
-      betas: ['server-side-fallback-2026-07-01'],
-      fallbacks: 'default',
-      system: CHARTER,
-      output_config: { effort: 'medium' },
-      // Veille volontairement courte : c'est l'étape la plus chère (chaque page lue est renvoyée à chaque tour).
-      tools: [
-        { type: 'web_search_20260209', name: 'web_search', max_uses: 4, user_location: { type: 'approximate', country: 'FR', timezone: 'Europe/Paris' } },
-        { type: 'web_fetch_20260209', name: 'web_fetch', max_uses: 4, max_content_tokens: 5000 }
-      ],
-      messages
-    })
-    track(`veille (tour ${turn + 1})`, response.usage)
-    if (response.stop_reason !== 'pause_turn') break
-    messages.push({ role: 'assistant', content: response.content })
+// Lit les sources choisies (gratuit). Garde celles qui s'ouvrent et contiennent un vrai texte.
+export async function readSources(urls) {
+  const out = []
+  for (const url of [...new Set(urls)].slice(0, 4)) {
+    try {
+      const res = await fetch(url, { headers: { 'User-Agent': UA }, redirect: 'follow', signal: AbortSignal.timeout(20000) })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const html = await res.text()
+      const text = pageText(html)
+      if (text.length < 600) throw new Error('page sans texte')
+      const title = stripHtml(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || url).trim()
+      out.push({ url, title, text: text.slice(0, 9000) })
+    } catch (err) {
+      console.warn(`Source illisible (${err.message}) : ${url}`)
+    }
   }
-  if (response.stop_reason === 'refusal') throw new Error(`Veille refusée (${response.stop_details?.category ?? 'sans catégorie'})`)
-  const text = response.content.filter((b) => b.type === 'text').map((b) => b.text).join('')
-  if (!/## SUJET/.test(text)) throw new Error('Dossier de veille vide ou mal formé')
-  return text
+  return out
+}
+
+export function buildDossier(topic, sources) {
+  return `Type : ${topic.kind}
+Angle : ${topic.angle}
+Pourquoi c'est utile : ${topic.why}
+Requêtes visées : ${topic.queries.join(' ; ')}
+
+Sources lues ce jour (les seuls faits utilisables ; cite ces URL exactes) :
+${sources.map((src, i) => `### Source ${i + 1} : ${src.title}\nURL : ${src.url}\n${src.text}`).join('\n\n')}`
 }
 
 /* ---------------------------------------------------------------- 2. rédaction */
@@ -256,10 +282,10 @@ const ArticleSchema = z.object({
   sources: z.array(z.object({ label: z.string(), url: z.string() })).describe('2 à 6 sources réellement utilisées, URL https exactes, au moins une source officielle')
 })
 
-function writerRules(inventory) {
+export function writerRules(inventory) {
   return `${CHARTER}
 
-Tu rédiges un article à partir d'un dossier de veille déjà vérifié.
+Tu rédiges un article à partir du texte des sources officielles lues ce jour.
 
 Règles de rédaction :
 - Français clair, tutoiement, phrases courtes, aucun jargon sans explication. Ton direct et bienveillant, jamais racoleur.
@@ -269,7 +295,7 @@ Règles de rédaction :
   formulés comme des questions ou des promesses concrètes ; dates explicites ("en novembre 2026") ; chiffres toujours attribués à leur source
   dans la phrase ("selon l'INSEE...") ; un exemple chiffré concret ; une section "Ce que ça change pour toi" ou "Ce que tu peux faire".
 - 800 à 1 300 mots au total. Pas de remplissage. Au moins 3 chiffres précis et sourcés (montants, taux, dates, durées).
-- N'invente rien : utilise seulement les faits du dossier. Si une mesure n'est pas encore votée ou en vigueur, écris-le clairement.
+- N'invente rien : utilise seulement les faits écrits dans les sources du dossier. Si une mesure n'est pas encore votée ou en vigueur, écris-le clairement.
 - Pas de conseil personnalisé ni de promesse de rendement. Pas de tiret cadratin, pas de point médian, pas de tilde.
 - Sources : les URL exactes du dossier, au moins une officielle.
 - Liens internes : 2 à 5, choisis uniquement dans cette liste (href exact), et place-les aussi dans le texte des sections quand c'est naturel :
@@ -277,9 +303,8 @@ ${inventory.map((p) => `  ${p.href} : ${p.title}`).join('\n')}`
 }
 
 async function writeArticle(client, kind, dossier, inventory, fix = null) {
-  const label = kind === 'actu' ? 'SUJET ACTU' : 'SUJET BLOG'
-  let prompt = `Nous sommes le ${todayFr()}. Rédige l'article "${kind}" de l'édition du ${edFr()} à partir de la section "## ${label}" du dossier ci-dessous.
-Si cette section dit AUCUN ou n'existe pas, renvoie skip = true.
+  let prompt = `Nous sommes le ${todayFr()}. Rédige l'article "${kind}" de l'édition du ${edFr()} à partir du dossier ci-dessous.
+Si les sources ne permettent pas d'écrire un article utile avec au moins 3 chiffres précis, renvoie skip = true.
 
 Dossier :
 ${dossier}`
@@ -292,17 +317,17 @@ Corrige uniquement ces points et garde tout le reste. Ta première version :
 ${JSON.stringify(fix.article)}`
   }
 
+  // Rédaction : Sonnet en effort bas (le dossier est déjà prêt). Correction : Haiku, 20 fois moins cher.
+  const model = fix ? CHEAP_MODEL : MODEL
   const response = await client.beta.messages.parse({
-    model: MODEL,
+    model,
     max_tokens: 16000,
-    betas: ['server-side-fallback-2026-07-01'],
-    fallbacks: 'default',
-    // Les règles et la liste des pages ne changent pas d'un article à l'autre : elles sont mises en cache.
-    system: [{ type: 'text', text: writerRules(inventory), cache_control: { type: 'ephemeral' } }],
-    output_config: { effort: 'medium', format: betaZodOutputFormat(ArticleSchema) },
+    ...(model === MODEL ? { betas: ['server-side-fallback-2026-07-01'], fallbacks: 'default' } : {}),
+    system: writerRules(inventory),
+    output_config: { effort: 'low', format: betaZodOutputFormat(ArticleSchema) },
     messages: [{ role: 'user', content: prompt }]
   })
-  track(`rédaction ${kind}${fix ? ' (correction)' : ''}`, response.usage)
+  track(`rédaction ${kind}${fix ? ' (correction Haiku)' : ''}`, response.usage, model)
   if (response.stop_reason === 'refusal') throw new Error(`Rédaction refusée (${response.stop_details?.category ?? 'sans catégorie'})`)
   if (response.stop_reason === 'max_tokens') throw new Error('Rédaction coupée (max_tokens)')
   if (!response.parsed_output) throw new Error('Sortie JSON invalide')
@@ -628,21 +653,13 @@ async function main() {
     return 0
   }
   const today = ed()
-  const doneKinds = new Set(
-    Object.keys(KINDS).filter((k) => (loadJson(KINDS[k].log, { published: [] }).published || []).some((r) => r.date === today))
-  )
-  // L'actu passe en premier ; le blog garantit au moins un article quand il n'y a pas d'actu utile.
-  // La boucle s'arrête dès que MAX_ARTICLES est atteint.
-  const wanted = ['actu', 'blog'].filter((k) => !doneKinds.has(k))
-  if (!wanted.length) return 0
-
-  // Plafond de tentatives : une veille coûte de l'argent. Avec au moins un article en ligne, on n'insiste pas
-  // au-delà de 2 veilles par édition ; sans article, on retente à chaque passage pour en garantir un.
   const runs = loadJson(RUNS_LOG, { runs: [] })
-  const tries = (runs.runs || []).filter((r) => r.edition === today && r.researched).length
-  if (already.length > 0 && tries >= 2) {
-    console.log(`${tries} veilles déjà faites pour l'édition du ${edFr()} et ${already.length} article(s) en ligne. Stop.`)
-    return 0
+  const editionSpent = (runs.runs || []).filter((r) => r.edition === today).reduce((sum, r) => sum + (r.costUsd || 0), 0)
+  const budget = EDITION_BUDGET * MAX_ARTICLES
+  // Il faut de quoi payer au moins une rédaction (environ 0,10 $) : sinon on n'entame rien.
+  if (editionSpent + 0.08 > budget) {
+    console.log(`Budget de l'édition du ${edFr()} atteint (${editionSpent.toFixed(3)} $ sur ${budget.toFixed(2)} $). Stop.`)
+    return already.length ? 0 : 1
   }
 
   if (!process.env.ANTHROPIC_API_KEY) {
@@ -650,32 +667,58 @@ async function main() {
     return already.length ? 0 : 1
   }
   const client = new Anthropic({ maxRetries: 4 })
-  const record = { at: new Date().toISOString(), edition: today, wanted, researched: false, results: [], costUsd: 0 }
+  const record = { at: new Date().toISOString(), edition: today, researched: false, results: [], costUsd: 0 }
 
   const files = []
   const titles = []
   let published = already.length
   try {
     const hints = await feedHints()
-    console.log(`${hints.length} piste(s) dans les flux officiels.`)
-    const dossier = await research(client, hints, recentTitles(), wanted, abandonedTopics(runs.runs || []))
-    record.researched = true
-    console.log('Dossier de veille prêt.')
+    const refs = referenceTopics()
+    console.log(`${hints.length} piste(s) dans les flux, ${refs.length} fiches de référence.`)
+    const avoid = abandonedTopics(runs.runs || [])
+    const done = new Set(recentTitles())
 
-    for (const kind of wanted) {
-      if (published >= MAX_ARTICLES) break
-      try {
-        let raw = await writeArticle(client, kind, dossier, inventory)
-        if (raw.skip) {
-          console.log(`${kind} abandonné : ${raw.skipReason}`)
-          record.results.push({ kind, outcome: 'skip', detail: raw.skipReason })
-          continue
-        }
+    // Jusqu'à 3 choix de sujet (0,003 $ chacun) pour en trouver un dont les sources s'ouvrent.
+    let topic = null
+    let sources = []
+    for (let attempt = 0; attempt < 3 && !topic; attempt++) {
+      const t = await pickTopic(client, hints, refs, [...done], avoid)
+      const read = await readSources(t.urls)
+      if (read.length >= 2 && read.some((x) => isOfficial(x.url))) {
+        topic = t
+        sources = read
+      } else {
+        console.warn(`Sujet écarté, sources insuffisantes : ${t.angle}`)
+        record.results.push({ kind: t.kind, outcome: 'skip', detail: `sources illisibles : ${t.angle}` })
+        avoid.push(t.angle)
+      }
+    }
+    if (!topic) throw new Error('Aucun sujet avec au moins 2 sources lisibles dont une officielle')
+    record.researched = true
+    const kind = topic.kind
+    const dossier = buildDossier(topic, sources)
+    console.log(`Sujet : [${kind}] ${topic.angle}\nSources : ${sources.map((x) => x.url).join(', ')}`)
+    if (process.env.PICK_ONLY === '1') {
+      console.log(`Dossier : ${dossier.length} caractères (environ ${Math.round(dossier.length / 3.5)} tokens)`)
+      record.results.push({ kind, outcome: 'pick-only', title: topic.angle })
+    } else {
+      // Garde-fou avant l'appel le plus cher : estimation entrée + sortie de Sonnet.
+      const inputTokens = (writerRules(inventory).length + dossier.length) / 3.2
+      const estimate = (inputTokens * PRICES[MODEL].input + 7000 * PRICES[MODEL].output) / 1e6
+      if (editionSpent + spend.usd + estimate > budget) {
+        throw new Error(`Rédaction annulée : ${(editionSpent + spend.usd + estimate).toFixed(3)} $ estimés pour un plafond de ${budget.toFixed(2)} $`)
+      }
+      let raw = await writeArticle(client, kind, dossier, inventory)
+      if (raw.skip) {
+        console.log(`${kind} abandonné : ${raw.skipReason}`)
+        record.results.push({ kind, outcome: 'skip', detail: `${topic.angle} : ${raw.skipReason}` })
+      } else {
         let a = normalize(raw, internal)
         a.sources = await checkSources(a.sources)
         let errors = qualityCheck(a, kind, internal)
         if (errors.length) {
-          // Une seule correction : souvent un titre trop long ou un chiffre manquant.
+          // Une seule correction, par Haiku : souvent un titre trop long ou un chiffre manquant.
           console.warn(`${kind} refusé par la garde, correction demandée : ${errors.join(' ; ')}`)
           raw = await writeArticle(client, kind, dossier, inventory, { errors, article: raw })
           a = normalize(raw, internal)
@@ -685,28 +728,26 @@ async function main() {
         if (errors.length) {
           console.warn(`${kind} écarté par la garde : ${errors.join(' ; ')}`)
           record.results.push({ kind, outcome: 'rejected', detail: errors.join(' ; '), title: a.title })
-          continue
+        } else if (DRY) {
+          console.log(`DRY ${kind} : ${a.slug}\n${a.title}\n${a.bluf}`)
+          published++
+        } else {
+          files.push(...writeArticleFiles(kind, a))
+          titles.push(a.title)
+          record.results.push({ kind, outcome: 'published', slug: a.slug, title: a.title })
+          published++
         }
-        if (DRY) { console.log(`DRY ${kind} : ${a.slug}\n${a.title}\n${a.bluf}`); published++; continue }
-        files.push(...writeArticleFiles(kind, a))
-        titles.push(a.title)
-        record.results.push({ kind, outcome: 'published', slug: a.slug, title: a.title })
-        published++
-      } catch (err) {
-        const detail = err instanceof Anthropic.APIError ? `erreur API ${err.status} ${err.message}` : err.message
-        console.error(`${kind} : ${detail}`)
-        record.results.push({ kind, outcome: 'error', detail })
       }
     }
   } catch (err) {
     const detail = err instanceof Anthropic.APIError ? `erreur API ${err.status} ${err.message}` : err.message
-    console.error(`Veille : ${detail}`)
-    record.results.push({ kind: 'veille', outcome: 'error', detail })
+    console.error(`Passage : ${detail}`)
+    record.results.push({ kind: 'passage', outcome: 'error', detail })
   }
 
   // Journal des passages, versionné : il permet de suivre les refus et le coût sans accès aux logs GitHub.
   record.costUsd = Number(spend.usd.toFixed(3))
-  if (!DRY) {
+  if (!DRY && process.env.PICK_ONLY !== '1') {
     runs.runs = [...(runs.runs || []), record].slice(-300)
     fs.writeFileSync(path.join(rootDir, RUNS_LOG), JSON.stringify(runs, null, 2) + '\n', 'utf8')
   }

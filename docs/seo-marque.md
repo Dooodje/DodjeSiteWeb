@@ -65,10 +65,13 @@ Par ordre d'impact. L'optimisation quotidienne prépare les textes prêts à col
 
 ## 3. Optimisations quotidiennes (une par jour, faites automatiquement)
 
+**Règle obligatoire : la page d'accueil (index.html) ne doit jamais changer visuellement.** Sur l'accueil, seules les balises
+invisibles du `<head>` (title, meta, données structurées) peuvent être modifiées ; rien dans le `<body>`, le CSS ou les scripts qu'elle charge.
+
 Règles : une tâche par jour, la plus haute non cochée. Construire et valider le SEO avant de publier. Ne rien inventer
 (chiffres, avis, distinctions). Ne pas toucher aux articles publiés par Baptiste sauf correction technique.
 
-- [ ] Accueil : titre « Dodje : le jeu gratuit pour comprendre l'argent », `alternateName` limités aux vrais noms (Dodje App, Dodje Solutions).
+- [ ] Accueil, `<head>` uniquement : balise title « Dodje : le jeu gratuit pour comprendre l'argent », `alternateName` limités aux vrais noms (Dodje App, Dodje Solutions).
 - [ ] Page /a-propos : fiche d'identité de Dodje (créateurs, Orléans, date de lancement, liens officiels, « s'écrit avec un j »), schéma AboutPage + Organization.
 - [ ] Page /application : « Télécharger Dodje sur iPhone et Android », liens et QR code des stores, captures, FAQ installation, schéma MobileApplication.
 - [ ] Équipe éditoriale déclarée en `Organization` au lieu de `Person` sur toutes les pages.

@@ -1,6 +1,7 @@
 name: Contenu auto (actu + blog)
 
-# 1 article par jour, rédigés par Claude à partir de sources vérifiées, en ligne avant 7h.
+# 1 article par jour, rédigé par Claude à partir de sources officielles lues par le script, en ligne avant 7h.
+# Coût plafonné à 0,15 $ par édition, tous passages confondus (voir EDITION_BUDGET_USD dans le script).
 # Les tâches planifiées de GitHub partent ici avec 4 à 10 h de retard (mesuré en octobre et novembre 2026) :
 # on lance donc plusieurs tentatives la veille au soir et dans la nuit. Après 15h à Paris, le script prépare
 # l'édition du lendemain ; il s'arrête tout seul quand le quota de l'édition est atteint.
