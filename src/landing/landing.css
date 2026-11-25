@@ -23,12 +23,14 @@ ul{padding:0;list-style:none}
 .lime{color:#06D001}
 
 /* Le saut des cartes de l'app : 0,9 → 1,06 → 0,978 → 1, cascade de 40 ms.
-   Départ à opacity .001 et non 0 : invisible à l'œil (moins d'un niveau de couleur),
-   mais Chrome compte alors le hero dans le Largest Contentful Paint (sinon NO_LCP). */
-.j{opacity:.001}
+   Dans le hero, départ à opacity .001 et non 0 : invisible à l'œil (moins d'un niveau
+   de couleur), mais Chrome compte alors le titre dans le Largest Contentful Paint
+   (sinon NO_LCP et pas de score Performance dans PageSpeed). */
+.j{opacity:0}
+:where(#top) .j{opacity:.001}
 .on .j{animation:jump 410ms both;animation-delay:calc(var(--i,0) * 40ms + 60ms)}
 .noio .j{opacity:1}
-@keyframes jump{0%{opacity:.001;transform:scale(.9);animation-timing-function:cubic-bezier(.33,1,.68,1)}29%{opacity:1}44%{transform:scale(1.06);animation-timing-function:cubic-bezier(.45,0,.55,1)}73%{transform:scale(.978);animation-timing-function:cubic-bezier(.5,1,.89,1)}100%{opacity:1;transform:scale(1)}}
+@keyframes jump{0%{opacity:0;transform:scale(.9);animation-timing-function:cubic-bezier(.33,1,.68,1)}29%{opacity:1}44%{transform:scale(1.06);animation-timing-function:cubic-bezier(.45,0,.55,1)}73%{transform:scale(.978);animation-timing-function:cubic-bezier(.5,1,.89,1)}100%{opacity:1;transform:scale(1)}}
 .navin{animation:navIn 420ms cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i,0) * 50ms + 80ms)}
 @keyframes navIn{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
 
