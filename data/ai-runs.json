@@ -107,6 +107,28 @@
         }
       ],
       "costUsd": 0.743
+    },
+    {
+      "at": "2026-11-25T02:29:10.526Z",
+      "edition": "2026-11-25",
+      "wanted": [
+        "actu",
+        "blog"
+      ],
+      "researched": true,
+      "results": [
+        {
+          "kind": "actu",
+          "outcome": "skip",
+          "detail": "La section SUJET ACTU du dossier indique AUCUN : la seule piste (décollecte du Livret A) recoupe des articles déjà publiés et n'a pas été vérifiée aux sources primaires (Caisse des dépôts, INSEE, France Assureurs)."
+        },
+        {
+          "kind": "blog",
+          "outcome": "skip",
+          "detail": "Le sujet blog (solidarité fiscale dans le couple) repose sur une seule page officielle, celle d'economie.gouv.fr du 23 novembre 2026, dont seuls l'existence et la date sont confirmés. Le contenu n'a pas été lu, et le dossier précise qu'aucun autre fait n'est vérifié (qui est solidaire, sur quels impôts, pour quelle période, démarches après une séparation). Il est donc impossible de rédiger 800 mots avec au moins 3 chiffres sourcés sans inventer. À reprendre une fois la page economie.gouv.fr, service-public.fr et impots.gouv.fr lues."
+        }
+      ],
+      "costUsd": 0.582
     }
   ]
 }
