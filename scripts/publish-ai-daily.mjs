@@ -11,7 +11,7 @@
  *   DRY_RUN=1        : fait la veille et la rédaction, n'écrit aucun fichier
  *   FIXTURE=f.json   : rend un article JSON déjà rédigé, sans appeler l'API (tests)
  *   AUTO_COMMIT=1    : commit et push des fichiers créés
- *   MAX_ARTICLES=2   : nombre d'articles visés par jour (1 ou 2)
+ *   MAX_ARTICLES=1   : nombre d'articles visés par jour (1 ou 2)
  *
  * Code de sortie : 0 si au moins un article est en ligne pour aujourd'hui, 1 sinon.
  */
@@ -48,7 +48,7 @@ function track(label, usage) {
   )
 }
 const UA = 'Mozilla/5.0 (compatible; DodjeEditorialBot/1.0; +https://dodje.fr/)'
-const MAX_ARTICLES = Math.min(2, Math.max(1, Number(process.env.MAX_ARTICLES || 2)))
+const MAX_ARTICLES = Math.min(2, Math.max(1, Number(process.env.MAX_ARTICLES || 1)))
 const DRY = process.env.DRY_RUN === '1'
 
 // Les tâches planifiées de GitHub partent avec 4 à 10 h de retard : la rédaction tourne donc la veille au soir.
@@ -170,7 +170,7 @@ Le site publie chaque matin des articles d'actualité et de blog sur les finance
 impôts, salaire, aides et prestations, crédit et immobilier, bourse, ETF, PEA, assurance-vie, retraite, crypto et régulation,
 consommation, arnaques financières. Le lecteur n'est pas un expert : il veut savoir ce qui change pour lui et quoi faire.`
 
-async function research(client, hints, titles, wanted) {
+async function research(client, hints, titles, wanted, avoid = []) {
   const prompt = `Nous sommes le ${todayFr()}. Prépare le dossier de recherche des articles de l'édition du ${edFr()} (publiés ce matin-là).
 
 Sujets à préparer : ${wanted.join(' et ')}.
@@ -183,7 +183,10 @@ Sujets à préparer : ${wanted.join(' et ')}.
 Déjà publiés sur le site (ne refais aucun de ces sujets, ni sous un autre angle trop proche) :
 ${titles.map((t) => `- ${t}`).join('\n')}
 
-Pistes des flux officiels de ces derniers jours (à vérifier, à ignorer si elles ne concernent pas l'argent des particuliers) :
+${avoid.length ? `Sujets abandonnés lors des derniers passages faute de source lisible ou de chiffre vérifié (n'y reviens pas, choisis-en un autre) :
+${avoid.map((t) => `- ${t}`).join('\n')}
+
+` : ''}Pistes des flux officiels de ces derniers jours (à vérifier, à ignorer si elles ne concernent pas l'argent des particuliers) :
 ${hints.length ? hints.map((h) => `- [${h.source}] ${h.title} (${h.date.toISOString().slice(0, 10)}) ${h.link}`).join('\n') : '- aucune'}
 
 Méthode :
@@ -191,6 +194,9 @@ Méthode :
    INSEE, AMF, Légifrance, Assemblée nationale, Sénat, Urssaf, BCE...) pour vérifier chaque chiffre et chaque date.
 2. Ne retiens un chiffre que si tu l'as lu sur une source que tu cites. Si une mesure n'est pas encore votée ou en vigueur, dis-le.
 3. Si aucune actu des 7 derniers jours n'est assez utile et vérifiable, écris AUCUN pour l'actu plutôt que d'en forcer une.
+4. Le sujet blog doit toujours aboutir : ne le choisis qu'après avoir lu au moins une source officielle qui s'ouvre
+   (service-public.fr, impots.gouv.fr, Banque de France, AMF, INSEE...). Si une page ne s'ouvre pas, change de sujet
+   au lieu de rendre un sujet invérifiable. Il y a toujours un sujet pratique utile et vérifiable.
 
 Rends le dossier en texte, exactement sous cette forme, une section par sujet demandé :
 
@@ -584,6 +590,22 @@ function gitCommit(files, message) {
 
 /* ---------------------------------------------------------------- main */
 
+// Sujets abandonnés ou refusés ces 3 derniers jours : la veille ne doit pas retomber dessus à chaque passage
+// (le 25/11/2026, quatre passages ont buté sur le même sujet blog dont la source officielle ne s'ouvrait pas).
+function abandonedTopics(runs) {
+  const since = Date.now() - 3 * 86400000
+  const out = []
+  for (const r of runs) {
+    if (new Date(r.at).getTime() < since) continue
+    for (const x of r.results || []) {
+      if (x.outcome !== 'skip' && x.outcome !== 'rejected') continue
+      const t = (x.title || x.detail || '').replace(/\s+/g, ' ').slice(0, 220)
+      if (t && !out.includes(t)) out.push(t)
+    }
+  }
+  return out.slice(-8)
+}
+
 async function main() {
   const inventory = siteInventory()
   const internal = new Set(inventory.map((p) => p.href))
@@ -636,7 +658,7 @@ async function main() {
   try {
     const hints = await feedHints()
     console.log(`${hints.length} piste(s) dans les flux officiels.`)
-    const dossier = await research(client, hints, recentTitles(), wanted)
+    const dossier = await research(client, hints, recentTitles(), wanted, abandonedTopics(runs.runs || []))
     record.researched = true
     console.log('Dossier de veille prêt.')
 
