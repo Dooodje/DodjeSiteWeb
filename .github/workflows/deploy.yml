@@ -39,6 +39,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Les articles publiés par les tâches planifiées Claude arrivent sans image : on les crée ici.
+      - name: Images des articles et hubs à jour
+        run: |
+          node scripts/article-image.mjs --missing
+          node scripts/contenu.mjs hubs
+
       - name: Build
         run: npm run build
 

@@ -1,0 +1,425 @@
+{
+  "note": "Sujets de la rubrique Histoire. La tâche planifiée choisit d'abord un anniversaire (MM-JJ) dans les 5 prochains jours, sinon le premier sujet non publié. Les dates sont à revérifier dans les sources avant d'écrire.",
+  "sujets": [
+    {
+      "id": "tulipomanie-la-premiere-bulle-speculative-1637",
+      "sujet": "Tulipomanie : la première bulle spéculative (1637)",
+      "anniversaire": null,
+      "theme": "bulles",
+      "publie": true
+    },
+    {
+      "id": "le-jeudi-noir-de-1929-et-la-grande-depression",
+      "sujet": "Le jeudi noir de 1929 et la Grande Dépression",
+      "anniversaire": "10-24",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "bitcoin-pizza-day-2-pizzas-pour-10-000-bitcoins-2010",
+      "sujet": "Bitcoin Pizza Day : 2 pizzas pour 10 000 bitcoins (2010)",
+      "anniversaire": "05-22",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "le-livre-blanc-de-satoshi-nakamoto-31-octobre-2008",
+      "sujet": "Le livre blanc de Satoshi Nakamoto (31 octobre 2008)",
+      "anniversaire": "10-31",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "le-bloc-genese-du-bitcoin-et-son-message-sur-les-banques-2009",
+      "sujet": "Le bloc genèse du Bitcoin et son message sur les banques (2009)",
+      "anniversaire": "01-03",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "la-faillite-de-lehman-brothers-15-septembre-2008",
+      "sujet": "La faillite de Lehman Brothers (15 septembre 2008)",
+      "anniversaire": "09-15",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "le-lundi-noir-de-1987-22-en-une-journee-a-wall-street",
+      "sujet": "Le lundi noir de 1987 : -22 % en une journée à Wall Street",
+      "anniversaire": "10-19",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "john-law-et-la-banqueroute-de-1720-en-france",
+      "sujet": "John Law et la banqueroute de 1720 en France",
+      "anniversaire": null,
+      "theme": "bulles",
+      "publie": false
+    },
+    {
+      "id": "la-bulle-des-mers-du-sud-et-isaac-newton-ruine-1720",
+      "sujet": "La bulle des mers du Sud et Isaac Newton ruiné (1720)",
+      "anniversaire": null,
+      "theme": "bulles",
+      "publie": false
+    },
+    {
+      "id": "la-bulle-internet-le-pic-du-nasdaq-du-10-mars-2000",
+      "sujet": "La bulle internet : le pic du Nasdaq du 10 mars 2000",
+      "anniversaire": "03-10",
+      "theme": "bulles",
+      "publie": false
+    },
+    {
+      "id": "la-voc-premiere-societe-cotee-de-l-histoire-1602",
+      "sujet": "La VOC, première société cotée de l'histoire (1602)",
+      "anniversaire": "03-20",
+      "theme": "bourse",
+      "publie": false
+    },
+    {
+      "id": "naissance-de-la-bourse-de-paris-1724",
+      "sujet": "Naissance de la Bourse de Paris (1724)",
+      "anniversaire": "09-24",
+      "theme": "bourse",
+      "publie": false
+    },
+    {
+      "id": "la-fin-de-l-etalon-or-le-choc-nixon-du-15-aout-1971",
+      "sujet": "La fin de l'étalon-or : le choc Nixon du 15 août 1971",
+      "anniversaire": "08-15",
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "le-passage-a-l-euro-en-pieces-et-billets-1er-janvier-2002",
+      "sujet": "Le passage à l'euro en pièces et billets (1er janvier 2002)",
+      "anniversaire": "01-01",
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "le-nouveau-franc-de-1960-100-anciens-francs-1-franc",
+      "sujet": "Le nouveau franc de 1960 : 100 anciens francs = 1 franc",
+      "anniversaire": "01-01",
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "la-naissance-du-franc-en-1360",
+      "sujet": "La naissance du franc en 1360",
+      "anniversaire": "12-05",
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "la-creation-de-la-banque-de-france-par-bonaparte-1800",
+      "sujet": "La création de la Banque de France par Bonaparte (1800)",
+      "anniversaire": "01-18",
+      "theme": "banques",
+      "publie": false
+    },
+    {
+      "id": "l-hyperinflation-allemande-de-1923-un-pain-a-200-milliards-de-marks",
+      "sujet": "L'hyperinflation allemande de 1923 : un pain à 200 milliards de marks",
+      "anniversaire": "11-15",
+      "theme": "inflation",
+      "publie": false
+    },
+    {
+      "id": "les-assignats-de-la-revolution-francaise",
+      "sujet": "Les assignats de la Révolution française",
+      "anniversaire": null,
+      "theme": "inflation",
+      "publie": false
+    },
+    {
+      "id": "le-zimbabwe-et-son-billet-de-100-000-milliards-de-dollars",
+      "sujet": "Le Zimbabwe et son billet de 100 000 milliards de dollars",
+      "anniversaire": null,
+      "theme": "inflation",
+      "publie": false
+    },
+    {
+      "id": "mansa-musa-l-homme-le-plus-riche-de-l-histoire-fait-chuter-l-or-au-cai",
+      "sujet": "Mansa Musa, l'homme le plus riche de l'histoire, fait chuter l'or au Caire (1324)",
+      "anniversaire": null,
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "les-premieres-pieces-de-monnaie-en-lydie",
+      "sujet": "Les premières pièces de monnaie en Lydie",
+      "anniversaire": null,
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "les-pierres-de-yap-une-monnaie-trop-lourde-pour-bouger",
+      "sujet": "Les pierres de Yap : une monnaie trop lourde pour bouger",
+      "anniversaire": null,
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "charles-ponzi-l-inventeur-de-l-arnaque-pyramidale-1920",
+      "sujet": "Charles Ponzi, l'inventeur de l'arnaque pyramidale (1920)",
+      "anniversaire": null,
+      "theme": "arnaques",
+      "publie": false
+    },
+    {
+      "id": "l-arrestation-de-bernard-madoff-11-decembre-2008",
+      "sujet": "L'arrestation de Bernard Madoff (11 décembre 2008)",
+      "anniversaire": "12-11",
+      "theme": "arnaques",
+      "publie": false
+    },
+    {
+      "id": "la-faillite-d-enron-2-decembre-2001",
+      "sujet": "La faillite d'Enron (2 décembre 2001)",
+      "anniversaire": "12-02",
+      "theme": "arnaques",
+      "publie": false
+    },
+    {
+      "id": "nick-leeson-fait-sauter-la-banque-barings-1995",
+      "sujet": "Nick Leeson fait sauter la banque Barings (1995)",
+      "anniversaire": "02-26",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "la-chute-de-ftx-et-de-sam-bankman-fried-novembre-2022",
+      "sujet": "La chute de FTX et de Sam Bankman-Fried (novembre 2022)",
+      "anniversaire": "11-11",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "mt-gox-la-plateforme-qui-a-perdu-850-000-bitcoins-2014",
+      "sujet": "Mt. Gox, la plateforme qui a perdu 850 000 bitcoins (2014)",
+      "anniversaire": "02-28",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "l-effondrement-de-terra-luna-mai-2022",
+      "sujet": "L'effondrement de Terra-Luna (mai 2022)",
+      "anniversaire": "05-09",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "gamestop-quand-reddit-a-fait-trembler-wall-street-janvier-2021",
+      "sujet": "GameStop : quand Reddit a fait trembler Wall Street (janvier 2021)",
+      "anniversaire": "01-28",
+      "theme": "bourse",
+      "publie": false
+    },
+    {
+      "id": "le-flash-crash-du-6-mai-2010",
+      "sujet": "Le flash crash du 6 mai 2010",
+      "anniversaire": "05-06",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "le-mercredi-noir-de-la-livre-sterling-et-george-soros-1992",
+      "sujet": "Le mercredi noir de la livre sterling et George Soros (1992)",
+      "anniversaire": "09-16",
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "le-krach-de-l-union-generale-a-paris-1882",
+      "sujet": "Le krach de l'Union générale à Paris (1882)",
+      "anniversaire": "01-19",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "les-emprunts-russes-l-epargne-des-francais-partie-en-fumee-1918",
+      "sujet": "Les emprunts russes : l'épargne des Français partie en fumée (1918)",
+      "anniversaire": null,
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "le-scandale-de-panama-1892",
+      "sujet": "Le scandale de Panama (1892)",
+      "anniversaire": null,
+      "theme": "arnaques",
+      "publie": false
+    },
+    {
+      "id": "le-premier-etf-de-l-histoire-le-spdr-1993",
+      "sujet": "Le premier ETF de l'histoire : le SPDR (1993)",
+      "anniversaire": "01-22",
+      "theme": "bourse",
+      "publie": false
+    },
+    {
+      "id": "la-creation-du-cac-40-base-1-000-points",
+      "sujet": "La création du CAC 40 (base 1 000 points)",
+      "anniversaire": "12-31",
+      "theme": "bourse",
+      "publie": false
+    },
+    {
+      "id": "le-premier-distributeur-de-billets-londres-1967",
+      "sujet": "Le premier distributeur de billets (Londres, 1967)",
+      "anniversaire": "06-27",
+      "theme": "banques",
+      "publie": false
+    },
+    {
+      "id": "la-bulle-japonaise-le-nikkei-au-sommet-le-29-decembre-1989",
+      "sujet": "La bulle japonaise : le Nikkei au sommet le 29 décembre 1989",
+      "anniversaire": "12-29",
+      "theme": "bulles",
+      "publie": false
+    },
+    {
+      "id": "la-crise-asiatique-de-1997-demarre-en-thailande",
+      "sujet": "La crise asiatique de 1997 démarre en Thaïlande",
+      "anniversaire": "07-02",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "le-corralito-argentin-les-comptes-bancaires-geles-2001",
+      "sujet": "Le corralito argentin : les comptes bancaires gelés (2001)",
+      "anniversaire": "12-01",
+      "theme": "banques",
+      "publie": false
+    },
+    {
+      "id": "la-crise-des-subprimes-commence-le-9-aout-2007",
+      "sujet": "La crise des subprimes commence le 9 août 2007",
+      "anniversaire": "08-09",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "la-faillite-de-silicon-valley-bank-mars-2023",
+      "sujet": "La faillite de Silicon Valley Bank (mars 2023)",
+      "anniversaire": "03-10",
+      "theme": "banques",
+      "publie": false
+    },
+    {
+      "id": "le-krach-du-covid-en-mars-2020",
+      "sujet": "Le krach du Covid en mars 2020",
+      "anniversaire": "03-16",
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "le-nft-de-beeple-vendu-69-millions-de-dollars-2021",
+      "sujet": "Le NFT de Beeple vendu 69 millions de dollars (2021)",
+      "anniversaire": "03-11",
+      "theme": "bulles",
+      "publie": false
+    },
+    {
+      "id": "dogecoin-la-crypto-nee-d-une-blague-2013",
+      "sujet": "Dogecoin, la crypto née d'une blague (2013)",
+      "anniversaire": "12-06",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "le-salvador-adopte-le-bitcoin-comme-monnaie-legale-2021",
+      "sujet": "Le Salvador adopte le bitcoin comme monnaie légale (2021)",
+      "anniversaire": "09-07",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "le-lancement-d-ethereum-30-juillet-2015",
+      "sujet": "Le lancement d'Ethereum (30 juillet 2015)",
+      "anniversaire": "07-30",
+      "theme": "crypto",
+      "publie": false
+    },
+    {
+      "id": "warren-buffett-rachete-berkshire-hathaway-1965",
+      "sujet": "Warren Buffett rachète Berkshire Hathaway (1965)",
+      "anniversaire": null,
+      "theme": "bourse",
+      "publie": false
+    },
+    {
+      "id": "les-premiers-billets-de-banque-en-chine",
+      "sujet": "Les premiers billets de banque en Chine",
+      "anniversaire": null,
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "les-premiers-billets-d-europe-en-suede-1661",
+      "sujet": "Les premiers billets d'Europe en Suède (1661)",
+      "anniversaire": null,
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "la-naissance-du-livret-a-1818",
+      "sujet": "La naissance du Livret A (1818)",
+      "anniversaire": null,
+      "theme": "epargne",
+      "publie": false
+    },
+    {
+      "id": "la-legende-des-rothschild-et-de-waterloo-1815",
+      "sujet": "La légende des Rothschild et de Waterloo (1815)",
+      "anniversaire": null,
+      "theme": "bourse",
+      "publie": false
+    },
+    {
+      "id": "la-creation-de-la-bce-1er-juin-1998",
+      "sujet": "La création de la BCE (1er juin 1998)",
+      "anniversaire": "06-01",
+      "theme": "banques",
+      "publie": false
+    },
+    {
+      "id": "les-taux-negatifs-de-la-bce-2014",
+      "sujet": "Les taux négatifs de la BCE (2014)",
+      "anniversaire": null,
+      "theme": "banques",
+      "publie": false
+    },
+    {
+      "id": "la-panique-bancaire-de-1907-et-j-p-morgan",
+      "sujet": "La panique bancaire de 1907 et J.P. Morgan",
+      "anniversaire": null,
+      "theme": "banques",
+      "publie": false
+    },
+    {
+      "id": "la-crise-de-la-dette-grecque-2010",
+      "sujet": "La crise de la dette grecque (2010)",
+      "anniversaire": null,
+      "theme": "krachs",
+      "publie": false
+    },
+    {
+      "id": "le-code-d-hammurabi-et-les-premiers-taux-d-interet",
+      "sujet": "Le code d'Hammurabi et les premiers taux d'intérêt",
+      "anniversaire": null,
+      "theme": "monnaie",
+      "publie": false
+    },
+    {
+      "id": "la-carte-bleue-arrive-en-france-1967",
+      "sujet": "La Carte Bleue arrive en France (1967)",
+      "anniversaire": null,
+      "theme": "banques",
+      "publie": false
+    }
+  ]
+}

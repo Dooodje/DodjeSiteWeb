@@ -117,7 +117,7 @@ function validateLegacyRedirects() {
 
 // Toute page indexable d'une rubrique doit être liée depuis son hub (sinon Google la découvre mal : « Détectée, non indexée »).
 function validateHubCoverage() {
-  const hubs = { actualites: 'actualites/index.html', blog: 'blog.html', guides: 'guides/index.html', outils: 'outils/index.html' }
+  const hubs = { actualites: 'actualites/index.html', histoire: 'histoire/index.html', blog: 'blog.html', guides: 'guides/index.html', outils: 'outils/index.html' }
   const xml = fs.readFileSync(path.join(distDir, 'sitemap.xml'), 'utf8')
   const urls = new Set(extractSitemapUrls(xml))
   for (const [dir, hubFile] of Object.entries(hubs)) {
@@ -420,7 +420,7 @@ function validateAppEducationFinanciereQuery() {
 }
 
 function validateContentPagesGeo() {
-  const dirs = ['guides', 'actualites', 'blog']
+  const dirs = ['guides', 'actualites', 'histoire', 'blog']
   for (const dir of dirs) {
     const fullDir = path.join(distDir, dir)
     if (!fs.existsSync(fullDir)) continue
@@ -434,7 +434,7 @@ function validateContentPagesGeo() {
       if (dir === 'actualites' && !html.includes('NewsArticle') && !html.includes('"Article"')) {
         fail(`Missing Article/NewsArticle JSON-LD: ${dir}/${file}`)
       }
-      if (dir === 'blog' && !html.includes('"Article"') && !html.includes('"@type": "Article"')) {
+      if ((dir === 'blog' || dir === 'histoire') && !html.includes('"Article"') && !html.includes('"@type": "Article"')) {
         fail(`Missing Article JSON-LD: ${dir}/${file}`)
       }
       const facts = countNumericFacts(html)

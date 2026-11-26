@@ -1,0 +1,98 @@
+{
+  "kind": "histoire",
+  "slug": "tulipomanie-1637-premiere-bulle-speculative",
+  "kicker": "Bulles et krachs",
+  "title": "Tulipomanie : quand un bulbe valait une maison",
+  "primaryKeyword": "tulipomanie",
+  "metaDescription": "En 1637, un bulbe de tulipe pouvait coûter 10 000 florins, puis perdre 99 % de sa valeur en une semaine. L'histoire de la première bulle, et sa leçon.",
+  "eventDate": "1637-02-03",
+  "bluf": "Entre 1634 et 1637, aux Pays-Bas, des bulbes de tulipe se sont échangés jusqu'à 10 000 florins, le prix d'une belle maison à Amsterdam. Le 3 février 1637, le marché s'arrête net et les prix sont divisés par 100 en une semaine. C'est la tulipomanie, souvent présentée comme la première bulle spéculative de l'histoire.",
+  "keyFigures": [
+    { "value": "10 000 florins", "label": "le prix du bulbe le plus recherché, selon Charles Mackay" },
+    { "value": "x12", "label": "la hausse du bulbe le plus courant en 5 semaines, début 1637" },
+    { "value": "÷100", "label": "la chute du prix en une semaine après le 3 février 1637" },
+    { "value": "3,5 %", "label": "ce que les vendeurs ont finalement touché sur leurs contrats" }
+  ],
+  "keyPoints": [
+    "La tulipe arrive en Europe au XVIe siècle : rare et nouvelle, elle devient un objet de luxe aux Provinces-Unies.",
+    "À partir de 1634, on n'achète plus des fleurs mais des promesses de bulbes, revendues parfois 10 fois dans la même journée.",
+    "Entre le 31 décembre 1636 et le 3 février 1637, le prix du bulbe le plus courant est multiplié par 12.",
+    "Le 3 février 1637, plus personne n'achète : en une semaine, le prix est divisé par 100.",
+    "Le 24 février 1637, les juges annulent les contrats contre une indemnité de 3,5 % pour les vendeurs."
+  ],
+  "sections": [
+    {
+      "h2": "Pourquoi une fleur est devenue un placement ?",
+      "html": "<p><strong>La tulipe était rare, nouvelle et lente à produire : il faut une dizaine d'années pour qu'une graine donne un bulbe, selon la Banque de France.</strong> Quand la demande explose, l'offre ne peut pas suivre. Le prix grimpe.</p><p>Au début du XVIIe siècle, les Provinces-Unies (les Pays-Bas actuels) vivent leur âge d'or, entre 1600 et 1750 selon la Banque de France. Les marchands sont riches et veulent le montrer. La tulipe, arrivée d'Asie centrale et de l'Empire ottoman, devient l'objet chic par excellence. Les variétés panachées, aux pétales striés, sont les plus recherchées. Ironie de l'histoire : ces stries venaient d'un virus, qui rendait aussi les bulbes plus lents à se multiplier.</p>"
+    },
+    {
+      "h2": "Comment les prix sont devenus fous ?",
+      "html": "<p><strong>À partir de 1634, les acheteurs ne veulent plus la fleur : ils veulent le bulbe pour le revendre plus cher.</strong> Le marché devient spéculatif.</p><p>Comme les bulbes restent en terre une bonne partie de l'année, on échange des papiers : des promesses de livrer un bulbe plus tard. C'est un marché à terme avant l'heure, qui se tient surtout dans les tavernes. Pendant l'hiver 1636-1637, un même contrat peut changer 10 fois de propriétaire en une seule journée, d'après la Banque de France.</p><p>Les chiffres donnent le vertige. Selon le journaliste Charles Mackay, le bulbe le plus recherché s'échange contre 10 000 florins, soit le prix d'une demeure bourgeoise à Amsterdam. En moyenne, un bulbe vaut 10 à 15 fois le salaire annuel d'un artisan qualifié. Et entre le 31 décembre 1636 et le 3 février 1637, le prix du bulbe le plus courant est multiplié par 12.</p>"
+    },
+    {
+      "h2": "Que s'est-il passé le 3 février 1637 ?",
+      "html": "<p><strong>Ce jour-là, à Haarlem, les acheteurs ne se présentent plus aux enchères : le prix est divisé par 100 en une semaine.</strong></p><p>Personne ne sait exactement pourquoi la confiance casse ce jour-là. Il suffit que quelques acheteurs doutent pour que tout le monde veuille vendre en même temps. Sans acheteur, le prix n'a plus de plancher. En quelques jours, les bulbes retrouvent leur niveau d'avant la hausse.</p><p>Restent les contrats signés au plus haut. Le 24 février 1637, la guilde des horticulteurs saisit les juges commerciaux, qui annulent les contrats. Les vendeurs touchent un dédommagement de 3,5 % du prix promis. Autrement dit, celui qui attendait 1 000 florins en récupère 35.</p>"
+    },
+    {
+      "h2": "Les 4 étapes d'une bulle, version tulipe",
+      "html": "<p><strong>La tulipomanie suit pile le schéma décrit en 1978 par l'économiste Charles Kindleberger : préparation, naissance, euphorie, explosion.</strong></p><ol><li><strong>Préparation</strong> : un pays riche, un objet à la mode, des prix qui montent doucement.</li><li><strong>Naissance</strong> : on achète parce qu'on pense que ça va monter, et de nouveaux acheteurs arrivent en prenant plus de risques.</li><li><strong>Euphorie</strong> : on s'endette pour acheter, on signe des contrats sur des bulbes qui n'existent pas encore, on se met à plusieurs pour s'offrir un seul bulbe.</li><li><strong>Explosion</strong> : les anticipations se retournent, tout le monde vend, le prix s'effondre. Les économistes parlent de « moment Minsky ».</li></ol>"
+    },
+    {
+      "h2": "Une légende un peu trop belle ?",
+      "html": "<p><strong>Une partie de l'histoire a été grossie : beaucoup de chiffres viennent de pamphlets religieux hostiles à la spéculation, rappelle la Banque de France.</strong></p><p>Le récit le plus connu date de 1841, avec le livre de Charles Mackay sur la folie des foules. On lui doit l'anecdote du marin qui aurait mangé un bulbe de Semper Augustus en le prenant pour un oignon, un bulbe estimé à 3 000 florins selon l'Encyclopædia Universalis. Plus tard, l'économiste Peter Garber a épluché les ventes réelles de 161 bulbes de 39 variétés entre 1633 et 1637. Sa conclusion : la folie était réelle, mais moins généralisée qu'on le raconte.</p><p>D'ailleurs, les dégâts sont restés limités. Les échanges concernaient surtout la bourgeoisie marchande, pendant que la noblesse et le peuple regardaient de loin. Les Provinces-Unies sont restées l'une des économies les plus riches du monde.</p>"
+    },
+    {
+      "h2": "Pourquoi on en parle encore aujourd'hui ?",
+      "html": "<p><strong>Parce que chaque nouvelle bulle lui ressemble : la Banque de France cite les NFT en 2022 et, aujourd'hui, la spéculation sur les crypto-actifs.</strong></p><p>Remplace « bulbe » par « image numérique » ou « jeton » et tu retrouves les mêmes ingrédients : un objet nouveau, une offre limitée, des prix qui ne parlent plus de l'objet mais de ce qu'on pourra le revendre. Ça ne veut pas dire que tout ce qui monte est une bulle. Mais quand la seule raison d'acheter est « quelqu'un paiera plus cher demain », tu es dans la tulipe.</p><p>Pour voir comment ça se passe sur les marchés actuels, lis notre guide pour <a href=\"/guides/comprendre-la-crypto\">comprendre la crypto sans se faire avoir</a> ou celui pour <a href=\"/guides/comprendre-la-bourse\">comprendre la bourse sans jargon</a>.</p>"
+    }
+  ],
+  "lesson": "Avant d'acheter quelque chose qui monte vite, pose-toi une seule question : est-ce que je l'achète pour ce qu'il vaut ou pour le revendre plus cher demain ? Si c'est la deuxième réponse, ne mets que de l'argent que tu peux perdre, et jamais d'argent emprunté.",
+  "definitions": [
+    { "term": "Bulle spéculative", "definition": "Une hausse des prix qui n'est plus justifiée par la valeur de ce qu'on achète, mais par l'espoir de revendre plus cher. Elle finit presque toujours par éclater." },
+    { "term": "Marché à terme", "definition": "Un marché où l'on s'engage aujourd'hui à acheter ou vendre plus tard, à un prix fixé d'avance." },
+    { "term": "Florin", "definition": "La monnaie des Provinces-Unies au XVIIe siècle." }
+  ],
+  "faq": [
+    { "question": "C'est quoi la tulipomanie ?", "answer": "La tulipomanie est la flambée puis l'effondrement du prix des bulbes de tulipe aux Pays-Bas entre 1634 et 1637. Elle est souvent présentée comme la première bulle spéculative de l'histoire." },
+    { "question": "Combien coûtait un bulbe de tulipe en 1637 ?", "answer": "Selon Charles Mackay, le bulbe le plus recherché s'échangeait contre 10 000 florins, le prix d'une maison bourgeoise à Amsterdam. En moyenne, un bulbe valait 10 à 15 fois le salaire annuel d'un artisan qualifié, selon la Banque de France." },
+    { "question": "Pourquoi la bulle des tulipes a éclaté ?", "answer": "Le 3 février 1637, les acheteurs ne se sont plus présentés aux enchères. Comme tout le monde voulait vendre en même temps, le prix a été divisé par 100 en une semaine." },
+    { "question": "Quel lien entre la tulipomanie et la crypto ?", "answer": "La Banque de France rapproche la crise des tulipes des NFT en 2022 et de la spéculation sur les crypto-actifs : un objet nouveau, une offre limitée et des achats motivés surtout par l'espoir de revendre plus cher." }
+  ],
+  "internalLinks": [
+    { "href": "/guides/comprendre-la-crypto", "label": "Comprendre la crypto" },
+    { "href": "/guides/comprendre-la-bourse", "label": "Comprendre la bourse" },
+    { "href": "/actualites/bulle-ia-2026-valorisations-investissements-risques", "label": "Bulle de l'IA en 2026 ?" }
+  ],
+  "calculs": [
+    "Indemnité : 3,5 % de 1 000 florins = 35 florins.",
+    "Du 31 décembre 1636 au 3 février 1637 : environ 5 semaines.",
+    "Divisé par 100 = perte de 99 % de la valeur."
+  ],
+  "sources": [
+    {
+      "label": "Banque de France, « La crise des tulipes » (fiche pédagogique)",
+      "url": "https://www.banque-france.fr/fr/publications-et-statistiques/publications/la-crise-des-tulipes",
+      "extrait": "La crise se déroule aux Provinces-Unies pendant leur âge d'or économique (1600-1750). À partir de 1634, les bulbes deviennent un objet de spéculation. Selon le journaliste Charles MacKay, entre 1634 et 1637, le bulbe le plus recherché s'échange contre 10 000 florins, soit le prix d'une demeure bourgeoise à Amsterdam. En moyenne, un bulbe vaut 10 à 15 fois le salaire annuel d'un artisan qualifié. Entre le 31 décembre 1636 et le 3 février 1637, le prix du bulbe le plus courant est multiplié par douze (x12). Après le krach du 3 février 1637, le prix est divisé par 100 en une semaine. Le 24 février 1637, les juges commerciaux annulent les contrats contre un dédommagement de 3,5 % aux vendeurs. Schéma de Charles Kindleberger, 1978. La crise est citée à chaque nouvelle bulle, notamment celle des NFT en 2022."
+    },
+    {
+      "label": "Banque de France, « Mot de l'actu : la crise des tulipes (1637) » (PDF)",
+      "url": "https://www.banque-france.fr/system/files/2026-11/Mot-Actu-Crise-des-tulipes.pdf",
+      "extrait": "10 changements de propriétaire en une seule journée, pendant l'hiver 1636-1637. Une dizaine d'années sont nécessaires pour qu'une graine produise un bulbe. 24 février 1637 : demande de la guilde des horticulteurs aux juges commerciaux, qui rendent les contrats caducs. Indemnisation de 3,5 % versée aux vendeurs. En une semaine, le prix du bulbe est divisé par 100. Les données proviennent pour beaucoup de pamphlets calvinistes du XVIIe siècle s'opposant à la spéculation."
+    },
+    {
+      "label": "Encyclopædia Universalis, « Tulipomanie »",
+      "url": "https://www.universalis.fr/encyclopedie/tulipomanie/",
+      "extrait": "L'histoire de ce jeune marin hollandais du XVIIe siècle qui s'en alla déguster un beau hareng rouge, avec ce qu'il croyait être un oignon : un bulbe de Semper Augustus qui valait alors, au plus fort de la tulipomanie en 1636, quelque 3 000 florins."
+    },
+    {
+      "label": "Wikipedia (en), « Tulip mania »",
+      "url": "https://en.wikipedia.org/wiki/Tulip_mania",
+      "extrait": "The 1637 event was popularized in 1841 by the book Extraordinary Popular Delusions and the Madness of Crowds, written by British journalist Charles Mackay. In February 1637, tulip bulb contract prices collapsed abruptly. The collapse began in Haarlem. Economist Peter Garber collected data on the sales of 161 bulbs of 39 varieties between 1633 and 1637."
+    },
+    {
+      "label": "Citéco, « Première bulle spéculative, sur le marché des bulbes de tulipe »",
+      "url": "https://citeco.fr/10000-years-history-economics/great-discoveries/first-speculative-bubble-on-the-tulip-bulb-market",
+      "extrait": "1636-1637. In the Netherlands in the 17th century, the prices of tulips were driven upwards as a result of their rarity and novelty. In the 1630s, they became an object of speculation. This euphoria lasted until 1637, when a sudden price reversal led buyers to sell in a movement of panic."
+    }
+  ]
+}

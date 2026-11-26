@@ -143,4 +143,30 @@ export function heroFigure(img, title) {
   return `<figure class="content-hero"><img src="/img/articles/${path.basename(img.rel)}" alt="${esc(title)}" width="${img.w}" height="${img.h}" fetchpriority="high" decoding="async"></figure>`
 }
 
+/* ------------------------------------------------ images manquantes (déploiement) */
+
+// Les tâches planifiées Claude n'ont pas npm : elles publient la page, et le déploiement crée ici
+// les images des articles (actualites, histoire, blog) qui n'en ont pas encore. Les cartes des hubs les utilisent aussi.
+function missing() {
+  let n = 0
+  for (const dir of ['actualites', 'histoire', 'blog']) {
+    const full = path.join(rootDir, dir)
+    if (!fs.existsSync(full)) continue
+    for (const f of fs.readdirSync(full)) {
+      if (!f.endsWith('.html') || f === 'index.html') continue
+      const slug = f.replace(/\.html$/, '')
+      if (fs.existsSync(path.join(rootDir, OUT_DIR, `${slug}-16x9.png`))) continue
+      const html = fs.readFileSync(path.join(full, f), 'utf8')
+      if (/http-equiv="refresh"/i.test(html)) continue
+      const clean = (s) => String(s || '').replace(/<[^>]+>/g, '').replace(/&#39;|&apos;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&nbsp;|\u00a0/g, ' ').trim()
+      const title = clean(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1]) || slug
+      const kicker = clean(html.match(/<p class="legal-eyebrow">([\s\S]*?)<\/p>/)?.[1]) || (dir === 'histoire' ? 'Histoire' : 'Actualité')
+      renderArticleImages({ slug, kicker, title })
+      n++
+    }
+  }
+  console.log(`Images d'articles créées : ${n}`)
+}
+
 if (import.meta.url === `file://${process.argv[1]}` && process.argv.includes('--backfill')) backfill()
+if (import.meta.url === `file://${process.argv[1]}` && process.argv.includes('--missing')) missing()

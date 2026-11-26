@@ -11,6 +11,7 @@ const NAV = [
   ['guides', '/guides', 'Guides'],
   ['outils', '/outils', 'Outils'],
   ['actus', '/actualites', 'Actus'],
+  ['histoire', '/histoire', 'Histoire'],
   ['blog', '/blog', 'Blog']
 ]
 
@@ -22,6 +23,7 @@ export function sectionFromRel(rel) {
   if (p.startsWith('guides/') || p.startsWith('glossaire/')) return 'guides'
   if (p.startsWith('outils/')) return 'outils'
   if (p.startsWith('actualites/')) return 'actus'
+  if (p.startsWith('histoire/')) return 'histoire'
   if (p === 'blog.html' || p.startsWith('blog/')) return 'blog'
   return ''
 }
@@ -170,6 +172,39 @@ function ensureHead(html) {
   return html
 }
 
+/** Pages qui reçoivent le design éditorial : 'article', 'hub' ou '' (aucun). */
+export function editorialKind(rel) {
+  const p = String(rel || '').replace(/\\/g, '/')
+  if (p === 'blog.html') return 'hub'
+  const m = p.match(/^(actualites|histoire|blog|guides)\/(.+)\.html$/)
+  if (!m) return ''
+  return m[2] === 'index' ? 'hub' : 'article'
+}
+
+/** Feuille de style, script de lecture et classes du design éditorial (idempotent). */
+export function applyEditorial(html, rel) {
+  const kind = editorialKind(rel)
+  if (!kind) return html
+  let next = html
+  if (!next.includes('href="/editorial.css"')) {
+    next = next.replace('</head>', '    <link rel="stylesheet" href="/editorial.css">\n</head>')
+  }
+  if (kind === 'article' && !next.includes('src="/editorial.js"')) {
+    next = next.replace('</head>', '    <script src="/editorial.js" defer></script>\n</head>')
+  }
+  next = next.replace(/<body([^>]*)>/i, (tag, attrs) => {
+    const want = ['ed', `ed-${kind}`]
+    const cls = attrs.match(/\sclass="([^"]*)"/)
+    if (cls) {
+      const list = cls[1].split(/\s+/).filter(Boolean)
+      for (const c of want) if (!list.includes(c)) list.push(c)
+      return `<body${attrs.replace(cls[0], ` class="${list.join(' ')}"`)}>`
+    }
+    return `<body${attrs} class="${want.join(' ')}">`
+  })
+  return next
+}
+
 export function applyChrome(html, rel) {
   if (!/<body[\s>]/i.test(html) || html.includes('data-landing-page')) return html
   let next = html
@@ -202,5 +237,6 @@ export function applyChrome(html, rel) {
   } else {
     next = next.replace(/<\/body>/i, `${footer}</body>`)
   }
-  return ensureHead(next)
+  // Pas de lignes vides qui s'accumulent à chaque passage
+  return applyEditorial(ensureHead(next), rel).replace(/(?:\n[ \t]*){3,}(<\/body>)/, '\n\n$1')
 }

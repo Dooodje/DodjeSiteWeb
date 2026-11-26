@@ -20,7 +20,7 @@ export const STATIC_PAGES = [
   '404.html'
 ]
 
-const CONTENT_DIRS = ['outils', 'actualites', 'guides', 'glossaire', 'blog']
+const CONTENT_DIRS = ['outils', 'actualites', 'histoire', 'guides', 'glossaire', 'blog']
 
 const ENTITY_BLUF =
   "Dodje est un jeu mobile gratuit pour apprendre la finance : tu suis des leçons courtes, tu gagnes des Dodjis, tu les investis pour développer ton île et grimper au classement mondial. Pas un jeu d'argent, pas un courtier."
@@ -168,6 +168,10 @@ export function sitemapMetaForUrl(url) {
     return { priority: '0.85', changefreq: 'weekly' }
   }
 
+  if (url.includes('/histoire/') && !url.endsWith('/histoire')) {
+    return { priority: '0.85', changefreq: 'monthly' }
+  }
+
   if (url.includes('/blog/') && !url.endsWith('/blog')) {
     return { priority: '0.9', changefreq: 'monthly' }
   }
@@ -187,6 +191,7 @@ export function sitemapMetaForUrl(url) {
     url.endsWith('/outils') ||
     url.endsWith('/guides') ||
     url.endsWith('/actualites') ||
+    url.endsWith('/histoire') ||
     url.endsWith('/jeu') ||
     url.endsWith('/blog') ||
     url.includes('jeu-educatif-finance') ||
@@ -361,7 +366,7 @@ export function buildLlmsTxt(rootDir) {
 
   // Derniers articles publiés (actu + blog) : les moteurs IA lisent llms.txt en priorité, la fraîcheur compte.
   const latest = []
-  for (const [dir, log] of [['actualites', 'data/actu-auto-log.json'], ['blog', 'data/blog-auto-log.json']]) {
+  for (const [dir, log] of [['actualites', 'data/actu-auto-log.json'], ['histoire', 'data/histoire-log.json'], ['blog', 'data/blog-auto-log.json']]) {
     const file = path.join(rootDir, log)
     if (!fs.existsSync(file)) continue
     for (const row of JSON.parse(fs.readFileSync(file, 'utf8')).published || []) {
@@ -370,7 +375,7 @@ export function buildLlmsTxt(rootDir) {
   }
   latest.sort((x, y) => String(y.date).localeCompare(String(x.date)))
   if (latest.length) {
-    sections.push('', '## Derniers articles (actualité et blog)', '')
+    sections.push('', '## Derniers articles (actualité, histoire et blog)', '')
     for (const row of latest.slice(0, 15)) {
       sections.push(`- ${row.date} : [${row.title}](${SITE}/${row.dir}/${row.slug}) (markdown : ${SITE}/${row.dir}/${row.slug}.md)`)
     }
@@ -382,6 +387,7 @@ export function buildLlmsTxt(rootDir) {
     '',
     '- Guides : https://dodje.fr/guides/[slug].md',
     '- Actualités : https://dodje.fr/actualites/[slug].md',
+    '- Histoire de l\'argent : https://dodje.fr/histoire/[slug].md',
     '- Calculateurs : https://dodje.fr/outils/[slug].md',
     '- Le jeu et la FAQ : https://dodje.fr/jeu.md, https://dodje.fr/faq.md',
     `- Exemple : ${SITE}/guides/jeu-educatif-finance.md`,
@@ -393,6 +399,7 @@ export function buildLlmsTxt(rootDir) {
     `- Calculateurs : ${SITE}/outils`,
     `- Guides : ${SITE}/guides`,
     `- Actualités : ${SITE}/actualites`,
+    `- Histoire de l'argent, de la bourse et de la crypto : ${SITE}/histoire`,
     `- Glossaire : ${SITE}/guides/glossaire-finance-investissement-2026`,
     `- Index complet (${paths.length} URLs) : ${SITE}/llms-full.txt`,
     `- Résumé structuré : ${SITE}/ai/summary.json`,
@@ -529,7 +536,7 @@ function publishedDate(rootDir, file) {
 
 export function buildFeedXml(rootDir) {
   const feedPaths = indexablePaths(rootDir)
-    .filter((p) => p.startsWith('guides/') || p.startsWith('actualites/') || p.startsWith('blog/'))
+    .filter((p) => p.startsWith('guides/') || p.startsWith('actualites/') || p.startsWith('histoire/') || p.startsWith('blog/'))
     .filter((p) => !p.endsWith('index.html'))
     .map((file) => ({ file, date: publishedDate(rootDir, file) }))
     .sort((a, b) => b.date - a.date)
@@ -580,10 +587,10 @@ function buildCrumbs(filePath, html) {
   const crumbs = [{ name: 'Accueil', url: SITE + '/' }]
   const parts = filePath.replace(/\.html$/, '').split('/')
 
-  if (parts[0] === 'guides' || parts[0] === 'outils' || parts[0] === 'actualites' || parts[0] === 'glossaire' || parts[0] === 'blog') {
+  if (parts[0] === 'guides' || parts[0] === 'outils' || parts[0] === 'actualites' || parts[0] === 'histoire' || parts[0] === 'glossaire' || parts[0] === 'blog') {
     const hub = parts[0]
     const hubLabel =
-      hub === 'guides' ? 'Guides' : hub === 'outils' ? 'Outils' : hub === 'actualites' ? 'Actualités' : hub === 'blog' ? 'Blog' : 'Glossaire'
+      hub === 'guides' ? 'Guides' : hub === 'outils' ? 'Outils' : hub === 'actualites' ? 'Actualités' : hub === 'histoire' ? 'Histoire' : hub === 'blog' ? 'Blog' : 'Glossaire'
     const hubUrl = hub === 'glossaire' ? `${SITE}/guides/glossaire-finance-investissement-2026` : `${SITE}/${hub}`
     crumbs.push({ name: hubLabel, url: hubUrl })
     if (parts[1] && parts[1] !== 'index') {
@@ -1155,7 +1162,7 @@ export function writeSeoArtifacts(rootDir) {
  * (/outils) et « Autre page avec balise canonique » (/actualites/, /guides/). Comme pour blog.html,
  * un fichier outils.html à la racine fait répondre /outils en 200 ; /outils/ reste servi avec la même canonique.
  */
-export const HUB_DIRS = ['outils', 'guides', 'actualites']
+export const HUB_DIRS = ['outils', 'guides', 'actualites', 'histoire']
 function writeHubAliases(distDir) {
   for (const dir of HUB_DIRS) {
     const src = path.join(distDir, dir, 'index.html')

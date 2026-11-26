@@ -14,11 +14,11 @@
     "new-article": "node scripts/new-article.mjs",
     "build:glossaire": "node scripts/build-glossaire.mjs",
     "build:geo-pages": "node scripts/generate-geo-pages.mjs",
-    "publish:actu": "node scripts/publish-actu-daily.mjs",
-    "publish:blog": "node scripts/publish-blog-daily.mjs",
+    "contenu:verifier": "node scripts/contenu.mjs verifier",
+    "contenu:publier": "node scripts/contenu.mjs publier",
+    "contenu:hubs": "node scripts/contenu.mjs hubs",
     "publish:guide": "node scripts/publish-guide-daily.mjs",
-    "test:editorial": "node scripts/editorial-extractors.test.mjs",
-    "publish:ai": "node scripts/publish-ai-daily.mjs"
+    "test:editorial": "node scripts/editorial-extractors.test.mjs"
   },
   "devDependencies": {
     "@types/react": "^18.3.29",
