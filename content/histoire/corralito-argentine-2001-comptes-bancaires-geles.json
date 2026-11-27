@@ -1,0 +1,161 @@
+{
+  "kind": "histoire",
+  "slug": "corralito-argentine-2001-comptes-bancaires-geles",
+  "kicker": "Banques",
+  "title": "Corralito : quand l'Argentine a gelé les comptes en 2001",
+  "primaryKeyword": "corralito argentine",
+  "metaDescription": "Le 1er décembre 2001, l'Argentine limite les retraits à 250 pesos par semaine : c'est le corralito. L'histoire du gel des comptes, et sa leçon.",
+  "eventDate": "2001-12-01",
+  "bluf": "Le 1er décembre 2001, le ministre argentin de l'Économie Domingo Cavallo annonce à la télévision que chacun ne pourra plus retirer que 250 pesos par semaine en liquide. Prévu pour 90 jours, ce « corralito » (le petit enclos) dure un an. Il déclenche des émeutes, la démission du président, puis la fin du peso à 1 dollar.",
+  "keyFigures": [
+    {
+      "value": "250 pesos",
+      "label": "le retrait maximum en liquide par semaine, à partir du 3 décembre 2001"
+    },
+    {
+      "value": "18 milliards $",
+      "label": "les dépôts retirés des banques argentines en 2001, avant le gel"
+    },
+    {
+      "value": "1,40 peso",
+      "label": "le taux auquel les dépôts en dollars ont été convertis en pesos en 2002"
+    },
+    {
+      "value": "4 pesos",
+      "label": "le prix d'un dollar en 2002, contre 1 peso avant la crise"
+    }
+  ],
+  "keyPoints": [
+    "Depuis 1991, la loi argentine fixe 1 peso = 1 dollar : les Argentins ont confiance et déposent leurs dollars à la banque.",
+    "En 2001, la crise s'aggrave et 18 milliards de dollars quittent les banques en quelques mois.",
+    "Le 1er décembre 2001, le gouvernement limite les retraits à 250 pesos par semaine et gèle les comptes, au départ pour 90 jours.",
+    "Les émeutes des 19 et 20 décembre font plus de 20 morts et poussent le président De la Rúa à démissionner.",
+    "En 2002, le peso est dévalué : les dépôts en dollars sont convertis à 1,40 peso, alors que le dollar monte à 4 pesos."
+  ],
+  "sections": [
+    {
+      "h2": "Pourquoi les Argentins avaient confiance dans leur banque ?",
+      "html": "<p><strong>Parce que depuis 1991, la loi fixe le taux de change à 1 peso pour 1 dollar, selon l'université Yale.</strong> Ton salaire en pesos vaut exactement autant de dollars. Pas de surprise, pas d'inflation folle comme dans les années 80.</p><p>Ce système s'appelle une caisse d'émission : la banque centrale ne peut créer un peso que si elle a un dollar en réserve pour le couvrir. Pendant des années, ça marche. Les Argentins déposent leurs économies à la banque, souvent directement en dollars. Le compte en banque devient l'endroit le plus sûr du pays.</p><p>Le problème, c'est que ce taux fixe coûte cher. L'Argentine ne peut plus dévaluer pour vendre moins cher à l'étranger. Elle s'endette en dollars. Et en 2001, d'après La Nación, l'économie recule pour la troisième année de suite, avec une chute de 4,4 %.</p>"
+    },
+    {
+      "h2": "Comment la panique a vidé les banques ?",
+      "html": "<p><strong>Sur l'année 2001, les Argentins retirent environ 18 milliards de dollars des banques, selon El Cronista.</strong> Chacun se dit la même chose : si le peso lâche, je veux mes dollars dans ma poche, pas dans un coffre que je ne contrôle pas.</p><p>C'est le mécanisme de la panique bancaire. Une banque ne garde jamais tout ton argent en caisse : elle en prête la plus grande partie. Tant que tout le monde ne vient pas en même temps, personne ne le remarque. Mais si tout le monde vient, il n'y a pas assez de billets pour tout le monde.</p><p>Fin novembre, ça s'accélère. Entre le 28 et le 30 novembre 2001, les dépôts chutent de 3,6 milliards de dollars, rapporte La Nación. Le gouvernement a quelques heures pour réagir.</p>"
+    },
+    {
+      "h2": "Que s'est-il passé le 1er décembre 2001 ?",
+      "html": "<p><strong>Ce samedi-là, Domingo Cavallo annonce à la télévision que les retraits en liquide sont limités à 250 pesos par semaine, raconte El Cronista.</strong> La mesure s'applique dès le lundi 3 décembre. Le décret 1570 est signé le même jour, d'après Diario de Cuyo.</p><blockquote>« La seule limite, c'est qu'on pourra retirer en liquide, en billets ou en pièces, jusqu'à 250 pesos par semaine. » Domingo Cavallo, cité par Diario de Cuyo.</blockquote><p>Concrètement, ton argent est toujours sur ton compte. Tu peux payer par carte ou faire un virement. Mais tu ne peux plus le sortir. Le plafond est de 1 000 pesos par mois, selon El Cronista. Le gel doit durer 90 jours. Les Argentins l'appellent tout de suite le <em>corralito</em>, le « petit enclos » où l'on parque le bétail.</p><p>Pour un petit commerçant, un retraité ou quelqu'un payé au noir en liquide, c'est la catastrophe. Une grande partie de l'économie tourne en espèces. Elle s'arrête presque du jour au lendemain.</p>"
+    },
+    {
+      "h2": "Des casseroles dans la rue à la démission du président",
+      "html": "<p><strong>Trois semaines plus tard, les émeutes des 19 et 20 décembre 2001 font plus de 20 morts et le président Fernando de la Rúa démissionne le 20 décembre, selon l'université Yale.</strong></p><p>La colère monte vite. Les épargnants tapent sur des casseroles devant les banques et dans les rues de Buenos Aires : c'est le <em>cacerolazo</em>. Le 5 décembre, le FMI annonce qu'il ne versera pas le prêt prévu de 1 260 millions de dollars, d'après El Cronista. Le 19 décembre, De la Rúa décrète l'état de siège. Les manifestations sur la Plaza de Mayo tournent à l'affrontement. Cavallo démissionne dans la nuit, puis le président le lendemain.</p><p>Quelques jours plus tard, l'Argentine annonce qu'elle ne remboursera pas 141 milliards de dollars de dette extérieure, rappelle Yale.</p>"
+    },
+    {
+      "h2": "Qu'est devenu l'argent bloqué ?",
+      "html": "<p><strong>Il a fondu : en janvier 2002, l'Argentine abandonne le 1 peso = 1 dollar, et les dépôts en dollars sont convertis de force à 1,40 peso par dollar, selon Wikipedia.</strong> Pendant ce temps, le dollar grimpe jusqu'à 4 pesos.</p><p>Fais le calcul. Tu avais 10 000 dollars à la banque. On te les transforme en 14 000 pesos. Mais au cours du marché, ces 14 000 pesos ne valent plus que 3 500 dollars. Tu as perdu 65 % de ton épargne sans avoir rien acheté ni rien vendu. C'est la « pesificación ».</p><p>Pire, le gouvernement suivant gèle aussi les livrets et les dépôts à terme : le petit enclos devient le <em>corralón</em>, le grand enclos. Cavallo lui-même dira plus tard que le vrai tournant, c'était le corralón. Le corralito, prévu pour 90 jours, dure finalement un an. Les dernières restrictions sur les comptes courants sont levées le 2 décembre 2002, selon Yale. Entre-temps, la pauvreté a dépassé 50 % de la population, d'après La Nación.</p>"
+    },
+    {
+      "h2": "Est-ce que ça pourrait arriver en France ?",
+      "html": "<p><strong>Un gel aussi brutal est très peu probable en France, mais la zone euro a déjà connu un mini-corralito : en Grèce, en 2015, les retraits ont été limités à 60 euros par jour, selon l'AFP.</strong></p><p>En France, tes dépôts sont protégés par le Fonds de garantie des dépôts. Ça protège contre la faillite d'une banque. Ça ne protège pas contre une monnaie qui perd sa valeur, ni contre des règles de retrait décidées par l'État en cas de crise.</p><p>Le corralito a laissé une trace durable en Argentine : beaucoup d'épargnants ont gardé le réflexe de mettre des dollars de côté hors des banques. Quand on a vu son compte gelé une fois, on se méfie longtemps. Sur l'île de Dodje, c'est le rôle de la réserve : un endroit sûr pour ton argent, mais pas le seul. Pour aller plus loin, lis notre guide sur <a href=\"/blog/epargne-de-precaution-combien-mettre-de-cote\">l'épargne de précaution</a>.</p>"
+    }
+  ],
+  "lesson": "Ne mets pas tous tes œufs dans le même panier : garde une épargne de précaution accessible, répartie si possible sur deux banques, et souviens-toi qu'un argent « sûr » peut perdre de la valeur si la monnaie elle-même vacille.",
+  "definitions": [
+    {
+      "term": "Corralito",
+      "definition": "« Petit enclos » en espagnol. Le nom donné au gel partiel des comptes bancaires en Argentine à partir du 1er décembre 2001."
+    },
+    {
+      "term": "Panique bancaire",
+      "definition": "Quand beaucoup de clients veulent retirer leur argent en même temps, par peur que la banque ne puisse plus payer. Comme les banques prêtent l'argent déposé, aucune n'a assez de billets pour tout le monde."
+    },
+    {
+      "term": "Dévaluation",
+      "definition": "La baisse décidée ou subie de la valeur d'une monnaie par rapport aux autres. Avec la même somme, tu achètes moins de produits importés."
+    },
+    {
+      "term": "Caisse d'émission",
+      "definition": "Un système où chaque billet national est couvert par une devise étrangère en réserve, ici 1 dollar pour 1 peso."
+    }
+  ],
+  "faq": [
+    {
+      "question": "C'est quoi le corralito en Argentine ?",
+      "answer": "Le corralito est la mesure annoncée le 1er décembre 2001 par le ministre Domingo Cavallo pour stopper la fuite des dépôts. Les Argentins ne pouvaient plus retirer que 250 pesos par semaine en liquide, et leurs comptes étaient gelés."
+    },
+    {
+      "question": "Combien de temps a duré le corralito ?",
+      "answer": "Il était prévu pour 90 jours mais a duré environ un an. Les dernières restrictions sur les comptes courants ont été levées le 2 décembre 2002, selon l'université Yale."
+    },
+    {
+      "question": "Les Argentins ont-ils perdu leur argent avec le corralito ?",
+      "answer": "Beaucoup, oui. En 2002, leurs dépôts en dollars ont été convertis à 1,40 peso par dollar, alors que le dollar est monté jusqu'à 4 pesos. Une partie de leur épargne a ainsi fondu."
+    },
+    {
+      "question": "Pourquoi le corralito a-t-il été mis en place ?",
+      "answer": "Parce que les Argentins vidaient leurs comptes par peur d'une dévaluation : environ 18 milliards de dollars sont sortis des banques en 2001. Sans limite, les banques auraient manqué de liquide."
+    },
+    {
+      "question": "Un corralito est-il possible en France ?",
+      "answer": "C'est très peu probable, mais la zone euro a déjà connu des limites de retrait : en Grèce, en 2015, on ne pouvait sortir que 60 euros par jour au distributeur, selon l'AFP. En France, les dépôts sont protégés par le Fonds de garantie des dépôts en cas de faillite d'une banque."
+    }
+  ],
+  "internalLinks": [
+    {
+      "href": "/blog/epargne-de-precaution-combien-mettre-de-cote",
+      "label": "Épargne de précaution : combien mettre de côté"
+    },
+    {
+      "href": "/guides/top-5-livrets-epargne-2026",
+      "label": "Top 5 des livrets d'épargne"
+    },
+    {
+      "href": "/outils/calculateur-inflation",
+      "label": "Calculateur d'inflation"
+    },
+    {
+      "href": "/histoire/tulipomanie-1637-premiere-bulle-speculative",
+      "label": "Tulipomanie : la première bulle"
+    }
+  ],
+  "calculs": [
+    "10 000 dollars convertis à 1,40 peso = 14 000 pesos.",
+    "14 000 pesos à 4 pesos par dollar = 3 500 dollars.",
+    "Perte : (10 000 - 3 500) / 10 000 = 65 %.",
+    "u$s 18 mil millones = 18 milliards de dollars.",
+    "US$3600 millones = 3,6 milliards de dollars.",
+    "USD 141 billion = 141 milliards de dollars.",
+    "Du 1er au 20 décembre 2001 : environ trois semaines."
+  ],
+  "sources": [
+    {
+      "label": "Yale Program on Financial Stability, « Argentina: National Bank Holidays, 2001 »",
+      "url": "https://newbagehot.yale.edu/docs/argentina-national-bank-holidays-2001",
+      "extrait": "Starting in 1991, Argentina operated a currency board regime. The authorities restricted withdrawals from demand deposit accounts to 250 Argentine pesos (ARS). Culminating in the resignation of President de la Rúa and Minister of Economy Domingo Cavallo on December 20. These measures led to riots in which over 20 demonstrators were killed. The government announced that it would default on USD 141 billion in outstanding foreign debt. On January 6, 2002, Congress ended Argentina's convertibility regime. Demand deposits: December 2, 2002."
+    },
+    {
+      "label": "El Cronista, « Se cumplen 20 años del corralito, la medida que desató la furia de los ahorristas » (1er décembre 2021)",
+      "url": "https://www.cronista.com/finanzas-mercados/se-cumplen-20-anos-del-corralito-la-medida-que-desato-la-furia-de-los-ahorristas",
+      "extrait": "Anunció por televisión que los ahorristas tendrían un límite de extracción semanal de hasta 250 pesos. El límite iba a ser de $ 1000 mensuales. La medida empezó a funcionar el lunes 3. Para ese entonces, habían salido de sistema bancario unos u$s 18 mil millones a lo largo de 2001. El 5 de diciembre el FMI anunció que no enviaría a la Argentina un desembolso de u$s 1260 millones. La bisagra no fue el corralito. La bisagra fue el corralón."
+    },
+    {
+      "label": "La Nación, « Corralito : la medida por 90 días que aceleró el estallido de diciembre de 2001 » (20 décembre 2021)",
+      "url": "https://www.lanacion.com.ar/economia/corralito-la-medida-por-90-dias-que-acelero-el-estallido-de-diciembre-de-2001-nid20122021/",
+      "extrait": "Limitaba el retiro de depósitos de los bancos hasta $250 por persona y por semana, que inicialmente iba a durar 90 días. El corralito, que iba a durar 90 días, se extendió por un año. Una caída de US$3600 millones entre el 28 y el 30 de noviembre. El 19 de diciembre el presidente De La Rúa decretó el estado de sitio. En 2001, la economía completó su tercer año de caída consecutiva, con un desplome del 4,4%. La devaluación del peso llevó a la pobreza por encima del 50%."
+    },
+    {
+      "label": "Diario de Cuyo, « A 20 años del corralito » (1er décembre 2021)",
+      "url": "https://www.diariodecuyo.com.ar/argentina/A-20-anos-del-corralito-la-medida-que-marco-la-mayor-catastrofe-economica-y-social-del-pais-20211201-0003.html",
+      "extrait": "El 1 de diciembre de 2001 firmó el decreto 1570, un paquete de medidas ideado por el ministro de Economía, Domingo Cavallo. La única limitación es que podrá extraer en efectivo, en billetes o monedas, hasta 250 pesos por semana. Iba a tener, según los planes iniciales, una vigencia de 90 días. Desembocó en la represión del 19 y 20 de diciembre. La medida se mantuvo en vigencia por un año. El FMI anunció que no realizaría el desembolso acordado de 1260 millones."
+    },
+    {
+      "label": "Wikipedia (en), « Corralito »",
+      "url": "https://en.wikipedia.org/wiki/Corralito",
+      "extrait": "Economic measures taken in Argentina at the end of 2001 by Minister of Economy Domingo Cavallo: a limit of cash withdrawals of 250 ARS per week (at that time US$1 = 1 ARS). The government froze all bank accounts, initially for 90 days. President Fernando de la Rúa resigned on 20 December 2001 after violent riots. US denominated debt and deposits were forcibly exchanged for Argentine pesos at 1.4 pesos per dollar for deposits. The exchange rate spiked to 4 ARS/USD."
+    },
+    {
+      "label": "DH / AFP, « Grèce : banques fermées jusqu'au 6 juillet, retraits limités à 60 euros » (29 juin 2015)",
+      "url": "https://www.dhnet.be/actu/economie/2015/06/29/grece-banques-fermees-jusquau-6-juillet-retraits-limites-a-60-euros-NQGSMSWI6RG6BLGQJRX5A7OQ3U/",
+      "extrait": "Dépêche AFP du 29 juin 2015. Les établissements bancaires grecs resteront fermés jusqu'au 6 juillet. Les retraits aux guichets automatiques seront durant cette période limités à 60 euros par jour. Les mesures radicales de contrôle des capitaux ont été décidées afin de protéger le système bancaire."
+    }
+  ]
+}

@@ -5,6 +5,12 @@
       "date": "2026-11-26",
       "title": "Tulipomanie : quand un bulbe valait une maison",
       "engine": "claude-scheduled"
+    },
+    {
+      "slug": "corralito-argentine-2001-comptes-bancaires-geles",
+      "date": "2026-11-27",
+      "title": "Corralito : quand l'Argentine a gelé les comptes en 2001",
+      "engine": "claude-scheduled"
     }
   ]
 }
