@@ -215,6 +215,12 @@
       "date": "2026-11-26",
       "title": "Modifier l'avance de crédit d'impôt avant le 10 décembre",
       "engine": "claude"
+    },
+    {
+      "slug": "black-friday-2026-prix-barre-regle-30-jours",
+      "date": "2026-11-27",
+      "title": "Black Friday 2026 : prix barré et règle des 30 jours",
+      "engine": "claude-scheduled"
     }
   ],
   "fingerprints": [
