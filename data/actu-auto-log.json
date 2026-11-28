@@ -221,6 +221,12 @@
       "date": "2026-11-27",
       "title": "Black Friday 2026 : prix barré et règle des 30 jours",
       "engine": "claude-scheduled"
+    },
+    {
+      "slug": "inflation-novembre-2026-2-9-livret-a",
+      "date": "2026-11-28",
+      "title": "Inflation novembre 2026 : 2,9 %, ce que ça change pour toi",
+      "engine": "claude-scheduled"
     }
   ],
   "fingerprints": [
